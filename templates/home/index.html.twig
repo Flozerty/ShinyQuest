@@ -4,6 +4,13 @@
 
 {% block body %}
 
+<nav>
+
+  {% if is_granted('ROLE_ADMIN') %}
+  {% endif %}
+
+</nav>
+
 {% if app.user is not empty %}
 Bienvenue {{app.user.pseudo}}
 {% else %}
