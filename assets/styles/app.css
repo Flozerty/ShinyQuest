@@ -1,3 +1,7 @@
-body {
-    background-color: skyblue;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  vertical-align: top;
+  line-height: 1.2em;
 }
