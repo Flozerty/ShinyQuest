@@ -18,6 +18,11 @@ framework:
     php_errors:
         log: true
 
+    http_client:
+        scoped_clients:
+            jph:
+                base_uri: https://pokeapi.co/api/v2/
+
 when@test:
     framework:
         test: true

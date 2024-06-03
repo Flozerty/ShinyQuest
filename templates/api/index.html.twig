@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ApiController!{% endblock %}
+
+{% block body %}
+
+<div class="users">
+    {% for pokemon in pokemons.results %}
+    <div class="pokemon">
+        {{pokemon.name}}<br>
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}
