@@ -15,11 +15,21 @@ class ApiHttpClient extends AbstractController
   {
     $this->httpClient = $jph;
   }
-  public function getPokemons()
+  public function getPokemons(): array
   {
-    $response = $this->httpClient->request('GET', "pokemon/?offest=1302&limit=1302", [
-      'verify_peer' => false,
-    ]);
-    return $response->toArray();
+    // pagination pour éviter de charger trop de données d'un coup
+    $pokemonsNameSprite = [];
+
+    for ($i = 1; $i <= 1025; $i++) {
+      $response = $this->httpClient->request('GET', "pokemon/$i");
+      $pokemon = $response->toArray();
+      $pokemonsNameSprite[] = [
+        'name' => $pokemon['name'],
+        'spriteN' => $pokemon['sprites']['other']['official-artwork']['front_default'],
+        'spriteS' => $pokemon['sprites']['other']['official-artwork']['front_shiny'],
+      ];
+    }
+
+    return $pokemonsNameSprite;
   }
 }

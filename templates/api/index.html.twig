@@ -5,9 +5,10 @@
 {% block body %}
 
 <div class="users">
-    {% for pokemon in pokemons.results %}
+    {% for pokemon in allPokemons %}
     <div class="pokemon">
         {{pokemon.name}}<br>
+        <img src="{{pokemon.spriteN}}" alt="sprite de {{pokemon.name}}"><br>
     </div>
 
     {% endfor %}
