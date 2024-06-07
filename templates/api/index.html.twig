@@ -4,15 +4,6 @@
 
 {% block body %}
 
-<div class="users">
-    {% for pokemon in allPokemons %}
-    <div class="pokemon">
-        {{pokemon.name}}<br>
-        <img src="{{pokemon.spriteN}}" alt="sprite normal de {{pokemon.name}}"><br>
-        <img src="{{pokemon.spriteS}}" alt="sprite shiny de {{pokemon.name}}"><br>
-    </div>
 
-    {% endfor %}
-</div>
 
 {% endblock %}

@@ -2,22 +2,99 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-    {% block stylesheets %}
-    {#
-    <link rel="stylesheet" href="style.css"> #}
-    {% endblock %}
+  <meta charset="UTF-8">
+  <title>{% block title %}Welcome!{% endblock %}</title>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+  {% block stylesheets %}
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/custom_pokeball.css">
+  {% endblock %}
 
-    {% block javascripts %}
-    {% block importmap %}{{ importmap('app') }}{% endblock %}
-    {% endblock %}
+  <script src="https://kit.fontawesome.com/7252ea4d54.js" crossorigin="anonymous"></script>
+  {% block javascripts %}
+  {% block importmap %}{{ importmap('app') }}{% endblock %}
+  {% endblock %}
 </head>
 
 <body>
-    {% block body %}{% endblock %}
+  {# header #}
+  <header>
+
+    <div>
+      <a href="{{ path('app_home') }}">
+        <img src="#" alt="logo">SHINYQUEST
+      </a>
+    </div>
+
+    <div id="search">
+      <div id="search-img-container"></div>
+      <input type="search" placeholder="recherchez un pokemon, un dresseur, ...">
+    </div>
+
+    <div id="l_d_mode">
+      <i class="fa-regular fa-sun"></i>
+      <i class="fa-regular fa-moon"></i>
+    </div>
+
+    <nav id="nav-header">
+      <ul>
+        <li><i class="fa-regular fa-comments"></i></li>
+
+        <li>
+          <div class="custom-pokeball">
+            <div class="pokeball-circle"></div>
+            <div class="pokeball-center"></div>
+            <div class="pokeball-line"></div>
+          </div>
+        </li>
+        <li><i class="fa-solid fa-user-group"></i></li>
+        <li><i class="fa-regular fa-message"></i></li>
+        <li>profile? </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div id="main-wrapper">
+
+    <aside id="main-side-nav">
+      <div>
+        <h3>
+          <a href="{{ path('app_home') }}">
+            Accueil
+          </a>
+        </h3>
+      </div>
+      <div>
+        <h3>Mon suivi</h3>
+        <ul>
+          <li>Mes shasses</li>
+          <li>Mes captures</li>
+          <li>Mon shinydex</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Communauté</h3>
+        <ul>
+          <li>Mes amis</li>
+          <li>Les dresseurs</li>
+          <li>Shasses en cours</li>
+          <li>Forum</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Général</h3>
+        <ul>
+          <li>Pokedex</li>
+          <li>Recherche pokemon</li>
+        </ul>
+      </div>
+    </aside>
+    {# main #}
+    <main>
+      {% block body %}{% endblock %}
+    </main>
+  </div>
 </body>
 
 </html>
