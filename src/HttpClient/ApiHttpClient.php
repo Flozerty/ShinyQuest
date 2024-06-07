@@ -17,17 +17,23 @@ class ApiHttpClient extends AbstractController
   }
   public function getPokemons(): array
   {
-    // pagination pour éviter de charger trop de données d'un coup
+    $response = $this->httpClient->request('GET', "https://tyradex.vercel.app/api/v1/pokemon");
+    $pokemons = $response->toArray();
+
+    array_shift($pokemons);
+    // dd($pokemons);
+
     $pokemonsNameSprite = [];
 
-    for ($i = 1; $i <= 1025; $i++) {
-      $response = $this->httpClient->request('GET', "pokemon/$i");
-      $pokemon = $response->toArray();
-      $pokemonsNameSprite[] = [
-        'name' => $pokemon['name'],
-        'spriteN' => $pokemon['sprites']['other']['official-artwork']['front_default'],
-        'spriteS' => $pokemon['sprites']['other']['official-artwork']['front_shiny'],
-      ];
+    foreach ($pokemons as $pokemon) {
+
+      $pokemonsNameSprite[] =
+        [
+          'pokedex_id' => $pokemon["pokedex_id"],
+          'name' => $pokemon['name']['fr'],
+          'spriteN' => 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' . $pokemon["pokedex_id"] . '.png',
+          'spriteS' => 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/' . $pokemon["pokedex_id"] . '.png',
+        ];
     }
 
     return $pokemonsNameSprite;
