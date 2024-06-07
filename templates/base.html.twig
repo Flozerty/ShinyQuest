@@ -38,6 +38,9 @@
     </div>
 
     <nav id="nav-header">
+
+      {% if app.user is not empty %}
+
       <ul>
         <li><i class="fa-regular fa-comments"></i></li>
 
@@ -50,8 +53,22 @@
         </li>
         <li><i class="fa-solid fa-user-group"></i></li>
         <li><i class="fa-regular fa-message"></i></li>
-        <li>profile? </li>
       </ul>
+
+      <div id="header-profile">
+        <p>{{app.user}}</p>
+        <figure>
+          <img src="../img/{{app.user.avatar}}" alt="image de profil de {{app.user}}">
+        </figure>
+      </div>
+
+      {% else %}
+      <ul>
+        <li>inscription</li>
+        <li>connexion</li>
+      </ul>
+      {% endif %}
+
     </nav>
   </header>
 

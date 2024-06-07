@@ -5,7 +5,6 @@
   --custom-ball-size: 40px;
 }
 
-
 header {
   display: flex;
   justify-content: space-between;
@@ -14,25 +13,28 @@ header {
   height: 80px;
   border-bottom: 1px solid black;
 
-  #nav-header ul {
+  #nav-header {
     display: flex;
+    align-items: center;
+
+    ul {
+      display: flex;
+
+      li {
+        padding: 0 10px;
+      }
+    }
   }
 
   i {
     font-size: var(--custom-ball-size);
     color: var(--darkblue);
   }
-
-  li {
-    padding: 0 10px;
-
-  }
 }
 
 #l_d_mode {
   display: flex;
   border: 1px solid black;
-
 }
 
 #search {
@@ -44,20 +46,65 @@ header {
   border: 1px solid black;
   overflow: hidden;
   align-items: center;
+  background-color: var(--lightblue);
 
   input {
-    margin-left: 10px;
+    padding-left: 10px;
+    height: 100%;
     width: 100%;
     border: none;
+    border-radius: 15px;
+    background-color: var(--lightblue);
   }
 
   #search-img-container {
     height: 80%;
     width: 50px;
-    background-image: url(../img/wenSearch.png);
+    background-image: url(../img/zarbi-int-shiny.png);
     background-size: contain;
     background-position: center right;
     background-repeat: no-repeat;
+  }
+}
+
+#header-profile {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 8px 40px 8px 15px;
+  background-color: var(--darkblue);
+  border-radius: 15px 0 0 15px;
+  /* margin from 50% figure 60px absolute */
+  margin-right: 30px;
+  transition: var(--transitionTime);
+  cursor: pointer;
+
+  &:hover {
+    padding: 12px 40px 12px 15px;
+  }
+
+  p {
+    color: white;
+  }
+
+  figure {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 0;
+    height: 60px;
+    width: 60px;
+    transform: translateX(50%);
+    background-color: var(--darkblue);
+    border-radius: 50%;
+
+    img {
+      background-color: white;
+      border-radius: 50%;
+      height: 80%;
+      overflow: hidden;
+    }
   }
 }
 
@@ -82,6 +129,10 @@ header {
 
     ul {
       padding: 5px 0 0 10px;
+
+      li {
+        margin: 5px 0;
+      }
     }
 
     h3 {
