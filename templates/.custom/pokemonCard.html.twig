@@ -55,7 +55,9 @@
         <img class="pokemon-img" src="{{capture.imgShiny}}" alt="{{capture.nomPokemon}} shiny">
         {# if capture #}
         {% if capture.termine == true %}
-        <p class="ball-img">{{capture.ball}}</p>
+        <img class="ball-img"
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/{{capture.ball}}.png"
+          alt="{{capture.ball}}">
         {% endif %}
         {# #}
 

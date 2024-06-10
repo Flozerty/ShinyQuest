@@ -12,13 +12,30 @@
 
 <section id="my-actives">
   {% for capture in captures %}
+  {% if capture.suivi %}
+
   {# on utilise le template de pokemonCard pour afficher toutes les shasses en cours #}
   {% include '.custom/pokemonCard.html.twig' %}
 
+  {% endif %}
   {% endfor %}
 </section>
 
 <h3>Débuter une shasse</h3>
 
 <h3>Liste de mes autres shasses</h3>
+
+<section id="my-other-shasses">
+
+
+  {% for capture in captures %}
+  {% if capture.suivi == false %}
+
+  {# on utilise le template de pokemonCard pour afficher toutes les shasses en cours #}
+  {% include '.custom/pokemonCard.html.twig' %}
+
+  {% endif %}
+  {% endfor %}
+</section>
+
 {% endblock %}

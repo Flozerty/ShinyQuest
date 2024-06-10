@@ -62,7 +62,7 @@ class Capture
     private ?bool $suivi = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $ball = null;
+    private ?string $ball = null;
 
     public function getId(): ?int
     {
@@ -249,12 +249,12 @@ class Capture
         return $this;
     }
 
-    public function getBall(): ?int
+    public function getBall(): ?string
     {
         return $this->ball;
     }
 
-    public function setBall(int $ball): static
+    public function setBall(string $ball): static
     {
         $this->ball = $ball;
 

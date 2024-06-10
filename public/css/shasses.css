@@ -3,3 +3,9 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+#my-other-shasses {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
