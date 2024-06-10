@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -46,10 +48,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $avatar = null;
 
+    /**
+     * @var Collection<int, Capture>
+     */
+    #[ORM\OneToMany(targetEntity: Capture::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $captures;
+
     // On donne la valeur par défaut de new DateTime dans le construct
     public function __construct()
     {
         $this->dateInscription = new \DateTime();
+        $this->captures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -178,5 +187,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString()
     {
         return $this->getPseudo();
+    }
+
+    /**
+     * @return Collection<int, Capture>
+     */
+    public function getCaptures(): Collection
+    {
+        return $this->captures;
+    }
+
+    public function addCapture(Capture $capture): static
+    {
+        if (!$this->captures->contains($capture)) {
+            $this->captures->add($capture);
+            $capture->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCapture(Capture $capture): static
+    {
+        if ($this->captures->removeElement($capture)) {
+            // set the owning side to null (unless already changed)
+            if ($capture->getUser() === $this) {
+                $capture->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

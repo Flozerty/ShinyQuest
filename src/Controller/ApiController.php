@@ -13,7 +13,7 @@ class ApiController extends AbstractController
   #[Route('/pokedex', name: 'pokedex_classic')]
   public function index(ApiHttpClient $apiHttpClient): Response
   {
-    $pokemons = $apiHttpClient->getPokemons();
+    $pokemons = $apiHttpClient->getPokedex();
 
     // dd($pokemons);
     return $this->render('api/pokedex.html.twig', [

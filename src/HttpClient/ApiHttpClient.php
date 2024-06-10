@@ -15,7 +15,7 @@ class ApiHttpClient extends AbstractController
   {
     $this->httpClient = $jph;
   }
-  public function getPokemons(): array
+  public function getPokedex(): array
   {
     $response = $this->httpClient->request('GET', "https://tyradex.vercel.app/api/v1/pokemon");
     $pokemons = $response->toArray();

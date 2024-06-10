@@ -29,6 +29,20 @@ class Capture
     #[ORM\Column]
     private ?bool $favori = null;
 
+    #[ORM\Column]
+    private ?int $pokedex_id = null;
+
+    #[ORM\ManyToOne(inversedBy: 'captures')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'captures')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?MethodeCapture $methodeCapture = null;
+
+    #[ORM\Column]
+    private ?bool $termine = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +104,54 @@ class Capture
     public function setFavori(bool $favori): static
     {
         $this->favori = $favori;
+
+        return $this;
+    }
+
+    public function getPokedexId(): ?int
+    {
+        return $this->pokedex_id;
+    }
+
+    public function setPokedexId(int $pokedex_id): static
+    {
+        $this->pokedex_id = $pokedex_id;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getMethodeCapture(): ?MethodeCapture
+    {
+        return $this->methodeCapture;
+    }
+
+    public function setMethodeCapture(?MethodeCapture $methodeCapture): static
+    {
+        $this->methodeCapture = $methodeCapture;
+
+        return $this;
+    }
+
+    public function isTermine(): ?bool
+    {
+        return $this->termine;
+    }
+
+    public function setTermine(bool $termine): static
+    {
+        $this->termine = $termine;
 
         return $this;
     }
