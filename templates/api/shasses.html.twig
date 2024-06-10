@@ -2,11 +2,23 @@
 
 {% block title %}Hello ApiController!{% endblock %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="css/pkmn_card.css">
+<link rel="stylesheet" href="css/shasses.css">
+{% endblock %}
+
 {% block body %}
+<h3>Mes shasses suivies</h3>
 
-{% for capture in captures %}
-{{capture.pokedexId}}
-<img src="{{capture.imgShiny}}" alt="">
-{% endfor %}
+<section id="my-actives">
+  {% for capture in captures %}
+  {# on utilise le template de pokemonCard pour afficher toutes les shasses en cours #}
+  {% include '.custom/pokemonCard.html.twig' %}
 
+  {% endfor %}
+</section>
+
+<h3>Débuter une shasse</h3>
+
+<h3>Liste de mes autres shasses</h3>
 {% endblock %}

@@ -1,0 +1,95 @@
+<div class="pokemon-card">
+  <div class="main-card-content">
+    <section class="capture-infos">
+
+      {# if capture #}
+      {% if capture.termine == true %}
+      <div>
+        <p>rencontres</p>
+        <hr>
+        <p class="nbRencontres">{{capture.nbRencontres}}</p>
+      </div>
+
+      <div>
+        <p>date</p>
+        <hr>
+        <p>{{capture.dateCapture | date('d/m/Y')}}</p>
+      </div>
+      {% endif %}
+      {# #}
+
+      <div>
+        <p>jeu</p>
+        <hr>
+        <p class="jeu">{{capture.jeu}}</p>
+      </div>
+
+      <div>
+        <p>lieu</p>
+        <hr>
+        <p class="lieu">{{capture.lieu}}</p>
+      </div>
+
+      <div>
+        <p>méthode</p>
+        <hr>
+        <p class="methode">{{capture.methodeCapture}}</p>
+      </div>
+
+      <div class="chroma-container">
+        <img src="img/sprite-charme-chroma.png" alt="charme chroma">
+
+        {% if capture.charmeChroma %}
+        avec
+        {% else %}
+        sans
+        {% endif %}
+      </div>
+    </section>
+
+    <section class="pokemon-infos">
+
+      #{{ '%03d'|format(capture.pokedexId) }}
+
+      <div class="capture-img-container">
+        <img class="pokemon-img" src="{{capture.imgShiny}}" alt="{{capture.nomPokemon}} shiny">
+        {# if capture #}
+        {% if capture.termine == true %}
+        <p class="ball-img">{{capture.ball}}</p>
+        {% endif %}
+        {# #}
+
+      </div>
+
+      {# if capture #}
+      {% if capture.termine == true %}
+
+      <div class="captured-pokemon-footer">
+        <div class="capture-names">
+          <p>{{capture.nomPokemon}}</p>
+          <p>{{capture.surnom}}</p>
+        </div>
+
+        {% if capture.sexe == "male" %}
+        <i class="fa-solid fa-mars"></i>
+        {% elseif capture.sexe == "femelle" %}
+        <i class="fa-solid fa-venus"></i>
+        {% else %}
+        <i class="fa-solid fa-genderless"></i>
+        {% endif %}
+      </div>
+
+      {% endif %}
+      {# #}
+
+    </section>
+  </div>
+
+  {# if shasse #}
+  {% if capture.termine == false %}
+  -+compteur taux arreter shiny
+
+  {% endif %}
+  {# #}
+
+</div>

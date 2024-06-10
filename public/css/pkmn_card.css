@@ -1,0 +1,89 @@
+:root {
+  --darkblue: #003BB3;
+  --lightblue: #B9E7FF;
+  --transitionTime: 0.3s;
+  --custom-ball-size: 40px;
+}
+
+.pokemon-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  margin: 15px;
+  border-radius: 20px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.main-card-content {
+  display: flex;
+}
+
+.capture-infos {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  div {
+    margin: 3px 0;
+    width: fit-content;
+  }
+
+  .chroma-container {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 50px;
+    }
+  }
+}
+
+.pokemon-infos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+  .capture-img-container {
+    position: relative;
+
+    .pokemon-img {
+      width: 150px;
+    }
+
+    .ball-img {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+
+  .captured-pokemon-footer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    .capture-names {
+      text-align: center;
+      margin: 0 10px;
+    }
+  }
+}
+
+.nbRencontres {
+  color: #FF0000;
+}
+
+.lieu {
+  color: #3CB371;
+}
+
+.jeu {
+  color: #FF8C00;
+}
+
+.methode {
+  color: #800080;
+}
