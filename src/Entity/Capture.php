@@ -49,6 +49,21 @@ class Capture
     #[ORM\Column(length: 50)]
     private ?string $nomPokemon = null;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $jeu = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $lieu = null;
+
+    #[ORM\Column(length: 10, nullable: true)]
+    private ?string $sexe = null;
+
+    #[ORM\Column]
+    private ?bool $suivi = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $ball = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -182,6 +197,66 @@ class Capture
     public function setNomPokemon(string $nomPokemon): static
     {
         $this->nomPokemon = $nomPokemon;
+
+        return $this;
+    }
+
+    public function getJeu(): ?string
+    {
+        return $this->jeu;
+    }
+
+    public function setJeu(string $jeu): static
+    {
+        $this->jeu = $jeu;
+
+        return $this;
+    }
+
+    public function getLieu(): ?string
+    {
+        return $this->lieu;
+    }
+
+    public function setLieu(string $lieu): static
+    {
+        $this->lieu = $lieu;
+
+        return $this;
+    }
+
+    public function getSexe(): ?string
+    {
+        return $this->sexe;
+    }
+
+    public function setSexe(string $sexe): static
+    {
+        $this->sexe = $sexe;
+
+        return $this;
+    }
+
+    public function isSuivi(): ?bool
+    {
+        return $this->suivi;
+    }
+
+    public function setSuivi(bool $suivi): static
+    {
+        $this->suivi = $suivi;
+
+        return $this;
+    }
+
+    public function getBall(): ?int
+    {
+        return $this->ball;
+    }
+
+    public function setBall(int $ball): static
+    {
+        $this->ball = $ball;
 
         return $this;
     }

@@ -22,14 +22,15 @@ class ApiHttpClient extends AbstractController
     $response = $this->httpClient->request('GET', "https://tyradex.vercel.app/api/v1/pokemon");
     $pokemons = $response->toArray();
 
+    // on enlève le "pokemon 0"
     array_shift($pokemons);
     // dd($pokemons);
 
-    $pokemonsNameSprite = [];
+    $allPokemons = [];
 
     foreach ($pokemons as $pokemon) {
 
-      $pokemonsNameSprite[] =
+      $allPokemons[] =
         [
           'pokedex_id' => $pokemon["pokedex_id"],
           'generation' => $pokemon["generation"],
@@ -39,14 +40,13 @@ class ApiHttpClient extends AbstractController
           'types' => $pokemon["types"],
         ];
     }
-    return $pokemonsNameSprite;
+    return $allPokemons;
   }
 
   public function getPokemonInfos($id)
   {
     $response = $this->httpClient->request('GET', "pokemon/$id");
     $pokemon = $response->toArray();
-
     return $pokemon;
   }
 }
