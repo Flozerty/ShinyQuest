@@ -42,17 +42,18 @@
       {% if app.user is not empty %}
 
       <ul>
-        <li><i class="fa-regular fa-comments"></i></li>
+        <li title="Forum"><i class="fa-regular fa-comments"></i></li>
 
-        <li>
+        <li title="Mes captures">
           <div class="custom-pokeball">
             <div class="pokeball-circle"></div>
             <div class="pokeball-center"></div>
             <div class="pokeball-line"></div>
           </div>
         </li>
-        <li><i class="fa-solid fa-user-group"></i></li>
-        <li><i class="fa-regular fa-message"></i></li>
+
+        <li title="Mes amis"><i class="fa-solid fa-user-group"></i></li>
+        <li title="Messagerie"><i class="fa-regular fa-message"></i></li>
       </ul>
 
       <div id="header-profile">
@@ -62,6 +63,12 @@
         </figure>
       </div>
 
+      {# <ul id="profile-nav">
+        <li><a href="">Mon profil</a></li>
+        <li><a href="">Mes shasses</a></li>
+        <li><a href="">Ma carte</a></li>
+        <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+      </ul> #}
       {% else %}
       <ul>
         <li>inscription</li>
@@ -77,38 +84,41 @@
     <aside id="main-side-nav">
       <div>
         <h3>
-          <a href="{{ path('app_home') }}">
-            Accueil
-          </a>
+          <a href="{{ path('app_home') }}">Accueil</a>
         </h3>
       </div>
+
       <div>
         <h3>Mon suivi</h3>
         <ul>
-          <li>Mes shasses</li>
-          <li>Mes captures</li>
-          <li>Mon shinydex</li>
+          <li><a href="{{ path('my_shasses') }}">Mes shasses</a></li>
+          <li><a href="{{ path('my_captures') }}">Mes captures</a></li>
+          <li><a href="">Mon shinydex</a></li>
         </ul>
       </div>
+
       <div>
         <h3>Communauté</h3>
         <ul>
-          <li>Mes amis</li>
-          <li>Les dresseurs</li>
-          <li>Shasses en cours</li>
-          <li>Forum</li>
+          <li><a href="">Mes amis</a></li>
+          <li><a href="">Les dresseurs</a></li>
+          <li><a href="">Shasses en cours</a></li>
+          <li><a href="">Forum</a></li>
         </ul>
       </div>
+
       <div>
         <h3>Général</h3>
         <ul>
-          <li>Pokedex</li>
-          <li>Recherche pokemon</li>
+          <li><a href="{{ path('app_pokedex') }}">Pokedex</a></li>
+          <li><a href="">Recherche pokemon</a></li>
         </ul>
       </div>
     </aside>
+
     {# main #}
     <main>
+      <h1>{{page_title}}</h1>
       {% block body %}{% endblock %}
     </main>
   </div>

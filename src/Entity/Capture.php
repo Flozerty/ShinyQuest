@@ -43,6 +43,12 @@ class Capture
     #[ORM\Column]
     private ?bool $termine = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $imgShiny = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $nomPokemon = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -152,6 +158,30 @@ class Capture
     public function setTermine(bool $termine): static
     {
         $this->termine = $termine;
+
+        return $this;
+    }
+
+    public function getImgShiny(): ?string
+    {
+        return $this->imgShiny;
+    }
+
+    public function setImgShiny(string $imgShiny): static
+    {
+        $this->imgShiny = $imgShiny;
+
+        return $this;
+    }
+
+    public function getNomPokemon(): ?string
+    {
+        return $this->nomPokemon;
+    }
+
+    public function setNomPokemon(string $nomPokemon): static
+    {
+        $this->nomPokemon = $nomPokemon;
 
         return $this;
     }

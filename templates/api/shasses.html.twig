@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ApiController!{% endblock %}
+
+{% block body %}
+
+{% for capture in captures %}
+{{capture.pokedexId}}
+<img src="{{capture.imgShiny}}" alt="">
+{% endfor %}
+
+{% endblock %}
