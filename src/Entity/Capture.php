@@ -18,7 +18,7 @@ class Capture
     private ?string $surnom = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $nb_rencontres = null;
+    private ?int $nbRencontres = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateCapture = null;
@@ -30,7 +30,7 @@ class Capture
     private ?bool $favori = null;
 
     #[ORM\Column]
-    private ?int $pokedex_id = null;
+    private ?int $pokedexId = null;
 
     #[ORM\ManyToOne(inversedBy: 'captures')]
     #[ORM\JoinColumn(nullable: false)]
@@ -83,12 +83,12 @@ class Capture
 
     public function getNbRencontres(): ?int
     {
-        return $this->nb_rencontres;
+        return $this->nbRencontres;
     }
 
-    public function setNbRencontres(?int $nb_rencontres): static
+    public function setNbRencontres(?int $nbRencontres): static
     {
-        $this->nb_rencontres = $nb_rencontres;
+        $this->nbRencontres = $nbRencontres;
 
         return $this;
     }
@@ -131,12 +131,12 @@ class Capture
 
     public function getPokedexId(): ?int
     {
-        return $this->pokedex_id;
+        return $this->pokedexId;
     }
 
-    public function setPokedexId(int $pokedex_id): static
+    public function setPokedexId(int $pokedexId): static
     {
-        $this->pokedex_id = $pokedex_id;
+        $this->pokedexId = $pokedexId;
 
         return $this;
     }

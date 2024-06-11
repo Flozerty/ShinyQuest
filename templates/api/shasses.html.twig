@@ -9,8 +9,8 @@
 
 {% block body %}
 
+<h3>Mes shasses suivies</h3>
 <section id="my-actives">
-  <h3>Mes shasses suivies</h3>
 
   {% for capture in captures %}
   {% if capture.suivi %}
@@ -23,17 +23,36 @@
 </section>
 
 
+<h3>Débuter une shasse</h3>
 <section id="new-shasse">
-  <h3>Débuter une shasse</h3>
   {# créer une shasse #}
 
+  {{form_start(formNewShasse)}}
+
+  {# {{form_row(formNewShasse.nomPokemon)}} #}
+  <label for="pokemonId">Nom du pokemon :</label>
+  <select name="pokemonId" id="pokemonId">
+    <option value="">Sélectionnez le pokémon</option>
+
+    {% for pokemon in allPokemons %}
+    <option value="{{pokemon.pokedex_id}}">{{pokemon.pokedex_id}} - {{pokemon.name}}</option>
+    {% endfor %}
+  </select>
 
 
+  <div class="chroma-container">
+    <img src='img/sprite-charme-chroma.png' alt='charme chroma'>
+    {{form_row(formNewShasse.charmeChroma)}}
+  </div>
+
+  <input type="submit" value='A la shasse!'>
+
+  {{form_end(formNewShasse)}}
 </section>
 
 
+<h3>Liste de mes autres shasses</h3>
 <section id="my-other-shasses">
-  <h3>Liste de mes autres shasses</h3>
 
   {% for capture in captures %}
   {% if capture.suivi == false %}
