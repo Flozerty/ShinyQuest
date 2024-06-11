@@ -16,7 +16,7 @@ class ApiHttpClient extends AbstractController
     $this->httpClient = $jph;
   }
 
-
+  // get all pkmns with name + gen + id + img + types
   public function getPokedex(): array
   {
     $response = $this->httpClient->request('GET', "https://tyradex.vercel.app/api/v1/pokemon");
@@ -43,10 +43,42 @@ class ApiHttpClient extends AbstractController
     return $allPokemons;
   }
 
+  // get a single pkmn "allInfos"
   public function getPokemonInfos($id)
   {
     $response = $this->httpClient->request('GET', "pokemon/$id");
     $pokemon = $response->toArray();
     return $pokemon;
+  }
+
+  // get all pkmns with only name + id
+  public function getAllPokemons(): array
+  {
+    $response = $this->httpClient->request('GET', "https://tyradex.vercel.app/api/v1/pokemon");
+    $pokemons = $response->toArray();
+
+    // on enlève le "pokemon 0"
+    array_shift($pokemons);
+
+    $allPokemons = [];
+
+    foreach ($pokemons as $pokemon) {
+
+      $allPokemons[] =
+        [
+          'pokedex_id' => $pokemon["pokedex_id"],
+          'name' => $pokemon['name']['fr'],
+        ];
+    }
+    // dd($allPokemons);
+
+    return $allPokemons;
+  }
+
+  public function getPokemonNameById($id)
+  {
+    $response = $this->httpClient->request('GET', "https://tyradex.vercel.app/api/v1/pokemon/$id");
+    $pokemon = $response->toArray();
+    return $pokemon["name"]["fr"];
   }
 }
