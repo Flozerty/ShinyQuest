@@ -45,6 +45,11 @@
   align-items: center;
   justify-content: space-evenly;
 
+  .pokemon-id {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
   .capture-img-container {
     position: relative;
 
@@ -74,6 +79,17 @@
   }
 }
 
+.compteur-container {
+  display: flex;
+  width: 70%;
+  justify-content: space-evenly;
+}
+
+.compteur-input {
+  width: 50%;
+  border: 1px solid black;
+}
+
 .nbRencontres {
   color: #FF0000;
 }
@@ -88,4 +104,16 @@
 
 .methode {
   color: #800080;
+}
+
+.fa-mars {
+  color: blue;
+}
+
+.fa-venus {
+  color: #E48BDB;
+}
+
+.fa-genderless {
+  color: green;
 }

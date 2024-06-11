@@ -49,7 +49,7 @@
 
     <section class="pokemon-infos">
 
-      #{{ '%03d'|format(capture.pokedexId) }}
+      <p class="pokemon-id">#{{ '%03d'|format(capture.pokedexId) }}</p>
 
       <div class="capture-img-container">
         <img class="pokemon-img" src="{{capture.imgShiny}}" alt="{{capture.nomPokemon}} shiny">
@@ -89,7 +89,15 @@
 
   {# if shasse #}
   {% if capture.termine == false %}
-  -+compteur taux arreter shiny
+  <div class="buttons">
+    <button>-</button>
+    <button>+</button>
+  </div>
+  <p class="compteur-input">{{capture.nbRencontres}}</p>
+  taux?
+  <button>arreter le suivi</button>
+  shiny
+
 
   {% endif %}
   {# #}

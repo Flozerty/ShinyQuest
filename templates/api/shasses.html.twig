@@ -8,9 +8,10 @@
 {% endblock %}
 
 {% block body %}
-<h3>Mes shasses suivies</h3>
 
 <section id="my-actives">
+  <h3>Mes shasses suivies</h3>
+
   {% for capture in captures %}
   {% if capture.suivi %}
 
@@ -21,12 +22,18 @@
   {% endfor %}
 </section>
 
-<h3>Débuter une shasse</h3>
 
-<h3>Liste de mes autres shasses</h3>
+<section id="new-shasse">
+  <h3>Débuter une shasse</h3>
+  {# créer une shasse #}
+
+
+
+</section>
+
 
 <section id="my-other-shasses">
-
+  <h3>Liste de mes autres shasses</h3>
 
   {% for capture in captures %}
   {% if capture.suivi == false %}
