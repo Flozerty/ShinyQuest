@@ -140,3 +140,17 @@ header {
     }
   }
 }
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+
+.chroma-container {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 50px;
+  }
+}

@@ -64,10 +64,10 @@
       </div>
 
       {# <ul id="profile-nav">
-        <li><a href="">Mon profil</a></li>
-        <li><a href="">Mes shasses</a></li>
-        <li><a href="">Ma carte</a></li>
-        <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+        <li><a class="nav-link" href="">Mon profil</a></li>
+        <li><a class="nav-link" href="">Mes shasses</a></li>
+        <li><a class="nav-link" href="">Ma carte</a></li>
+        <li><a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a></li>
       </ul> #}
       {% else %}
       <ul>
@@ -84,34 +84,34 @@
     <aside id="main-side-nav">
       <div>
         <h3>
-          <a href="{{ path('app_home') }}">Accueil</a>
+          <a class="nav-link" href="{{ path('app_home') }}">Accueil</a>
         </h3>
       </div>
 
       <div>
         <h3>Mon suivi</h3>
         <ul>
-          <li><a href="{{ path('my_shasses') }}">Mes shasses</a></li>
-          <li><a href="{{ path('my_captures') }}">Mes captures</a></li>
-          <li><a href="">Mon shinydex</a></li>
+          <li><a class="nav-link" href="{{ path('my_shasses') }}">Mes shasses</a></li>
+          <li><a class="nav-link" href="{{ path('my_captures') }}">Mes captures</a></li>
+          <li><a class="nav-link" href="">Mon shinydex</a></li>
         </ul>
       </div>
 
       <div>
         <h3>Communauté</h3>
         <ul>
-          <li><a href="">Mes amis</a></li>
-          <li><a href="">Les dresseurs</a></li>
-          <li><a href="">Shasses en cours</a></li>
-          <li><a href="">Forum</a></li>
+          <li><a class="nav-link" href="">Mes amis</a></li>
+          <li><a class="nav-link" href="">Les dresseurs</a></li>
+          <li><a class="nav-link" href="">Shasses en cours</a></li>
+          <li><a class="nav-link" href="">Forum</a></li>
         </ul>
       </div>
 
       <div>
         <h3>Général</h3>
         <ul>
-          <li><a href="{{ path('app_pokedex') }}">Pokedex</a></li>
-          <li><a href="">Recherche pokemon</a></li>
+          <li><a class="nav-link" href="{{ path('app_pokedex') }}">Pokedex</a></li>
+          <li><a class="nav-link" href="">Recherche pokemon</a></li>
         </ul>
       </div>
     </aside>
