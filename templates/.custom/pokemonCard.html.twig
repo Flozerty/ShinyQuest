@@ -95,7 +95,7 @@
   </div>
   <p class="compteur-input">{{capture.nbRencontres}}</p>
   taux?
-  <button>arreter le suivi</button>
+  <a href="{{ path('stop_suivi', {'id': capture.id}) }}">arrêter le suivi</a>
   shiny
 
 
