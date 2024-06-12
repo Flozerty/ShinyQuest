@@ -92,7 +92,6 @@ class ApiController extends AbstractController
 
     $pokemons = $apiHttpClient->getAllPokemons();
 
-
     $captures = $captureRepository->findBy(['user' => $user, 'termine' => 0]);
 
     return $this->render('api/shasses.html.twig', [

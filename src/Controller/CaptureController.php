@@ -17,10 +17,9 @@ class CaptureController extends AbstractController
         ]);
     }
 
-    #[Route('/capture/{id}/stop_suivi', name: 'stop_suivi')]
+    #[Route('/shasse/{id}/stop_suivi', name: 'stop_suivi')]
     public function stopSuivi(Capture $shasse = null, EntityManagerInterface $entityManager): Response
     {
-
         if ($shasse) {
             $shasse->setSuivi(false);
             $entityManager->persist($shasse);
@@ -28,7 +27,28 @@ class CaptureController extends AbstractController
         }
 
         return $this->redirectToRoute("my_shasses");
-
     }
 
+    #[Route('/shasse/{id}/add_suivi', name: 'add_suivi')]
+    public function addSuivi(Capture $shasse = null, EntityManagerInterface $entityManager): Response
+    {
+        if ($shasse) {
+            $shasse->setSuivi(true);
+            $entityManager->persist($shasse);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute("my_shasses");
+    }
+
+    #[Route('/shasse/{id}/delete', name: 'delete_shasse')]
+    public function deleteShasse(Capture $shasse = null, EntityManagerInterface $entityManager): Response
+    {
+        if ($shasse) {
+            $entityManager->remove($shasse);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute("my_shasses");
+    }
 }
