@@ -59,7 +59,7 @@
       <div id="header-profile">
         <p>{{app.user}}</p>
         <figure>
-          <img src="../img/{{app.user.avatar}}" alt="image de profil de {{app.user}}">
+          <img src="{{ asset('img/' ~ app.user.avatar) }}" alt="image de profil de {{app.user}}">
         </figure>
       </div>
 
@@ -102,6 +102,7 @@
         <ul>
           <li><a class="nav-link" href="">Mes amis</a></li>
           <li><a class="nav-link" href="">Les dresseurs</a></li>
+          <li><a class="nav-link" href="">Le top des shasses</a></li>
           <li><a class="nav-link" href="">Shasses en cours</a></li>
           <li><a class="nav-link" href="">Forum</a></li>
         </ul>
