@@ -9,7 +9,7 @@
 
 {% block body %}
 
-<h3>Mes shasses suivies</h3>
+<h2>Mes shasses suivies</h2>
 <section id="my-actives">
 
   {% for capture in captures %}
@@ -23,7 +23,7 @@
 </section>
 
 
-<h3>Débuter une shasse</h3>
+<h2>Débuter une shasse</h2>
 <section id="new-shasse">
   {# créer une shasse #}
 
@@ -39,9 +39,8 @@
     {% endfor %}
   </select>
 
-
   <div class="chroma-container">
-    <img src='img/sprite-charme-chroma.png' alt='charme chroma'>
+    <img src="{{ asset('img/' ~ 'sprite-charme-chroma.png') }}" alt='charme chroma'>
     {{form_row(formNewShasse.charmeChroma)}}
   </div>
 
@@ -51,17 +50,65 @@
 </section>
 
 
-<h3>Liste de mes autres shasses</h3>
+<h2>Liste de mes autres shasses</h2>
 <section id="my-other-shasses">
 
-  {% for capture in captures %}
-  {% if capture.suivi == false %}
+  {# table des shasses non suivies #}
+  <table id="shassesTable">
+    <thead>
+      <tr>
+        <th colspan="2">Pokémon</th>
+        <th>Jeu</th>
+        <th>Méthode</th>
+        <th>Compteur</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
 
-  {# on utilise le template de pokemonCard pour afficher toutes les shasses en cours #}
-  {% include '.custom/pokemonCard.html.twig' %}
+    <tbody>
 
+      {# initialisation de count (pour table vide) #}
+      {% set count = 0 %}
+
+      {% for capture in captures %}
+      {% if capture.suivi == false %}
+
+      {% set count = count + 1 %}
+
+      <tr>
+        <td class="td-pokemon-img">
+          <img src="{{capture.imgShiny}}" alt="{{capture.nomPokemon}}">
+        </td>
+        <td class="td-pokemon-name">
+          {{capture.nomPokemon}}
+        </td>
+        <td>
+          {{capture.jeu}}
+        </td>
+        <td>
+          {{capture.methodeCapture}}
+        </td>
+        <td>
+          {{capture.nbRencontres}}
+        </td>
+        <td>
+          <a href="{{ path('add_suivi', {'id': capture.id}) }}">ajouter au suivi</a>
+        </td>
+        <td>
+          <a href="{{ path('delete_shasse', {'id': capture.id}) }}"><i class="fa-solid fa-circle-xmark"></i></a>
+        </td>
+      </tr>
+
+      {% endif %}
+      {% endfor %}
+
+    </tbody>
+  </table>
+
+  {% if count == 0 %}
+  <p>pas d'entrées</p>
   {% endif %}
-  {% endfor %}
+
 </section>
 
 {% endblock %}

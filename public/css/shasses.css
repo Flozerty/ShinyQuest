@@ -1,3 +1,10 @@
+:root {
+  --darkblue: #003BB3;
+  --lightblue: #B9E7FF;
+  --transitionTime: 0.3s;
+  --custom-ball-size: 40px;
+}
+
 #my-actives {
   display: flex;
   flex-wrap: wrap;
@@ -8,4 +15,52 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+#shassesTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+
+  thead {
+    background-color: var(--darkblue);
+    color: white;
+  }
+
+  tbody {
+    tr {
+      &:nth-child(2n+1) {
+        background-color: var(--lightblue);
+      }
+
+      &:nth-child(2n) {
+        background-color: white;
+      }
+    }
+  }
+
+  tr {
+    position: relative;
+  }
+
+  td {
+    vertical-align: middle;
+  }
+
+  th {
+    padding: 10px 0;
+  }
+
+  .td-pokemon-name {
+    text-align: start;
+    padding-left: 10px;
+  }
+
+  .td-pokemon-img {
+    text-align: end;
+
+    img {
+      height: 50px;
+    }
+  }
 }
