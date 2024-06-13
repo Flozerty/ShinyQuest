@@ -37,6 +37,7 @@
 .pokemon-sprites {
   img {
     width: 150px;
+    display: none;
   }
 }
 
