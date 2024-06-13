@@ -1,16 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ApiController!{% endblock %}
+{% block title %}Pokédex{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="css/pokedex.css">
+{% endblock %}
 
 {% block body %}
 
-<div class="users">
+<p>Trouvez votre prochaine shasse !</p>
+<p>Sélectionnez un pokémon et accédez à toutes les infos utiles.</p>
+
+<div id="pokedex-content">
   {% for pokemon in allPokemons %}
-  <div class="pokemon">
-    {{pokemon.name}}<br>
-    <img src="{{pokemon.spriteN}}" alt="sprite normal de {{pokemon.name}}"><br>
-    <img src="{{pokemon.spriteS}}" alt="sprite shiny de {{pokemon.name}}"><br>
-  </div>
+
+  {# on utilise le template de pokedexCard pour afficher tous les pokemons #}
+  {% include '.custom/pokedexCard.html.twig' %}
 
   {% endfor %}
 </div>

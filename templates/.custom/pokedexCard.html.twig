@@ -1,0 +1,18 @@
+<div class="pokemon">
+
+  <p class="pokemon-id">#{{ '%03d'|format(pokemon.pokedex_id) }}</p>
+
+  <div class="types">
+    {% for type in pokemon.types %}
+    <img src="{{type.image}}" alt="type {{type.name}}">
+    {% endfor %}
+  </div>
+
+  <div class="pokemon-sprites">
+    <img class="sprite-normal" src="{{pokemon.spriteN}}" alt="sprite normal de {{pokemon.name}}"><br>
+    <img class="sprite-shiny" src="{{pokemon.spriteS}}" alt="sprite shiny de {{pokemon.name}}"><br>
+  </div>
+
+  <p class="pokemon-name">{{pokemon.name}}</p>
+
+</div>

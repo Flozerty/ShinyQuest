@@ -24,7 +24,7 @@ class ApiController extends AbstractController
 
     // dd($pokemons);
     return $this->render('api/pokedex.html.twig', [
-      "page_title" => 'Pokédex',
+      "page_title" => 'Recherche par Pokédex',
       'allPokemons' => $pokemons,
     ]);
   }
