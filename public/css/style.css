@@ -11,6 +11,7 @@
   box-sizing: border-box;
   vertical-align: top;
   line-height: 1.2em;
+  font-family: "Chocolate Classical Sans", sans-serif;
 }
 
 html {
@@ -192,5 +193,17 @@ main {
 
   input {
     transform: translateY(50%);
+  }
+}
+
+dialog {
+  margin: auto;
+  min-width: 25%;
+  border-color: var(--darkblue);
+
+  #dialog-content {
+
+    padding: 20px;
+    text-align: center;
   }
 }

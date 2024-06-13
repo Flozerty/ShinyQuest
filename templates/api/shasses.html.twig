@@ -7,6 +7,10 @@
 <link rel="stylesheet" href="css/shasses.css">
 {% endblock %}
 
+{% block javascripts %}
+<script src="{{asset('js/shasseModal.js')}}"></script>
+{% endblock %}
+
 {% block body %}
 
 <h2>Mes shasses suivies</h2>
@@ -110,5 +114,25 @@
   {% endif %}
 
 </section>
+
+
+<dialog id="shasseDialog">
+  <div id="dialog-content">
+
+    {# {{ form_start(formAddFormateur) }}
+
+    <div class="modalNav">
+      <button type="button" class="cancel">
+        <i class="fa-solid fa-circle-xmark"></i>
+      </button>
+
+    </div>
+    {{ form_end(formAddFormateur) }} #}
+
+    test
+
+    <button class="cancel">cancel</button>
+  </div>
+</dialog>
 
 {% endblock %}
