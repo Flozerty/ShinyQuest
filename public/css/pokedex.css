@@ -1,3 +1,10 @@
+:root {
+  --darkblue: #003BB3;
+  --lightblue: #B9E7FF;
+  --transitionTime: 0.3s;
+  --custom-ball-size: 40px;
+}
+
 #pokedex-content {
   display: flex;
   flex-wrap: wrap;
@@ -7,10 +14,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 15px;
-  margin: 15px;
+  padding: 5px;
+  margin: 5px;
   border-radius: 20px;
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  box-shadow: rgb(38, 57, 77) 0px 10px 15px -10px;
+  transition: var(--transitionTime);
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(5px);
+    box-shadow: none;
+    transition: 0.8s;
+  }
 }
 
 .types {
@@ -23,10 +38,6 @@
   img {
     width: 150px;
   }
-}
-
-.sprite-shiny {
-  display: none;
 }
 
 .pokemon-id {

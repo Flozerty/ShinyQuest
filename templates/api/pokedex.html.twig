@@ -6,10 +6,16 @@
 <link rel="stylesheet" href="css/pokedex.css">
 {% endblock %}
 
+{% block javascripts %}
+<script src="{{asset('js/pokedexSpriteDisplay.js')}}"></script>
+{% endblock %}
+
 {% block body %}
 
 <p>Trouvez votre prochaine shasse !</p>
 <p>Sélectionnez un pokémon et accédez à toutes les infos utiles.</p>
+
+<button id="shiny-mode">change</button>
 
 <div id="pokedex-content">
   {% for pokemon in allPokemons %}
