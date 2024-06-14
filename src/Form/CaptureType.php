@@ -34,3 +34,4 @@ class CaptureType extends AbstractType
         ]);
     }
 }
+ 
