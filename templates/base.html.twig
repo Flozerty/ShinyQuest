@@ -65,14 +65,12 @@
         <figure>
           <img src="{{ asset('img/' ~ app.user.avatar) }}" alt="image de profil de {{app.user}}">
         </figure>
+        
       </div>
+      <i id="profile-caret" class="fa-solid fa-caret-down"></i>
 
-      {# <ul id="profile-nav">
-        <li><a class="nav-link" href="">Mon profil</a></li>
-        <li><a class="nav-link" href="">Mes shasses</a></li>
-        <li><a class="nav-link" href="">Ma carte</a></li>
-        <li><a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a></li>
-      </ul> #}
+     
+    
       {% else %}
       <ul>
         <li>inscription</li>
@@ -81,6 +79,13 @@
       {% endif %}
 
     </nav>
+
+    <ul id="profile-nav">
+      <li><a class="nav-link" href="">Mon profil</a></li>
+      <li><a class="nav-link" href="">Mes shasses</a></li>
+      <li><a class="nav-link" href="">Ma carte</a></li>
+      <li><a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a></li>
+    </ul>
   </header>
 
   <div id="main-wrapper">
@@ -133,4 +138,6 @@
   </div>
 </body>
 
+
+<script src="js/profileNav.js"></script>
 </html>
