@@ -16,9 +16,7 @@
   {% block stylesheets %}{% endblock %}
 
   <script src="https://kit.fontawesome.com/7252ea4d54.js" crossorigin="anonymous"></script>
-  {% block javascripts %}
-  {% block importmap %}{{ importmap('app') }}{% endblock %}
-  {% endblock %}
+
 </head>
 
 <body>
@@ -136,9 +134,10 @@
       {% block body %}{% endblock %}
     </main>
   </div>
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="js/profileNav.js"></script>
+  {% block javascripts %}{% endblock %}
+
 </body>
-
-
-<script src="js/profileNav.js"></script>
-
 </html>

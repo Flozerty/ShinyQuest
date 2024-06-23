@@ -90,10 +90,11 @@
   {# if shasse #}
   {% if capture.termine == false %}
   <div class="buttons">
-    <button>-</button>
-    <button>+</button>
+    <button class="decrement" data-id="{{ capture.id }}">-</button>
+    <button class="increment" data-id="{{ capture.id }}">+</button>
   </div>
-  <p class="compteur-input">{{capture.nbRencontres}}</p>
+
+  <p class="compteur-input" id="compteur-{{ capture.id }}">{{capture.nbRencontres}}</p>
   taux?
   <a href="{{ path('stop_suivi', {'id': capture.id}) }}">arrêter le suivi</a>
 
