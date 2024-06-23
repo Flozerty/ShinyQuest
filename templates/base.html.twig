@@ -73,8 +73,8 @@
 
       {% else %}
       <ul>
-        <li>inscription</li>
-        <li>connexion</li>
+        <li><a class="nav-link" href="{{ path('app_register') }}">Inscription</a></li>
+        <li><a class="nav-link" href="{{ path('app_login') }}">Connexion</a></li>
       </ul>
       {% endif %}
 
