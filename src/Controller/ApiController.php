@@ -63,8 +63,8 @@ class ApiController extends AbstractController
 
     $formNewShasse->handleRequest($request);
 
+    // validation du formulaire de nouvelle shasse
     if ($formNewShasse->isSubmitted() && $formNewShasse->isValid()) {
-      // validation du formulaire de nouvelle shasse
 
       $pokemonId = filter_input(INPUT_POST, "pokemonId", FILTER_VALIDATE_INT);
 

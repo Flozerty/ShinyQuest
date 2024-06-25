@@ -117,3 +117,15 @@
 .fa-genderless {
   color: green;
 }
+
+.counter-buttons {
+  margin: 10px 0;
+
+  button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--lightblue);
+    border: 1px solid var(--darkblue);
+  }
+}

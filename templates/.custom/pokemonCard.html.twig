@@ -89,9 +89,11 @@
 
   {# if shasse #}
   {% if capture.termine == false %}
-  <div class="buttons">
-    <button class="decrement" data-id="{{ capture.id }}">-</button>
-    <button class="increment" data-id="{{ capture.id }}">+</button>
+  <div class="counter-buttons">
+    <button class="decrement10" data-id="{{ capture.id }}">-10</button>
+    <button class="decrement" data-id="{{ capture.id }}">-1</button>
+    <button class="increment" data-id="{{ capture.id }}">+1</button>
+    <button class="increment10" data-id="{{ capture.id }}">+10</button>
   </div>
 
   <p class="compteur-input" id="compteur-{{ capture.id }}">{{capture.nbRencontres}}</p>

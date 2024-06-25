@@ -12,10 +12,16 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class CaptureController extends AbstractController
 {
-    #[Route('/capture', name: 'app_capture')]
-    public function index(): Response
+    // retirer du suivi des shasses
+    #[Route('/shasse/{id}/found_pokemon', name: 'found_pokemon')]
+    public function foundPokemon(Capture $shasse = null, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('capture/index.html.twig', []);
+        if ($shasse) {
+            $shasse->setSuivi(false);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute("my_shasses");
     }
 
     // retirer du suivi des shasses
@@ -24,7 +30,6 @@ class CaptureController extends AbstractController
     {
         if ($shasse) {
             $shasse->setSuivi(false);
-            $entityManager->persist($shasse);
             $entityManager->flush();
         }
 
@@ -37,7 +42,6 @@ class CaptureController extends AbstractController
     {
         if ($shasse) {
             $shasse->setSuivi(true);
-            $entityManager->persist($shasse);
             $entityManager->flush();
         }
 
@@ -57,7 +61,7 @@ class CaptureController extends AbstractController
     }
 
     #[Route('/shasse/{id}/increment', name: 'increment_shasse')]
-    public function incrementNbRencontres(int $id, EntityManagerInterface $entityManager, Request $request): Response
+    public function incrementCounter(int $id, EntityManagerInterface $entityManager, Request $request): Response
     {
         $shasse = $entityManager->getRepository(Capture::class)->find($id);
 
@@ -77,6 +81,32 @@ class CaptureController extends AbstractController
         if ($shasse) {
 
             $shasse->setNbRencontres($shasse->getNbRencontres() - 1);
+            $entityManager->flush();
+        }
+        return $this->json(['nbRencontres' => $shasse->getNbRencontres()]);
+    }
+
+    #[Route('/shasse/{id}/increment10', name: 'increment10_shasse')]
+    public function increment10Counter(int $id, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $shasse = $entityManager->getRepository(Capture::class)->find($id);
+
+        if ($shasse) {
+
+            $shasse->setNbRencontres($shasse->getNbRencontres() + 10);
+            $entityManager->flush();
+        }
+        return $this->json(['nbRencontres' => $shasse->getNbRencontres()]);
+    }
+
+    #[Route('/shasse/{id}/decrement10', name: 'decrement10_shasse')]
+    public function decrement10Counter(int $id, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $shasse = $entityManager->getRepository(Capture::class)->find($id);
+
+        if ($shasse) {
+
+            $shasse->setNbRencontres($shasse->getNbRencontres() - 10);
             $entityManager->flush();
         }
         return $this->json(['nbRencontres' => $shasse->getNbRencontres()]);
