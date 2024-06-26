@@ -28,15 +28,6 @@
     margin: 3px 0;
     width: fit-content;
   }
-
-  .chroma-container {
-    display: flex;
-    align-items: center;
-
-    img {
-      width: 50px;
-    }
-  }
 }
 
 .pokemon-infos {
@@ -128,4 +119,12 @@
     background-color: var(--lightblue);
     border: 1px solid var(--darkblue);
   }
+}
+
+.stop_suivi {
+  color: white;
+  background-color: red;
+  padding: 5px 10px;
+  border-radius: 12px;
+  margin: 10px 0;
 }

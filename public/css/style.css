@@ -28,6 +28,13 @@ a {
   color: inherit;
 }
 
+.fa-circle-check{
+  color: green;
+}
+
+.fa-circle-xmark {
+  color: red;
+}
 
 header {
   position: fixed;
@@ -218,7 +225,6 @@ main {
   text-decoration: underline;
 }
 
-
 .chroma-container {
   display: flex;
   align-items: center;
@@ -229,17 +235,5 @@ main {
 
   input {
     transform: translateY(50%);
-  }
-}
-
-dialog {
-  margin: auto;
-  min-width: 25%;
-  border-color: var(--darkblue);
-
-  #dialog-content {
-
-    padding: 20px;
-    text-align: center;
   }
 }

@@ -7,6 +7,7 @@ use App\Entity\MethodeCapture;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,13 +17,18 @@ class CaptureType extends AbstractType
     {
         $builder
             ->add('surnom')
-            ->add('nbRencontres')
             ->add('dateCapture', null, [
                 'widget' => 'single_text',
             ])
-            ->add('charmeChroma')
-            ->add('termine')
-            ->add('sexe')
+            ->add('sexe', ChoiceType::class, [
+                'choices' => [
+                    '<i class="fa-solid fa-mars"></i>' => 'male',
+                    'f' => 'femelle',
+                    'x' => 'autre',
+                ],
+                'expanded' => true,
+                'multiple' => false,
+            ])
             ->add('ball')
         ;
     }

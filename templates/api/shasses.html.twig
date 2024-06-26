@@ -98,7 +98,7 @@
           {{capture.nbRencontres}}
         </td>
         <td>
-          <a href="{{ path('add_suivi', {'id': capture.id}) }}">ajouter au suivi</a>
+          <a class="add_suivi" href="{{ path('add_suivi', {'id': capture.id}) }}">ajouter au suivi</a>
         </td>
         <td>
           <a href="{{ path('delete_shasse', {'id': capture.id}) }}"><i class="fa-solid fa-circle-xmark"></i></a>
@@ -121,19 +121,40 @@
 <dialog id="shasseDialog">
   <div id="dialog-content">
 
-    {# {{ form_start(formAddFormateur) }}
+    {{ form_start(formCapture) }}
 
-    <div class="modalNav">
-      <button type="button" class="cancel">
-        <i class="fa-solid fa-circle-xmark"></i>
-      </button>
+    {{ form_row(formCapture.surnom) }}
+    {{ form_row(formCapture.dateCapture) }}
 
+    <div>
+      {{ form_label(formCapture.sexe) }}
+      <div>
+        {% for choice in formCapture.sexe %}
+        <label>
+          {{ form_widget(choice) }}
+          {% if choice.vars.value == 'male' %}
+          <i class="fa-solid fa-mars"></i>
+          {% elseif choice.vars.value == 'femelle' %}
+          <i class="fa-solid fa-venus"></i>
+          {% elseif choice.vars.value == 'autre' %}
+          <i class="fa-solid fa-genderless"></i>
+          {% endif %}
+        </label>
+        {% endfor %}
+      </div>
     </div>
-    {{ form_end(formAddFormateur) }} #}
 
-    test
+    {{ form_row(formCapture.ball) }}
 
-    <button class="cancel">cancel</button>
+    <div id="modalNav">
+      <button type="submit">
+        <i class="fa-solid fa-circle-check"></i>
+      </button>
+      <button type="cancel">
+        <i class="cancel fa-solid fa-circle-xmark"></i>
+      </button>
+    </div>
+    {{ form_end(formCapture) }}
   </div>
 </dialog>
 
