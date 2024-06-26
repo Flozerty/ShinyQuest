@@ -111,4 +111,18 @@ class CaptureController extends AbstractController
         }
         return $this->json(['nbRencontres' => $shasse->getNbRencontres()]);
     }
+
+    #[Route('/shasse/{id}/updateCounter', name: 'shasse_updateCounter')]
+    public function updateCounter(int $id, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $shasse = $entityManager->getRepository(Capture::class)->find($id);
+        $newValue = (int) $request->request->get('nbRencontres');
+
+        if ($shasse) {
+
+            $shasse->setNbRencontres($newValue);
+            $entityManager->flush();
+        }
+        return $this->json(['nbRencontres' => $shasse->getNbRencontres()]);
+    }
 }
