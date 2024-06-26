@@ -96,9 +96,12 @@
     <button class="increment10" data-id="{{ capture.id }}">+10</button>
   </div>
 
-  <p class="compteur-input" id="compteur-{{ capture.id }}">{{capture.nbRencontres}}</p>
+  <form action="" method="post">
+    <input type="text" class="compteur-input" id="compteur-{{ capture.id }}" value="{{capture.nbRencontres}}"></input>
+  </form>
+  
   taux?
-  <a href="{{ path('stop_suivi', {'id': capture.id}) }}">arrêter le suivi</a>
+  <a class="stop_suivi" href="{{ path('stop_suivi', {'id': capture.id}) }}">arrêter le suivi</a>
 
   <button class="shasse-trouve">shiny</button>
 
