@@ -32,6 +32,9 @@
     width: fit-content;
   }
 }
+.capture-infos-termine {
+  height: 340px;
+}
 
 .pokemon-infos {
   display: flex;

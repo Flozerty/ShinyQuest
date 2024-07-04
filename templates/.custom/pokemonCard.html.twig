@@ -4,7 +4,7 @@
   <p class="hidden">{{capture.id}}</p>
 
   <div class="main-card-content">
-    <section class="capture-infos">
+    <section class="capture-infos{% if capture.termine == true %} capture-infos-termine{% endif %}">
 
       {# if capture #}
       {% if capture.termine == true %}
