@@ -7,6 +7,7 @@
 
 #pokedex-content {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -29,6 +30,8 @@
 }
 
 .types {
+  height: 25px;
+
   img {
     width: 25px;
   }
@@ -52,4 +55,38 @@
 
 p {
   text-align: center;
+}
+
+/* shinydex condition */
+.filtered-dex {
+
+  .types img {
+    display: none;
+  }
+  .pokemon-sprites img {
+    filter: brightness(0%);
+  }
+  .pokemon-name {
+    display: none;
+  }
+}
+
+#dex-completion {
+  border: 1px solid var(--darkblue);
+  width: 80%;
+  height: 50px;
+  margin: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#completion-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: -1;
+  background-color: #B9E7FF;
 }

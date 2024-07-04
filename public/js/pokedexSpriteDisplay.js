@@ -1,16 +1,26 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-  const button = document.getElementById('shiny-mode');
+  let shinyMode = false;
+  
   const shinySprites = document.querySelectorAll('.sprite-shiny');
   const normalSprites = document.querySelectorAll('.sprite-normal');
+  const button = document.getElementById('shiny-mode');
 
-  let shinyMode = false;
-  button.addEventListener('click', () => {
-    shinyMode = !shinyMode;
-    verifyDisplayMode();
-  })
+  if (button) { // On est dans le pokedex
+    button.addEventListener('click', () => {
+      shinyMode = !shinyMode;
+      verifyDisplayMode();
+    })
+
+  } else { // Pour le Shinydex
+    shinyMode = true;
 
 
+
+  }
+
+
+  // fonction commune pour l'affichage des images normal/shiny
   function verifyDisplayMode() {
     if (shinyMode) {
       shinySprites.forEach(sprite => {
@@ -28,6 +38,5 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
   }
-
   verifyDisplayMode()
 })
