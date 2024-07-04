@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Capture;
 use App\Entity\User;
+use App\Form\CaptureType;
 use App\Form\ShasseStartType;
 use App\HttpClient\ApiHttpClient;
 use App\Repository\CaptureRepository;
@@ -57,8 +58,9 @@ class ApiController extends AbstractController
       return $this->redirectToRoute('app_login');
     }
 
-    // nouvelle shasse
     $shasse = new Capture;
+
+    //  formulaire de création de nouvelle shasse
     $formNewShasse = $this->createForm(ShasseStartType::class, $shasse);
 
     $formNewShasse->handleRequest($request);
@@ -90,6 +92,32 @@ class ApiController extends AbstractController
       return $this->redirectToRoute('my_shasses');
     }
 
+
+    //  formulaire de shasse terminée
+    $formCapture = $this->createForm(CaptureType::class, $shasse);
+
+    $formCapture->handleRequest($request);
+
+    // validation du formulaire de shiny trouvé
+    if ($formCapture->isSubmitted() && $formCapture->isValid()) {
+
+      $idCapture = filter_input(INPUT_POST, "IdCapture", FILTER_VALIDATE_INT);
+      // on va récupérer la capture avec cet ID.
+      $capture = $entityManager->getRepository(Capture::class)->find($idCapture);
+
+      // et on lui donne les résultats du formulaire de modal :
+      $capture->setSurnom($shasse->getSurnom());
+      $capture->setDateCapture($shasse->getDateCapture());
+      $capture->setSexe($shasse->getSexe());
+      $capture->setBall($shasse->getBall());
+
+      $capture->setSuivi(false);
+      $capture->setTermine(true);
+
+      $entityManager->flush();
+    }
+
+
     $pokemons = $apiHttpClient->getAllPokemons();
 
     $captures = $captureRepository->findBy(['user' => $user, 'termine' => 0]);
@@ -98,6 +126,7 @@ class ApiController extends AbstractController
       "page_title" => 'Mes shasses',
       "captures" => $captures,
       "formNewShasse" => $formNewShasse,
+      "formCapture" => $formCapture,
       "allPokemons" => $pokemons,
     ]);
   }

@@ -1,4 +1,8 @@
 <div class="pokemon-card">
+
+  {# envoi de l'Id pour la modal #}
+  <p class="hidden">{{capture.id}}</p>
+
   <div class="main-card-content">
     <section class="capture-infos">
 
@@ -96,10 +100,9 @@
     <button class="increment10" data-id="{{ capture.id }}">+10</button>
   </div>
 
-  <form action="" method="post">
-    <input type="text" class="compteur-input" id="compteur-{{ capture.id }}" value="{{capture.nbRencontres}}"></input>
-  </form>
-  
+  {# affichage du compteur #}
+  <input type="text" class="compteur-input" id="compteur-{{ capture.id }}" value="{{capture.nbRencontres}}"></input>
+
   taux?
   <a class="stop_suivi" href="{{ path('stop_suivi', {'id': capture.id}) }}">arrêter le suivi</a>
 

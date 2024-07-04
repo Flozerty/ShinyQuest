@@ -36,6 +36,10 @@ a {
   color: red;
 }
 
+.hidden {
+  display: none;
+}
+
 header {
   position: fixed;
   top: 0;

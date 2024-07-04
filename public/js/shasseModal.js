@@ -7,10 +7,19 @@ document.addEventListener('DOMContentLoaded', function () {
   const dialogContent = dialog.querySelector('#dialog-content');
   const cancelButton = dialog.querySelector(".cancel");
 
+  const IdCaptureInputHidden = dialog.querySelector("#IdCapture")
+
+
+  
   cards.forEach(card => {
     const buttonFind = card.querySelector(".shasse-trouve");
 
     buttonFind.addEventListener('click', () => {
+      // changer la value du hidden Input de la modal (idCapture)
+      const captureId = card.querySelector(".hidden").textContent;
+      IdCaptureInputHidden.value = captureId;
+
+      // afficher le modal
       dialog.showModal();
       openCheck(dialog)
     })
