@@ -1,8 +1,20 @@
 <div class="pokemon-card">
 
+  {# delete : capture ou shasse #}
+  <a class="del-btn" 
+    href="
+    {% if capture.termine == true %}
+      {{ path('delete_capture', {'id': capture.id}) }}
+    {% else %}
+      {{ path('delete_shasse', {'id': capture.id}) }}
+    {% endif %}">
+    <i class="fa-solid fa-circle-xmark"></i>
+  </a>
+
   {# envoi de l'Id pour la modal #}
   <p class="hidden">{{capture.id}}</p>
 
+  {# contenu de la card #}
   <div class="main-card-content">
     <section class="capture-infos{% if capture.termine == true %} capture-infos-termine{% endif %}">
 

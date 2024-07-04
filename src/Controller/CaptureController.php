@@ -12,16 +12,28 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class CaptureController extends AbstractController
 {
-    // retirer du suivi des shasses
-    #[Route('/shasse/{id}/found_pokemon', name: 'found_pokemon')]
-    public function foundPokemon(Capture $shasse = null, EntityManagerInterface $entityManager): Response
+    // supprimer une shasses
+    #[Route('/shasse/{id}/delete', name: 'delete_shasse')]
+    public function deleteShasse(Capture $shasse = null, EntityManagerInterface $entityManager): Response
     {
         if ($shasse) {
-            $shasse->setSuivi(false);
+            $entityManager->remove($shasse);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute("my_shasses");
+    }
+
+    // supprimer une capture
+    #[Route('/capture/{id}/delete', name: 'delete_capture')]
+    public function deleteCapture(Capture $shasse = null, EntityManagerInterface $entityManager): Response
+    {
+        if ($shasse) {
+            $entityManager->remove($shasse);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute("my_captures");
     }
 
     // retirer du suivi des shasses
@@ -42,18 +54,6 @@ class CaptureController extends AbstractController
     {
         if ($shasse) {
             $shasse->setSuivi(true);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute("my_shasses");
-    }
-
-    // supprimer la shasse
-    #[Route('/shasse/{id}/delete', name: 'delete_shasse')]
-    public function deleteShasse(Capture $shasse = null, EntityManagerInterface $entityManager): Response
-    {
-        if ($shasse) {
-            $entityManager->remove($shasse);
             $entityManager->flush();
         }
 
