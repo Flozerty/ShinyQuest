@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chocolate+Classical+Sans&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/custom_pokeball.css">
+  <link rel="stylesheet" href="{{asset('css/style.css')}}">
+  <link rel="stylesheet" href="{{asset('css/custom_pokeball.css')}}">
   {% block stylesheets %}{% endblock %}
 
   <script src="https://kit.fontawesome.com/7252ea4d54.js" crossorigin="anonymous"></script>
@@ -100,7 +100,7 @@
         <ul>
           <li><a class="nav-link" href="{{ path('my_shasses') }}">Mes shasses</a></li>
           <li><a class="nav-link" href="{{ path('my_captures') }}">Mes captures</a></li>
-          <li><a class="nav-link" href="">Mon shinydex</a></li>
+          <li><a class="nav-link" href="{{ path('app_shinydex', {'id': app.user.id}) }}">Mon shinydex</a></li>
         </ul>
       </div>
 
