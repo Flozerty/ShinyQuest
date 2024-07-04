@@ -1,9 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Pokédex{% endblock %}
+{% block title %}
+
+{% if capturedPokemonIds is defined %}
+Shinydex
+{% else %}
+Pokédex
+{% endif %}
+{% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="css/pokedex.css">
+<link rel="stylesheet" href="{{asset('css/pokedex.css')}}">
+
 {% endblock %}
 
 {% block javascripts %}
@@ -12,10 +20,23 @@
 
 {% block body %}
 
+{# shinydex #}
+{% if capturedPokemonIds is defined %}
+  <p>Complétion du shinydex : </p>
+<div id="dex-completion">
+  <p>{{capturedPokemonIds | length}} / {{allPokemons | length}}</p>
+  {# completion bar : capturés / total #}
+  <div id="completion-bar" style="width:{{ (capturedPokemonIds | length / allPokemons | length) * 100}}%"></div>
+</div>
+
+{# pokedex #}
+{% else %}
 <p>Trouvez votre prochaine shasse !</p>
 <p>Sélectionnez un pokémon et accédez à toutes les infos utiles.</p>
 
 <button id="shiny-mode">change</button>
+
+{% endif %}
 
 <div id="pokedex-content">
   {% for pokemon in allPokemons %}
