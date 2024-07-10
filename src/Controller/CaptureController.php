@@ -29,7 +29,7 @@ class CaptureController extends AbstractController
 
     $captures = $captureRepository->findBy(['user' => $user, 'termine' => 1]);
 
-    return $this->render('api/captures.html.twig', [
+    return $this->render('capture/captures.html.twig', [
       "page_title" => 'Mes captures',
       "captures" => $captures,
     ]);
@@ -109,7 +109,7 @@ class CaptureController extends AbstractController
 
     $captures = $captureRepository->findBy(['user' => $user, 'termine' => 0]);
 
-    return $this->render('api/shasses.html.twig', [
+    return $this->render('capture/shasses.html.twig', [
       "page_title" => 'Mes shasses',
       "captures" => $captures,
       "formNewShasse" => $formNewShasse,
