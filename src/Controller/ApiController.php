@@ -48,10 +48,23 @@ class ApiController extends AbstractController
     }
 
     return $this->render('api/pokedex.html.twig', [
-      "page_title" => 'Shinydex'.'',
+      "page_title" => 'Shinydex' . '',
       'allPokemons' => $pokemons,
       // on récupère les clés du tableau d'IDs.
       'capturedPokemonIds' => array_keys($capturedPokemonIds),
     ]);
   }
+
+  // #[Route('/test', name: 'test')]
+  // public function test(ApiHttpClient $apiHttpClient): Response
+  // {
+
+  //   $games = $apiHttpClient->getAllGamesVersions();
+
+  //   dd($games);
+
+  //   return $this->render('api/index.html.twig', [
+  //     // on récupère les clés du tableau d'IDs.
+  //   ]);
+  // }
 }
