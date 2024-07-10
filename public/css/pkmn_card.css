@@ -33,6 +33,7 @@
     width: fit-content;
   }
 }
+
 .capture-infos-termine {
   height: 340px;
 }
@@ -129,8 +130,16 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: var(--lightblue);
+    background-color: white;
+    color: var(--darkblue);
+    font-weight: 600;
     border: 1px solid var(--darkblue);
+    cursor: pointer;
+    transition: var(--transitionTime);
+
+    &:hover {
+      background-color: var(--lightblue);
+    }
   }
 }
 
@@ -143,8 +152,8 @@
 }
 
 .del-btn {
- position: absolute;
- top: 10px;
- right: 10px;
- font-size: 1.2rem;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.2rem;
 }
