@@ -135,3 +135,48 @@ dialog {
     }
   }
 }
+
+#new-shasse {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  max-width: 700px;
+  margin: auto;
+  padding: 15px;
+  border-radius: 20px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      margin: 15px 0;
+    }
+
+    label {
+      padding-right: 20px;
+      font-weight: 600;
+    }
+
+    .chroma-container {
+      align-self: center;
+    }
+
+    input,
+    select {
+      border: 1px solid var(--darkblue);
+      border-radius: 5px;
+      padding: 5px;
+    }
+
+    #submit-new-shasse {
+      background-color: var(--lightblue);
+      box-shadow: var(--darkblue) 0px 50px 100px -20px, var(--darkblue) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+      cursor: pointer;
+    }
+  }
+}
