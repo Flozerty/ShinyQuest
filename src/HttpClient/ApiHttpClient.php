@@ -97,16 +97,13 @@ class ApiHttpClient extends AbstractController
       $newResponse = $this->httpClient->request('GET', $url);
       $gameNames = $newResponse->toArray();
 
-      $idVersion = $gameNames["id"]; //
+      // $idVersion = $gameNames["id"];
 
       foreach ($gameNames['names'] as $name) {
 
         if ($name["language"]["name"] === "fr") {
 
-          $frGames[] = [
-            "id" => $idVersion,
-            "name" => $name["name"]
-          ];
+          $frGames[] = $name["name"];
         }
       }
     }
