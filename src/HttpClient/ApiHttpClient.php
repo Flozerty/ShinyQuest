@@ -81,4 +81,36 @@ class ApiHttpClient extends AbstractController
     $pokemon = $response->toArray();
     return $pokemon["name"]["fr"];
   }
+
+
+  // Récupération de toutes les versions & leurs id
+  public function getAllGamesVersions()
+  {
+    $response = $this->httpClient->request('GET', "https://pokeapi.co/api/v2/version/?offset=0&limit=100");
+    $allGames = $response->toArray()["results"];
+
+    // On va chercher tous les noms des jeux en français
+    $frGames = [];
+    foreach ($allGames as $game) {
+      $url = $game["url"];
+
+      $newResponse = $this->httpClient->request('GET', $url);
+      $gameNames = $newResponse->toArray();
+
+      $idVersion = $gameNames["id"]; //
+
+      foreach ($gameNames['names'] as $name) {
+
+        if ($name["language"]["name"] === "fr") {
+
+          $frGames[] = [
+            "id" => $idVersion,
+            "name" => $name["name"]
+          ];
+        }
+      }
+    }
+
+    return $frGames;
+  }
 }
