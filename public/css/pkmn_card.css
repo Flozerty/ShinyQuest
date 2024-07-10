@@ -136,10 +136,36 @@
     border: 1px solid var(--darkblue);
     cursor: pointer;
     transition: var(--transitionTime);
+    overflow: hidden;
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      right: 50%;
+      bottom: 50%;
+      background-color: var(--lightblue);
+      transition: var(--transitionTime);
+      z-index: 0;
+      border-radius: 50%;
+    }
 
     &:hover {
-      background-color: var(--lightblue);
+      &:before {
+        left: -10%;
+        top: -10%;
+        right: -10%;
+        bottom: -10%;
+      }
     }
+
+    span {
+      position: relative;
+      z-index: 1;
+    }
+
   }
 }
 
