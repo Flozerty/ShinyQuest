@@ -123,6 +123,13 @@
   color: green;
 }
 
+.pokemon-name {
+  font-size: 1.2rem;
+}
+.surname {
+  font-size: 0.8rem;
+}
+
 .counter-buttons {
   margin: 10px 0;
 
