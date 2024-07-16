@@ -84,8 +84,8 @@
 
       <div class="captured-pokemon-footer">
         <div class="capture-names">
-          <p>{{capture.nomPokemon}}</p>
-          <p>{{capture.surnom}}</p>
+          <p class="pokemon-name">{{capture.nomPokemon}}</p>
+          <p class="surname">{{capture.surnom}}</p>
         </div>
 
         {% if capture.sexe == "male" %}
@@ -115,7 +115,8 @@
   {# affichage du compteur #}
   <input type="text" class="compteur-input" id="compteur-{{ capture.id }}" value="{{capture.nbRencontres}}"></input>
 
-  taux?
+  {# ?? ajouter ici le taux de capture ?? #}
+
   <a class="stop_suivi" href="{{ path('stop_suivi', {'id': capture.id}) }}">arrêter le suivi</a>
 
   <button class="shasse-trouve">shiny</button>
