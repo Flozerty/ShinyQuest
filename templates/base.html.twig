@@ -48,15 +48,15 @@
 
         <li title="Mes captures">
           <a href="{{ path('my_captures') }}">
-          <div class="custom-pokeball">
-            <div class="pokeball-circle"></div>
-            <div class="pokeball-center"></div>
-            <div class="pokeball-line"></div>
-          </div>
-        </a>
+            <div class="custom-pokeball">
+              <div class="pokeball-circle"></div>
+              <div class="pokeball-center"></div>
+              <div class="pokeball-line"></div>
+            </div>
+          </a>
         </li>
 
-        <li title="Mes amis"><i class="fa-solid fa-user-group"></i></li>
+        <li title="Mes amis"><a href="{{ path('app_amis') }}"><i class="fa-solid fa-user-group"></i></a></li>
         <li title="Messagerie"><i class="fa-regular fa-message"></i></li>
       </ul>
 
@@ -68,8 +68,6 @@
 
       </div>
       <i id="profile-caret" class="fa-solid fa-caret-down"></i>
-
-
 
       {% else %}
       <ul>
