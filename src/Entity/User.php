@@ -54,11 +54,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Capture::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $captures;
 
+    /**
+     * @var Collection<int, Amis>
+     */
+    #[ORM\OneToMany(targetEntity: Amis::class, mappedBy: 'userDemande', orphanRemoval: true)]
+    private Collection $amisDemande;
+
+    /**
+     * @var Collection<int, Amis>
+     */
+    #[ORM\OneToMany(targetEntity: Amis::class, mappedBy: 'userRecoit', orphanRemoval: true)]
+    private Collection $amisRecoit;
+
     // On donne la valeur par défaut de new DateTime dans le construct
     public function __construct()
     {
         $this->dateInscription = new \DateTime();
         $this->captures = new ArrayCollection();
+        $this->amisDemande = new ArrayCollection();
+        $this->amisRecoit = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -213,6 +227,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($capture->getUser() === $this) {
                 $capture->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Amis>
+     */
+    public function getAmisDemande(): Collection
+    {
+        return $this->amisDemande;
+    }
+
+    public function addAmisDemande(Amis $amisDemande): static
+    {
+        if (!$this->amisDemande->contains($amisDemande)) {
+            $this->amisDemande->add($amisDemande);
+            $amisDemande->setUserDemande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAmisDemande(Amis $amisDemande): static
+    {
+        if ($this->amisDemande->removeElement($amisDemande)) {
+            // set the owning side to null (unless already changed)
+            if ($amisDemande->getUserDemande() === $this) {
+                $amisDemande->setUserDemande(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Amis>
+     */
+    public function getAmisRecoit(): Collection
+    {
+        return $this->amisRecoit;
+    }
+
+    public function addAmisRecoit(Amis $amisRecoit): static
+    {
+        if (!$this->amisRecoit->contains($amisRecoit)) {
+            $this->amisRecoit->add($amisRecoit);
+            $amisRecoit->setUserRecoit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAmisRecoit(Amis $amisRecoit): static
+    {
+        if ($this->amisRecoit->removeElement($amisRecoit)) {
+            // set the owning side to null (unless already changed)
+            if ($amisRecoit->getUserRecoit() === $this) {
+                $amisRecoit->setUserRecoit(null);
             }
         }
 
