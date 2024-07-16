@@ -2,6 +2,11 @@
 
 {% block title %}Hello HomeController!{% endblock %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="css/home.css">
+<link rel="stylesheet" href="css/pkmn_card.css">
+{% endblock %}
+
 {% block body %}
 
 <nav>
@@ -11,10 +16,53 @@
 
 </nav>
 
+<h1>Bienvenue sur ShinyQuest</h1>
+
 {% if app.user is not empty %}
 Bienvenue {{app.user.pseudo}}
+
+<h2>Mes shasses en cours :</h2>
+
+<section id="my-actives">
+
+  {% for shasse in shasses %}
+
+  <div class="my-shasse">
+    <img class="pokemon-img" src="{{shasse.imgShiny}}" alt="{{shasse.nomPokemon}} shiny">
+    <p class="compteur">{{shasse.nbRencontres}}</p>
+  </div>
+
+  {% endfor %}
+</section>
+
 {% else %}
 Hello world !
 {% endif %}
+
+<h2>Les dernières captures :</h2>
+
+<section id="last-captures">
+
+  {% for capture in captures %}
+
+  <div class="last-capture">
+    <p class="capture-description">
+      Attrapé par <span class="pseudo-captures">{{ capture.user.pseudo }}</span>,
+      {% set now = date() %}
+      {% if capture.dateCapture|date("Y-m-d") == now|date("Y-m-d") %}
+        aujourd'hui
+      {% else %}
+      {% set captureDate = capture.dateCapture %}
+
+        {% set diff = captureDate.diff(now) %}
+        il y a {{ diff.days }} jours.
+      {% endif %}
+    </p>
+    {# on utilise le template de pokemonCard pour afficher les captures #}
+    {% include '.custom/pokemonCard.html.twig' %}
+  </div>
+
+  {% endfor %}
+</section>
 
 {% endblock %}
