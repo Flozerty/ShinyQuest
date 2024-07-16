@@ -47,11 +47,13 @@
         <li title="Forum"><i class="fa-regular fa-comments"></i></li>
 
         <li title="Mes captures">
+          <a href="{{ path('my_captures') }}">
           <div class="custom-pokeball">
             <div class="pokeball-circle"></div>
             <div class="pokeball-center"></div>
             <div class="pokeball-line"></div>
           </div>
+        </a>
         </li>
 
         <li title="Mes amis"><i class="fa-solid fa-user-group"></i></li>
@@ -98,17 +100,24 @@
       <div>
         <h3>Mon suivi</h3>
         <ul>
+          {% if app.user is not empty %}
           <li><a class="nav-link" href="{{ path('my_shasses') }}">Mes shasses</a></li>
           <li><a class="nav-link" href="{{ path('my_captures') }}">Mes captures</a></li>
           <li><a class="nav-link" href="{{ path('app_shinydex', {'id': app.user.id}) }}">Mon shinydex</a></li>
+          {% else %}
+          <li><a class="nav-link" href="{{ path('app_login') }}">Connectez-vous</a></li>
+          {% endif %}
         </ul>
       </div>
 
       <div>
         <h3>Communauté</h3>
         <ul>
+          {% if app.user is not empty %}
           <li><a class="nav-link" href="">Mes amis</a></li>
-          <li><a class="nav-link" href="">Les dresseurs</a></li>
+          {% endif %}
+
+          <li><a class="nav-link" href="{{ path('app_dresseurs') }}">Les dresseurs</a></li>
           <li><a class="nav-link" href="">Le top des shasses</a></li>
           <li><a class="nav-link" href="">Shasses en cours</a></li>
           <li><a class="nav-link" href="">Forum</a></li>
@@ -134,10 +143,11 @@
       {% block body %}{% endblock %}
     </main>
   </div>
-  
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="js/profileNav.js"></script>
   {% block javascripts %}{% endblock %}
 
 </body>
+
 </html>
