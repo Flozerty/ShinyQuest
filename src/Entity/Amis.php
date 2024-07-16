@@ -23,7 +23,7 @@ class Amis
     private ?User $userRecoit = null;
 
     #[ORM\Column(length: 100)]
-    private ?string $statut = null;
+    private ?bool $statut = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateDemande = null;
@@ -33,7 +33,7 @@ class Amis
     public function __construct()
     {
         $this->dateDemande = new \DateTime();
-        $this->statut = "en attente";
+        $this->statut = false;
     }
 
     public function getId(): ?int
@@ -70,7 +70,7 @@ class Amis
         return $this->statut;
     }
 
-    public function setStatut(string $statut): static
+    public function setStatut(bool $statut): static
     {
         $this->statut = $statut;
 
