@@ -1,9 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('css/security.css')}}">
+
+{% endblock %}
 
 {% block body %}
-<form method="post">
+
+<h1 class="h3 mb-3 font-weight-normal">Connexion à ShinyQuest</h1>
+
+<form method="post" id="loginForm">
     {% if error %}
     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -14,11 +22,10 @@
     </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <label for="inputPseudo">Pseudo</label>
     <input type="pseudo" value="{{ last_username }}" name="pseudo" id="inputPseudo" class="form-control"
         autocomplete="pseudo" required autofocus>
-    <label for="inputPassword">Password</label>
+    <label for="inputPassword">Mot de passe</label>
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password"
         required>
 
@@ -26,12 +33,12 @@
 
     <div class="checkbox mb-3">
         <label>
-            <input type="checkbox" name="_remember_me"> Remember me
+            <input type="checkbox" name="_remember_me"> Se souvenir de moi
         </label>
     </div>
 
     <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+        Connexion
     </button>
 </form>
 {% endblock %}
