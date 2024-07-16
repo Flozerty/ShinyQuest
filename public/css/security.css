@@ -1,0 +1,44 @@
+:root {
+  --darkblue: #003BB3;
+  --lightblue: #B9E7FF;
+  --transitionTime: 0.3s;
+  --custom-ball-size: 40px;
+}
+
+#loginForm {
+  border: 1px solid var(--darkblue);
+  border-radius: 20px;
+  width: 50%;
+  min-width: 300px;
+  margin: auto;
+  margin-top: 100px;
+  padding: 20px;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+
+  input {
+    width: 100%;
+    padding: 3px;
+    margin: 10px 0;
+  }
+
+  label {
+    font-weight: 600;
+    color: var(--darkblue);
+  }
+
+  .checkbox {
+    margin: 10px 0;
+    input {
+      width: auto;
+      margin: 0;
+    }
+  }
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--darkblue);
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+}
