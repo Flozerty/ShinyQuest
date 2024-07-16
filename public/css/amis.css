@@ -1,0 +1,14 @@
+#dresseurs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.dresseur {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  img {
+    max-height: 100px;
+  }
+}
