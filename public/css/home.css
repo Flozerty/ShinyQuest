@@ -1,0 +1,61 @@
+:root {
+  --darkblue: #003BB3;
+  --lightblue: #B9E7FF;
+  --transitionTime: 0.3s;
+  --custom-ball-size: 40px;
+}
+
+#my-actives {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#last-captures {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.my-shasse {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+  margin: 15px;
+  padding: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+
+  .pokemon-img {
+    width: 100px;
+  }
+
+  .compteur {
+    text-align: center;
+    min-width: 50%;
+    color: var(--darkblue);
+    padding: 2px;
+    border: 1px solid var(--darkblue);
+    border-radius: 5px;
+  }
+}
+
+.last-capture {
+
+  margin: 15px 15px;
+
+  .pokemon-card {
+    margin: 0;
+  }
+}
+
+.pseudo-captures {
+  color: var(--darkblue);
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.capture-description {
+  margin: 0 0 5px 15px;
+}
