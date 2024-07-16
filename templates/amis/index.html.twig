@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des dresseurs{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="css/amis.css">
+{% endblock %}
+
+
+{% block body %}
+
+<h1>Liste de mes amis</h1>
+
+<section id="dresseurs">
+    {% for data in dresseurs %}
+
+    <div class="dresseur">
+        <figure>
+            <img src="{{ asset('img/' ~ data.user.avatar) }}" alt="avatar de {{data.user.pseudo}}">
+        </figure>
+        <span class="pseudo">
+            {{data.user.pseudo}}
+        </span>
+
+        <div id="dex-completion">
+            <p>{{data.capturedPokemonIds | length}} / {{allPokemons | length}}</p>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+{% endblock %}
