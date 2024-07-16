@@ -9,10 +9,25 @@
 
 {% block body %}
 
+<section id="demandes">
+<div id="demandes-envoyees">
+    <h2>Demandes envoyées :</h2>
+    {% for dresseur in demandesEnvoyees %}
+    {{dresseur.pseudo}}
+    {% endfor %}
+</div>
+
+<div id="demandes-recues">
+    <h2>Demandes reçues :</h2>
+    {% for dresseur in demandesRecues %}
+    {{dresseur.pseudo}}
+    {% endfor %}
+</div>
+</section>
+<section id="dresseurs">
 <h1>Liste de mes amis</h1>
 
-<section id="dresseurs">
-    {% for data in dresseurs %}
+    {% for data in dresseursAmis %}
 
     <div class="dresseur">
         <figure>

@@ -21,41 +21,62 @@ class AmisController extends AbstractController
 
         $allPokemons = $apiHttpClient->getPokedex();
 
+        $AmisByDemande = $amisRepository->findBy(["userDemande" => $this->getUser()]);
+        $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()],);
+
         $dresseursData = [];
+        $demandeEnvoyee = [];
+        $demandeRecue = [];
 
-
-
-        $AmisByDemande = $amisRepository->findBy(["userDemande" => $this->getUser()], );
-
-        $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()], );
-        
-        dd($AmisByRecoit);
-
-        $users =  $userRepository->findBy([], ["pseudo" => "ASC"]);
-
-
-        // /////////////////////////////////////////////////////////////:
-        
-        foreach($users as $user) {
-            // même méthode que dans ApiController   =>   #[Route('/shinydex/{id}', name: 'app_shinydex')]
-            $pokemonsCaptured = $captureRepository->findBy(['user' => $user->getId(), 'termine' => true]);
-            $capturedPokemonIds = [];
-
-            foreach ($pokemonsCaptured as $pokemon) {
-                $pokemonId = $pokemon->getPokedexId();
-                $capturedPokemonIds[$pokemonId] = true;
+        foreach ($AmisByDemande as $demande) {
+            if ($demande->getStatut() == true) {
+                $dresseursData[] = [
+                    'user' => $demande->getUserRecoit(),
+                    "capturedPokemonIds" => $this->getUserPokedexData($demande->getUserRecoit(), $captureRepository),
+                ];
+            } else {
+                $demandeEnvoyee[] = $demande->getUserRecoit();
             }
-
-            // ajout de la data du user.
-            $dresseursData[] = [
-                'user' => $user,
-                'capturedPokemonIds' => $capturedPokemonIds,
-            ];
         }
 
+        foreach ($AmisByRecoit as $demande) {
+            if ($demande->getStatut() == true) {
+                $dresseursData[] = [
+                    'user' => $demande->getUserDemande(),
+                    "capturedPokemonIds" => $this->getUserPokedexData($demande->getUserDemande(), $captureRepository),
+                ];
+            } else {
+                $demandeRecue[] = $demande->getUserDemande();
+            }
+        }
+
+        // trier par user->getPseudo()
+        usort($dresseursData, function($a, $b) {
+            return strcmp($a['user']->getPseudo(), $b['user']->getPseudo());
+        });
+
         return $this->render('amis/index.html.twig', [
-            'dresseurs' => $dresseursData,
+            'dresseursAmis' => $dresseursData,
+            'demandesEnvoyees' => $demandeEnvoyee,
+            'demandesRecues' => $demandeRecue,
             "allPokemons" => $allPokemons,
         ]);
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////// PRIVATE METHODS ///////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////
+
+    private function getUserPokedexData($user, CaptureRepository $captureRepository)
+    {
+        $pokemonsCaptured = $captureRepository->findBy(['user' => $user->getId(), 'termine' => true]);
+        $capturedPokemonIds = [];
+
+        foreach ($pokemonsCaptured as $pokemon) {
+            $pokemonId = $pokemon->getPokedexId();
+            $capturedPokemonIds[$pokemonId] = true;
+        }
+
+        return $capturedPokemonIds;
     }
 }
