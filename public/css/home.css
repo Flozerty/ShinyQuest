@@ -44,6 +44,9 @@
 .last-capture {
 
   margin: 15px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   .pokemon-card {
     margin: 0;
@@ -57,5 +60,7 @@
 }
 
 .capture-description {
-  margin: 0 0 5px 15px;
+  margin-bottom: 5px;
+  width: 330px;
+  padding-left: 15px;
 }

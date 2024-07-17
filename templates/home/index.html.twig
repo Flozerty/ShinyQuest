@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block stylesheets %}
 <link rel="stylesheet" href="css/home.css">
@@ -15,8 +15,6 @@
   {% endif %}
 
 </nav>
-
-<h1>Bienvenue sur ShinyQuest</h1>
 
 {% if app.user is not empty %}
 Bienvenue {{app.user.pseudo}}
@@ -48,16 +46,27 @@ Hello world !
   <div class="last-capture">
     <p class="capture-description">
       Attrapé par <span class="pseudo-captures">{{ capture.user.pseudo }}</span>,
-      {% set now = date() %}
-      {% if capture.dateCapture|date("Y-m-d") == now|date("Y-m-d") %}
-        aujourd'hui
-      {% else %}
-      {% set captureDate = capture.dateCapture %}
 
-        {% set diff = captureDate.diff(now) %}
-        il y a {{ diff.days }} jours.
+      {# affichage de la date de capture #}
+      {% set now = date() %}
+      {% set diff = capture.dateCapture.diff(now) %}
+      {% set years = diff.format('%y') %}
+      {% set months = diff.format('%m') %}
+      {% set days = diff.format('%d') %}
+
+      {% if capture.dateCapture|date("Y-m-d") == now|date("Y-m-d") %}
+      aujourd'hui
+      {% elseif years > 0 %}
+      il y a {{ years }} {{ years > 1 ? 'ans' : 'an' }}
+      {% elseif months > 0 %}
+      il y a {{ months }} mois
+      {% elseif days > 1 %}
+      il y a {{ days }} jours
+      {% else %}
+      hier
       {% endif %}
     </p>
+    
     {# on utilise le template de pokemonCard pour afficher les captures #}
     {% include '.custom/pokemonCard.html.twig' %}
   </div>
