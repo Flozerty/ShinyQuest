@@ -31,8 +31,9 @@ class ApiController extends AbstractController
   }
 
   #[Route('/shinydex/{id}', name: 'app_shinydex')]
-  public function shinydex(ApiHttpClient $apiHttpClient, int $id, CaptureRepository $captureRepository): Response
+  public function shinydex(ApiHttpClient $apiHttpClient, int $id, CaptureRepository $captureRepository, UserRepository $userRepository): Response
   {
+    $dresseur = $userRepository->findOneBy(['id' => $id]);
 
     // Get tous les pokemons
     $pokemons = $apiHttpClient->getPokedex();
@@ -48,10 +49,11 @@ class ApiController extends AbstractController
     }
 
     return $this->render('api/pokedex.html.twig', [
-      "page_title" => 'Shinydex' . '',
+      "page_title" => 'Shinydex de ' . $dresseur->getPseudo(),
       'allPokemons' => $pokemons,
       // on récupère les clés du tableau d'IDs.
       'capturedPokemonIds' => array_keys($capturedPokemonIds),
+      "dresseur" => $dresseur,
     ]);
   }
 
