@@ -22,22 +22,50 @@ class CaptureType extends AbstractType
             ])
             ->add('sexe', ChoiceType::class, [
                 'choices' => [
-                    '<i class="fa-solid fa-mars"></i>' => 'male',
-                    'f' => 'femelle',
-                    'x' => 'autre',
+                    'male',
+                    'femelle',
+                    'autre',
                 ],
                 'expanded' => true,
                 'multiple' => false,
             ])
-            ->add('ball')
-        ;
+
+            // ->add('ball', ChoiceType::class, [
+            //     'choices' => $this->getBallChoices($options['balls']),
+            //     // 'choice_label' => function($choice, $key, $value) {
+            //     //     return $choice['name'];
+            //     // },
+            //     // 'group_by' => function($choice, $key, $value) {
+            //     //     return $choice['categoryName'];
+            //     // },
+            //     'expanded' => false,
+            //     'multiple' => false,
+            // ])
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Capture::class,
+            'balls' => [],
         ]);
     }
+
+    // private function getBallChoices(array $balls): array
+    // {
+    //     $choices = [];
+    //     foreach ($balls as $category) {
+    //         foreach ($category['ballsData'] as $ball) {
+    //             $choices[$ball['name']] = [
+    //                 'name' => $ball['name'],
+    //                 'categoryName' => $category['categoryName'],
+    //                 'sprite' => $ball['sprite'],
+    //             ];
+    //         }
+    //     }
+    //     // dd($choices);
+    //     return $choices;
+    
+    // }
 }
- 

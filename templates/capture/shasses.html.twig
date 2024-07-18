@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ApiController!{% endblock %}
+{% block title %}Mes Shasses{% endblock %}
 
 {% block stylesheets %}
 <link rel="stylesheet" href="css/pkmn_card.css">
@@ -54,8 +54,8 @@
 
   {{form_row(formNewShasse.nbRencontres)}}
 
-    {{form_row(formNewShasse.jeu)}}
-    {{form_row(formNewShasse.lieu)}}
+  {{form_row(formNewShasse.jeu)}}
+  {{form_row(formNewShasse.lieu)}}
 
   {{form_row(formNewShasse.methodeCapture)}}
 
@@ -136,6 +136,8 @@
     {{ form_row(formCapture.surnom) }}
     {{ form_row(formCapture.dateCapture) }}
 
+
+    {# radio sexe #}
     <div>
       {{ form_label(formCapture.sexe) }}
       <div>
@@ -154,7 +156,23 @@
       </div>
     </div>
 
-    {{ form_row(formCapture.ball) }}
+    {# select balls #}
+    <div>
+      <label for="ball">Ball</label>
+      <select id="ball" name="ball">
+
+        {% for group in balls %}
+        <optgroup label="{{group.categoryName}}">
+
+          {% for ball in group.ballsData %}
+          <option value="{{ball.spriteName}}">{{ball.name}}</option>
+
+          {% endfor %}
+        </optgroup>
+
+        {% endfor %}
+      </select>
+    </div>
 
     {# hidden captureID #}
     <input type="hidden" id="IdCapture" name="IdCapture" value="" />
