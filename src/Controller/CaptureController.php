@@ -27,7 +27,7 @@ class CaptureController extends AbstractController
       return $this->redirectToRoute('app_login');
     }
 
-    $captures = $captureRepository->findBy(['user' => $user, 'termine' => 1]);
+    $captures = $captureRepository->findBy(['user' => $user, 'termine' => 1], ['dateCapture' => "DESC"]);
 
     return $this->render('capture/captures.html.twig', [
       "page_title" => 'Mes captures',
@@ -46,10 +46,9 @@ class CaptureController extends AbstractController
 
     // récupération de tous les jeux
     $games = $apiHttpClient->getAllGamesVersions();
-
     $shasse = new Capture;
 
-    //  formulaire de création de nouvelle shasse
+    ///////////////////  formulaire de création de nouvelle shasse ///////////////////
     $formNewShasse = $this->createForm(ShasseStartType::class, $shasse, [
       /* jeux en paramètres pour le formType */
       'games' => $games,
@@ -83,14 +82,21 @@ class CaptureController extends AbstractController
       return $this->redirectToRoute('my_shasses');
     }
 
-    //  formulaire de shasse terminée
-    $formCapture = $this->createForm(CaptureType::class, $shasse);
+
+    $balls = $apiHttpClient->getAllBalls();
+    //////////////////////////  formulaire de shasse terminée //////////////////////////
+    $formCapture = $this->createForm(CaptureType::class, $shasse, [
+      /* balls en paramètres pour le formType */
+      // 'balls' => $balls,
+    ]);
     $formCapture->handleRequest($request);
 
     // validation du formulaire de shiny trouvé
     if ($formCapture->isSubmitted() && $formCapture->isValid()) {
 
       $idCapture = filter_input(INPUT_POST, "IdCapture", FILTER_VALIDATE_INT);
+      $ball = filter_input(INPUT_POST, "ball", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
       // on va récupérer la capture avec cet ID.
       $capture = $entityManager->getRepository(Capture::class)->find($idCapture);
 
@@ -98,6 +104,7 @@ class CaptureController extends AbstractController
       $capture->setSurnom($shasse->getSurnom());
       $capture->setDateCapture($shasse->getDateCapture());
       $capture->setSexe($shasse->getSexe());
+
       $capture->setBall($shasse->getBall());
 
       $capture->setSuivi(false);
@@ -116,8 +123,10 @@ class CaptureController extends AbstractController
       "formNewShasse" => $formNewShasse,
       "formCapture" => $formCapture,
       "allPokemons" => $pokemons,
+      "balls" => $balls,
     ]);
   }
+
 
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////

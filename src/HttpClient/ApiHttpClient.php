@@ -86,7 +86,7 @@ class ApiHttpClient extends AbstractController
   // Récupération de toutes les versions & leurs id
   public function getAllGamesVersions()
   {
-    $response = $this->httpClient->request('GET', "https://pokeapi.co/api/v2/version/?offset=0&limit=100");
+    $response = $this->httpClient->request('GET', "version/?offset=0&limit=100");
     $allGames = $response->toArray()["results"];
 
     // On va chercher tous les noms des jeux en français
@@ -109,5 +109,67 @@ class ApiHttpClient extends AbstractController
     }
 
     return $frGames;
+  }
+
+  // Récupérer tous les types de balls
+  public function getAllBalls()
+  {
+    $response = $this->httpClient->request('GET', "item-pocket/3/");
+    $allBallsCategories = $response->toArray()["categories"];
+
+    $allBallsData = [];
+
+    foreach ($allBallsCategories as $category) {
+
+      $url = $category["url"];
+
+      // on effectue une nouvelle requête pour la catégorie de  ballsen cours
+      $newResponse = $this->httpClient->request('GET', $url);
+      $categoryData = $newResponse->toArray();
+
+      $nameOfCategory = $categoryData["names"][0]["name"];
+      $ballsOfCategory = [];
+
+      // on récupère toutes les balls de la catégorie
+      foreach ($categoryData['items'] as $ball) {
+
+        $url = $ball["url"];
+
+        $ballsOfCategory[] = $this->getBallData($url);
+      }
+
+      // On ajoute le contenu de la catégorie de balls à la data 
+      $allBallsData[] = [
+        "categoryName" => $nameOfCategory,
+        "ballsData" => $ballsOfCategory,
+      ];
+    }
+
+    return $allBallsData;
+  }
+
+  // récupération des infos d'une seule ball
+  public function getBallData($url)
+  {
+    $response = $this->httpClient->request('GET', $url);
+    $ballData = $response->toArray();
+
+    // on cherche le nom de la ball en français.
+    foreach ($ballData['names'] as $name) {
+
+      if ($name["language"]["name"] === "fr") {
+
+        return [
+          "spriteName" => $ballData["name"],
+          "name" => $name["name"],
+        ];
+      }
+
+      // Si le nom français n'est pas trouvé
+      // return [
+      //   "name" => "x",
+      //   "sprite" => "x",
+      // ];
+    }
   }
 }
