@@ -18,7 +18,9 @@ class ShasseStartType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nbRencontres', IntegerType::class)
+            ->add('nbRencontres', IntegerType::class, [
+                 "label" => "Compteur"
+            ])
 
             ->add('charmeChroma', null, [
                 "label" => " "
