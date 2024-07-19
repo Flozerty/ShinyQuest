@@ -23,6 +23,14 @@ class Message
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $pieceJointe = null;
 
+    #[ORM\ManyToOne(inversedBy: 'messagesEnvoi')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $userEnvoi = null;
+
+    #[ORM\ManyToOne(inversedBy: 'messagesRecus')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $userRecoit = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +68,30 @@ class Message
     public function setPieceJointe(?string $pieceJointe): static
     {
         $this->pieceJointe = $pieceJointe;
+
+        return $this;
+    }
+
+    public function getUserEnvoi(): ?User
+    {
+        return $this->userEnvoi;
+    }
+
+    public function setUserEnvoi(?User $userEnvoi): static
+    {
+        $this->userEnvoi = $userEnvoi;
+
+        return $this;
+    }
+
+    public function getUserRecoit(): ?User
+    {
+        return $this->userRecoit;
+    }
+
+    public function setUserRecoit(?User $userRecoit): static
+    {
+        $this->userRecoit = $userRecoit;
 
         return $this;
     }

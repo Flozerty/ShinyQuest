@@ -66,6 +66,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Amis::class, mappedBy: 'userRecoit', orphanRemoval: true)]
     private Collection $amisRecoit;
 
+    /**
+     * @var Collection<int, Message>
+     */
+    #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'userEnvoi')]
+    private Collection $messagesEnvoye;
+
+    /**
+     * @var Collection<int, Message>
+     */
+    #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'userRecoit')]
+    private Collection $messagesRecus;
+
     // On donne la valeur par défaut de new DateTime dans le construct
     public function __construct()
     {
@@ -73,6 +85,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->captures = new ArrayCollection();
         $this->amisDemande = new ArrayCollection();
         $this->amisRecoit = new ArrayCollection();
+        $this->messagesEnvoye = new ArrayCollection();
+        $this->messagesRecus = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -287,6 +301,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($amisRecoit->getUserRecoit() === $this) {
                 $amisRecoit->setUserRecoit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getMessagesEnvoye(): Collection
+    {
+        return $this->messagesEnvoye;
+    }
+
+    public function addMessagesEnvoye(Message $messagesEnvoye): static
+    {
+        if (!$this->messagesEnvoye->contains($messagesEnvoye)) {
+            $this->messagesEnvoye->add($messagesEnvoye);
+            $messagesEnvoye->setUserEnvoi($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessagesEnvoye(Message $messagesEnvoye): static
+    {
+        if ($this->messagesEnvoye->removeElement($messagesEnvoye)) {
+            // set the owning side to null (unless already changed)
+            if ($messagesEnvoye->getUserEnvoi() === $this) {
+                $messagesEnvoye->setUserEnvoi(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getMessagesRecus(): Collection
+    {
+        return $this->messagesRecus;
+    }
+
+    public function addMessagesRecu(Message $messagesRecu): static
+    {
+        if (!$this->messagesRecus->contains($messagesRecu)) {
+            $this->messagesRecus->add($messagesRecu);
+            $messagesRecu->setUserRecoit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessagesRecu(Message $messagesRecu): static
+    {
+        if ($this->messagesRecus->removeElement($messagesRecu)) {
+            // set the owning side to null (unless already changed)
+            if ($messagesRecu->getUserRecoit() === $this) {
+                $messagesRecu->setUserRecoit(null);
             }
         }
 
