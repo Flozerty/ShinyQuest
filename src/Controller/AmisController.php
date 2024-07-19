@@ -6,6 +6,7 @@ use App\HttpClient\ApiHttpClient;
 use App\Repository\AmisRepository;
 use App\Repository\CaptureRepository;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -31,29 +32,39 @@ class AmisController extends AbstractController
         foreach ($AmisByDemande as $demande) {
             if ($demande->getStatut() == true) {
                 $dresseursData[] = [
+                    "id" => $demande->getId(),
                     'user' => $demande->getUserRecoit(),
                     "capturedPokemonIds" => $this->getUserPokedexData($demande->getUserRecoit(), $captureRepository),
                 ];
             } else {
-                $demandeEnvoyee[] = $demande->getUserRecoit();
+                $demandeEnvoyee[] = [
+                    "id" => $demande->getId(),
+                    "user" => $demande->getUserRecoit(),
+                ];
             }
         }
 
         foreach ($AmisByRecoit as $demande) {
             if ($demande->getStatut() == true) {
                 $dresseursData[] = [
+                    "id" => $demande->getId(),
                     'user' => $demande->getUserDemande(),
                     "capturedPokemonIds" => $this->getUserPokedexData($demande->getUserDemande(), $captureRepository),
                 ];
             } else {
-                $demandeRecue[] = $demande->getUserDemande();
+                $demandeRecue[] = [
+                    "id" => $demande->getId(),
+                    "user" => $demande->getUserDemande(),
+                ];
             }
         }
 
         // trier par user->getPseudo()
-        usort($dresseursData, function($a, $b) {
+        usort($dresseursData, function ($a, $b) {
             return strcmp($a['user']->getPseudo(), $b['user']->getPseudo());
         });
+
+        // dd($AmisByRecoit);
 
         return $this->render('amis/index.html.twig', [
             'dresseursAmis' => $dresseursData,
@@ -61,6 +72,32 @@ class AmisController extends AbstractController
             'demandesRecues' => $demandeRecue,
             "allPokemons" => $allPokemons,
         ]);
+    }
+
+    #[Route('/amis/{id}/delete', name: 'delete_ami')]
+    public function deleteAmi(AmisRepository $amisRepository, EntityManagerInterface $entityManager, int $id): Response
+    {
+        $lienAmis = $amisRepository->find($id);
+
+        if ($lienAmis) {
+            $entityManager->remove($lienAmis);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute("app_amis");
+    }
+
+    #[Route('/amis/{id}/accept', name: 'accept_ami')]
+    public function acceptAmi(AmisRepository $amisRepository, EntityManagerInterface $entityManager, int $id): Response
+    {
+        $lienAmis = $amisRepository->find($id);
+
+        if ($lienAmis) {
+            $lienAmis->setStatut(true);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute("app_amis");
     }
 
     ///////////////////////////////////////////////////////////////////////////////
