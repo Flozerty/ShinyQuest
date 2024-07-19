@@ -60,12 +60,18 @@
 <section id="dresseurs-amis">
     <h1>Liste de mes amis</h1>
 
+    <div class="dresseurs-header">
+        <p class="profil-dresseur">Dresseur</p>
+        <p class="dex-completion">Complétion du Shinydex</p>
+        <p class="dresseur-links">Liens message / captures</p>        
+    </div>
+
     {% for data in dresseursAmis %}
 
     <div class="dresseur">
         <figure class="profil-dresseur">
             <img src="{{ asset('img/' ~ data.user.avatar) }}" alt="avatar de {{data.user.pseudo}}">
-            <figcaption>{{data.user.pseudo}}</figcaption>
+            <figcaption class="pseudo">{{data.user.pseudo}}</figcaption>
         </figure>
 
         <div class="dex-completion">

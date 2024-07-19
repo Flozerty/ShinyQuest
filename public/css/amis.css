@@ -11,7 +11,8 @@
   width: 100%;
 }
 
-.dresseur {
+.dresseur,
+.dresseurs-header {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   width: 100%;
@@ -25,7 +26,9 @@
     align-items: center;
     width: 100%;
   }
+}
 
+.dresseur {
   &:nth-child(2n) {
     background-color: var(--lightblue);
 
@@ -37,61 +40,68 @@
   &:last-of-type {
     border-bottom: 1px solid var(--lightblue);
   }
+}
 
-  .profil-dresseur {
-    grid-column: 1/3;
-    position: relative;
+.dresseurs-header {
+  font-weight: 600;
+}
 
-    img {
-      max-height: 75px;
-      width: 75px;
-      margin-right: 10px;
-    }
+.profil-dresseur {
+  grid-column: 1/3;
+  position: relative;
 
-    figcaption {
-      position: absolute;
-      left: 100px;
-      color: var(--darkblue);
-      text-decoration: underline;
-      font-weight: 600;
-    }
+  img {
+    max-height: 50px;
+    width: 50px;
+    margin-left: 10px;
   }
 
-  .dex-completion {
-    grid-column: 4/5;
-    justify-content: center;
-
-    i {
-      margin-left: 10px;
-      color: var(--darkblue);
-    }
+  figcaption {
+    position: absolute;
+    left: 80px;
   }
+}
 
-  .dresseur-links {
-    grid-column: 6/7;
-    gap: 10px;
-    justify-content: center;
-    i{
-      font-size: 2rem;
-      color: var(--darkblue);
-    }
+.pseudo {
+  color: var(--darkblue);
+  font-weight: 600;
+}
+
+.dex-completion {
+  grid-column: 3/6;
+  justify-content: center;
+
+  i {
+    margin-left: 10px;
+    color: var(--darkblue);
   }
+}
 
-  .del-ami {
-    grid-column: 8;
-    justify-content: center;
-    background-color: rgb(230, 0, 0);
-    color: white;
-    font-weight: 600;
-    width: fit-content;
-    margin: auto;
-    padding: 5px 10px;
-    text-decoration: underline;
-    border-radius: 10px;
+.dresseur-links {
+  grid-column: 6/8;
+  gap: 10px;
+  justify-content: center;
 
-    &:hover {
-      text-decoration: none;
-    }
+  i {
+    font-size: 2rem;
+    color: var(--darkblue);
+  }
+}
+
+.del-ami {
+  grid-column: 8;
+  justify-content: center;
+  background-color: rgb(230, 0, 0);
+  color: white;
+  font-weight: 600;
+  width: fit-content;
+  margin: auto;
+  padding: 5px 10px;
+  text-decoration: underline;
+  border-radius: 10px;
+
+  &:hover {
+    text-decoration: none;
   }
 }
 
@@ -129,12 +139,6 @@
     flex-direction: column;
     text-align: center;
 
-    a {
-      padding: 5px 15px;
-      margin: 3px 5px;
-      border-radius: 10px;
-    }
-
     .accept-demand {
       color: white;
       background-color: var(--darkblue);
@@ -142,7 +146,14 @@
 
     .refuse-demand {
       background-color: var(--lightblue);
+      color: var(--darkblue);
     }
+  }
+
+  #demandes-recues a {
+    padding: 5px 15px;
+    margin: 3px 5px;
+    border-radius: 10px;
   }
 
   #demandes-envoyees,
@@ -150,6 +161,8 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    max-width: 200px;
+    text-align: center;
 
     .amis-envois,
     .amis-demandes {
