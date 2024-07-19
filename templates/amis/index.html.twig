@@ -10,32 +10,54 @@
 {% block body %}
 
 <section id="demandes">
-    <div id="demandes-envoyees">
-        <h2>Demandes envoyées :</h2>
-        {% for dresseur in demandesEnvoyees %}
-        <figure>
-            <img src="{{ asset('img/' ~ dresseur.avatar) }}" alt="avatar de {{dresseur.pseudo}}">
-        </figure>
-        <span class="pseudo">
-            {{dresseur.pseudo}}
-        </span>
-        {% endfor %}
-    </div>
 
-    <div id="demandes-recues">
-        <h2>Demandes reçues :</h2>
-        {% for dresseur in demandesRecues %}
-        <figure>
-            <img src="{{ asset('img/' ~ dresseur.avatar) }}" alt="avatar de {{dresseur.pseudo}}">
-        </figure>
-        <span class="pseudo">
-            {{dresseur.pseudo}}
-        </span>
+    {% if demandesEnvoyees is not empty %}
+
+    <h2>Demandes envoyées :</h2>
+    <div id="demandes-envoyees">
+        {% for demande in demandesEnvoyees %}
+        <div class="amis-envois">
+            <figure>
+                <img src="{{ asset('img/' ~ demande.user.avatar) }}" alt="avatar de {{demande.user.pseudo}}">
+            </figure>
+            <span class="pseudo">
+                {{demande.user.pseudo}}
+            </span>
+            <div class="demande-links">
+                <a href="{{ path('delete_ami', {'id': demande.id}) }}"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+        </div>
+
         {% endfor %}
     </div>
+    {% endif %}
+
+    {% if demandesRecues is not empty %}
+
+    <h2>Demandes reçues :</h2>
+    <div id="demandes-recues">
+        {% for demande in demandesRecues %}
+        <div class="amis-demandes">
+
+            <figure>
+                <img src="{{ asset('img/' ~ demande.user.avatar) }}" alt="avatar de {{demande.user.pseudo}}">
+            </figure>
+            <span class="pseudo">
+                {{demande.user.pseudo}}
+            </span>
+            <div class="demande-links">
+                <a href="{{ path('accept_ami', {'id': demande.id}) }}" class="accept-demand">confirmer</a>
+                <a href="{{ path('delete_ami', {'id': demande.id}) }}" class="refuse-demand">supprimer</a>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+    {% endif %}
+
 </section>
 
-<section id="dresseurs">
+<section id="dresseurs-amis">
     <h1>Liste de mes amis</h1>
 
     {% for data in dresseursAmis %}
@@ -48,14 +70,24 @@
 
         <div class="dex-completion">
             <p>{{data.capturedPokemonIds | length}} / {{allPokemons | length}}</p>
+            <a href="{{ path('app_shinydex', {'id': data.user.id}) }}"><i
+                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
         </div>
 
         <ul class="dresseur-links">
-            <li><a href="">msg</a></li>
-            <li><a href="{{ path('app_shinydex', {'id': data.user.id}) }}">dex</a></li>
-            <li><a href="">shasses</a></li>
+            <li><a href="">
+                    <i class="fa-regular fa-message"></i>
+                </a></li>
+
+            <li><a href="">
+                    <div class="custom-pokeball">
+                        <div class="pokeball-circle"></div>
+                        <div class="pokeball-center"></div>
+                        <div class="pokeball-line"></div>
+                    </div>
+                </a></li>
         </ul>
-        <p class="del-ami">retirer ami</p>
+        <a class="del-ami" href="{{ path('delete_ami', {'id': data.id}) }}">retirer ami</a>
     </div>
     {% endfor %}
 </section>
