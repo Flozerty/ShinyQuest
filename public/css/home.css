@@ -64,3 +64,11 @@
   width: 330px;
   padding-left: 15px;
 }
+
+h1 {
+  text-align: center;
+}
+
+.intro {
+  text-align: center;
+}

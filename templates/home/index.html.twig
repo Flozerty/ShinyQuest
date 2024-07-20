@@ -34,7 +34,9 @@ Bienvenue {{app.user.pseudo}}
 </section>
 
 {% else %}
-Hello world !
+<p class="intro">
+  Connectez-vous pour rejoindre la légion des shiny hunters et compléter votre propre Shinydex!
+</p>
 {% endif %}
 
 <h2>Les dernières captures :</h2>
@@ -66,7 +68,7 @@ Hello world !
       hier
       {% endif %}
     </p>
-    
+
     {# on utilise le template de pokemonCard pour afficher les captures #}
     {% include '.custom/pokemonCard.html.twig' %}
   </div>
