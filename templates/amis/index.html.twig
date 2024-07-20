@@ -13,16 +13,21 @@
 
     {% if demandesEnvoyees is not empty %}
 
+    {# Demandes d'ami envoyées #}
     <h2>Demandes envoyées :</h2>
     <div id="demandes-envoyees">
         {% for demande in demandesEnvoyees %}
         <div class="amis-envois">
-            <figure>
-                <img src="{{ asset('img/' ~ demande.user.avatar) }}" alt="avatar de {{demande.user.pseudo}}">
-            </figure>
-            <span class="pseudo">
-                {{demande.user.pseudo}}
-            </span>
+
+            <a class="user-link" href="{{ path('profile_user', {'id': demande.user.id}) }}">
+                <figure>
+                    <img src="{{ asset('img/' ~ demande.user.avatar) }}" alt="avatar de {{demande.user.pseudo}}">
+                </figure>
+                <span class="pseudo">
+                    {{demande.user.pseudo}}
+                </span>
+            </a>
+
             <div class="demande-links">
                 <a href="{{ path('delete_ami', {'id': demande.id}) }}"><i class="fa-solid fa-xmark"></i></a>
             </div>
@@ -32,6 +37,7 @@
     </div>
     {% endif %}
 
+    {# Demanes d'ami reçues #}
     {% if demandesRecues is not empty %}
 
     <h2>Demandes reçues :</h2>
@@ -39,12 +45,15 @@
         {% for demande in demandesRecues %}
         <div class="amis-demandes">
 
-            <figure>
-                <img src="{{ asset('img/' ~ demande.user.avatar) }}" alt="avatar de {{demande.user.pseudo}}">
-            </figure>
-            <span class="pseudo">
-                {{demande.user.pseudo}}
-            </span>
+            <a class="user-link" href="{{ path('profile_user', {'id': demande.user.id}) }}">
+                <figure>
+                    <img src="{{ asset('img/' ~ demande.user.avatar) }}" alt="avatar de {{demande.user.pseudo}}">
+                </figure>
+                <span class="pseudo">
+                    {{demande.user.pseudo}}
+                </span>
+            </a>
+
             <div class="demande-links">
                 <a href="{{ path('accept_ami', {'id': demande.id}) }}" class="accept-demand">confirmer</a>
                 <a href="{{ path('delete_ami', {'id': demande.id}) }}" class="refuse-demand">supprimer</a>
@@ -58,21 +67,27 @@
 </section>
 
 <section id="dresseurs-amis">
-    <h1>Liste de mes amis</h1>
+    <h1>Liste d'amis</h1>
 
     <div class="dresseurs-header">
         <p class="profil-dresseur">Dresseur</p>
         <p class="dex-completion">Complétion du Shinydex</p>
-        <p class="dresseur-links">Liens message / captures</p>        
+        <p class="dresseur-links">Liens message / captures</p>
     </div>
 
+    {# Liste des amis #}
     {% for data in dresseursAmis %}
 
     <div class="dresseur">
-        <figure class="profil-dresseur">
-            <img src="{{ asset('img/' ~ data.user.avatar) }}" alt="avatar de {{data.user.pseudo}}">
-            <figcaption class="pseudo">{{data.user.pseudo}}</figcaption>
-        </figure>
+
+        <a class="user-link profil-dresseur" href="{{ path('profile_user', {'id': data.user.id}) }}">
+            <figure>
+                <img src="{{ asset('img/' ~ data.user.avatar) }}" alt="avatar de {{data.user.pseudo}}">
+            </figure>
+            <span class="pseudo">
+                {{data.user.pseudo}}
+            </span>
+        </a>
 
         <div class="dex-completion">
             <p>{{data.capturedPokemonIds | length}} / {{allPokemons | length}}</p>

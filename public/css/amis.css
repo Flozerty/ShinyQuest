@@ -29,7 +29,7 @@
 }
 
 .dresseur {
-  &:nth-child(2n) {
+  &:nth-child(2n+1) {
     background-color: var(--lightblue);
 
     .pokeball-circle {
@@ -46,19 +46,13 @@
   font-weight: 600;
 }
 
-.profil-dresseur {
-  grid-column: 1/3;
-  position: relative;
-
-  img {
-    max-height: 50px;
-    width: 50px;
-    margin-left: 10px;
-  }
-
-  figcaption {
-    position: absolute;
-    left: 80px;
+.dresseur {
+  .profil-dresseur {
+    grid-column: 1/3;
+    flex-direction: row;
+    justify-content: start;
+    gap: 15px;
+    margin-left: 15px;
   }
 }
 
@@ -105,6 +99,13 @@
   }
 }
 
+.user-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 #demandes {
   i {
     font-size: 2rem;
@@ -116,23 +117,7 @@
     background-color: var(--lightblue);
   }
 
-  figure {
-    border-radius: 50%;
-    background-color: var(--darkblue);
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
-    height: 60px;
-    width: 60px;
-
-    img {
-      border-radius: 50%;
-      background-color: white;
-      height: 90%;
-      overflow: hidden;
-    }
-  }
 
   .demande-links {
     display: flex;
@@ -175,5 +160,23 @@
       padding: 10px;
       border-radius: 8px;
     }
+  }
+}
+
+figure {
+  border-radius: 50%;
+  background-color: var(--darkblue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 60px;
+  width: 60px;
+
+  img {
+    border-radius: 50%;
+    background-color: white;
+    height: 90%;
+    overflow: hidden;
   }
 }
