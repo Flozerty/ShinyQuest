@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Amis;
+use App\Entity\User;
 use App\HttpClient\ApiHttpClient;
 use App\Repository\AmisRepository;
 use App\Repository\CaptureRepository;
 use App\Repository\UserRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,11 +16,13 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class AmisController extends AbstractController
 {
+
+    // Afficher toutes mes demandes d'amis
     #[Route('/amis', name: 'app_amis')]
     public function index(ApiHttpClient $apiHttpClient, AmisRepository $amisRepository, CaptureRepository $captureRepository, UserRepository $userRepository,): Response
     {
         if (!$this->getUser()) {
-            return $this->redirectToRoute('app_home');
+            dd("pas d'user co");
         }
 
         $allPokemons = $apiHttpClient->getPokedex();
@@ -74,6 +79,7 @@ class AmisController extends AbstractController
         ]);
     }
 
+    // Supprimer / Refuser une demande d'ami
     #[Route('/amis/{id}/delete', name: 'delete_ami')]
     public function deleteAmi(AmisRepository $amisRepository, EntityManagerInterface $entityManager, int $id): Response
     {
@@ -87,6 +93,7 @@ class AmisController extends AbstractController
         return $this->redirectToRoute("app_amis");
     }
 
+    // Accepter une demande d'ami
     #[Route('/amis/{id}/accept', name: 'accept_ami')]
     public function acceptAmi(AmisRepository $amisRepository, EntityManagerInterface $entityManager, int $id): Response
     {
@@ -96,6 +103,43 @@ class AmisController extends AbstractController
             $lienAmis->setStatut(true);
             $entityManager->flush();
         }
+
+        return $this->redirectToRoute("app_amis");
+    }
+
+    // Envoyerune demande d'ami
+    #[Route('/amis/{id}/demand', name: 'demande_ami')]
+    public function demandeAmi(AmisRepository $amisRepository, EntityManagerInterface $entityManager, User $userEnvoi = null): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+            // si il n'y a pas d'user connecté
+            dd('pas co');
+        }
+
+        if (!$userEnvoi) {
+            // si l'user demandé n'existe pas
+            dd('pas trouvé');
+        }
+
+        if (
+            $amisRepository->findBy(["userDemande" => $user, "userRecoit" => $userEnvoi]) ||
+            $amisRepository->findBy(["userRecoit" => $user, "userDemande" => $userEnvoi])
+        ) {
+            // S'il existe déjà une demande d'ami entre les deux users
+            dd('déja demandé');
+        }
+
+        // Si les conditions passent, on créait la demande d'ami
+        $demande = new Amis;
+        $demande->setUserDemande($user);
+        $demande->setUserRecoit($userEnvoi);
+        $demande->setStatut(false);
+        $demande->setDateDemande(new DateTime());
+
+        $entityManager->persist($demande);
+        $entityManager->flush();
 
         return $this->redirectToRoute("app_amis");
     }
