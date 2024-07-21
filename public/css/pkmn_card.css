@@ -97,6 +97,7 @@
 
 .nbRencontres {
   color: #FF0000;
+  font-weight: 600;
 }
 
 .lieu {
@@ -105,6 +106,7 @@
 
 .jeu {
   color: #FF8C00;
+  font-weight: 600;
 }
 
 .methode {
