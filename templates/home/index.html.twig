@@ -9,13 +9,6 @@
 
 {% block body %}
 
-<nav>
-
-  {% if is_granted('ROLE_ADMIN') %}
-  {% endif %}
-
-</nav>
-
 {% if app.user is not empty %}
 Bienvenue {{app.user.pseudo}}
 
@@ -47,7 +40,7 @@ Bienvenue {{app.user.pseudo}}
 
   <div class="last-capture">
     <p class="capture-description">
-      Attrapé par <span class="pseudo-captures">{{ capture.user.pseudo }}</span>,
+      Attrapé par <a class="pseudo-captures" href="{{ path('profile_user', {'id': capture.user.id}) }}">{{ capture.user.pseudo }}</a>,
 
       {# affichage de la date de capture #}
       {% set now = date() %}

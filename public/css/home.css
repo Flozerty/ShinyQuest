@@ -42,7 +42,6 @@
 }
 
 .last-capture {
-
   margin: 15px 15px;
   display: flex;
   flex-direction: column;
@@ -51,6 +50,10 @@
   .pokemon-card {
     margin: 0;
   }
+}
+
+.pokemon-card .del-btn {
+  display: none;
 }
 
 .pseudo-captures {
@@ -63,10 +66,6 @@
   margin-bottom: 5px;
   width: 330px;
   padding-left: 15px;
-}
-
-h1 {
-  text-align: center;
 }
 
 .intro {
