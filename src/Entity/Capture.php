@@ -165,7 +165,7 @@ class Capture
         return $this;
     }
 
-    public function isTermine(): ?bool
+    public function getTermine(): ?bool
     {
         return $this->termine;
     }
