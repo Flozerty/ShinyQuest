@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de {{user.pseudo}}{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('css/profile.css')}}">
+{% endblock %}
+
+{% block body %}
+
+{% if myProfil is defined and myProfil is not empty %}
+<h2>Editer le compte</h2>
+
+<a href="">changer pseudo</a>
+<a href="">changer avatar</a>
+<a href="">supprimer compte</a>
+    
+{% endif %}
+
+<h2>Infos sur le dresseur</h2>
+<section id="user-infos">
+    <figure>
+        <img src="{{ asset('img/' ~ user.avatar) }}" alt="avatar de {{user.pseudo}}">
+    </figure>
+    <div id="user-basics-info">
+        <p class="dateInscription">Inscrit depuis le : <span>{{user.dateInscription | date("d/m/Y")}}</span></p>
+        <p class="nbShiny">Shiny trouvés : <span>{{capturesTermine | length}}</span></p>
+        <p class="nbShasses">Shasses en cours : <span>{{capturesNotTermine | length}}</span></p>
+        <p class="nbRencontres">Total des rencontres : <span>{{totalRencontres}}</span></p>
+    </div>
+    <div id="dex-completion-container">
+        <p>Complétion du shinydex : </p>
+        <div id="dex-completion">
+            <p>{{capturedPokemonIds | length}} / {{allPokemons | length}}</p>
+            {# completion bar : capturés / total #}
+            <div id="completion-bar" style="width:{{ (capturedPokemonIds | length / allPokemons | length) * 100}}%">
+            </div>
+        </div>
+    </div>
+    <a href="{{ path('app_shinydex', {'id': user.id}) }}" id="shinydex-link"><i class="fa-solid fa-star"></i>&nbsp; ShinyDex</a>
+</section>
+
+<section id="activity">
+    <h2>Activité récente</h2>
+
+    {% set counter = 0 %}
+    {% for capture in capturesTermine %}
+
+    {% if counter < 5 %} <p class="activity-capture">
+        {{ capture.dateCapture|date('d/m/Y') }} : &nbsp;
+        <span>{{ capture.user.pseudo }}</span> &nbsp; a trouvé &nbsp;<img src="{{capture.imgShiny}}"
+            alt="{{capture.nomPokemon}} shiny"> <span>{{
+            capture.nomPokemon }}</span>&nbsp; shiny sur &nbsp; <span>{{ capture.jeu }}</span> &nbsp; en &nbsp;
+        <span>{{ capture.nbRencontres }}</span> &nbsp; rencontres{% if capture.surnom is not empty %}, et l'a appelé
+        &nbsp; <span>{{capture.surnom }}</span>.
+        {% else %}.
+        {% endif %}
+        </p>
+        {% endif %}
+
+        {% set counter = counter + 1 %}
+        {% endfor %}
+</section>
+{% endblock %}
