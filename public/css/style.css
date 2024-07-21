@@ -28,7 +28,7 @@ a {
   color: inherit;
 }
 
-.fa-circle-check{
+.fa-circle-check {
   color: green;
   cursor: pointer;
 }
@@ -246,7 +246,9 @@ main {
 
 h1 {
   margin: 40px 0;
+  text-align: center;
 }
+
 h2 {
   margin: 20px 0 20px 50px;
 }
