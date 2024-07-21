@@ -1,17 +1,13 @@
 <div class="pokemon-card">
 
-  {# delete : capture ou shasse #}
-  <a class="del-btn" 
-    href="
-    {% if capture.termine == true %}
-      {{ path('delete_capture', {'id': capture.id}) }}
-    {% else %}
-      {{ path('delete_shasse', {'id': capture.id}) }}
-    {% endif %}">
+  {# delete : capture ou shasse de l'user connecté ou admin #}
+  {% if app.user == capture.user or 'ROLE_ADMIN' in app.user.roles %}
+  <a class="del-btn" href="{{ path('delete_capture', {'id': capture.id}) }}">
     <i class="fa-solid fa-circle-xmark"></i>
   </a>
+  {% endif %}
 
-  {# envoi de l'Id pour la modal #}
+  {# envoi de l'id pour la modal #}
   <p class="hidden">{{capture.id}}</p>
 
   {# contenu de la card #}
@@ -68,15 +64,15 @@
       <p class="pokemon-id">#{{ '%03d'|format(capture.pokedexId) }}</p>
 
       <div class="capture-img-container">
-        <img class="pokemon-img" src="{{capture.imgShiny}}" alt="{{capture.nomPokemon}} shiny">
+        <img class="pokemon-img" src="{{capture.imgShiny}}" alt="{{capture.nomPokemon}} shiny" title="{{capture.nomPokemon}}">
+
         {# if capture #}
         {% if capture.termine == true %}
         <img class="ball-img"
           src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/{{capture.ball}}.png"
-          alt="{{capture.ball}}">
+          alt="{{capture.ball}}" title="{{capture.ball}}">
         {% endif %}
         {# #}
-
       </div>
 
       {# if capture #}
