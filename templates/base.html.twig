@@ -88,6 +88,11 @@
 
   <div id="main-wrapper">
 
+    {# navigation admin #}
+    {% if is_granted('ROLE_ADMIN') %}
+    <nav> </nav>
+    {% endif %}
+
     <aside id="main-side-nav">
       <div>
         <h3>
@@ -143,9 +148,8 @@
   </div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="js/profileNav.js"></script>
+  <script src="{{asset('js/profileNav.js')}}"></script>
   {% block javascripts %}{% endblock %}
 
 </body>
-
 </html>
