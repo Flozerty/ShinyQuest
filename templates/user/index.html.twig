@@ -4,6 +4,8 @@
 
 {% block body %}
 
-
+{% for dresseur in users %}
+    {{dresseur.pseudo}}<br>
+{% endfor %}
 
 {% endblock %}
