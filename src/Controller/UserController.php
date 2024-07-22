@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\HttpClient\ApiHttpClient;
 use App\Repository\CaptureRepository;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -13,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class UserController extends AbstractController
 {
     #[Route('/users', name: 'app_users')]
-    public function index(UserRepository $userRepository,): Response
+    public function index(UserRepository $userRepository, ): Response
     {
         $users = $userRepository->findBy([], ["pseudo" => "ASC"]);
 
@@ -99,5 +100,16 @@ class UserController extends AbstractController
             "allPokemons" => $pokemons,
             "capturedPokemonIds" => $capturedPokemonIds,
         ]);
+    }
+
+    #[Route('/user/editAvatar', name: 'change_avatar')]
+    public function changeAvatar(): Response
+    {
+        return $this->redirectToRoute("my_profile");
+    }
+    #[Route('/user/editPseudo', name: 'change_pseudo')]
+    public function changePseudo(): Response
+    {
+        return $this->redirectToRoute("my_profile");
     }
 }
