@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -29,5 +30,28 @@ class SecurityController extends AbstractController
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+    #[Route(path: '/error404', name: 'error404')]
+    public function error404(): Response
+    {
+        return $this->render('security/error.html.twig', [
+            "errorCode" => "404",
+        ]);
+    }
+
+    #[Route('/user/delete', name: 'delete_account')]
+    public function deleteAccount(EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+
+        if ($user) {
+            // $user = $entityManager->merge($user);
+            $entityManager->remove($user);
+            $entityManager->flush();
+            return $this->redirectToRoute("app_home");
+        } else {
+            dd("test");
+        }
     }
 }
