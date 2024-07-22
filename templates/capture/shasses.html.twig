@@ -3,8 +3,9 @@
 {% block title %}Mes Shasses{% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="css/pkmn_card.css">
-<link rel="stylesheet" href="css/shasses.css">
+<link rel="stylesheet" href="{{asset('css/pkmn_card.css')}}">
+<link rel="stylesheet" href="{{asset('css/shasses.css')}}">
+<link rel="stylesheet" href="{{asset('css/modals.css')}}">
 {% endblock %}
 
 {% block javascripts %}
@@ -129,7 +130,7 @@
 
 
 <dialog id="shasseDialog">
-  <div id="dialog-content">
+  <div class="dialog-content">
 
     {{ form_start(formCapture) }}
 
@@ -177,13 +178,13 @@
     {# hidden captureID #}
     <input type="hidden" id="IdCapture" name="IdCapture" value="" />
 
-    <div id="modalNav">
+    <div class="modalNav">
       <button type="submit">
         <i class="fa-solid fa-circle-check"></i>
       </button>
-      <button type="cancel">
+      <p class="cancelBtn">
         <i class="cancel fa-solid fa-circle-xmark"></i>
-      </button>
+      </p>
     </div>
     {{ form_end(formCapture) }}
   </div>
