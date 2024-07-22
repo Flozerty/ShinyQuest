@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('css/error.css')}}">
+
+{% endblock %}
+
+{% block title %}erreur {{errorCode}}{% endblock %}
+
+{% block body %}
+<img src="https://s1.zerochan.net/Smeargle.600.3286516.jpg" alt="queulorior">
+<div>
+  <p id="oups">Oups!</p>
+  <p>La page que vous cherchez semble introuvable.</p>
+  <p id="code-error">code d'erreur : <span>{{errorCode}}</span></p>
+</div>
+
+{% endblock %}
