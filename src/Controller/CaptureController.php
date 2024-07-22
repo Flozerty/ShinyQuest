@@ -68,7 +68,7 @@ class CaptureController extends AbstractController
       $shasse = $formNewShasse->getData(); //filter tous les inputs
 
       $shasse->setFavori(false);
-      $shasse->setSuivi(false);
+      $shasse->setSuivi(true);
       $shasse->setTermine(false);
       $shasse->setPokedexId($pokemonId);
       $shasse->setImgShiny($pokemon["sprites"]["other"]["official-artwork"]["front_shiny"]);
@@ -105,7 +105,7 @@ class CaptureController extends AbstractController
       $capture->setDateCapture($shasse->getDateCapture());
       $capture->setSexe($shasse->getSexe());
 
-      $capture->setBall($shasse->getBall());
+      $capture->setBall($ball);
 
       $capture->setSuivi(false);
       $capture->setTermine(true);
