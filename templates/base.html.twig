@@ -63,7 +63,7 @@
       <div id="header-profile">
         <p>{{app.user}}</p>
         <figure>
-          <img src="{{ asset('img/' ~ app.user.avatar) }}" alt="image de profil de {{app.user}}">
+          <img src="{{ asset('img/' ~ app.user.avatar) }}" alt="avatar de {{app.user}}">
         </figure>
 
       </div>
@@ -81,7 +81,7 @@
     <ul id="profile-nav">
       <li><a class="nav-link" href="{{ path('my_profile') }}">Mon profil</a></li>
       <li><a class="nav-link" href="{{ path('my_shasses') }}">Mes shasses</a></li>
-      <li><a class="nav-link" href="">Ma carte</a></li>
+      {# <li><a class="nav-link" href="">Ma carte</a></li> #}
       <li><a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a></li>
     </ul>
   </header>
@@ -152,4 +152,5 @@
   {% block javascripts %}{% endblock %}
 
 </body>
+
 </html>

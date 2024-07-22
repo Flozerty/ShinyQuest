@@ -164,12 +164,6 @@ class ApiHttpClient extends AbstractController
           "name" => $name["name"],
         ];
       }
-
-      // Si le nom français n'est pas trouvé
-      // return [
-      //   "name" => "x",
-      //   "sprite" => "x",
-      // ];
     }
   }
 }
