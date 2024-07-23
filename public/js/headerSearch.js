@@ -6,6 +6,7 @@ $(document).ready(function () {
     searchInput.addEventListener('input', () => {
         const query = searchInput.value;
 
+        // conditions de réalisation de la requete
         if (query.length > 2) {
 
             fetch(`/search?q=${encodeURIComponent(query)}`)
@@ -19,21 +20,20 @@ $(document).ready(function () {
     });
 
     function displayResults(data) {
-        console.log(data)
-
+        // console.log(data)
         searchResults.innerHTML = '';
 
         if (data.pokemons.length > 0) {
-            const pokemonList = document.createElement('ul');
-            pokemonList.innerHTML = '<li class="search-title">Pokémons</li>';
+            const pkmnList = document.createElement('ul');
+            pkmnList.innerHTML = '<li class="search-title">Pokémons</li>';
 
             data.pokemons.forEach(pokemon => {
                 const li = document.createElement('li');
                 li.classList.add('search-result')
-                li.innerHTML = pokemon.pokedex_id + " - " + pokemon.name;
-                pokemonList.appendChild(li);
+                li.innerHTML = "<a href='/pokemon/" + pokemon.pokedex_id + "'>" + pokemon.pokedex_id + " - " + pokemon.name + "</a>";
+                pkmnList.appendChild(li);
             });
-            searchResults.appendChild(pokemonList);
+            searchResults.appendChild(pkmnList);
         }
 
         if (data.users.length > 0) {
@@ -41,14 +41,16 @@ $(document).ready(function () {
             userList.innerHTML = '<li class="search-title">Dresseurs</li>';
 
             data.users.forEach(user => {
-                console.log(user)
-                console.log(user.pseudo)
                 const li = document.createElement('li');
                 li.classList.add('search-result')
-                li.textContent = user.pseudo;
+                li.innerHTML = "<a href='/users/" + user.id + "'>" + user.pseudo + "</a>";
                 userList.appendChild(li);
             });
             searchResults.appendChild(userList);
+        }
+
+        if (data.users.length == 0 && data.pokemons.length == 0) {
+            searchResults.innerHTML = "<p>Aucun résultat trouvé</p>";
         }
     }
 });
