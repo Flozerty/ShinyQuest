@@ -8,6 +8,7 @@ $(document).ready(function () {
 
   searchInput.addEventListener('input', () => {
     const query = searchInput.value;
+    // si on a déjà un timeout actif, on le supprime
     clearTimeout(timeout);
 
     // conditions de réalisation de la requete
