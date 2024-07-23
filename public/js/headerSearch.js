@@ -14,6 +14,7 @@ $(document).ready(function () {
     // conditions de réalisation de la requete
     if (query.length <= 2) {
       searchResults.innerHTML = '';
+      lastQuery = "";
       return;
     }
 
@@ -39,12 +40,13 @@ $(document).ready(function () {
     searchResults.innerHTML = '';
 
     if (data.pokemons.length > 0) {
+      // affichage des pokémons trouvés
       const pkmnList = document.createElement('ul');
       pkmnList.innerHTML = '<li class="search-title">Pokémons</li>';
 
       data.pokemons.forEach(pokemon => {
         const li = document.createElement('li');
-        li.classList.add('search-result')
+        li.classList.add('search-result');
         li.innerHTML = `<a href='/pokemon/${pokemon.pokedex_id}'>${pokemon.pokedex_id} - ${pokemon.name}</a>`;
         pkmnList.appendChild(li);
       });
@@ -52,20 +54,35 @@ $(document).ready(function () {
     }
 
     if (data.users.length > 0) {
+      // affichage des users trouvés
       const userList = document.createElement('ul');
       userList.innerHTML = '<li class="search-title">Dresseurs</li>';
 
       data.users.forEach(user => {
         const li = document.createElement('li');
-        li.classList.add('search-result')
-        li.innerHTML = "<a href='/users/" + user.id + "'>" + user.pseudo + "</a>";
+        li.classList.add('search-result');
+        li.innerHTML = `<a href='/users/${user.id}'>${user.pseudo}</a>`;
         userList.appendChild(li);
       });
       searchResults.appendChild(userList);
     }
 
+    // Si on n'a trouvé aucun résultat
     if (data.users.length == 0 && data.pokemons.length == 0) {
       searchResults.innerHTML = "<p>Aucun résultat trouvé</p>";
     }
+
+    // dans tous les cas, on met une croix
+    closeBtn = document.createElement('span');
+    closeBtn.innerHTML = "<i class='fa-solid fa-xmark'></i>";
+    searchResults.appendChild(closeBtn);
+
+    closeBtn.addEventListener('click', () => {
+      searchResults.innerHTML = "";
+      searchInput.value = "";
+      lastQuery = "";
+      clearTimeout(timeout);
+
+    })
   }
 });
