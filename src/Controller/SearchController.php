@@ -16,14 +16,13 @@ class SearchController extends AbstractController
     public function searchHeader(Request $request, UserRepository $userRepository, ApiHttpClient $apiHttpClient): Response
     {
         $query = $request->query->get('q');
-        // $query = "pat";
 
         $pokemons = $apiHttpClient->searchPokemonByQuery($query);
         $users = $userRepository->searchByPseudo($query); // tableau d'objets
 
-        // on récupère l'id et le pseudo de l'user.
+        // on récupère l'id et le pseudo de l'user
         $usersContent = [];
-        foreach($users as $user) {
+        foreach ($users as $user) {
             $usersContent[] = [
                 "id" => $user->getId(),
                 "pseudo" => $user->getPseudo()
