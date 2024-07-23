@@ -1,0 +1,99 @@
+#search {
+  position: relative;
+  display: flex;
+  min-width: 250px;
+  width: 25%;
+  border-radius: 15px;
+  height: 40px;
+  border: 1px solid black;
+  /* overflow: hidden; */
+  align-items: center;
+  background-color: var(--lightblue);
+
+  input {
+    padding-left: 10px;
+    height: 100%;
+    width: 100%;
+    border: none;
+    border-radius: 0 15px 15px 0;
+    background-color: var(--lightblue);
+  }
+
+  #search-img-container {
+    height: 80%;
+    width: 50px;
+    background-image: url(../img/zarbi-int-shiny.png);
+    background-size: contain;
+    background-position: center right;
+    background-repeat: no-repeat;
+  }
+}
+
+#search-results {
+  position: absolute;
+  background-color: lightgray;
+  bottom: -5px;
+  transform: translateY(100%);
+  left: 0;
+  right: 0;
+  min-width: 320px;
+  display: flex;
+  justify-content: space-evenly;
+  max-height: 100px;
+  overflow-y: scroll;
+  border-radius: 5px;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    border-radius: 5px;
+
+  }
+
+  &::-webkit-scrollbar-track:hover {
+    background-color: var(--lightblue);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    min-height: 50px;
+    background-color: var(--darkblue);
+    border-radius: 5px;
+    border: 1px solid white;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    border: var(--darkblue);
+  }
+
+  ul {
+    width: 50%;
+    padding: 10px 5px;
+
+    li {
+      border-bottom: 1px solid black;
+      font-weight: 600;
+
+      &:last-of-type {
+        border: none;
+      }
+    }
+  }
+
+  .search-result {
+    color: var(--darkblue);
+    padding: 5px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .search-title {
+    color: black;
+    padding-left: 5px;
+  }
+}
