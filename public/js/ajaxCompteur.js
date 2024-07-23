@@ -49,7 +49,7 @@ $(document).ready(function () { // ~= document.addEventListener('DOMContentLoade
   });
 
   $('.compteur-input').change(function () {
-    let captureId = $(this).attr('id').split('-')[1]; // Extraction de l'ID à partir de l'ID de l'input
+    let captureId = $(this).attr('id').split('-')[1]; // Extraction de l'id à partir de l'id de l'input (id="compteur-{{ capture.id }}")
     let newValue = $(this).val(); // Nouvelle valeur entrée par l'utilisateur
 
     $.ajax({

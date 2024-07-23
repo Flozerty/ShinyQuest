@@ -13,7 +13,9 @@
 
 {% block body %}
 
+{# Edition du compte SSSI sur mon profil #}
 {% if myProfil is defined and myProfil is not empty %}
+
 <h2>Editer le compte</h2>
 
 <section id="edit-account">
@@ -72,7 +74,8 @@
         {% endfor %}
 </section>
 
-
+{# dialogs de modification SSSI sur mon profil #}
+{% if myProfil is defined and myProfil is not empty %}
 <dialog id="avatarDialog">
     <div class="dialog-content">
 
@@ -112,4 +115,6 @@
         </form>
     </div>
 </dialog>
+{% endif %}
+
 {% endblock %}

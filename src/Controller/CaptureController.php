@@ -177,70 +177,69 @@ class CaptureController extends AbstractController
       $shasse->setSuivi(true);
       $entityManager->flush();
     }
-
     return $this->redirectToRoute("my_shasses");
   }
 
+  // +1 button
   #[Route('/shasse/{id}/increment', name: 'increment_shasse')]
   public function incrementCounter(int $id, EntityManagerInterface $entityManager, Request $request): Response
   {
     $shasse = $entityManager->getRepository(Capture::class)->find($id);
 
     if ($shasse) {
-
       $shasse->setNbRencontres($shasse->getNbRencontres() + 1);
       $entityManager->flush();
     }
     return $this->json(['nbRencontres' => $shasse->getNbRencontres()]);
   }
 
+  // -1 button
   #[Route('/shasse/{id}/decrement', name: 'decrement_shasse')]
   public function decrementCounter(int $id, EntityManagerInterface $entityManager, Request $request): Response
   {
     $shasse = $entityManager->getRepository(Capture::class)->find($id);
 
     if ($shasse) {
-
       $shasse->setNbRencontres($shasse->getNbRencontres() - 1);
       $entityManager->flush();
     }
     return $this->json(['nbRencontres' => $shasse->getNbRencontres()]);
   }
 
+  // +10 button
   #[Route('/shasse/{id}/increment10', name: 'increment10_shasse')]
   public function increment10Counter(int $id, EntityManagerInterface $entityManager, Request $request): Response
   {
     $shasse = $entityManager->getRepository(Capture::class)->find($id);
 
     if ($shasse) {
-
       $shasse->setNbRencontres($shasse->getNbRencontres() + 10);
       $entityManager->flush();
     }
     return $this->json(['nbRencontres' => $shasse->getNbRencontres()]);
   }
 
+  // -10 button
   #[Route('/shasse/{id}/decrement10', name: 'decrement10_shasse')]
   public function decrement10Counter(int $id, EntityManagerInterface $entityManager, Request $request): Response
   {
     $shasse = $entityManager->getRepository(Capture::class)->find($id);
 
     if ($shasse) {
-
       $shasse->setNbRencontres($shasse->getNbRencontres() - 10);
       $entityManager->flush();
     }
     return $this->json(['nbRencontres' => $shasse->getNbRencontres()]);
   }
 
+  // update counter manually on the input
   #[Route('/shasse/{id}/updateCounter', name: 'shasse_updateCounter')]
   public function updateCounter(int $id, EntityManagerInterface $entityManager, Request $request): Response
   {
     $shasse = $entityManager->getRepository(Capture::class)->find($id);
-    $newValue = (int) $request->request->get('nbRencontres');
+    $newValue = $request->request->get('nbRencontres');
 
     if ($shasse) {
-
       $shasse->setNbRencontres($newValue);
       $entityManager->flush();
     }

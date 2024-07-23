@@ -43,7 +43,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         //          SELECT *
         //          FROM user u
         //          WHERE u.pseudo LIKE '%query%'
-        
+
         // % = toute la chaîne de caractères.
     }
 

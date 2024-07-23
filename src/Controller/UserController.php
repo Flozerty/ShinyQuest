@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class UserController extends AbstractController
 {
     #[Route('/users', name: 'app_users')]
-    public function index(UserRepository $userRepository, ): Response
+    public function index(UserRepository $userRepository,): Response
     {
         $users = $userRepository->findBy([], ["pseudo" => "ASC"]);
 
@@ -36,7 +36,6 @@ class UserController extends AbstractController
         $capturesNotTermine = [];
         $totalRencontres = 0;
 
-
         foreach ($userCaptures as $capture) {
             $capture->getTermine() ? $capturesTermine[] = $capture : $capturesNotTermine[] = $capture;
             $totalRencontres += $capture->getNbRencontres();
@@ -52,7 +51,7 @@ class UserController extends AbstractController
         }
 
         return $this->render('user/profile.html.twig', [
-            "page_title" => "Profil de " . $user->getPseudo(),
+            "page_title" => "Profil public de " . $user->getPseudo(),
             "user" => $user,
             "capturesTermine" => $capturesTermine,
             "capturesNotTermine" => $capturesNotTermine,
@@ -107,6 +106,7 @@ class UserController extends AbstractController
     {
         return $this->redirectToRoute("my_profile");
     }
+
     #[Route('/user/editPseudo', name: 'change_pseudo')]
     public function changePseudo(): Response
     {
