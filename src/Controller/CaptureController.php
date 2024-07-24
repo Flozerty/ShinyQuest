@@ -71,7 +71,7 @@ class CaptureController extends AbstractController
       $shasse->setSuivi(true);
       $shasse->setTermine(false);
       $shasse->setPokedexId($pokemonId);
-      $shasse->setImgShiny($pokemon["sprites"]["other"]["official-artwork"]["front_shiny"]);
+      $shasse->setImgShiny($pokemon["pkmnStats"]["sprites"]["other"]["official-artwork"]["front_shiny"]);
       $shasse->setNomPokemon($nomPokemon);
       $shasse->setUser($user);
 

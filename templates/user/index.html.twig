@@ -1,11 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des dresseurs{% endblock %}
-
 {% block body %}
 
 {% for dresseur in users %}
-    {{dresseur.pseudo}}<br>
+{{dresseur.pseudo}}<br>
 {% endfor %}
 
 {% endblock %}

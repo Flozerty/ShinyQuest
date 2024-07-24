@@ -19,7 +19,7 @@
         {% for demande in demandesEnvoyees %}
         <div class="amis-envois">
 
-            <a class="user-link" href="{{ path('profile_user', {'id': demande.user.id}) }}">
+            <a class="user-link" href="{{ path('profile_user', {'pseudo': demande.user.pseudo}) }}">
                 <figure>
                     <img src="{{ asset('img/' ~ demande.user.avatar) }}" alt="avatar de {{demande.user.pseudo}}">
                 </figure>
@@ -45,7 +45,7 @@
         {% for demande in demandesRecues %}
         <div class="amis-demandes">
 
-            <a class="user-link" href="{{ path('profile_user', {'id': demande.user.id}) }}">
+            <a class="user-link" href="{{ path('profile_user', {'pseudo': demande.user.pseudo}) }}">
                 <figure>
                     <img src="{{ asset('img/' ~ demande.user.avatar) }}" alt="avatar de {{demande.user.pseudo}}">
                 </figure>
@@ -63,7 +63,6 @@
         {% endfor %}
     </div>
     {% endif %}
-
 </section>
 
 <section id="dresseurs-amis">
@@ -80,7 +79,7 @@
 
     <div class="dresseur">
 
-        <a class="user-link profil-dresseur" href="{{ path('profile_user', {'id': data.user.id}) }}">
+        <a class="user-link profil-dresseur" href="{{ path('profile_user', {'pseudo': data.user.pseudo}) }}">
             <figure>
                 <img src="{{ asset('img/' ~ data.user.avatar) }}" alt="avatar de {{data.user.pseudo}}">
             </figure>
@@ -91,7 +90,7 @@
 
         <div class="dex-completion">
             <p>{{data.capturedPokemonIds | length}} / {{allPokemons | length}}</p>
-            <a href="{{ path('app_shinydex', {'id': data.user.id}) }}"><i
+            <a href="{{ path('app_shinydex', {'pseudo': data.user.pseudo}) }}"><i
                     class="fa-solid fa-arrow-up-right-from-square"></i></a>
         </div>
 

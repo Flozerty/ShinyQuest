@@ -18,18 +18,14 @@
   {% block stylesheets %}{% endblock %}
 
   <script src="https://kit.fontawesome.com/7252ea4d54.js" crossorigin="anonymous"></script>
-
 </head>
 
 <body>
   {# header #}
   <header>
-
-    <div>
-      <a href="{{ path('app_home') }}">
-        <img src="#" alt="logo">SHINYQUEST
-      </a>
-    </div>
+    <a id="logo-container" href="{{ path('app_home') }}">
+      <img src="#" alt="logo">SHINYQUEST
+    </a>
 
     <form id="search" action="">
       <div id="search-img-container"></div>
@@ -45,7 +41,6 @@
     <nav id="nav-header">
 
       {% if app.user is not empty %}
-
       <ul>
         <li title="Forum"><i class="fa-regular fa-comments"></i></li>
 
@@ -78,7 +73,6 @@
         <li><a class="nav-link" href="{{ path('app_login') }}">Connexion</a></li>
       </ul>
       {% endif %}
-
     </nav>
 
     <ul id="profile-nav">
@@ -109,7 +103,7 @@
           {% if app.user is not empty %}
           <li><a class="nav-link" href="{{ path('my_shasses') }}">Mes shasses</a></li>
           <li><a class="nav-link" href="{{ path('my_captures') }}">Mes captures</a></li>
-          <li><a class="nav-link" href="{{ path('app_shinydex', {'id': app.user.id}) }}">Mon shinydex</a></li>
+          <li><a class="nav-link" href="{{ path('app_shinydex', {'pseudo': app.user.pseudo}) }}">Mon shinydex</a></li>
           {% else %}
           <li><a class="nav-link" href="{{ path('app_login') }}">Connectez-vous</a></li>
           {% endif %}
@@ -141,7 +135,6 @@
 
     {# main #}
     <main>
-
       {% if page_title is defined %}
       <h1>{{page_title}}</h1>
       {% endif %}
@@ -154,7 +147,6 @@
   <script src="{{asset('js/headerProfileNav.js')}}"></script>
   <script src="{{asset('js/headerSearch.js')}}"></script>
   {% block javascripts %}{% endblock %}
-
 </body>
 
 </html>

@@ -48,7 +48,16 @@ class ApiHttpClient extends AbstractController
   {
     $response = $this->httpClient->request('GET', "pokemon/$id");
     $pokemon = $response->toArray();
-    return $pokemon;
+
+    $responseSpec = $this->httpClient->request('GET', "pokemon-species/$id");
+    $pokemonSpec = $responseSpec->toArray();
+    return ["pkmnStats" => $pokemon, "pkmnSpec" => $pokemonSpec];
+  }
+
+  public function getRequestByUrl($url)
+  {
+    $response = $this->httpClient->request('GET', $url);
+    return $response->toArray();
   }
 
   // get all pkmns with only name + id
