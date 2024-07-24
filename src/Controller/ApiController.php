@@ -59,14 +59,17 @@ class ApiController extends AbstractController
   public function pokemonDetails(ApiHttpClient $apiHttpClient, int $id): Response
   {
     $pokemon = $apiHttpClient->getPokemonInfos($id);
+    // dd($pokemon);
     $pokemonVarieties = [];
     $varieties = $pokemon["pkmnSpec"]["varieties"];
 
-    if (count($varieties) > 1) {
+    if (count($varieties) > 0) {
       foreach ($varieties as $variety) {
         $url = $variety["pokemon"]["url"];
-        $pokemonId = $apiHttpClient->getRequestByUrl($url)["id"];
-        $pokemonVarieties[] = $apiHttpClient->getRequestByUrl($url);
+        $pokemonVarieties[] = [
+          "pkmnStats" => $apiHttpClient->getRequestByUrl($url),
+          "pkmnSpec" => $pokemon["pkmnSpec"]
+        ];
       }
     }
 
@@ -76,7 +79,6 @@ class ApiController extends AbstractController
     foreach ($pokemon["pkmnSpec"]["names"] as $lang) {
       $lang["language"]["name"] == "fr" ? $name = $lang["name"] : null;
     }
-    // dd($pokemon);
     return $this->render('api/pokemonDetails.html.twig', [
       "page_title" => $name,
       'pokemon' => $pokemon,
