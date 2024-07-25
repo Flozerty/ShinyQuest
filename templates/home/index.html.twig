@@ -40,7 +40,8 @@ Bienvenue {{app.user.pseudo}}
 
   <div class="last-capture">
     <p class="capture-description">
-      Attrapé par <a class="pseudo-captures" href="{{ path('profile_user', {'id': capture.user.id}) }}">{{ capture.user.pseudo }}</a>,
+      Attrapé par <a class="pseudo-captures" href="{{ path('profile_user', {'pseudo': capture.user.pseudo}) }}">{{
+        capture.user.pseudo }}</a>,
 
       {# affichage de la date de capture #}
       {% set now = date() %}

@@ -71,7 +71,7 @@ class CaptureController extends AbstractController
       $shasse->setSuivi(true);
       $shasse->setTermine(false);
       $shasse->setPokedexId($pokemonId);
-      $shasse->setImgShiny($pokemon["sprites"]["other"]["official-artwork"]["front_shiny"]);
+      $shasse->setImgShiny($pokemon["pkmnStats"]["sprites"]["other"]["official-artwork"]["front_shiny"]);
       $shasse->setNomPokemon($nomPokemon);
       $shasse->setUser($user);
 
@@ -85,10 +85,7 @@ class CaptureController extends AbstractController
 
     $balls = $apiHttpClient->getAllBalls();
     //////////////////////////  formulaire de shasse terminée //////////////////////////
-    $formCapture = $this->createForm(CaptureType::class, $shasse, [
-      /* balls en paramètres pour le formType */
-      // 'balls' => $balls,
-    ]);
+    $formCapture = $this->createForm(CaptureType::class, $shasse);
     $formCapture->handleRequest($request);
 
     // validation du formulaire de shiny trouvé
@@ -98,7 +95,7 @@ class CaptureController extends AbstractController
       $ball = filter_input(INPUT_POST, "ball", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
       // on va récupérer la capture avec cet ID.
-      $capture = $entityManager->getRepository(Capture::class)->find($idCapture);
+      $capture = $captureRepository->find($idCapture);
 
       // et on lui donne les résultats du formulaire de modal :
       $capture->setSurnom($shasse->getSurnom());
@@ -182,9 +179,9 @@ class CaptureController extends AbstractController
 
   // +1 button
   #[Route('/shasse/{id}/increment', name: 'increment_shasse')]
-  public function incrementCounter(int $id, EntityManagerInterface $entityManager, Request $request): Response
+  public function incrementCounter(int $id, EntityManagerInterface $entityManager, CaptureRepository $captureRepository, Request $request): Response
   {
-    $shasse = $entityManager->getRepository(Capture::class)->find($id);
+    $shasse = $captureRepository->find($id);
 
     if ($shasse) {
       $shasse->setNbRencontres($shasse->getNbRencontres() + 1);
@@ -195,9 +192,9 @@ class CaptureController extends AbstractController
 
   // -1 button
   #[Route('/shasse/{id}/decrement', name: 'decrement_shasse')]
-  public function decrementCounter(int $id, EntityManagerInterface $entityManager, Request $request): Response
+  public function decrementCounter(int $id, EntityManagerInterface $entityManager, CaptureRepository $captureRepository, Request $request): Response
   {
-    $shasse = $entityManager->getRepository(Capture::class)->find($id);
+    $shasse = $captureRepository->find($id);
 
     if ($shasse) {
       $shasse->setNbRencontres($shasse->getNbRencontres() - 1);
@@ -208,9 +205,9 @@ class CaptureController extends AbstractController
 
   // +10 button
   #[Route('/shasse/{id}/increment10', name: 'increment10_shasse')]
-  public function increment10Counter(int $id, EntityManagerInterface $entityManager, Request $request): Response
+  public function increment10Counter(int $id, EntityManagerInterface $entityManager, CaptureRepository $captureRepository, Request $request): Response
   {
-    $shasse = $entityManager->getRepository(Capture::class)->find($id);
+    $shasse = $captureRepository->find($id);
 
     if ($shasse) {
       $shasse->setNbRencontres($shasse->getNbRencontres() + 10);
@@ -221,9 +218,9 @@ class CaptureController extends AbstractController
 
   // -10 button
   #[Route('/shasse/{id}/decrement10', name: 'decrement10_shasse')]
-  public function decrement10Counter(int $id, EntityManagerInterface $entityManager, Request $request): Response
+  public function decrement10Counter(int $id, EntityManagerInterface $entityManager, CaptureRepository $captureRepository, Request $request): Response
   {
-    $shasse = $entityManager->getRepository(Capture::class)->find($id);
+    $shasse = $captureRepository->find($id);
 
     if ($shasse) {
       $shasse->setNbRencontres($shasse->getNbRencontres() - 10);
@@ -234,9 +231,9 @@ class CaptureController extends AbstractController
 
   // update counter manually on the input
   #[Route('/shasse/{id}/updateCounter', name: 'shasse_updateCounter')]
-  public function updateCounter(int $id, EntityManagerInterface $entityManager, Request $request): Response
+  public function updateCounter(int $id, EntityManagerInterface $entityManager, CaptureRepository $captureRepository, Request $request): Response
   {
-    $shasse = $entityManager->getRepository(Capture::class)->find($id);
+    $shasse = $captureRepository->find($id);
     $newValue = $request->request->get('nbRencontres');
 
     if ($shasse) {

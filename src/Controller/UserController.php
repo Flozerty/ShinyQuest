@@ -14,16 +14,17 @@ use Symfony\Component\Routing\Attribute\Route;
 class UserController extends AbstractController
 {
     #[Route('/users', name: 'app_users')]
-    public function index(UserRepository $userRepository,): Response
+    public function index(UserRepository $userRepository, ): Response
     {
         $users = $userRepository->findBy([], ["pseudo" => "ASC"]);
 
         return $this->render('user/index.html.twig', [
+            "page_title" => "Liste des dresseurs",
             "users" => $users,
         ]);
     }
 
-    #[Route('/users/{id}', name: 'profile_user')]
+    #[Route('/profile/{pseudo}', name: 'profile_user')]
     public function profile(User $user = null, CaptureRepository $captureRepository, ApiHttpClient $apiHttpClient): Response
     {
         if (!$user) {
@@ -61,7 +62,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/profile', name: 'my_profile')]
+    #[Route('/user/profile', name: 'my_profile')]
     public function myProfile(CaptureRepository $captureRepository, ApiHttpClient $apiHttpClient): Response
     {
         $user = $this->getUser();

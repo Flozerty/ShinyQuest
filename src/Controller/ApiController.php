@@ -18,7 +18,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class ApiController extends AbstractController
 {
-
   #[Route('/pokedex', name: 'app_pokedex')]
   public function pokedex(ApiHttpClient $apiHttpClient): Response
   {
@@ -30,16 +29,15 @@ class ApiController extends AbstractController
     ]);
   }
 
-  #[Route('/shinydex/{id}', name: 'app_shinydex')]
-  public function shinydex(ApiHttpClient $apiHttpClient, int $id, CaptureRepository $captureRepository, UserRepository $userRepository): Response
+  #[Route('/{pseudo}/shinydex', name: 'app_shinydex')]
+  public function shinydex(ApiHttpClient $apiHttpClient, User $user, CaptureRepository $captureRepository, UserRepository $userRepository): Response
   {
-    $dresseur = $userRepository->findOneBy(['id' => $id]);
 
     // Get tous les pokemons
     $pokemons = $apiHttpClient->getPokedex();
 
     // tous les pokemons capturés par l'user
-    $pokemonsCaptured = $captureRepository->findBy(['user' => $id, 'termine' => true]);
+    $pokemonsCaptured = $captureRepository->findBy(['user' => $user->getId(), 'termine' => true]);
     $capturedPokemonIds = [];
 
     foreach ($pokemonsCaptured as $pokemon) {
@@ -49,11 +47,42 @@ class ApiController extends AbstractController
     }
 
     return $this->render('api/pokedex.html.twig', [
-      "page_title" => 'Shinydex de ' . $dresseur->getPseudo(),
+      "page_title" => 'Shinydex de ' . $user->getPseudo(),
       'allPokemons' => $pokemons,
       // on récupère les clés du tableau d'IDs.
       'capturedPokemonIds' => array_keys($capturedPokemonIds),
-      "dresseur" => $dresseur,
+      "dresseur" => $user,
+    ]);
+  }
+
+  #[Route('/pokemon/{id}', name: 'pokemon_details')]
+  public function pokemonDetails(ApiHttpClient $apiHttpClient, int $id): Response
+  {
+    $pokemon = $apiHttpClient->getPokemonInfos($id);
+    // dd($pokemon);
+    $pokemonVarieties = [];
+    $varieties = $pokemon["pkmnSpec"]["varieties"];
+
+    if (count($varieties) > 0) {
+      foreach ($varieties as $variety) {
+        $url = $variety["pokemon"]["url"];
+        $pokemonVarieties[] = [
+          "pkmnStats" => $apiHttpClient->getRequestByUrl($url),
+          "pkmnSpec" => $pokemon["pkmnSpec"]
+        ];
+      }
+    }
+
+    // dd($pokemonVarieties);
+
+    $name = "";
+    foreach ($pokemon["pkmnSpec"]["names"] as $lang) {
+      $lang["language"]["name"] == "fr" ? $name = $lang["name"] : null;
+    }
+    return $this->render('api/pokemonDetails.html.twig', [
+      "page_title" => $name,
+      'pokemon' => $pokemon,
+      'pokemonVarieties' => $pokemonVarieties,
     ]);
   }
 

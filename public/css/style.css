@@ -207,15 +207,12 @@ main {
   img {
     width: 50px;
   }
-
-  input {
-    /* transform: translateY(50%); */
-  }
 }
 
 h1 {
   margin: 40px 0;
   text-align: center;
+  font-size: 2.3rem;
 }
 
 h2 {

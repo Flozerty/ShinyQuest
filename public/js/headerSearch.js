@@ -61,7 +61,7 @@ $(document).ready(function () {
       data.users.forEach(user => {
         const li = document.createElement('li');
         li.classList.add('search-result');
-        li.innerHTML = `<a href='/users/${user.id}'>${user.pseudo}</a>`;
+        li.innerHTML = `<a href='/profile/${user.pseudo}'>${user.pseudo}</a>`;
         userList.appendChild(li);
       });
       searchResults.appendChild(userList);
