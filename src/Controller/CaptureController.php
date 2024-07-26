@@ -114,6 +114,9 @@ class CaptureController extends AbstractController
 
     $captures = $captureRepository->findBy(['user' => $user, 'termine' => 0]);
 
+    $pokeball = $apiHttpClient->getRequestByUrl("https://pokeapi.co/api/v2/item/4/");
+    // dd($pokeball);
+
     return $this->render('capture/shasses.html.twig', [
       "page_title" => 'Mes shasses',
       "captures" => $captures,
@@ -121,6 +124,7 @@ class CaptureController extends AbstractController
       "formCapture" => $formCapture,
       "allPokemons" => $pokemons,
       "balls" => $balls,
+      "pokeball" => $pokeball
     ]);
   }
 
