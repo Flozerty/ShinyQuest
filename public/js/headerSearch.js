@@ -32,7 +32,7 @@ $(document).ready(function () {
             console.error('Erreur en récupérant les résultats:', error);
           });
       }
-    }, 500);
+    }, 300);
   });
 
   function displayResults(data) {
