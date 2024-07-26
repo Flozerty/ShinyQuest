@@ -1,22 +1,20 @@
 {# pour shinydex : grayscale aux pokemons jamais capturés #}
-<a href="{{path('pokemon_details', {'id': pokemon.pokedex_id })}}">
-  <div
-    class="pokemon{% if capturedPokemonIds is defined and pokemon.pokedex_id not in capturedPokemonIds %} filtered-dex{% endif %}">
+<div
+  class="pokemon{% if capturedPokemonIds is defined and pokemon.pokedex_id not in capturedPokemonIds %} filtered-dex{% endif %}">
 
-    <p class="pokemon-id">#{{ '%03d'|format(pokemon.pokedex_id) }}</p>
+  <p class="pokemon-id">#{{ '%03d'|format(pokemon.pokedex_id) }}</p>
 
-    <div class="types">
-      {% for type in pokemon.types %}
-      <img src="{{type.image}}" alt="type {{type.name}}">
-      {% endfor %}
-    </div>
-
-    <div class="pokemon-sprites">
-      <img class="sprite-normal" src="{{pokemon.spriteN}}" alt="sprite normal de {{pokemon.name}}" loading="lazy">
-
-      <img class="sprite-shiny" src="{{pokemon.spriteS}}" alt="sprite shiny de {{pokemon.name}}" loading="lazy">
-    </div>
-
-    <p class="pokemon-name">{{pokemon.name}}</p>
+  <div class="types">
+    {% for type in pokemon.types %}
+    <img src="{{type.image}}" alt="type {{type.name}}">
+    {% endfor %}
   </div>
-</a>
+
+  <div class="pokemon-sprites">
+    <img class="sprite-normal" src="{{pokemon.spriteN}}" alt="sprite normal de {{pokemon.name}}" loading="lazy">
+
+    <img class="sprite-shiny" src="{{pokemon.spriteS}}" alt="sprite shiny de {{pokemon.name}}" loading="lazy">
+  </div>
+
+  <p class="pokemon-name">{{pokemon.name}}</p>
+</div>
