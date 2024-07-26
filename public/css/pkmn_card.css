@@ -5,6 +5,52 @@
   --custom-ball-size: 40px;
 }
 
+@keyframes ballAnimation {
+  0% {
+    transform: rotate(-80deg);
+  }
+
+  10% {
+    transform: rotate(80deg);
+  }
+
+  20% {
+    transform: rotate(-70deg);
+  }
+
+  30% {
+    transform: rotate(70deg);
+  }
+
+  40% {
+    transform: rotate(-50deg);
+  }
+
+  50% {
+    transform: rotate(50deg);
+  }
+
+  60% {
+    transform: rotate(-20deg);
+  }
+
+  70% {
+    transform: rotate(20deg);
+  }
+
+  80% {
+    transform: rotate(-10deg);
+  }
+
+  90% {
+    transform: rotate(10deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
 .pokemon-card {
   position: relative;
   display: flex;
@@ -128,6 +174,7 @@
 .pokemon-name {
   font-size: 1.2rem;
 }
+
 .surname {
   font-size: 0.8rem;
 }
@@ -174,7 +221,6 @@
       position: relative;
       z-index: 1;
     }
-
   }
 }
 
@@ -191,4 +237,50 @@
   top: 10px;
   right: 10px;
   font-size: 1.2rem;
+  /* transition: var(--transitionTime); */
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.shasse-trouve {
+  background: none;
+  border-radius: 50%;
+  border: 2px solid var(--darkblue);
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--transitionTime);
+  padding: 0;
+  margin: 5px;
+
+  svg {
+    display: block;
+    height: 40px;
+    width: 40px;
+  }
+
+  img {
+    height: 40px;
+    width: 40px;
+    display: none;
+    transform: scale(1.2);
+  }
+
+  &:hover {
+    transform: scale(1.15);
+    border-color: transparent;
+    overflow: visible;
+    padding: 5px;
+    margin: 0;
+    animation: ballAnimation 1s linear infinite;
+
+    svg {
+      display: none;
+    }
+
+    img {
+      display: block;
+    }
+  }
 }
