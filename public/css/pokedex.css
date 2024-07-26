@@ -63,9 +63,11 @@ p {
   .types img {
     display: none;
   }
+
   .pokemon-sprites img {
     filter: brightness(0%);
   }
+
   .pokemon-name {
     display: none;
   }
