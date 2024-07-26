@@ -78,6 +78,23 @@ header {
   }
 }
 
+#logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: var(--transitionTime);
+
+  span {
+    font-family: "Concert One", sans-serif;
+    font-size: 1.5rem;
+    color: var(--darkblue);
+  }
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
 #l_d_mode {
   display: flex;
   border: 1px solid black;
@@ -161,12 +178,13 @@ header {
   display: flex;
   justify-content: center;
   height: 100%;
-  padding-left: 200px;
+  padding-left: 300px;
   margin-top: 80px;
 }
 
 main {
   width: 80%;
+  position: relative;
 }
 
 #main-side-nav {
@@ -176,17 +194,30 @@ main {
   left: 0;
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: 300px;
   border-right: 1px solid var(--darkblue);
 
   div {
-    padding: 10px 0 10px 20px;
+    padding: 10px 30px;
+    width: 100%;
 
     ul {
-      padding: 5px 0 0 10px;
+      padding: 5px 0 0 30px;
+      width: 100%;
 
       li {
-        margin: 5px 0;
+        height: fit-content;
+        width: 100%;
+
+        .nav-link {
+          display: block;
+          width: 100%;
+          padding: 5px 0;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
     }
 
@@ -194,10 +225,6 @@ main {
       color: var(--darkblue);
     }
   }
-}
-
-.nav-link:hover {
-  text-decoration: underline;
 }
 
 .chroma-container {
@@ -209,6 +236,13 @@ main {
   }
 }
 
+h1,
+h2,
+h3 {
+  font-family: "Concert One", "Chocolate Classical Sans", sans-serif;
+  font-weight: 400;
+}
+
 h1 {
   margin: 40px 0;
   text-align: center;
@@ -216,5 +250,18 @@ h1 {
 }
 
 h2 {
-  margin: 20px 0 20px 50px;
+  margin: 20px 50px;
+}
+
+/* dans pokedex & pokemonDetails */
+#shiny-mode {
+  background: none;
+  border-radius: 50%;
+  border: 2px solid var(--darkblue);
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--transitionTime);
+  position: sticky;
+  transform: translateX(-100%);
+  top: 15%;
 }
