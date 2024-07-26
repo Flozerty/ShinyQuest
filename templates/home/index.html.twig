@@ -12,6 +12,9 @@
 {% if app.user is not empty %}
 Bienvenue {{app.user.pseudo}}
 
+
+{% if shasses is not empty %}
+
 <h2>Mes shasses en cours :</h2>
 
 <section id="my-actives">
@@ -25,6 +28,11 @@ Bienvenue {{app.user.pseudo}}
 
   {% endfor %}
 </section>
+{% else %}
+
+
+{% endif %}
+
 
 {% else %}
 <p class="intro">
@@ -32,7 +40,7 @@ Bienvenue {{app.user.pseudo}}
 </p>
 {% endif %}
 
-<h2>Les dernières captures :</h2>
+<h2>Les dernières trouvailles :</h2>
 
 <section id="last-captures">
 
