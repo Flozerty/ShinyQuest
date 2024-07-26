@@ -5,12 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Welcome!{% endblock %}</title>
-  <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+  <link rel="icon" href="{{asset('favicon.svg')}}">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chocolate+Classical+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="{{asset('css/style.css')}}">
   <link rel="stylesheet" href="{{asset('css/search.css')}}">
@@ -24,7 +24,21 @@
   {# header #}
   <header>
     <a id="logo-container" href="{{ path('app_home') }}">
-      <img src="#" alt="logo">SHINYQUEST
+      <svg width="41" height="40" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M15.246 10.2708C14.97 9.69792 14.3867 9.33337 13.7462 9.33337C13.1056 9.33337 12.5276 9.69792 12.2464 10.2708L8.89778 17.1606L1.41945 18.2647C0.794518 18.3584 0.273743 18.7959 0.0810558 19.3947C-0.111631 19.9936 0.0446014 20.655 0.492468 21.0977L5.91894 26.4669L4.63784 34.0546C4.53368 34.6795 4.79407 35.3148 5.30964 35.6846C5.8252 36.0543 6.50742 36.1012 7.06986 35.8044L13.7514 32.2371L20.4329 35.8044C20.9954 36.1012 21.6776 36.0595 22.1932 35.6846C22.7087 35.3096 22.9691 34.6795 22.865 34.0546L21.5786 26.4669L27.0051 21.0977C27.453 20.655 27.6144 19.9936 27.4165 19.3947C27.2186 18.7959 26.7031 18.3584 26.0781 18.2647L18.5946 17.1606L15.246 10.2708Z"
+          fill="#F4A32C" />
+        <path
+          d="M30.4783 33.5677C30.4093 33.4245 30.2634 33.3334 30.1033 33.3334C29.9432 33.3334 29.7986 33.4245 29.7283 33.5677L28.8912 35.2902L27.0216 35.5662C26.8654 35.5896 26.7352 35.699 26.687 35.8487C26.6388 35.9984 26.6779 36.1638 26.7899 36.2745L28.1465 37.6167L27.8262 39.5137C27.8002 39.6699 27.8653 39.8287 27.9942 39.9212C28.123 40.0136 28.2936 40.0253 28.4342 39.9511L30.1046 39.0593L31.775 39.9511C31.9156 40.0253 32.0861 40.0149 32.215 39.9212C32.3439 39.8274 32.409 39.6699 32.383 39.5137L32.0614 37.6167L33.418 36.2745C33.53 36.1638 33.5704 35.9984 33.5209 35.8487C33.4714 35.699 33.3425 35.5896 33.1863 35.5662L31.3154 35.2902L30.4783 33.5677Z"
+          fill="#F4A32C" />
+        <path
+          d="M34.2898 0.468698C34.1518 0.182271 33.8601 0 33.5398 0C33.2196 0 32.9305 0.182271 32.7899 0.468698L31.1156 3.91362L27.3765 4.46565C27.064 4.51252 26.8036 4.73124 26.7073 5.03069C26.6109 5.33013 26.689 5.66082 26.913 5.88215L29.6262 8.56675L28.9857 12.3606C28.9336 12.6731 29.0638 12.9907 29.3216 13.1756C29.5794 13.3605 29.9205 13.3839 30.2017 13.2355L33.5424 11.4518L36.8832 13.2355C37.1644 13.3839 37.5055 13.3631 37.7633 13.1756C38.0211 12.9881 38.1513 12.6731 38.0992 12.3606L37.4561 8.56675L40.1693 5.88215C40.3932 5.66082 40.474 5.33013 40.375 5.03069C40.2761 4.73124 40.0183 4.51252 39.7058 4.46565L35.9641 3.91362L34.2898 0.468698Z"
+          fill="#F4A32C" />
+        <path
+          d="M23.8115 5.56772C23.7425 5.42451 23.5967 5.33337 23.4365 5.33337C23.2764 5.33337 23.1319 5.42451 23.0616 5.56772L22.2244 7.29019L20.3549 7.5662C20.1986 7.58963 20.0684 7.69899 20.0203 7.84872C19.9721 7.99844 20.0112 8.16379 20.1231 8.27445L21.4797 9.61675L21.1595 11.5137C21.1334 11.6699 21.1985 11.8287 21.3274 11.9212C21.4563 12.0136 21.6269 12.0253 21.7675 11.9511L23.4379 11.0593L25.1082 11.9511C25.2488 12.0253 25.4194 12.0149 25.5483 11.9212C25.6772 11.8274 25.7423 11.6699 25.7162 11.5137L25.3947 9.61675L26.7513 8.27445C26.8632 8.16379 26.9036 7.99844 26.8541 7.84872C26.8047 7.69899 26.6758 7.58963 26.5195 7.5662L24.6487 7.29019L23.8115 5.56772Z"
+          fill="#F4A32C" />
+      </svg>
+      <span>SHINYQUEST</span>
     </a>
 
     <form id="search" action="">
@@ -34,6 +48,8 @@
     </form>
 
     <div id="l_d_mode">
+      {# <input id="ldMode" type="checkbox" name="ldMode" value="on"> #}
+
       <i class="fa-regular fa-sun"></i>
       <i class="fa-regular fa-moon"></i>
     </div>
@@ -92,9 +108,10 @@
 
     <aside id="main-side-nav">
       <div>
-        <h3>
-          <a class="nav-link" href="{{ path('app_home') }}">Accueil</a>
-        </h3>
+        <h3>Accueil</h3>
+        <ul>
+          <li><a class="nav-link" href="{{ path('app_home') }}">Page d'accueil</a></li>
+        </ul>
       </div>
 
       <div>
@@ -127,8 +144,7 @@
       <div>
         <h3>Général</h3>
         <ul>
-          <li><a class="nav-link" href="{{ path('app_pokedex') }}">Pokedex</a></li>
-          <li><a class="nav-link" href="">Recherche pokemon</a></li>
+          <li><a class="nav-link" href="{{ path('app_pokedex') }}">Recherche pokédex</a></li>
         </ul>
       </div>
     </aside>
@@ -146,6 +162,7 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{{asset('js/headerProfileNav.js')}}"></script>
   <script src="{{asset('js/headerSearch.js')}}"></script>
+  <script src="{{asset('js/ldMode.js')}}"></script>
   {% block javascripts %}{% endblock %}
 </body>
 
