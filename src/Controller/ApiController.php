@@ -60,6 +60,8 @@ class ApiController extends AbstractController
   {
     $pokemon = $apiHttpClient->getPokemonInfos($id);
     // dd($pokemon);
+
+    // récupération des différentes formes du pokémon
     $pokemonVarieties = [];
     $varieties = $pokemon["pkmnSpec"]["varieties"];
 
@@ -79,10 +81,33 @@ class ApiController extends AbstractController
     foreach ($pokemon["pkmnSpec"]["names"] as $lang) {
       $lang["language"]["name"] == "fr" ? $name = $lang["name"] : null;
     }
+
+    // récupération de la chaîne d'évolution du pokémon
+    $url = $pokemon["pkmnSpec"]["evolution_chain"]["url"];
+    $evolutionChain =  $apiHttpClient->getEvolutionChain($url);
+
+    // dd($evolutionChain);
+
+    // récupération des statss du pokemon
+    $stats = [];
+    foreach ($pokemon["pkmnStats"]["stats"] as $stat) {
+      $url = $stat["stat"]["url"];
+
+      $stats[] =  [
+        "base_stat" => $stat["base_stat"],
+        "details_stat" => $apiHttpClient->getRequestByUrl($url),
+      ];
+    };
+
+    // dd($stats);
+
     return $this->render('api/pokemonDetails.html.twig', [
-      "page_title" => $name,
+      "name" => $name,
       'pokemon' => $pokemon,
+      'stats' => $stats,
       'pokemonVarieties' => $pokemonVarieties,
+      "evolutionChain" => $evolutionChain,
+      "currentPokemonId" => $pokemon["pkmnStats"]["id"],
     ]);
   }
 
