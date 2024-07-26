@@ -16,7 +16,7 @@ class ApiHttpClient extends AbstractController
     $this->httpClient = $jph;
   }
 
-  // get all pkmns with name + gen + id + img + types
+  // Get all pkmns with name + gen + id + img + types
   public function getPokedex(): array
   {
     $response = $this->httpClient->request('GET', "https://tyradex.vercel.app/api/v1/pokemon");
@@ -24,8 +24,6 @@ class ApiHttpClient extends AbstractController
 
     // on enlève le "pokemon 0"
     array_shift($pokemons);
-    // dd($pokemons);
-
     $allPokemons = [];
 
     foreach ($pokemons as $pokemon) {
@@ -43,14 +41,22 @@ class ApiHttpClient extends AbstractController
     return $allPokemons;
   }
 
-  // get a single pkmn "allInfos"
+  // Récupérer l'id dans une url
+  function getIdFromUrl($url)
+  {
+    $parts = explode('/', rtrim($url, '/'));
+    return end($parts);
+  }
+
+  // Get a single pkmn "allInfos"
   public function getPokemonInfos($id)
   {
     $response = $this->httpClient->request('GET', "pokemon/$id");
     $pokemon = $response->toArray();
 
-    $responseSpec = $this->httpClient->request('GET', "pokemon-species/$id");
-    $pokemonSpec = $responseSpec->toArray();
+    $urlSpec = $pokemon["species"]["url"];
+    $pokemonSpec = $this->getRequestByUrl($urlSpec);
+
     return ["pkmnStats" => $pokemon, "pkmnSpec" => $pokemonSpec];
   }
 
@@ -60,7 +66,65 @@ class ApiHttpClient extends AbstractController
     return $response->toArray();
   }
 
-  // get all pkmns with only name + id
+  // Récupérer la chaîne d'évolution d'un pokémon
+  public function getEvolutionChain($url)
+  {
+    $evolutionChain = $this->getRequestByUrl($url);
+    $pokemons = [];
+
+    $this->extractEvolutionDetails($evolutionChain['chain'], $pokemons);
+    // dd($pokemons);
+
+    // on renvoie le tri de la chaîne d'évolution (voir 2 fonctions plus bas)
+    return $this->sortEvolutionChain($pokemons);
+  }
+
+  // extraire tous les pokémons de la chaîne d'évolution
+  private function extractEvolutionDetails($chain, &$pokemons)
+  // On utilise ici &$pokemons pour que les modifications apportées à $pokemons soient apportées à la variable d'origine, dans la fonction getEvolutionChain(), on n'a donc pas besoin de return ici.
+  {
+    $pokemonName = $chain['species']['name'];
+    $pokemonDetails = $this->getPokemonInfos($pokemonName);
+    $pokemons[] = $pokemonDetails;
+
+    if (!empty($chain['evolves_to'])) {
+      foreach ($chain['evolves_to'] as $evolution) {
+        $this->extractEvolutionDetails($evolution, $pokemons);
+      }
+    }
+  }
+
+  // triage de la chaîne d'évolution
+  private function sortEvolutionChain($evolutionChain)
+  {
+    $tree = [];
+    $lookup = [];
+
+    // Initialiser le lookup avec chaque Pokémon
+    foreach ($evolutionChain as $pokemon) {
+      $lookup[$pokemon['pkmnSpec']['id']] = [
+        'pokemon' => $pokemon,
+        'children' => []
+      ];
+    }
+
+    // Construire l'arbre d'évolution
+    foreach ($evolutionChain as $pokemon) {
+      $evolvesFromUrl = $pokemon['pkmnSpec']['evolves_from_species']['url'] ?? null;
+      $evolvesFromId = $evolvesFromUrl ? $this->getIdFromUrl($evolvesFromUrl) : null;
+
+      if ($evolvesFromId && isset($lookup[$evolvesFromId])) {
+        $lookup[$evolvesFromId]['children'][] = &$lookup[$pokemon['pkmnSpec']['id']];
+      } else {
+        $tree[] = &$lookup[$pokemon['pkmnSpec']['id']];
+      }
+    }
+    // dd($tree);
+
+    return $tree;
+  }
+
+  // Get all pkmns with only name + id (pour form)
   public function getAllPokemons(): array
   {
     $response = $this->httpClient->request('GET', "https://tyradex.vercel.app/api/v1/pokemon");
@@ -68,11 +132,9 @@ class ApiHttpClient extends AbstractController
 
     // on enlève le "pokemon 0"
     array_shift($pokemons);
-
     $allPokemons = [];
 
     foreach ($pokemons as $pokemon) {
-
       $allPokemons[] =
         [
           'pokedex_id' => $pokemon["pokedex_id"],
@@ -157,7 +219,7 @@ class ApiHttpClient extends AbstractController
     return $allBallsData;
   }
 
-  // récupération des infos d'une seule ball
+  // Récupération des infos d'une seule ball
   public function getBallData($url)
   {
     $response = $this->httpClient->request('GET', $url);
@@ -176,6 +238,7 @@ class ApiHttpClient extends AbstractController
     }
   }
 
+  // Recherche d'un pokemon par chaîne de caractère / id
   public function searchPokemonByQuery(string $query): array
   {
     $data = $this->getAllPokemons();
@@ -188,7 +251,6 @@ class ApiHttpClient extends AbstractController
         $filteredPokemons[] = $pokemon;
       }
     }
-
     return $filteredPokemons;
   }
 }
