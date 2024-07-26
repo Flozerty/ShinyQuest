@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-
   let shinyMode = false;
-  
+
   const shinySprites = document.querySelectorAll('.sprite-shiny');
   const normalSprites = document.querySelectorAll('.sprite-normal');
   const button = document.getElementById('shiny-mode');
@@ -14,13 +13,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   } else { // Pour le Shinydex
     shinyMode = true;
-
-
-
   }
 
-
-  // fonction commune pour l'affichage des images normal/shiny
+  // Affichage
   function verifyDisplayMode() {
     if (shinyMode) {
       shinySprites.forEach(sprite => {
@@ -30,11 +25,11 @@ document.addEventListener('DOMContentLoaded', function () {
         sprite.style.display = "none"
       });
     } else {
-      normalSprites.forEach(sprite => {
-        sprite.style.display = "block"
-      });
       shinySprites.forEach(sprite => {
         sprite.style.display = "none"
+      });
+      normalSprites.forEach(sprite => {
+        sprite.style.display = "block"
       });
     }
   }
