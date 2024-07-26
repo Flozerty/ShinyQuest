@@ -16,7 +16,6 @@
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   width: 100%;
-  height: 100px;
   align-items: center;
   justify-content: space-between;
   padding: 10px 0;
@@ -46,14 +45,18 @@
   font-weight: 600;
 }
 
-.dresseur {
-  .profil-dresseur {
-    grid-column: 1/3;
-    flex-direction: row;
-    justify-content: start;
-    gap: 15px;
-    margin-left: 15px;
-  }
+.user-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profil-dresseur {
+  grid-column: 1/3;
+  flex-direction: row;
+  justify-content: start;
+  gap: 15px;
+  margin-left: 15px;
 }
 
 .pseudo {
@@ -99,13 +102,6 @@
   }
 }
 
-.user-link {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 #demandes {
   i {
     font-size: 2rem;
@@ -116,8 +112,6 @@
     color: var(--darkblue);
     background-color: var(--lightblue);
   }
-
-
 
   .demande-links {
     display: flex;
