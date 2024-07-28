@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mes captures{% endblock %}
+{% block title %}
+{% if app.user == user %}
+Mes captures
+{% else %}
+Captures de {{user.pseudo}}
+{% endif %}
+{% endblock %}
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{asset('css/pkmn_card.css')}}">

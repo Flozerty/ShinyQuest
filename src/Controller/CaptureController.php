@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Capture;
+use App\Entity\User;
 use App\Form\CaptureType;
 use App\Form\ShasseStartType;
 use App\HttpClient\ApiHttpClient;
@@ -18,11 +19,9 @@ class CaptureController extends AbstractController
 {
 
   // Toutes mes captures
-  #[Route('/captures', name: 'my_captures')]
-  public function captures(CaptureRepository $captureRepository): Response
+  #[Route('/{pseudo}/captures', name: 'my_captures')]
+  public function captures(User $user, CaptureRepository $captureRepository): Response
   {
-
-    $user = $this->getUser();
     if (!$user) {
       return $this->redirectToRoute('app_login');
     }
@@ -30,8 +29,9 @@ class CaptureController extends AbstractController
     $captures = $captureRepository->findBy(['user' => $user, 'termine' => 1], ['dateCapture' => "DESC"]);
 
     return $this->render('capture/captures.html.twig', [
-      "page_title" => 'Mes captures',
+      "page_title" => $this->getUser() == $user ? 'Mes captures' : "Captures de " . $user->getPseudo(),
       "captures" => $captures,
+      "user" => $user,
     ]);
   }
 

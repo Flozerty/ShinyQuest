@@ -56,12 +56,12 @@
 
     <nav id="nav-header">
 
-      {% if app.user is not empty %}
+      {% if app.user is defined and app.user is not empty %}
       <ul>
         <li title="Forum"><i class="fa-regular fa-comments"></i></li>
 
         <li title="Mes captures">
-          <a href="{{ path('my_captures') }}">
+          <a href="{{ path('my_captures', {'pseudo' : app.user.pseudo}) }}">
             <div class="custom-pokeball">
               <div class="pokeball-circle"></div>
               <div class="pokeball-center"></div>
@@ -119,7 +119,7 @@
         <ul>
           {% if app.user is not empty %}
           <li><a class="nav-link" href="{{ path('my_shasses') }}">Mes shasses</a></li>
-          <li><a class="nav-link" href="{{ path('my_captures') }}">Mes captures</a></li>
+          <li><a class="nav-link" href="{{ path('my_captures', {'pseudo' : app.user.pseudo}) }}">Mes captures</a></li>
           <li><a class="nav-link" href="{{ path('app_shinydex', {'pseudo': app.user.pseudo}) }}">Mon shinydex</a></li>
           {% else %}
           <li><a class="nav-link" href="{{ path('app_login') }}">Connectez-vous</a></li>
