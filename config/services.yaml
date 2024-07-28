@@ -21,8 +21,8 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    App\Security\Redirect404:
-        class: App\Security\Redirect404
+    App\Security\RedirectExceptionListener:
+        class: App\Security\RedirectExceptionListener
         arguments:
             - "@router"
         tags:

@@ -32,14 +32,6 @@ class SecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
-    #[Route(path: '/error404', name: 'error404')]
-    public function error404(): Response
-    {
-        return $this->render('security/error.html.twig', [
-            "errorCode" => "404",
-        ]);
-    }
-
     #[Route('/user/delete', name: 'delete_account')]
     public function deleteAccount(EntityManagerInterface $entityManager): Response
     {
@@ -53,5 +45,41 @@ class SecurityController extends AbstractController
         } else {
             dd("test");
         }
+    }
+
+    //////////////////////////////////////////////////////
+    /////////////////////// ERRORS ///////////////////////
+    //////////////////////////////////////////////////////
+
+    #[Route(path: '/error400', name: 'error400')]
+    public function error400(): Response
+    {
+        return $this->render('security/error.html.twig', [
+            "errorCode" => "400",
+        ]);
+    }
+
+    #[Route(path: '/error403', name: 'error403')]
+    public function error403(): Response
+    {
+        return $this->render('security/error.html.twig', [
+            "errorCode" => "403",
+        ]);
+    }
+
+    #[Route(path: '/error404', name: 'error404')]
+    public function error404(): Response
+    {
+        return $this->render('security/error.html.twig', [
+            "errorCode" => "404",
+        ]);
+    }
+
+    #[Route(path: '/error500', name: 'error500')]
+    public function error500(): Response
+    {
+        return $this->render('security/error.html.twig', [
+            "errorCode" => "500",
+        ]);
     }
 }
