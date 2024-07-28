@@ -44,7 +44,6 @@ section {
     height: fit-content;
     row-gap: 15px;
 
-    max-height: 500px;
     overflow-y: scroll;
 
     a figure {
@@ -61,6 +60,33 @@ section {
     .active-pkmn {
         width: 200px;
     }
+
+    &::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: #f1f1f1;
+        border-radius: 5px;
+
+    }
+
+    &::-webkit-scrollbar-track:hover {
+        background-color: var(--lightblue);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        min-height: 50px;
+        background-color: var(--darkblue);
+        border-radius: 5px;
+        border: 1px solid white;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        border: var(--darkblue);
+    }
+
 }
 
 #evolution {
