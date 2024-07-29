@@ -12,10 +12,10 @@
   width: 25%;
   border-radius: 15px;
   height: 40px;
-  border: 1px solid black;
+  border: 1px solid var(--darkblue);
   /* overflow: hidden; */
   align-items: center;
-  background-color: var(--lightblue);
+  /* background-color: var(--lightblue); */
 
   input {
     padding-left: 10px;
@@ -23,7 +23,7 @@
     width: 100%;
     border: none;
     border-radius: 8px 15px 15px 8px;
-    background-color: var(--lightblue);
+    /* background-color: var(--lightblue); */
   }
 
   #search-img-container {
