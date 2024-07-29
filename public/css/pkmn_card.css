@@ -273,7 +273,7 @@
     overflow: visible;
     padding: 5px;
     margin: 0;
-    animation: ballAnimation 1s linear infinite;
+    animation: ballAnimation 1.3s linear infinite;
 
     svg {
       display: none;
