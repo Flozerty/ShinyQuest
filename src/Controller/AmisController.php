@@ -19,7 +19,7 @@ class AmisController extends AbstractController
 
     // Afficher toutes mes demandes d'amis
     #[Route('/amis', name: 'app_amis')]
-    public function index(ApiHttpClient $apiHttpClient, AmisRepository $amisRepository, CaptureRepository $captureRepository, UserRepository $userRepository,): Response
+    public function index(ApiHttpClient $apiHttpClient, AmisRepository $amisRepository, CaptureRepository $captureRepository, UserRepository $userRepository, ): Response
     {
         if (!$this->getUser()) {
             dd("pas d'user co");
@@ -28,7 +28,7 @@ class AmisController extends AbstractController
         $allPokemons = $apiHttpClient->getPokedex();
 
         $AmisByDemande = $amisRepository->findBy(["userDemande" => $this->getUser()]);
-        $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()],);
+        $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()], );
 
         $dresseursData = [];
         $demandeEnvoyee = [];
@@ -90,6 +90,11 @@ class AmisController extends AbstractController
             $entityManager->flush();
         }
 
+        $this->addFlash(
+            'notice',
+            "La demande d'ami a été refusée."
+        );
+
         return $this->redirectToRoute("app_amis");
     }
 
@@ -103,6 +108,11 @@ class AmisController extends AbstractController
             $lienAmis->setStatut(true);
             $entityManager->flush();
         }
+
+        $this->addFlash(
+            'notice',
+            "La demande d'ami a été acceptée!"
+        );
 
         return $this->redirectToRoute("app_amis");
     }
@@ -140,6 +150,11 @@ class AmisController extends AbstractController
 
         $entityManager->persist($demande);
         $entityManager->flush();
+
+        $this->addFlash(
+            'notice',
+            "Demande d'ami envoyée!"
+        );
 
         return $this->redirectToRoute("app_amis");
     }

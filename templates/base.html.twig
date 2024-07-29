@@ -49,10 +49,11 @@
     </form>
 
     <div id="l_d_mode">
-      {# <input id="ldMode" type="checkbox" name="ldMode" value="on"> #}
-
+      <input id="darkmode-toggle" name="darkmode-toggle" type="checkbox">
+<label for="darkmode-toggle">
       <i class="fa-regular fa-sun"></i>
       <i class="fa-regular fa-moon"></i>
+</label>
     </div>
 
     <nav id="nav-header">
@@ -160,10 +161,24 @@
     </main>
   </div>
 
+    {# footer #}
+  <footer>
+    {% for label, messages in app.flashes %}
+    {% for message in messages %}
+    <div class="flash-{{ label }}">
+      {{ message }}
+    </div>
+    {% endfor %}
+    {% endfor %}
+    <p id="copy">&copy; 2024 Flozerty - <span id="legal-mentions">Mentions légales</span></p>
+    <p>ShinyQuest est un projet non-officiel et n'est pas affilié à Nintendo ou à The Pokémon Company.</p>
+    <p>Pokémon est une marque déposée de Nintendo, GAME FREAK, Creatures Inc. et The Pokémon Company.</p>
+  </footer>
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{{asset('js/headerProfileNav.js')}}"></script>
   <script src="{{asset('js/headerSearch.js')}}"></script>
-  <script src="{{asset('js/ldMode.js')}}"></script>
+  <script src="{{asset('js/base.js')}}"></script>
   {% block javascripts %}{% endblock %}
 </body>
 
