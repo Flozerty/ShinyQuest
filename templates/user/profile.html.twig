@@ -47,9 +47,15 @@
             </div>
         </div>
     </div>
+<div id="links">
     <a href="{{ path('app_shinydex', {'pseudo': user.pseudo}) }}" id="shinydex-link">
         <i class="fa-solid fa-star"></i>&nbsp; ShinyDex
     </a>
+<a href="{{ path('captures', {'pseudo': user.pseudo}) }}" id="captures-link">
+        <i class="fa-solid fa-star"></i>&nbsp; Captures
+    </a>
+</div>
+
 </section>
 
 <section id="activity">
