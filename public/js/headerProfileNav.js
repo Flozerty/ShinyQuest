@@ -16,11 +16,11 @@ displayers.forEach(element => {
       showProfileNav()
     }
   })
-  element.addEventListener('mouseenter', () => {
-    if (!show) {
-      showProfileNav()
-    }
-  });
+  // element.addEventListener('mouseenter', () => {
+  //   if (!show) {
+  //     showProfileNav()
+  //   }
+  // });
 });
 
 // retire la nav quand on clique ailleurs
