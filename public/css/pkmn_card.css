@@ -60,7 +60,7 @@
   padding: 15px;
   margin: 15px;
   border-radius: 20px;
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  box-shadow: rgb(38, 57, 77) 0px 10px 15px -5px;
 }
 
 .main-card-content {
@@ -234,8 +234,8 @@
 
 .del-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 15px;
+  right: 15px;
 }
 
 .shasse-trouve {

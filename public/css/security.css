@@ -28,11 +28,13 @@
 
   .checkbox {
     margin: 10px 0;
+
     input {
       width: auto;
       margin: 0;
     }
   }
+
   button {
     width: 100%;
     padding: 10px;

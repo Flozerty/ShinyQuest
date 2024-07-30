@@ -19,11 +19,11 @@ class ShasseStartType extends AbstractType
     {
         $builder
             ->add('nbRencontres', IntegerType::class, [
-                 "label" => "Compteur"
+                "label" => "Compteur"
             ])
 
             ->add('charmeChroma', null, [
-                "label" => " "
+                "label" => "Charme chroma"
             ])
 
             // ->add('nomPokemon')
@@ -32,8 +32,8 @@ class ShasseStartType extends AbstractType
             ->add('jeu', ChoiceType::class, [
                 'choices' => $options['games'],
                 'placeholder' => 'Choisissez un jeu',
-             
-                'choice_label' => function($value) {
+
+                'choice_label' => function ($value) {
                     return $value;
                 },
             ])

@@ -33,7 +33,8 @@ a {
   cursor: pointer;
 }
 
-.fa-circle-xmark {
+.fa-circle-xmark,
+.fa-trash {
   color: red;
   transition: var(--transitionTime);
   font-size: 1.2rem;
