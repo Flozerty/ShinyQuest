@@ -9,9 +9,9 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
+    #[Route('/', name: 'index_redirect')]
     #[Route('/home', name: 'app_home')]
-    public function index(CaptureRepository $captureRepository,): Response
+    public function index(CaptureRepository $captureRepository, ): Response
     {
         $user = $this->getUser();
 
