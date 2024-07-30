@@ -28,7 +28,7 @@
 <h2>Infos sur le dresseur</h2>
 <section id="user-infos">
     <figure>
-        <img src="{{ asset('img/' ~ user.avatar) }}" alt="avatar de {{user.pseudo}}">
+        <img src="{{user.avatar ? asset('img/' ~ user.avatar) : asset('img/unknown_user.png') }}" alt="avatar de {{user.pseudo}}">
     </figure>
 
     <div id="user-basics-info">

@@ -61,7 +61,11 @@
 
       {% if app.user is defined and app.user is not empty %}
       <ul>
-        <li title="Forum"><i class="fa-regular fa-comments"></i></li>
+        <li title="Forum">
+          <a href="">
+            <i class="fa-regular fa-comments"></i>
+          </a>
+        </li>
 
         <li title="Mes captures">
           <a href="{{ path('captures', {'pseudo' : app.user.pseudo}) }}">
@@ -80,7 +84,8 @@
       <div id="header-profile">
         <p>{{app.user}}</p>
         <figure>
-          <img src="{{ asset('img/' ~ app.user.avatar) }}" alt="avatar de {{app.user}}">
+          <img src="{{app.user.avatar ? asset('img/' ~ app.user.avatar) : asset('img/unknown_user.png') }}"
+            alt="avatar de {{app.user}}">
         </figure>
 
       </div>
