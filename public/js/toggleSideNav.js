@@ -2,25 +2,39 @@ const sideNavContainer = document.querySelector('#main-side-nav'),
   toggleBtn = document.querySelector('#toggle-nav-btn'),
   mainContainer = document.querySelector('main')
 
-let toggle = false;
+let toggleNav = false;
 
 toggleBtn.addEventListener('click', () => {
-  toggle = !toggle;
+  toggleNav = !toggleNav;
   verifyToggle();
+})
+
+toggleBtn.addEventListener('mouseover', () => {
+  if (toggleNav) {
+    toggleBtn.style.transform = "translateX(20%) rotate(180deg)";
+  } else {
+    toggleBtn.style.transform = "translateX(80%)";
+  }
+})
+
+toggleBtn.addEventListener('mouseout', () => {
+  if (toggleNav) {
+    toggleBtn.style.transform = "translateX(40%) rotate(180deg)";
+  } else {
+    toggleBtn.style.transform = "translateX(60%)";
+  }
 })
 
 function verifyToggle() {
 
-  if (toggle) {
-    toggleBtn.style.transform = "translateX(60%) rotate(180deg)";
+  if (toggleNav) {
     sideNavContainer.classList.add('toggle-nav');
     sideNavContainer.classList.remove('hide-nav');
     mainContainer.classList.add("main-blur")
 
   } else {
-    toggleBtn.style.transform = "translateX(60%)";
     sideNavContainer.classList.add('hide-nav');
     sideNavContainer.classList.remove('toggle-nav');
-    mainContainer.style.filter = ""
+    mainContainer.classList.remove("main-blur")
   }
 }

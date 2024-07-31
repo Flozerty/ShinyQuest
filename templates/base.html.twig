@@ -40,16 +40,15 @@
           d="M23.8115 5.56772C23.7425 5.42451 23.5967 5.33337 23.4365 5.33337C23.2764 5.33337 23.1319 5.42451 23.0616 5.56772L22.2244 7.29019L20.3549 7.5662C20.1986 7.58963 20.0684 7.69899 20.0203 7.84872C19.9721 7.99844 20.0112 8.16379 20.1231 8.27445L21.4797 9.61675L21.1595 11.5137C21.1334 11.6699 21.1985 11.8287 21.3274 11.9212C21.4563 12.0136 21.6269 12.0253 21.7675 11.9511L23.4379 11.0593L25.1082 11.9511C25.2488 12.0253 25.4194 12.0149 25.5483 11.9212C25.6772 11.8274 25.7423 11.6699 25.7162 11.5137L25.3947 9.61675L26.7513 8.27445C26.8632 8.16379 26.9036 7.99844 26.8541 7.84872C26.8047 7.69899 26.6758 7.58963 26.5195 7.5662L24.6487 7.29019L23.8115 5.56772Z"
           fill="#F4A32C" />
       </svg>
-      <span>SHINYQUEST</span>
+      <span id="logo-title">SHINYQUEST</span>
     </a>
 
-    <form id="search" action="">
-      <div id="search-img-container"></div>
-      <input type="search" id="search-input" placeholder="recherchez un pokemon, un dresseur, ...">
-      <div id="search-results"></div>
+    <form id="search-header" action="">
+      <div class="search-img-container"></div>
+      <input type="search" class="search-input" placeholder="recherchez un pokemon, un dresseur, ...">
     </form>
 
-    <div id="l_d_mode">
+    <div class="l_d_mode-main">
       <input id="darkmode-toggle" name="darkmode-toggle" type="checkbox">
       <label for="darkmode-toggle">
         <i class="fa-regular fa-sun"></i>
@@ -99,6 +98,9 @@
       {% endif %}
     </nav>
 
+
+      {% if app.user is defined and app.user is not empty %}
+
     <ul id="profile-nav">
       <li><a class="nav-link" href="{{ path('my_profile') }}">Mon profil</a></li>
       <li><a class="nav-link" href="{{ path('my_shasses') }}">Mes shasses</a></li>
@@ -109,7 +111,25 @@
       <li class="profile-link"><a class="nav-link" href="">Forum</a></li>
 
       <li><a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a></li>
+
+<form id="search-profile" action="">
+      <div class="search-img-container"></div>
+      <input type="search" class="search-input" placeholder="recherchez un pokemon, un dresseur, ...">
+    </form>
+
+    <div class="l_d_mode">
+      <input id="darkmode-toggle2" name="darkmode-toggle2" type="checkbox">
+      <label for="darkmode-toggle2">
+        <i class="fa-regular fa-sun"></i>
+        <i class="fa-regular fa-moon"></i>
+      </label>
+    </div>
+
+   
     </ul>
+      {% endif %}
+
+      <div id="search-results"></div>
   </header>
 
   <div id="main-wrapper">

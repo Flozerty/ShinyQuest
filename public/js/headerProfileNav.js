@@ -16,11 +16,6 @@ displayers.forEach(element => {
       showProfileNav()
     }
   })
-  // element.addEventListener('mouseenter', () => {
-  //   if (!show) {
-  //     showProfileNav()
-  //   }
-  // });
 });
 
 // retire la nav quand on clique ailleurs
@@ -30,9 +25,9 @@ main.addEventListener("click", () => {
   }
 })
 
-// retire la nav quand on clique sur le header (sauf sur les displayers)
+// retire la nav quand on clique sur le header (sauf sur les displayers & la nav)
 header.addEventListener("click", (event) => {
-  if (show && !caret.contains(event.target) && !userContainer.contains(event.target)) {
+  if (show && !profileNav.contains(event.target) && !caret.contains(event.target) && !userContainer.contains(event.target)) {
     hideProfileNav()
   }
 })
@@ -45,6 +40,6 @@ function showProfileNav() {
 
 function hideProfileNav() {
   caret.style.transform = "rotate(-90deg)";
-  profileNav.style.transform = "translate(150%, 50%) rotate(45deg)";
+  profileNav.style.transform = "translate(170%, 50%) rotate(45deg)";
   show = false;
 }
