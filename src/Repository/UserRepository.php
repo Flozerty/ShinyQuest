@@ -41,13 +41,16 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->orderBy('u.pseudo', 'ASC')
             ->getQuery()
             ->getResult();
-                //  SELECT *
-                //  FROM user u
-                //  WHERE u.pseudo LIKE '%{query}%'
-                //  ORDER BY u.pseudo ASC
+
+        //  SELECT *
+        //  FROM user u
+        //  WHERE u.pseudo LIKE '%{query}%'
+        //  ORDER BY u.pseudo ASC
 
         // % = toute la chaîne de caractères.
     }
+
+
 
     //    /**
     //     * @return User[] Returns an array of User objects

@@ -41,7 +41,6 @@ section {
 }
 
 #varieties {
-    height: fit-content;
     row-gap: 15px;
 
     overflow-y: scroll;
