@@ -164,7 +164,7 @@
   }
 
   .submit-btn:hover>span>span {
-    animation: MoveRightInitial 0.1s forwards, MoveRightEnd 0.3s forwards 0.2s;
+    animation: MoveRightInitial var(--transitionTime) forwards, MoveRightEnd var(--transitionTime) forwards var(--transitionTime);
   }
 
   @keyframes MoveRightInitial {
@@ -218,6 +218,10 @@
     transition: transform 0.01s 0.3s cubic-bezier(0.7, 0, 0.2, 1);
   }
 }
+
+/* /////////////////////////////////////////// */
+/* ////////////// MEDIA QUERIES ////////////// */
+/* /////////////////////////////////////////// */
 
 @media (max-width: 700px) {
   #new-shasse {
