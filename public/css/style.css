@@ -264,7 +264,8 @@ header {
 #main-wrapper {
   display: flex;
   justify-content: center;
-  padding: 80px 0 80px 300px;
+  padding: 80px 0;
+  transition: var(--transitionTime);
   /* min-height calc dans base.js */
 }
 
@@ -273,15 +274,18 @@ main {
   position: relative;
 }
 
+/* //////////////////// SIDE NAV //////////////////// */
 #main-side-nav {
   position: fixed;
   top: 80px;
   bottom: 0;
-  left: 0;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   width: 300px;
   border-right: 1px solid var(--darkblue);
+  transition: var(--transitionTime);
+  background-color: white;
 
   div {
     padding: 10px 30px;
@@ -311,6 +315,30 @@ main {
       color: var(--darkblue);
     }
   }
+
+  #toggle-nav-btn {
+    font-size: 2rem;
+    color: var(--darkblue);
+    position: absolute;
+    top: 10%;
+    right: 0;
+    background-color: white;
+    cursor: pointer;
+    transition: var(--transitionTime);
+    transform: translateX(60%);
+
+    &:hover {
+      transform: translateX(100%);
+    }
+  }
+}
+
+.toggle-nav {
+  left: 0;
+}
+
+.hide-nav {
+  left: -300px;
 }
 
 .chroma-container {
@@ -425,5 +453,19 @@ footer {
     &:hover {
       color: black;
     }
+  }
+}
+
+@media (min-width: 1200px) {
+  #toggle-nav-btn {
+    display: none;
+  }
+
+  #main-wrapper {
+    padding-left: 300px;
+  }
+
+  #main-side-nav {
+    left: 0px;
   }
 }

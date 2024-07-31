@@ -114,7 +114,8 @@
     <nav> </nav>
     {% endif %}
 
-    <aside id="main-side-nav">
+    {# ////////////////Side nav//////////////// #}
+    <aside id="main-side-nav" class="hide-nav">
       <div>
         <h3>Accueil</h3>
         <ul>
@@ -155,6 +156,7 @@
           <li><a class="nav-link" href="{{ path('app_pokedex') }}">Recherche pokédex</a></li>
         </ul>
       </div>
+      <i id="toggle-nav-btn" class="fa-solid fa-circle-right"></i>
     </aside>
 
     {# main #}
@@ -227,6 +229,7 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{{asset('js/headerProfileNav.js')}}"></script>
   <script src="{{asset('js/headerSearch.js')}}"></script>
+  <script src="{{asset('js/toggleSideNav.js')}}"></script>
   <script src="{{asset('js/base.js')}}"></script>
   {% block javascripts %}{% endblock %}
 </body>
