@@ -15,6 +15,11 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
+  #stop-suivi-tip {
+    color: red;
+    font-weight: 600;
+  }
 }
 
 #shassesTable {
@@ -97,6 +102,7 @@
 
   form {
     display: flex;
+    width: 100%;
     flex-direction: column;
 
     div {
@@ -106,7 +112,6 @@
     }
 
     label {
-      padding-right: 20px;
       font-weight: 600;
     }
 
@@ -122,9 +127,52 @@
     }
 
     #submit-new-shasse {
+      align-self: center;
+      min-width: 50%;
       background-color: var(--lightblue);
       box-shadow: var(--darkblue) 0px 50px 100px -20px, var(--darkblue) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
       cursor: pointer;
     }
+  }
+}
+
+@media (max-width: 700px) {
+  #new-shasse {
+    width: 90%;
+
+    label {
+      padding-right: 5px;
+    }
+
+    input,
+    select {
+      max-width: 50%;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  #new-shasse {
+    div {
+      flex-direction: column;
+    }
+
+    .chroma-container,
+    .chroma-container div {
+      flex-direction: row;
+    }
+
+    input,
+    select {
+      width: 80%;
+      max-width: 80%;
+      align-self: center;
+    }
+  }
+}
+
+@media (min-width: 700px) {
+  label {
+    padding-right: 20px;
   }
 }
