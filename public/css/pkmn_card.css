@@ -116,6 +116,7 @@
 
   .captured-pokemon-footer {
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     justify-content: center;
     align-items: center;
@@ -135,6 +136,7 @@
 
 .compteur-input {
   width: 50%;
+  min-width: 100px;
   text-align: center;
   padding: 2px 0;
   margin: 5px 0;
@@ -282,14 +284,14 @@
   }
 }
 
-@media (min-width: 850px) {
+/* @media (min-width: 850px) { */
 
   .pokemon-img {
     width: 100%;
   }
-}
+/* } */
 
-
+/* 
 @media (max-width: 850px) {
   .pokemon-card {
     width: 250px;
@@ -299,4 +301,4 @@
       align-self: center;
     }
   }
-}
+} */
