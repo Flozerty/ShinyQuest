@@ -48,6 +48,10 @@ a {
   display: none;
 }
 
+.main-blur {
+  filter: blur(5px);
+}
+
 header {
   position: fixed;
   top: 0;
@@ -226,6 +230,14 @@ header {
       overflow: hidden;
     }
   }
+}
+
+.header-link {
+  display: none;
+}
+
+.profile-link {
+  display: block;
 }
 
 #profile-caret {
@@ -457,8 +469,13 @@ footer {
 }
 
 @media (min-width: 1200px) {
+
   #toggle-nav-btn {
     display: none;
+  }
+
+  .main-blur {
+    filter: blur(0);
   }
 
   #main-wrapper {
@@ -467,5 +484,13 @@ footer {
 
   #main-side-nav {
     left: 0px;
+  }
+
+  .header-link {
+    display: block;
+  }
+
+  .profile-link {
+    display: none;
   }
 }

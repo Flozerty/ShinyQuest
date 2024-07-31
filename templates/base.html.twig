@@ -61,13 +61,13 @@
 
       {% if app.user is defined and app.user is not empty %}
       <ul>
-        <li title="Forum">
+        <li title="Forum" class="header-link">
           <a href="">
             <i class="fa-regular fa-comments"></i>
           </a>
         </li>
 
-        <li title="Mes captures">
+        <li title="Mes captures" class="header-link">
           <a href="{{ path('captures', {'pseudo' : app.user.pseudo}) }}">
             <div class="custom-pokeball">
               <div class="pokeball-circle"></div>
@@ -77,8 +77,8 @@
           </a>
         </li>
 
-        <li title="Mes amis"><a href="{{ path('app_amis') }}"><i class="fa-solid fa-user-group"></i></a></li>
-        <li title="Messagerie"><i class="fa-regular fa-message"></i></li>
+        <li title="Mes amis" class="header-link"><a href="{{ path('app_amis') }}"><i class="fa-solid fa-user-group"></i></a></li>
+        <li title="Messagerie" class="header-link"><a href=""><i class="fa-regular fa-message"></i></a></li>
       </ul>
 
       <div id="header-profile">
@@ -102,7 +102,12 @@
     <ul id="profile-nav">
       <li><a class="nav-link" href="{{ path('my_profile') }}">Mon profil</a></li>
       <li><a class="nav-link" href="{{ path('my_shasses') }}">Mes shasses</a></li>
+      <li class="profile-link"><a class="nav-link" href="{{ path('captures', {'pseudo' : app.user.pseudo}) }}">Mes captures</a></li>
       {# <li><a class="nav-link" href="">Ma carte</a></li> #}
+      <li class="profile-link"><a class="nav-link" href="{{ path('app_amis') }}">Mes amis</a></li>
+      <li class="profile-link"><a class="nav-link" href="">Messagerie</a></li>
+      <li class="profile-link"><a class="nav-link" href="">Forum</a></li>
+
       <li><a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a></li>
     </ul>
   </header>
