@@ -36,8 +36,9 @@ $(document).ready(function () {
       }, 300);
     });
 
+
+    // fonction de retour des résultats
     function displayResults(data) {
-      // console.log(data)
       searchResults.innerHTML = '';
 
       if (data.pokemons.length > 0) {
@@ -73,7 +74,7 @@ $(document).ready(function () {
         searchResults.innerHTML = "<p>Aucun résultat trouvé</p>";
       }
 
-      // dans tous les cas, on met une croix
+      // dans tous les cas, on met une croix pour supprimer la recherche
       closeBtn = document.createElement('span');
       closeBtn.innerHTML = "<i class='fa-solid fa-xmark'></i>";
       searchResults.appendChild(closeBtn);
@@ -83,7 +84,6 @@ $(document).ready(function () {
         inputElement.value = "";
         lastQuery = "";
         clearTimeout(timeout);
-
       })
     }
   })
