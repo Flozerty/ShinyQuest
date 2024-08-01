@@ -3,7 +3,7 @@
   --lightblue: #B9E7FF;
   --transitionTime: 0.3s;
   --custom-ball-size: 40px;
-} 
+}
 
 #my-actives {
   display: flex;
@@ -25,7 +25,6 @@
   margin: 15px;
   padding: 5px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
 
   .pokemon-img {
     width: 100px;
@@ -60,6 +59,7 @@
   color: var(--darkblue);
   text-decoration: underline;
   font-weight: 600;
+  padding: 5px;
 }
 
 .capture-description {
