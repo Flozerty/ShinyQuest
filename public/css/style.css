@@ -34,7 +34,7 @@ a {
 }
 
 .fa-circle-xmark,
-.fa-trash {
+.fa-trash-can {
   color: red;
   transition: var(--transitionTime);
   font-size: 1.2rem;
@@ -50,6 +50,14 @@ a {
 
 .main-blur {
   filter: blur(5px);
+}
+
+hr {
+  width: 60%;
+  height: 1px;
+  margin: auto;
+  border: none;
+  background: linear-gradient(to right, var(--lightblue), var(--darkblue), var(--lightblue));
 }
 
 header {
@@ -165,6 +173,10 @@ header {
     transition: var(--transitionTime)
   }
 
+  label:hover:after {
+    width: 40px;
+  }
+
   label:active:after {
     width: 52px;
   }
@@ -263,6 +275,7 @@ header {
   transform: translate(170%, 50%) rotate(45deg);
   display: flex;
   padding: 10px 15px;
+  border-radius: 5px;
   background-color: #f2f2f2;
   flex-direction: column;
   align-items: center;
@@ -283,6 +296,8 @@ header {
 }
 
 #main-wrapper {
+  width: 90%;
+  margin: auto;
   display: flex;
   justify-content: center;
   padding: 80px 0;
@@ -291,8 +306,8 @@ header {
 }
 
 main {
-  width: 90%;
   position: relative;
+  width: 100%;
 }
 
 /* //////////////////// SIDE NAV //////////////////// */
@@ -404,7 +419,6 @@ h2 {
   top: 15%;
 }
 
-
 /* /////////////// footer /////////////// */
 footer {
   position: relative;
@@ -416,13 +430,6 @@ footer {
   background-color: var(--lightblue);
   gap: 20px;
   padding: 20px 0;
-
-  hr {
-    width: 60%;
-    height: 1px;
-    border: none;
-    background: linear-gradient(to right, var(--lightblue), var(--darkblue), var(--lightblue));
-  }
 
   section {
     display: flex;
@@ -497,10 +504,6 @@ footer {
     padding-left: 300px;
   }
 
-  main {
-    width: 80%;
-  }
-
   #main-side-nav {
     left: 0px;
   }
@@ -514,9 +517,9 @@ footer {
   }
 }
 
-@media (min-width: 1000px) {
-  main {
-    width: 90%;
+@media (min-width: 1400px) {
+  #main-wrapper {
+    width: 80%;
   }
 }
 
@@ -537,6 +540,10 @@ footer {
 
   h2 {
     margin: 20px 20px;
+  }
+
+  #main-wrapper {
+    width: 100%;
   }
 }
 

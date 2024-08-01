@@ -52,11 +52,7 @@
 }
 
 .profil-dresseur {
-  grid-column: 1/3;
-  flex-direction: row;
   justify-content: start;
-  gap: 15px;
-  margin-left: 15px;
 }
 
 .pseudo {
@@ -65,19 +61,19 @@
 }
 
 .dex-completion {
-  grid-column: 3/6;
   justify-content: center;
+  gap: 10px;
 
   i {
-    margin-left: 10px;
     color: var(--darkblue);
   }
 }
 
 .dresseur-links {
   grid-column: 6/8;
-  gap: 10px;
   justify-content: center;
+  gap: 10px;
+  text-align: center;
 
   i {
     font-size: 2rem;
@@ -96,10 +92,58 @@
   padding: 5px 10px;
   text-decoration: underline;
   border-radius: 10px;
+  transition: var(--transitionTime);
 
   &:hover {
-    text-decoration: none;
+    transform: scale(1.2);
   }
+
+  .fa-trash-can {
+    color: white;
+
+    &:hover {
+      transform: scale(1);
+    }
+  }
+}
+
+.menu-burger-ami {
+  position: relative;
+  height: 100%;
+  grid-column: 7/9;
+  font-size: 1.5rem;
+  color: var(--darkblue);
+  display: flex;
+  justify-content: center;
+
+  i {
+    cursor: pointer;
+  }
+}
+
+
+
+.dresseur-links-mobile {
+  display: flex;
+  top: 0;
+  right: 0;
+  transform: translate(-10%, -100%);
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  padding: 5px 10px;
+
+  i {
+    font-size: 2rem;
+  }
+}
+
+.hide {
+  display: none;
 }
 
 #demandes {
@@ -173,5 +217,48 @@ figure {
     background-color: white;
     height: 90%;
     overflow: hidden;
+  }
+}
+
+@media screen and (min-width: 700px) {
+
+  .profil-dresseur {
+    flex-direction: row;
+    margin-left: 15px;
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 700px) {}
+
+@media screen and (min-width: 500px) {
+  .profil-dresseur {
+    grid-column: 1/3;
+  }
+
+  .dex-completion {
+    grid-column: 3/6;
+  }
+
+  .menu-burger-ami {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .profil-dresseur {
+    grid-column: 1/4;
+  }
+
+  .dex-completion {
+    grid-column: 4/7;
+  }
+
+  .del-ami {
+    display: none;
+  }
+
+  .dresseur-links {
+    display: none;
   }
 }

@@ -204,18 +204,18 @@
 
   .submit-btn:hover::before {
     transform: translate3d(0, 0, 0);
-    transition: transform 0.3s cubic-bezier(0.7, 0, 0.2, 1);
+    transition: transform var(--transitionTime) cubic-bezier(0.7, 0, 0.2, 1);
   }
 
   .submit-btn::after {
     width: 105%;
     transform: translate3d(100%, 0, 0);
-    transition: transform 0.3s cubic-bezier(0.7, 0, 0.2, 1);
+    transition: transform var(--transitionTime) cubic-bezier(0.7, 0, 0.2, 1);
   }
 
   .submit-btn:hover::after {
     transform: translate3d(0, 0, 0);
-    transition: transform 0.01s 0.3s cubic-bezier(0.7, 0, 0.2, 1);
+    transition: transform 0.01s var(--transitionTime) cubic-bezier(0.7, 0, 0.2, 1);
   }
 }
 
