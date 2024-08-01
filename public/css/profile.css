@@ -11,6 +11,7 @@ span {
 
 #activity hr {
   margin: .5rem auto;
+  width: 80%;
 }
 
 .activity-capture {
