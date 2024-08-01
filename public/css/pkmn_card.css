@@ -155,16 +155,16 @@
 }
 
 .nbRencontres {
-  color: #FF0000;
+  color: #d10000;
   font-weight: 600;
 }
 
 .lieu {
-  color: #3CB371;
+  color: #FF8C00;
 }
 
 .jeu {
-  color: #FF8C00;
+  color: green;
   /* font-weight: 600; */
 }
 
