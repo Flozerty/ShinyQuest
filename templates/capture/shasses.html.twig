@@ -109,7 +109,7 @@
           <a class="add_suivi" href="{{ path('add_suivi', {'id': capture.id}) }}">ajouter au suivi</a>
         </td>
         <td>
-          <a href="{{ path('delete_shasse', {'id': capture.id}) }}"><i class="fa-solid fa-circle-xmark"></i></a>
+          <a aria-label="supprimer la shasse" href="{{ path('delete_shasse', {'id': capture.id}) }}"><i class="fa-solid fa-circle-xmark"></i></a>
         </td>
       </tr>
 

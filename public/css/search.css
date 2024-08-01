@@ -30,6 +30,7 @@
     width: 100%;
     height: 100%;
     border: none;
+    padding-left: 10px;
     border-radius: 8px 15px 15px 8px;
     background-color: white;
     /* background-color: var(--lightblue); */
