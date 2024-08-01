@@ -68,7 +68,6 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
   height: 80px;
   border-bottom: 1px solid var(--darkblue);
   background-color: rgba(255, 255, 255, 0.7);
@@ -524,6 +523,10 @@ footer {
 }
 
 @media (min-width: 900px) {
+  header {
+    padding: 0 20px;
+  }
+
   .l_d_mode {
     display: none;
   }
@@ -534,12 +537,12 @@ footer {
 }
 
 @media (max-width: 900px) {
-  #logo-container {
-    transform: scale(0.8);
+  header {
+    padding: 0 10px;
   }
 
   h2 {
-    margin: 20px 20px;
+    margin: 20px;
   }
 
   #main-wrapper {
@@ -548,6 +551,14 @@ footer {
 }
 
 @media (max-width: 600px) {
+  header {
+    padding: 0 10px 0 0;
+  }
+
+  #logo-container {
+    transform: scale(0.8);
+  }
+
   #footer-content {
     flex-direction: column;
     gap: 25px;
