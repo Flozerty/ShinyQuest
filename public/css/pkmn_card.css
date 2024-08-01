@@ -7,27 +7,27 @@
 
 @keyframes ballAnimation {
   0% {
-    transform: rotate(-80deg);
+    transform: rotate(-60deg);
   }
 
   10% {
-    transform: rotate(80deg);
+    transform: rotate(60deg);
   }
 
   20% {
-    transform: rotate(-70deg);
-  }
-
-  30% {
-    transform: rotate(70deg);
-  }
-
-  40% {
     transform: rotate(-50deg);
   }
 
-  50% {
+  30% {
     transform: rotate(50deg);
+  }
+
+  40% {
+    transform: rotate(-40deg);
+  }
+
+  50% {
+    transform: rotate(40deg);
   }
 
   60% {
@@ -79,6 +79,10 @@
     margin: 3px 0;
     width: fit-content;
   }
+}
+
+.pokemon-img {
+  width: 100%;
 }
 
 .capture-infos-termine {
@@ -246,24 +250,19 @@
 .shasse-trouve {
   background: none;
   border-radius: 50%;
-  border: 2px solid var(--darkblue);
+  border-color: transparent;
   overflow: hidden;
   cursor: pointer;
   transition: var(--transitionTime);
   padding: 0;
   margin: 5px;
 
-  svg {
-    display: block;
-    height: 40px;
-    width: 40px;
-  }
-
   img {
     height: 40px;
     width: 40px;
-    display: none;
     transform: scale(1.2);
+    filter: grayscale(1);
+    transition: var(--transitionTime);
   }
 
   &:hover {
@@ -274,31 +273,9 @@
     margin: 0;
     animation: ballAnimation 1.3s linear infinite;
 
-    svg {
-      display: none;
-    }
-
     img {
       display: block;
+      filter: grayscale(0);
     }
   }
 }
-
-/* @media (min-width: 850px) { */
-
-  .pokemon-img {
-    width: 100%;
-  }
-/* } */
-
-/* 
-@media (max-width: 850px) {
-  .pokemon-card {
-    width: 250px;
-
-    .pokemon-img {
-      width: 80%;
-      align-self: center;
-    }
-  }
-} */
