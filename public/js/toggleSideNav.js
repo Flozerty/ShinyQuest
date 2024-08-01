@@ -26,7 +26,6 @@ toggleBtn.addEventListener('mouseout', () => {
 })
 
 function verifyToggle() {
-
   if (toggleNav) {
     sideNavContainer.classList.add('toggle-nav');
     sideNavContainer.classList.remove('hide-nav');
@@ -38,3 +37,11 @@ function verifyToggle() {
     mainContainer.classList.remove("main-blur")
   }
 }
+
+document.addEventListener('click', (event) => {
+  if (!sideNavContainer.contains(event.target) && toggleNav) {
+    toggleNav = !toggleNav;
+    toggleBtn.style.transform = "translateX(60%)";
+    verifyToggle();
+  }
+})
