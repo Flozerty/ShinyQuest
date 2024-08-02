@@ -435,7 +435,7 @@ h1 {
 }
 
 h2 {
-  margin: 20px 50px;
+  margin: 80px 50px 30px 50px;
 }
 
 /* dans pokedex & pokemonDetails */
@@ -546,15 +546,13 @@ footer {
   }
 }
 
-@media (min-width: 1400px) {
-  #main-wrapper {
-    width: 80%;
-  }
-}
-
 @media (min-width: 900px) {
   header {
     padding: 0 20px;
+  }
+
+  #main-wrapper {
+    width: 90%;
   }
 
   .l_d_mode {
@@ -567,6 +565,12 @@ footer {
 
   #footer-content {
     min-width: 60%;
+  }
+}
+
+@media (min-width: 1650px) {
+  #main-wrapper {
+    width: 80%;
   }
 }
 
