@@ -469,14 +469,10 @@ footer {
   }
 
   #footer-content {
-    min-width: 60%;
     justify-content: space-evenly;
+    text-align: center;
 
-    &>* {
-      margin: 0 50px;
-    }
-
-    h3 {
+    h2 {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -568,6 +564,10 @@ footer {
   .l_d_mode-main {
     display: flex;
   }
+
+  #footer-content {
+    min-width: 60%;
+  }
 }
 
 @media (max-width: 900px) {
@@ -581,6 +581,10 @@ footer {
 
   #main-wrapper {
     width: 100%;
+  }
+
+  #footer-content {
+    min-width: 100%;
   }
 }
 
