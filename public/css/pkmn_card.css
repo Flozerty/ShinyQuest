@@ -56,6 +56,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+
+  background-color: #f8f8ff;
   width: 300px;
   padding: 15px;
   margin: 15px;
@@ -158,16 +160,16 @@
 }
 
 .lieu {
-  color: #95710f;
+  color: #906d0e;
 }
 
 .jeu {
-  color: green;
+  color: #008000;
   /* font-weight: 600; */
 }
 
 .methode {
-  color: #800080;
+  color: #b300b2;
 }
 
 .fa-mars {

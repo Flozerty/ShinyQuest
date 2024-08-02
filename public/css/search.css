@@ -22,8 +22,7 @@
   width: 25%;
   min-width: 250px;
   border-radius: 15px;
-  /* background-color: var(--lightblue); */
-  background-color: white;
+  background-color: ghostwhite;
   transition: var(--transitionTime);
 
   .search-input {
@@ -33,7 +32,7 @@
     padding-left: 10px;
     border-radius: 8px 15px 15px 8px;
     background-color: white;
-    /* background-color: var(--lightblue); */
+    background-color: ghostwhite;
     transition: var(--transitionTime);
   }
 

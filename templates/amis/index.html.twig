@@ -86,7 +86,8 @@
 
         <a class="user-link profil-dresseur" href="{{ path('profile_user', {'pseudo': data.user.pseudo}) }}">
             <figure>
-                <img src="{{data.user.avatar ? asset('img/' ~ data.user.avatar) : asset('img/unknown_user.png') }}" alt="avatar de {{data.user.pseudo}}">
+                <img src="{{data.user.avatar ? asset('img/' ~ data.user.avatar) : asset('img/unknown_user.png') }}"
+                    alt="avatar de {{data.user.pseudo}}">
             </figure>
             <span class="pseudo">
                 {{data.user.pseudo}}
