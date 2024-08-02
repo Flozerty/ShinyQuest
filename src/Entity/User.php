@@ -78,6 +78,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'userRecoit')]
     private Collection $messagesRecus;
 
+    /**
+     * @var Collection<int, Sujet>
+     */
+    #[ORM\OneToMany(targetEntity: Sujet::class, mappedBy: 'user')]
+    private Collection $sujets;
+
     // On donne la valeur par défaut de new DateTime dans le construct
     public function __construct()
     {
@@ -87,6 +93,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->amisRecoit = new ArrayCollection();
         $this->messagesEnvoye = new ArrayCollection();
         $this->messagesRecus = new ArrayCollection();
+        $this->sujets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -361,6 +368,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($messagesRecu->getUserRecoit() === $this) {
                 $messagesRecu->setUserRecoit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sujet>
+     */
+    public function getSujets(): Collection
+    {
+        return $this->sujets;
+    }
+
+    public function addSujet(Sujet $sujet): static
+    {
+        if (!$this->sujets->contains($sujet)) {
+            $this->sujets->add($sujet);
+            $sujet->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSujet(Sujet $sujet): static
+    {
+        if ($this->sujets->removeElement($sujet)) {
+            // set the owning side to null (unless already changed)
+            if ($sujet->getUser() === $this) {
+                $sujet->setUser(null);
             }
         }
 
