@@ -26,10 +26,8 @@
 
   .others-pokemon {
     grid-column: 1/3;
-    gap: 10px;
     padding-left: 15px;
     display: flex;
-    /* justify-content: center; */
     align-items: center;
 
     img {
@@ -56,18 +54,34 @@
   }
 
   .add_suivi {
+    align-items: center;
+    justify-content: center;
+
     a {
       display: flex;
       color: white;
       background-color: var(--darkblue);
       padding: 5px 10px;
       border-radius: 12px;
+      width: fit-content;
+      text-align: center;
+      white-space: nowrap;
     }
   }
 
   .others-del-btn {
     justify-content: center;
     align-items: center;
+  }
+}
+
+.others-row {
+  /* permet de disposer le contenu comme s'il était directement dans le conteneur parent */
+  display: contents;
+
+  &:nth-child(even)>* {
+    background-color: var(--lightblue);
+    padding: 5px;
   }
 }
 
@@ -342,12 +356,21 @@
     display: none;
   }
 
+  .others-pokemon {
+    flex-direction: column;
+  }
+
   #my-other-shasses {
     grid-template-columns: repeat(6, 1fr);
   }
 }
 
 @media (min-width: 550px) {
+
+  p.add_suivi,
+  p.others-del-btn {
+    display: flex;
+  }
 
   .menu-burger-shasse {
     display: none;

@@ -84,52 +84,53 @@
 
   {% set count = count + 1 %}
 
-  <div class="others-pokemon">
-    <p class="others-pokemon-img">
-      <img src="{{capture.imgShiny}}" alt="{{capture.nomPokemon}}">
+  <div class="others-row">
+    <div class="others-pokemon">
+      <p class="others-pokemon-img">
+        <img src="{{capture.imgShiny}}" alt="{{capture.nomPokemon}}">
+      </p>
+      <p class="others-pokemon-name">
+        {{capture.nomPokemon}}
+      </p>
+    </div>
+    <p class="others-jeu">
+      {{capture.jeu}}
     </p>
-    <p class="others-pokemon-name">
-      {{capture.nomPokemon}}
+    <p class="others-methode">
+      {{capture.methodeCapture}}
     </p>
+    <p class="others-compteur">
+      {{capture.nbRencontres}}
+    </p>
+    <p class="add_suivi">
+      <a href="{{ path('add_suivi', {'id': capture.id}) }}">
+        ajouter au suivi
+      </a>
+    </p>
+    <p class="others-del-btn">
+      <a aria-label="supprimer la shasse" href="{{ path('delete_shasse', {'id': capture.id}) }}">
+        <i class="fa-solid fa-circle-xmark"></i>
+      </a>
+    </p>
+
+    <div class="menu-burger-shasse">
+      <i class="fa-solid fa-ellipsis toggle-menu"></i>
+
+      <ul class="shasse-links-mobile hide">
+        <li class="add_suivi">
+          <a href="{{ path('add_suivi', {'id': capture.id}) }}">
+            ajouter au suivi
+          </a>
+        </li>
+
+        <li>
+          <a aria-label="supprimer la shasse" href="{{ path('delete_shasse', {'id': capture.id}) }}">
+            <i class="fa-solid fa-trash-can"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
-  <p class="others-jeu">
-    {{capture.jeu}}
-  </p>
-  <p class="others-methode">
-    {{capture.methodeCapture}}
-  </p>
-  <p class="others-compteur">
-    {{capture.nbRencontres}}
-  </p>
-  <p class="add_suivi">
-    <a href="{{ path('add_suivi', {'id': capture.id}) }}">
-      ajouter au suivi
-    </a>
-  </p>
-  <p class="others-del-btn">
-    <a aria-label="supprimer la shasse" href="{{ path('delete_shasse', {'id': capture.id}) }}">
-      <i class="fa-solid fa-circle-xmark"></i>
-    </a>
-  </p>
-
-  <div class="menu-burger-shasse">
-    <i class="fa-solid fa-ellipsis toggle-menu"></i>
-
-    <ul class="shasse-links-mobile hide">
-      <li class="add_suivi">
-        <a href="{{ path('add_suivi', {'id': capture.id}) }}">
-          ajouter au suivi
-        </a>
-      </li>
-
-      <li>
-        <a aria-label="supprimer la shasse" href="{{ path('delete_shasse', {'id': capture.id}) }}">
-          <i class="fa-solid fa-trash-can"></i>
-        </a>
-      </li>
-    </ul>
-  </div>
-
   {% endif %}
   {% endfor %}
 
