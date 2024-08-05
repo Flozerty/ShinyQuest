@@ -12,70 +12,106 @@
 }
 
 #my-other-shasses {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  #stop-suivi-tip {
-    color: red;
-    font-weight: 600;
-  }
-}
-
-#shassesTable {
-  width: 100%;
-  border-collapse: collapse;
+  display: grid;
   text-align: center;
 
-  thead {
-    background-color: var(--darkblue);
+  &>* {
+    padding: 5px;
+  }
+
+  .others-title {
     color: white;
+    background-color: var(--darkblue);
   }
 
-  tbody {
-    tr {
-      &:nth-child(2n+1) {
-        background-color: var(--lightblue);
-      }
-
-      &:nth-child(2n) {
-        background-color: white;
-      }
-    }
-  }
-
-  tr {
-    position: relative;
-  }
-
-  td {
-    vertical-align: middle;
-  }
-
-  th {
-    padding: 10px 0;
-  }
-
-  .td-pokemon-name {
-    text-align: start;
-    padding-left: 10px;
-  }
-
-  .td-pokemon-img {
-    text-align: end;
+  .others-pokemon {
+    grid-column: 1/3;
+    gap: 10px;
+    padding-left: 15px;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
 
     img {
       height: 50px;
     }
   }
+
+  .others-jeu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .others-methode {
+    grid-column: 4/6;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .others-compteur {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .add_suivi {
+    a {
+      display: flex;
+      color: white;
+      background-color: var(--darkblue);
+      padding: 5px 10px;
+      border-radius: 12px;
+    }
+  }
+
+  .others-del-btn {
+    justify-content: center;
+    align-items: center;
+  }
 }
 
-.add_suivi {
-  color: white;
-  background-color: var(--darkblue);
+.menu-burger-shasse {
+  position: relative;
+  height: 100%;
+  color: var(--darkblue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  i {
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
+}
+
+.shasse-links-mobile {
+  display: flex;
+  top: 0;
+  right: 0;
+  transform: translate(-10%, -100%);
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  background-color: #f2f2f2;
+  border: 1px solid var(--darkblue);
+  border-radius: 10px;
   padding: 5px 10px;
-  border-radius: 12px;
-  margin: 10px 0;
+
+  i {
+    font-size: 2rem;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+#stop-suivi-tip {
+  color: red;
+  font-weight: 600;
 }
 
 #modalNav {
@@ -237,6 +273,22 @@
       max-width: 50%;
     }
   }
+
+  #my-other-shasses {
+    grid-template-columns: repeat(7, 1fr);
+
+    .others-methode {
+      display: none;
+    }
+
+    .others-jeu {
+      grid-column: 3/5;
+    }
+
+    .others-compteur {
+      grid-column: 5;
+    }
+  }
 }
 
 @media (max-width: 500px) {
@@ -263,5 +315,41 @@
 @media (min-width: 700px) {
   label {
     padding-right: 20px;
+  }
+
+  #my-other-shasses {
+    grid-template-columns: repeat(8, 1fr);
+
+    .others-jeu {
+      grid-column: 3;
+    }
+
+    .others-methode {
+      display: flex;
+    }
+
+    .others-compteur {
+      grid-column: 6/7;
+
+    }
+  }
+}
+
+@media (max-width: 550px) {
+
+  p.add_suivi,
+  p.others-del-btn {
+    display: none;
+  }
+
+  #my-other-shasses {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (min-width: 550px) {
+
+  .menu-burger-shasse {
+    display: none;
   }
 }

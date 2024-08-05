@@ -10,6 +10,7 @@
 
 {% block javascripts %}
 <script src="{{asset('js/shasseModal.js')}}"></script>
+<script src="{{asset('js/otherShasseToggleLinks.js')}}"></script>
 <script src="{{asset('js/ajaxCompteur.js')}}"></script>
 {% endblock %}
 
@@ -68,57 +69,69 @@
 <section id="my-other-shasses">
 
   {# table des shasses non suivies #}
-  <table id="shassesTable">
-    <thead>
-      <tr>
-        <th colspan="2">Pokémon</th>
-        <th>Jeu</th>
-        <th>Méthode</th>
-        <th>Compteur</th>
-        <th colspan="2"></th>
-      </tr>
-    </thead>
+  <p class="others-pokemon others-title">Pokémon</p>
+  <p class="others-jeu others-title">Jeu</p>
+  <p class="others-methode others-title">Méthode</p>
+  <p class="others-compteur others-title">Compteur</p>
+  <p class="add-suivi others-title"></p>
+  <p class="others-del-btn others-title"></p>
 
-    <tbody>
+  {# initialisation de count (pour table vide) #}
+  {% set count = 0 %}
 
-      {# initialisation de count (pour table vide) #}
-      {% set count = 0 %}
+  {% for capture in captures %}
+  {% if capture.suivi == false %}
 
-      {% for capture in captures %}
-      {% if capture.suivi == false %}
+  {% set count = count + 1 %}
 
-      {% set count = count + 1 %}
+  <div class="others-pokemon">
+    <p class="others-pokemon-img">
+      <img src="{{capture.imgShiny}}" alt="{{capture.nomPokemon}}">
+    </p>
+    <p class="others-pokemon-name">
+      {{capture.nomPokemon}}
+    </p>
+  </div>
+  <p class="others-jeu">
+    {{capture.jeu}}
+  </p>
+  <p class="others-methode">
+    {{capture.methodeCapture}}
+  </p>
+  <p class="others-compteur">
+    {{capture.nbRencontres}}
+  </p>
+  <p class="add_suivi">
+    <a href="{{ path('add_suivi', {'id': capture.id}) }}">
+      ajouter au suivi
+    </a>
+  </p>
+  <p class="others-del-btn">
+    <a aria-label="supprimer la shasse" href="{{ path('delete_shasse', {'id': capture.id}) }}">
+      <i class="fa-solid fa-circle-xmark"></i>
+    </a>
+  </p>
 
-      <tr>
-        <td class="td-pokemon-img">
-          <img src="{{capture.imgShiny}}" alt="{{capture.nomPokemon}}">
-        </td>
-        <td class="td-pokemon-name">
-          {{capture.nomPokemon}}
-        </td>
-        <td>
-          {{capture.jeu}}
-        </td>
-        <td>
-          {{capture.methodeCapture}}
-        </td>
-        <td>
-          {{capture.nbRencontres}}
-        </td>
-        <td>
-          <a class="add_suivi" href="{{ path('add_suivi', {'id': capture.id}) }}">ajouter au suivi</a>
-        </td>
-        <td>
-          <a aria-label="supprimer la shasse" href="{{ path('delete_shasse', {'id': capture.id}) }}"><i
-              class="fa-solid fa-circle-xmark"></i></a>
-        </td>
-      </tr>
+  <div class="menu-burger-shasse">
+    <i class="fa-solid fa-ellipsis toggle-menu"></i>
 
-      {% endif %}
-      {% endfor %}
+    <ul class="shasse-links-mobile hide">
+      <li class="add_suivi">
+        <a href="{{ path('add_suivi', {'id': capture.id}) }}">
+          ajouter au suivi
+        </a>
+      </li>
 
-    </tbody>
-  </table>
+      <li>
+        <a aria-label="supprimer la shasse" href="{{ path('delete_shasse', {'id': capture.id}) }}">
+          <i class="fa-solid fa-trash-can"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  {% endif %}
+  {% endfor %}
 
   {% if count == 0 %}
   <p>Cliquez sur "<span id="stop-suivi-tip">arrêter le suivi</span>" pour garder votre shasse de côté</p>
