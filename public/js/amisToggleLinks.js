@@ -12,6 +12,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
       toggle = !toggle;
       verifyToggle();
     })
+    
+    document.addEventListener('click', (event) => {
+      if (toggle && !linksDiv.contains(event.target) && !displayButton.contains(event.target)) {
+        toggle = !toggle;
+        verifyToggle();
+      }
+    })
 
     verifyToggle()
 
