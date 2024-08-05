@@ -476,7 +476,7 @@ footer {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 15px;
+      margin: 30px 50px 15px 50px;
       gap: 10px;
 
       svg {
@@ -541,7 +541,7 @@ footer {
     display: block;
   }
 
-  .profile-link {
+  #profile-nav .profile-link {
     display: none;
   }
 }
