@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Formulaire d'inscription{% endblock %}
 
 {% block body %}
 {% for flash_error in app.flashes('verify_email_error') %}
 <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
 {% endfor %}
 
-<h1>Register</h1>
+<h1>Formulaire d'inscription</h1>
 
 {{ form_errors(registrationForm) }}
 
@@ -19,8 +19,8 @@ label: 'Password'
 }) }}
 {{ form_row(registrationForm.agreeTerms) }}
 
-<input type="checkbox" name="_remember_me"> Remember me<br>
+<input type="checkbox" name="_remember_me">Se souvenir de moi<br>
 
-<button type="submit" class="btn">Register</button>
+<button type="submit" class="btn">S'enregistrer</button>
 {{ form_end(registrationForm) }}
 {% endblock %}

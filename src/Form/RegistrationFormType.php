@@ -25,6 +25,7 @@ class RegistrationFormType extends AbstractType
             ->add('pseudo', TextType::class)
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
+                'label' => "Accepter les conditions d'utilisation",
                 'constraints' => [
                     new IsTrue([
                         'message' => "Vous devez accepter nos conditions d'utilisation.",
@@ -39,8 +40,8 @@ class RegistrationFormType extends AbstractType
                 'invalid_message' => 'Les mots de passe doivent correspondre.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'first_options' => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options' => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Répétez le mot de passe'],
 
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
