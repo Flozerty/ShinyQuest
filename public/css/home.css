@@ -2,7 +2,7 @@
   --darkblue: #003BB3;
   --lightblue: #B9E7FF;
   --transitionTime: 0.3s;
-  --custom-ball-size: 40px;
+  --custom-ball-size: 40px;  
 }
 
 #my-actives {
@@ -25,6 +25,7 @@
   margin: 15px;
   padding: 5px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: var(--cardColor);
 
   .pokemon-img {
     width: 100px;
