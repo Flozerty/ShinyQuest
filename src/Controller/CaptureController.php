@@ -82,8 +82,9 @@ class CaptureController extends AbstractController
       return $this->redirectToRoute('my_shasses');
     }
 
-
     $balls = $apiHttpClient->getAllBalls();
+    // dd($balls);
+
     //////////////////////////  formulaire de shasse terminée //////////////////////////
     $formCapture = $this->createForm(CaptureType::class, $shasse);
     $formCapture->handleRequest($request);

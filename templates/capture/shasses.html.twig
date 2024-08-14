@@ -178,7 +178,10 @@
         <optgroup label="{{group.categoryName}}">
 
           {% for ball in group.ballsData %}
+
+          {% if ball is defined and ball is not empty %}
           <option value="{{ball.spriteName}}">{{ball.name}}</option>
+          {% endif %}
 
           {% endfor %}
         </optgroup>
