@@ -20,7 +20,8 @@ html {
   height: 100%;
 }
 
-body {
+body,
+main {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -440,6 +441,8 @@ h2 {
 
 /* dans pokedex & pokemonDetails */
 #shiny-mode {
+  margin: 5px;
+
   background: none;
   border-radius: 50%;
   border: 2px solid var(--darkblue);
@@ -447,7 +450,6 @@ h2 {
   cursor: pointer;
   transition: var(--transitionTime);
   position: sticky;
-  transform: translateX(-100%);
   top: 15%;
 }
 
@@ -519,6 +521,12 @@ footer {
   }
 }
 
+/* ///////////////////////////////////////////////////////////////// */
+/* ///////////////////////// MEDIA QUERIES ///////////////////////// */
+/* ///////////////////////////////////////////////////////////////// */
+
+/* /////////////// MIN /////////////// */
+
 @media (min-width: 1200px) {
 
   #toggle-nav-btn {
@@ -543,6 +551,11 @@ footer {
 
   #profile-nav .profile-link {
     display: none;
+  }
+
+  #shiny-mode {
+    transform: translateX(-100%);
+    align-self: flex-start;
   }
 }
 
@@ -571,6 +584,14 @@ footer {
 @media (min-width: 1650px) {
   #main-wrapper {
     width: 80%;
+  }
+}
+
+/* /////////////// MAX /////////////// */
+
+@media (max-width: 1200px) {
+  #shiny-mode {
+    align-self: flex-end;
   }
 }
 

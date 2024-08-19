@@ -19,17 +19,6 @@ section {
     }
 }
 
-#shiny-mode {
-    background: none;
-    border-radius: 50%;
-    border: 2px solid var(--darkblue);
-    overflow: hidden;
-    cursor: pointer;
-    transition: var(--transitionTime);
-    padding: 0;
-    margin: 5px;
-}
-
 #varieties,
 #evolution {
     text-align: center;
@@ -159,9 +148,20 @@ section {
     height: 100%;
     z-index: -1;
     background-color: var(--darkblue);
+    border-radius: 0 8px 8px 0;
 
     transition: 1s;
     width: 0;
+}
+
+#locations {
+    flex-direction: column;
+    justify-content: baseline;
+    width: 100%;
+
+    h2 {
+        text-align: center;
+    }
 }
 
 @media screen and (min-width: 450px) {
