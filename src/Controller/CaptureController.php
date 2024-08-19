@@ -70,9 +70,10 @@ class CaptureController extends AbstractController
       $capture->setTermine(true);
 
       $entityManager->flush();
-    }
 
-    $pokemons = $apiHttpClient->getAllPokemons();
+
+      $this->addFlash('success', 'Félicitations, vous avez capturé '.$capture->getnomPokemon());
+    }
 
     $captures = $captureRepository->findBy(['user' => $user, 'termine' => 0]);
 
@@ -80,11 +81,10 @@ class CaptureController extends AbstractController
       "page_title" => 'Mes shasses',
       "captures" => $captures,
       "formCapture" => $formCapture,
-      "allPokemons" => $pokemons,
+      "allPokemons" => [],
       "balls" => [],
     ]);
   }
-
 
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
