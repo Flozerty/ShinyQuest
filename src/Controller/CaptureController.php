@@ -44,46 +44,7 @@ class CaptureController extends AbstractController
       return $this->redirectToRoute('app_login');
     }
 
-    // récupération de tous les jeux
-    $games = $apiHttpClient->getAllGamesVersions();
     $shasse = new Capture;
-
-    ///////////////////  formulaire de création de nouvelle shasse ///////////////////
-    $formNewShasse = $this->createForm(ShasseStartType::class, $shasse, [
-      /* jeux en paramètres pour le formType */
-      'games' => $games,
-    ]);
-
-    $formNewShasse->handleRequest($request);
-
-    // validation du formulaire de nouvelle shasse
-    if ($formNewShasse->isSubmitted() && $formNewShasse->isValid()) {
-
-      $pokemonId = filter_input(INPUT_POST, "pokemonId", FILTER_VALIDATE_INT);
-
-      // on récupère le nom du pokemon, son sprite, etc.
-      $pokemon = $apiHttpClient->getPokemonInfos($pokemonId);
-      $nomPokemon = $apiHttpClient->getPokemonNameById($pokemonId);
-
-      $shasse = $formNewShasse->getData(); //filter tous les inputs
-
-      $shasse->setFavori(false);
-      $shasse->setSuivi(true);
-      $shasse->setTermine(false);
-      $shasse->setPokedexId($pokemonId);
-      $shasse->setImgShiny($pokemon["pkmnStats"]["sprites"]["other"]["official-artwork"]["front_shiny"]);
-      $shasse->setNomPokemon($nomPokemon);
-      $shasse->setUser($user);
-
-      // prepare() and execute()
-      $entityManager->persist($shasse);
-      $entityManager->flush();
-
-      return $this->redirectToRoute('my_shasses');
-    }
-
-    $balls = $apiHttpClient->getAllBalls();
-    // dd($balls);
 
     //////////////////////////  formulaire de shasse terminée //////////////////////////
     $formCapture = $this->createForm(CaptureType::class, $shasse);
@@ -118,10 +79,9 @@ class CaptureController extends AbstractController
     return $this->render('capture/shasses.html.twig', [
       "page_title" => 'Mes shasses',
       "captures" => $captures,
-      "formNewShasse" => $formNewShasse,
       "formCapture" => $formCapture,
       "allPokemons" => $pokemons,
-      "balls" => $balls,
+      "balls" => [],
     ]);
   }
 
@@ -130,12 +90,37 @@ class CaptureController extends AbstractController
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
 
+  #[Route('/shasse/new', name: 'new_shasse_form', methods: ['GET'])]
+  public function newShasseForm(Request $request, ApiHttpClient $apiHttpClient): JsonResponse
+  {
+    $user = $this->getUser();
+    if (!$user) {
+      return new JsonResponse(['success' => false], 403);
+    }
+
+    // Récupération des jeux et des pokémons
+    $games = $apiHttpClient->getAllGamesVersions();
+    $allPokemons = $apiHttpClient->getAllPokemons();
+
+    $shasse = new Capture();
+    $formNewShasse = $this->createForm(ShasseStartType::class, $shasse, [
+      'games' => $games,
+    ]);
+
+    // Rendre uniquement le formulaire
+    $formHtml = $this->renderView('capture/form_new_shasse.html.twig', [
+      'formNewShasse' => $formNewShasse->createView(),
+      'allPokemons' => $allPokemons,
+    ]);
+
+    return new JsonResponse(['html' => $formHtml]);
+  }
 
   // supprimer une shasses
   #[Route('/shasse/{id}/delete', name: 'delete_shasse')]
   public function deleteShasse(Capture $shasse = null, EntityManagerInterface $entityManager): Response
   {
-    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()) )) {
+    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
       $entityManager->remove($shasse);
       $entityManager->flush();
     }
@@ -147,7 +132,7 @@ class CaptureController extends AbstractController
   #[Route('/capture/{id}/delete', name: 'delete_capture')]
   public function deleteCapture(Capture $shasse = null, EntityManagerInterface $entityManager): Response
   {
-    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()) )) {
+    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
       $entityManager->remove($shasse);
       $entityManager->flush();
     }
@@ -159,7 +144,7 @@ class CaptureController extends AbstractController
   #[Route('/shasse/{id}/stop_suivi', name: 'stop_suivi')]
   public function stopSuivi(Capture $shasse = null, EntityManagerInterface $entityManager): Response
   {
-    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()) )) {
+    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
       $shasse->setSuivi(false);
       $entityManager->flush();
     }
@@ -171,7 +156,7 @@ class CaptureController extends AbstractController
   #[Route('/shasse/{id}/add_suivi', name: 'add_suivi')]
   public function addSuivi(Capture $shasse = null, EntityManagerInterface $entityManager): Response
   {
-    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()) )) {
+    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
       $shasse->setSuivi(true);
       $entityManager->flush();
     }
@@ -184,7 +169,7 @@ class CaptureController extends AbstractController
   {
     $shasse = $captureRepository->find($id);
 
-    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()) )) {
+    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
       $shasse->setNbRencontres($shasse->getNbRencontres() + 1);
       $entityManager->flush();
     }
@@ -197,7 +182,7 @@ class CaptureController extends AbstractController
   {
     $shasse = $captureRepository->find($id);
 
-    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()) )) {
+    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
       $shasse->setNbRencontres($shasse->getNbRencontres() - 1);
       $entityManager->flush();
     }
@@ -210,7 +195,7 @@ class CaptureController extends AbstractController
   {
     $shasse = $captureRepository->find($id);
 
-    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()) )) {
+    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
       $shasse->setNbRencontres($shasse->getNbRencontres() + 10);
       $entityManager->flush();
     }
@@ -223,7 +208,7 @@ class CaptureController extends AbstractController
   {
     $shasse = $captureRepository->find($id);
 
-    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()) )) {
+    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
       $shasse->setNbRencontres($shasse->getNbRencontres() - 10);
       $entityManager->flush();
     }
@@ -237,7 +222,7 @@ class CaptureController extends AbstractController
     $shasse = $captureRepository->find($id);
     $newValue = $request->request->get('nbRencontres');
 
-    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()) )) {
+    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
       $shasse->setNbRencontres($newValue);
       $entityManager->flush();
     }
