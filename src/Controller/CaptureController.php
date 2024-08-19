@@ -135,7 +135,7 @@ class CaptureController extends AbstractController
   #[Route('/shasse/{id}/delete', name: 'delete_shasse')]
   public function deleteShasse(Capture $shasse = null, EntityManagerInterface $entityManager): Response
   {
-    if ($shasse) {
+    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()) )) {
       $entityManager->remove($shasse);
       $entityManager->flush();
     }
@@ -147,7 +147,7 @@ class CaptureController extends AbstractController
   #[Route('/capture/{id}/delete', name: 'delete_capture')]
   public function deleteCapture(Capture $shasse = null, EntityManagerInterface $entityManager): Response
   {
-    if ($shasse) {
+    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()) )) {
       $entityManager->remove($shasse);
       $entityManager->flush();
     }
@@ -159,7 +159,7 @@ class CaptureController extends AbstractController
   #[Route('/shasse/{id}/stop_suivi', name: 'stop_suivi')]
   public function stopSuivi(Capture $shasse = null, EntityManagerInterface $entityManager): Response
   {
-    if ($shasse) {
+    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()) )) {
       $shasse->setSuivi(false);
       $entityManager->flush();
     }
@@ -171,7 +171,7 @@ class CaptureController extends AbstractController
   #[Route('/shasse/{id}/add_suivi', name: 'add_suivi')]
   public function addSuivi(Capture $shasse = null, EntityManagerInterface $entityManager): Response
   {
-    if ($shasse) {
+    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()) )) {
       $shasse->setSuivi(true);
       $entityManager->flush();
     }
@@ -184,7 +184,7 @@ class CaptureController extends AbstractController
   {
     $shasse = $captureRepository->find($id);
 
-    if ($shasse) {
+    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()) )) {
       $shasse->setNbRencontres($shasse->getNbRencontres() + 1);
       $entityManager->flush();
     }
@@ -197,7 +197,7 @@ class CaptureController extends AbstractController
   {
     $shasse = $captureRepository->find($id);
 
-    if ($shasse) {
+    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()) )) {
       $shasse->setNbRencontres($shasse->getNbRencontres() - 1);
       $entityManager->flush();
     }
@@ -210,7 +210,7 @@ class CaptureController extends AbstractController
   {
     $shasse = $captureRepository->find($id);
 
-    if ($shasse) {
+    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()) )) {
       $shasse->setNbRencontres($shasse->getNbRencontres() + 10);
       $entityManager->flush();
     }
@@ -223,7 +223,7 @@ class CaptureController extends AbstractController
   {
     $shasse = $captureRepository->find($id);
 
-    if ($shasse) {
+    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()) )) {
       $shasse->setNbRencontres($shasse->getNbRencontres() - 10);
       $entityManager->flush();
     }
@@ -237,7 +237,7 @@ class CaptureController extends AbstractController
     $shasse = $captureRepository->find($id);
     $newValue = $request->request->get('nbRencontres');
 
-    if ($shasse) {
+    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()) )) {
       $shasse->setNbRencontres($newValue);
       $entityManager->flush();
     }
