@@ -181,7 +181,7 @@
   .submit-btn {
     overflow: hidden;
     font-size: 1rem;
-    color: black;
+    color: white;
     cursor: pointer;
     position: relative;
     display: inline-block;
@@ -198,19 +198,12 @@
   .submit-btn span {
     display: block;
     position: relative;
-    z-index: 1;
+      mix-blend-mode: difference;
+      z-index: 1;
   }
 
   .submit-btn>span {
     overflow: hidden;
-  }
-
-  .submit-btn:hover {
-    color: white;
-
-    &>span {
-      mix-blend-mode: difference;
-    }
   }
 
   .submit-btn:hover>span>span {
