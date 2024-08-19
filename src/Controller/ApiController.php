@@ -11,6 +11,7 @@ use App\Repository\CaptureRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -110,6 +111,13 @@ class ApiController extends AbstractController
       "currentPokemonId" => $pokemon["pkmnStats"]["id"],
     ]);
   }
+
+  #[Route('/api/balls', name: 'api_balls', methods: ['GET'])]
+public function getGames(ApiHttpClient $apiHttpClient): JsonResponse
+{
+    $balls = $apiHttpClient->getAllBalls();
+    return new JsonResponse($balls);
+}
 
   // #[Route('/test', name: 'test')]
   // public function test(ApiHttpClient $apiHttpClient): Response
