@@ -268,7 +268,7 @@
   }
 
   &:hover {
-    transform: scale(1.15);
+    transform: scale(1.25);
     border-color: transparent;
     overflow: visible;
     padding: 5px;
@@ -276,7 +276,8 @@
     animation: ballAnimation 1.3s linear infinite;
 
     img {
-      display: block;
+    transform: scale(1.5);
+    display: block;
       filter: grayscale(0);
     }
   }
