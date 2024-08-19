@@ -48,7 +48,7 @@ DROP TABLE IF EXISTS `capture`;
 CREATE TABLE IF NOT EXISTS `capture` (
   `id` int NOT NULL AUTO_INCREMENT,
   `pokedex_id` int NOT NULL,
-  `surnom` varchar(12) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `surnom` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nb_rencontres` int DEFAULT NULL,
   `date_capture` datetime DEFAULT NULL,
   `charme_chroma` tinyint(1) NOT NULL,
@@ -56,21 +56,21 @@ CREATE TABLE IF NOT EXISTS `capture` (
   `user_id` int NOT NULL,
   `methode_capture_id` int NOT NULL,
   `termine` tinyint(1) NOT NULL,
-  `img_shiny` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nom_pokemon` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `jeu` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lieu` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sexe` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `img_shiny` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nom_pokemon` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jeu` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lieu` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sexe` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `suivi` tinyint(1) NOT NULL,
-  `ball` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ball` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_8BFEA6E5A76ED395` (`user_id`),
   KEY `IDX_8BFEA6E5B5DEC791` (`methode_capture_id`),
   CONSTRAINT `FK_8BFEA6E5A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_8BFEA6E5B5DEC791` FOREIGN KEY (`methode_capture_id`) REFERENCES `methode_capture` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table shinyquest.capture : ~17 rows (environ)
+-- Listage des données de la table shinyquest.capture : ~6 rows (environ)
 DELETE FROM `capture`;
 INSERT INTO `capture` (`id`, `pokedex_id`, `surnom`, `nb_rencontres`, `date_capture`, `charme_chroma`, `favori`, `user_id`, `methode_capture_id`, `termine`, `img_shiny`, `nom_pokemon`, `jeu`, `lieu`, `sexe`, `suivi`, `ball`) VALUES
 	(3, 2, 'flo', 453, '2024-06-10 10:49:21', 0, 0, 16, 3, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/2.png', 'Florizarre', 'Émeraude', 'bourg palette', 'male', 0, 'ultra-ball'),
@@ -78,22 +78,28 @@ INSERT INTO `capture` (`id`, `pokedex_id`, `surnom`, `nb_rencontres`, `date_capt
 	(6, 2, 'flo', 453, '2024-06-10 10:49:21', 0, 0, 2, 3, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/2.png', 'Florizarre', 'Émeraude', 'bourg palette', 'zaea', 0, 'ultra-ball'),
 	(10, 1, 'bulbu', 645, NULL, 1, 0, 16, 1, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png', 'Bulbizarre', 'Émeraude', 'bourg palette', 'male', 0, ''),
 	(11, 1, 'bulbu', 645, NULL, 1, 0, 16, 1, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png', 'Bulbizarre', 'Émeraude', 'bourg palette', 'male', 0, ''),
-	(12, 1, 'bulbu', 645, NULL, 1, 0, 16, 1, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png', 'Bulbizarre', 'Émeraude', 'bourg palette', 'male', 0, ''),
-	(13, 3, NULL, 91, NULL, 1, 0, 2, 17, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/3.png', 'Florizarre', 'fqe', 'qf', NULL, 1, NULL),
-	(14, 19, NULL, 8471, '2024-07-17 12:16:15', 1, 0, 2, 9, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/19.png', 'Rattata', 'f', 'tddd', NULL, 0, 'safari-ball'),
-	(15, 862, 'test', 453, '2024-07-16 11:01:00', 1, 0, 2, 15, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/862.png', 'Ixon', 'db', 'db', 'male', 0, 'love-ball'),
-	(18, 700, 'qesrgdh', 74947, '2024-07-18 16:43:00', 1, 0, 2, 16, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/700.png', 'Nymphali', 'jg', 'route 104', 'femelle', 0, 'poke-ball'),
+	(12, 1, 'bulbu', 645, NULL, 1, 0, 16, 1, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png', 'Bulbizarre', 'Platine', 'bourg palette', 'male', 0, ''),
+	(13, 3, NULL, 1019, NULL, 1, 0, 2, 17, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/3.png', 'Florizarre', 'Jaune', 'qf', NULL, 1, NULL),
+	(14, 19, NULL, 8471, '2024-07-17 12:16:15', 1, 0, 2, 9, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/19.png', 'Rattata', 'X', 'tddd', NULL, 0, 'safari-ball'),
+	(15, 862, 'test', 453, '2024-07-16 11:01:00', 1, 0, 2, 15, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/862.png', 'Ixon', 'Émeraude', 'db', 'male', 0, 'love-ball'),
+	(18, 700, 'qesrgdh', 74947, '2024-07-18 16:43:00', 1, 0, 2, 16, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/700.png', 'Nymphali', 'Or HeartGold', 'route 104', 'femelle', 0, 'poke-ball'),
 	(21, 418, NULL, 8, '2024-07-07 12:16:17', 1, 0, 2, 17, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/418.png', 'Mustébouée', 'X', 'qzes', NULL, 0, 'sport-ball'),
 	(22, 817, 'test', 53, '2024-07-13 12:35:00', 0, 0, 2, 14, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/817.png', 'Arrozard', 'X', 'bourg-en vol', 'femelle', 0, 'poke-ball'),
-	(25, 7, 'test', 778, '2024-07-17 16:45:00', 0, 0, 2, 17, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/7.png', 'Carapuce', 'dfx', 'sdf', 'femelle', 0, 'nest-ball'),
+	(25, 7, 'test', 778, '2024-07-17 16:45:00', 0, 0, 2, 17, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/7.png', 'Carapuce', 'X', 'sdf', 'femelle', 0, 'nest-ball'),
 	(27, 600, NULL, 500, NULL, 1, 0, 2, 3, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/600.png', 'Clic', 'X', 'bourg-en vol', NULL, 0, NULL),
 	(28, 5, NULL, 3, '2024-01-17 12:16:04', 0, 0, 2, 16, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/5.png', 'Reptincel', 'Jaune', 'rtyhj', NULL, 0, 'great-ball'),
-	(29, 1, 'bulbu', 645, '2024-06-10 10:48:56', 1, 0, 19, 1, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png', 'Bulbizarre', 'Émeraude', 'bourg palette', 'male', 0, 'park-ball');
+	(29, 1, 'bulbu', 645, '2024-06-10 10:48:56', 1, 0, 19, 1, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png', 'Bulbizarre', 'Émeraude', 'bourg palette', 'male', 0, 'park-ball'),
+	(30, 9, NULL, 45, NULL, 0, 0, 2, 17, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/9.png', 'Tortank', 'Perle', 're', NULL, 1, NULL),
+	(31, 223, NULL, 404, NULL, 0, 0, 2, 18, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/223.png', 'Rémoraid', 'Platine', 'z', NULL, 1, NULL),
+	(32, 16, NULL, 5, NULL, 0, 0, 2, 1, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/16.png', 'Roucool', 'Émeraude', 'route 102', NULL, 1, NULL),
+	(33, 66, NULL, 496, NULL, 1, 0, 24, 4, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/66.png', 'Machoc', 'Jaune', 'bourg-en vol', NULL, 1, NULL),
+	(34, 726, NULL, 54, NULL, 1, 0, 2, 12, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/726.png', 'Matoufeu', 'Or HeartGold', 'd', NULL, 1, NULL),
+	(35, 401, NULL, 45, NULL, 0, 0, 2, 20, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/401.png', 'Crikzik', 'Rubis', 'bourg-en vol', NULL, 0, NULL);
 
 -- Listage de la structure de table shinyquest. doctrine_migration_versions
 DROP TABLE IF EXISTS `doctrine_migration_versions`;
 CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
-  `version` varchar(191) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `version` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `executed_at` datetime DEFAULT NULL,
   `execution_time` int DEFAULT NULL,
   PRIMARY KEY (`version`)
@@ -103,15 +109,17 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
 DELETE FROM `doctrine_migration_versions`;
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 	('DoctrineMigrations\\Version20240716143607', NULL, NULL),
-	('DoctrineMigrations\\Version20240719144440', '2024-07-19 14:44:49', 288);
+	('DoctrineMigrations\\Version20240719144440', '2024-07-19 14:44:49', 288),
+	('DoctrineMigrations\\Version20240802131931', '2024-08-02 13:19:44', 246),
+	('DoctrineMigrations\\Version20240819071051', '2024-08-19 07:10:55', 135);
 
 -- Listage de la structure de table shinyquest. message
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE IF NOT EXISTS `message` (
   `id` int NOT NULL AUTO_INCREMENT,
   `date_message` datetime NOT NULL,
-  `contenu_message` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `piece_jointe` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `contenu_message` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `piece_jointe` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_envoi_id` int NOT NULL,
   `user_recoit_id` int NOT NULL,
   PRIMARY KEY (`id`),
@@ -128,9 +136,9 @@ DELETE FROM `message`;
 DROP TABLE IF EXISTS `messenger_messages`;
 CREATE TABLE IF NOT EXISTS `messenger_messages` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `body` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `headers` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue_name` varchar(190) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `body` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `headers` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue_name` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `available_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `delivered_at` datetime DEFAULT NULL COMMENT '(DC2Type:datetime_immutable)',
@@ -160,7 +168,7 @@ INSERT INTO `messenger_messages` (`id`, `body`, `headers`, `queue_name`, `create
 DROP TABLE IF EXISTS `methode_capture`;
 CREATE TABLE IF NOT EXISTS `methode_capture` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nom_methode` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nom_methode` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -201,29 +209,72 @@ INSERT INTO `methode_capture` (`id`, `nom_methode`) VALUES
 	(33, 'boite mystere (GO)'),
 	(34, 'ultra brèches');
 
+-- Listage de la structure de table shinyquest. post
+DROP TABLE IF EXISTS `post`;
+CREATE TABLE IF NOT EXISTS `post` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `sujet_id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `contenu` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_post` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_5A8A6C8D7C4D497E` (`sujet_id`),
+  KEY `IDX_5A8A6C8DA76ED395` (`user_id`),
+  CONSTRAINT `FK_5A8A6C8D7C4D497E` FOREIGN KEY (`sujet_id`) REFERENCES `sujet` (`id`),
+  CONSTRAINT `FK_5A8A6C8DA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Listage des données de la table shinyquest.post : ~0 rows (environ)
+DELETE FROM `post`;
+
+-- Listage de la structure de table shinyquest. sujet
+DROP TABLE IF EXISTS `sujet`;
+CREATE TABLE IF NOT EXISTS `sujet` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `titre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_création` datetime NOT NULL,
+  `date_update` datetime NOT NULL,
+  `intro` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_2E13599DA76ED395` (`user_id`),
+  CONSTRAINT `FK_2E13599DA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Listage des données de la table shinyquest.sujet : ~5 rows (environ)
+DELETE FROM `sujet`;
+INSERT INTO `sujet` (`id`, `user_id`, `titre`, `date_création`, `date_update`, `intro`) VALUES
+	(1, 20, 'Ou trouver Chenipan', '2024-08-05 16:52:04', '2024-08-05 16:52:04', 'quelqu\'un a trouvé un bon spot sur Emeraude?'),
+	(2, 16, 'blabla', '2024-08-05 16:52:04', '2024-08-05 16:52:04', 'blabla blabla bla.'),
+	(3, 2, 'comment ça marche les gigamax?', '2024-08-05 16:52:04', '2024-08-05 16:52:04', 'Bonjour je suis nouveau sur le jeu, quelqu\'un peut m\'aider à comprendre ce que c\'est la méthode gigamax?'),
+	(4, 23, 'Streamer du shiny hunting?', '2024-08-05 16:52:04', '2024-08-05 16:52:04', 'Quelqu\'un connait un bon streameur de shiny hunting?'),
+	(5, 17, 'Ya pas une faute dans le mot shasse là?', '2024-08-05 16:52:04', '2024-08-05 16:52:04', 'Y a que moi qui trouve ça bizarre d\'appeler ça une "shasse" ? Il s\'est trompé dans l\'orthographe ou quoi?');
+
 -- Listage de la structure de table shinyquest. user
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `roles` json NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_verified` tinyint(1) NOT NULL,
-  `pseudo` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pseudo` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `date_inscription` datetime NOT NULL,
-  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_IDENTIFIER_EMAIL` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table shinyquest.user : ~4 rows (environ)
+-- Listage des données de la table shinyquest.user : ~7 rows (environ)
 DELETE FROM `user`;
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `is_verified`, `pseudo`, `date_inscription`, `avatar`) VALUES
 	(2, 'floris.louerat@gmail.com', '["ROLE_ADMIN"]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'Flozerty', '2024-05-29 12:26:53', 'zarbi-int-shiny.png'),
 	(16, 'ezar@efz.fr', '[]', '$2y$13$bbS.cw0g4KPW2HwlnYTuW.2whjxiGCnMBnQAHM6sc.7PTkzmdIFom', 0, 'patate', '2024-05-29 15:33:17', 'wenSearch.png'),
-	(17, 'ezaertr@efz.fr', '[]', '$2y$13$bbS.cw0g4KPW2HwlnYTuW.2whjxiGCnMBnQAHM6sc.7PTkzmdIFom', 0, 'patataze', '2024-05-29 15:33:17', 'wenSearch.png'),
-	(19, 'ezaezertrtr@efz.fr', '[]', '$2y$13$bbS.cw0g4KPW2HwlnYTuW.2whjxiGCnMBnQAHM6sc.7PTkzmdIFom', 0, 'patatazdfzreh gefgehdfzgedfeghje', '2024-05-29 15:33:17', 'wenSearch.png'),
-	(20, 'ezaezerertyutrtr@efz.fr', '[]', '$2y$13$bbS.cw0g4KPW2HwlnYTuW.2whjxiGCnMBnQAHM6sc.7PTkzmdIFom', 0, 'azetryzethry', '2024-05-29 15:33:17', 'zarbi-int-shiny.png');
+	(17, 'ezaertr@efz.fr', '[]', '$2y$13$bbS.cw0g4KPW2HwlnYTuW.2whjxiGCnMBnQAHM6sc.7PTkzmdIFom', 0, 'patataze', '2024-05-29 15:33:17', NULL),
+	(19, 'ezaezertrtr@efz.fr', '[]', '$2y$13$bbS.cw0g4KPW2HwlnYTuW.2whjxiGCnMBnQAHM6sc.7PTkzmdIFom', 0, 'patatazdfzreh gefgehdfzgedfeghje', '2024-05-29 15:33:17', NULL),
+	(20, 'ezaezerertyutrtr@efz.fr', '[]', '$2y$13$bbS.cw0g4KPW2HwlnYTuW.2whjxiGCnMBnQAHM6sc.7PTkzmdIFom', 0, 'azetryzethry', '2024-05-29 15:33:17', NULL),
+	(23, 'test@test.fr', '[]', '$2y$13$YT45xYgJs0rSPRWZvxT0Ye7jVncgl.L00olsWeKoJZUcogYQsWuJ.', 1, 'test', '2024-07-30 06:53:47', NULL),
+	(24, '123456abcABC@zz.fr', '[]', '$2y$13$RayFje38xsQrQCYXfhltZetsNg/9Cv3MUpf/8Lz8pXgpK2lmWDC76', 0, '123456abcABC.', '2024-07-31 17:16:24', NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

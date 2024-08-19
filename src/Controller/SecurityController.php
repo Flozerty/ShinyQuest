@@ -5,7 +5,9 @@ namespace App\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -33,12 +35,17 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/user/delete', name: 'delete_account')]
-    public function deleteAccount(EntityManagerInterface $entityManager): Response
+    public function deleteAccount(EntityManagerInterface $entityManager,TokenStorageInterface $tokenStorage, SessionInterface $session
+): Response
     {
         $user = $this->getUser();
 
         if ($user) {
-            // $user = $entityManager->merge($user);
+
+            // suppression de token d'auth & des données d'user dans la session
+            $tokenStorage->setToken(null);
+            $session->invalidate();
+
             $entityManager->remove($user);
             $entityManager->flush();
             return $this->redirectToRoute("app_home");
