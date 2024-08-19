@@ -29,7 +29,7 @@ class Sujet
     private ?string $intro = null;
 
     #[ORM\ManyToOne(inversedBy: 'sujets')]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?User $user = null;
 
     /**
