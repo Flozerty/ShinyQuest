@@ -57,7 +57,7 @@ class ApiController extends AbstractController
   }
 
   #[Route('/pokemon/{id}', name: 'pokemon_details')]
-  public function pokemonDetails(ApiHttpClient $apiHttpClient, int $id): Response
+  public function pokemonDetails(ApiHttpClient $apiHttpClient, int $id, CaptureRepository $captureRepository): Response
   {
     $pokemon = $apiHttpClient->getPokemonInfos($id);
     // dd($pokemon);
@@ -78,6 +78,7 @@ class ApiController extends AbstractController
 
     // dd($pokemonVarieties);
 
+    // récupération du nom du pokemon
     $name = "";
     foreach ($pokemon["pkmnSpec"]["names"] as $lang) {
       $lang["language"]["name"] == "fr" ? $name = $lang["name"] : null;
@@ -102,6 +103,13 @@ class ApiController extends AbstractController
 
     // dd($stats);
 
+    // récupération des captures du pokemon
+    $captures = $captureRepository->findCapturesByPokemonId($id);
+    $capturesByLieu = $captureRepository->getNbCapturesByGame($id);
+    // dd($capturesByLieu);
+    $bestSpots = $captureRepository->getPokemonCapturesByPlacesInGame($id, $capturesByLieu[0]["jeu"]);
+    // dd($bestSpots);
+
     return $this->render('api/pokemonDetails.html.twig', [
       "name" => $name,
       'pokemon' => $pokemon,
@@ -109,15 +117,18 @@ class ApiController extends AbstractController
       'pokemonVarieties' => $pokemonVarieties,
       "evolutionChain" => $evolutionChain,
       "currentPokemonId" => $pokemon["pkmnStats"]["id"],
+      "capturesByLieu" => $capturesByLieu,
+      "captures" => $captures,
+      "bestSpots" => $bestSpots,
     ]);
   }
 
   #[Route('/api/balls', name: 'api_balls', methods: ['GET'])]
-public function getGames(ApiHttpClient $apiHttpClient): JsonResponse
-{
+  public function getGames(ApiHttpClient $apiHttpClient): JsonResponse
+  {
     $balls = $apiHttpClient->getAllBalls();
     return new JsonResponse($balls);
-}
+  }
 
   // #[Route('/test', name: 'test')]
   // public function test(ApiHttpClient $apiHttpClient): Response
