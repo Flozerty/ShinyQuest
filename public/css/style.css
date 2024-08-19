@@ -521,6 +521,36 @@ footer {
   }
 }
 
+/* -------------------SCROLLER------------------ */
+
+.scroller {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  z-index: 100;
+  bottom: 8%;
+  right: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25%;
+  font-size: 1.5em;
+  transition: var(--transitionTime);
+  color: white;
+}
+
+.scroller:hover {
+  transform: translateY(-10px) scale(1.2);
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.hide-scroll {
+  bottom: 0;
+  transform: translateY(100%)
+}
+
 /* ///////////////////////////////////////////////////////////////// */
 /* ///////////////////////// MEDIA QUERIES ///////////////////////// */
 /* ///////////////////////////////////////////////////////////////// */
@@ -606,6 +636,7 @@ footer {
 
   #main-wrapper {
     width: 100%;
+    padding: 0 5px;
   }
 
   #footer-content {

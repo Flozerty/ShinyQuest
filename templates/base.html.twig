@@ -196,6 +196,11 @@
       {% endif %}
 
       {% block body %}{% endblock %}
+
+      <a href="#" class="scroller hide-scroll">
+        <i class="fa-solid fa-arrow-up"></i>
+      </a>
+
     </main>
   </div>
 
@@ -260,7 +265,7 @@
   <script src="{{asset('js/headerSearch.js')}}"></script>
   <script src="{{asset('js/toggleSideNav.js')}}"></script>
   <script src="{{asset('js/headerProfileNav.js')}}"></script>
-  <script src="{{asset('js/base.js')}}"></script>
+  <script src="{{asset('js/scrollUp.js')}}"></script>
   {% block javascripts %}{% endblock %}
 </body>
 
