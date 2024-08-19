@@ -42,7 +42,7 @@
             <figure {% if pokemonV.pkmnStats.id==pokemon.pkmnStats.id%} class="active-pkmn" {% else %}
                 class="non-active-pkmn" {% endif %}>
                 <img class="sprite-normal" src="{{pokemonV.pkmnStats.sprites.other['official-artwork'].front_default}}"
-                    alt="{{pokemonV.pkmnStats.name}}" loading="lazy">
+                    alt="{{pokemonV.pkmnStats.name}}">
                 <img class="sprite-shiny" src="{{pokemonV.pkmnStats.sprites.other['official-artwork'].front_shiny}}"
                     alt="{{pokemonV.pkmnStats.name}} shiny" loading="lazy">
                 <figcaption>{{pokemonV.pkmnStats.name}}</figcaption>
@@ -61,7 +61,7 @@
                 class="non-active-pkmn" {% endif %}>
                 <img class="sprite-normal"
                     src="{{ pokemon.pokemon.pkmnStats.sprites.other['official-artwork'].front_default }}"
-                    alt="{{ pokemon.pokemon.pkmnSpec.name }}" loading="lazy">
+                    alt="{{ pokemon.pokemon.pkmnSpec.name }}">
                 <img class="sprite-shiny"
                     src="{{ pokemon.pokemon.pkmnStats.sprites.other['official-artwork'].front_shiny }}"
                     alt="{{ pokemon.pokemon.pkmnSpec.name }} shiny" loading="lazy">
@@ -117,6 +117,6 @@
 </section>
 
 <section id="locations">
-    <h2>Méthodes & lieux</h2>
+    <h2>Infos de shasse</h2>
 </section>
 {% endblock %}
