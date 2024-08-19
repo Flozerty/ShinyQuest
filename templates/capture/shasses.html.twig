@@ -15,6 +15,7 @@
 <script src="{{asset('js/ajaxFormNewShasse.js')}}"></script>
 <script src="{{asset('js/ajaxFormSubmit.js')}}"></script>
 <script src="{{asset('js/ajaxAllBalls.js')}}"></script>
+<script src="{{asset('js/catchPokemon.js')}}"></script>
 {% endblock %}
 
 {% block body %}
@@ -161,7 +162,7 @@
         </optgroup>
 
         {% endfor %} #}
-        
+
       </select>
     </div>
 
@@ -169,6 +170,7 @@
     <input type="hidden" id="IdCapture" name="IdCapture" value="" />
 
     <div class="modalNav">
+
       <button type="submit">
         <i class="fa-solid fa-circle-check"></i>
       </button>
