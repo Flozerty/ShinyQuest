@@ -18,8 +18,6 @@
     border-radius: 8px;
   }
 
-
-
   .demande-links {
     display: flex;
     flex-direction: column;
@@ -61,8 +59,15 @@
     }
 
     .delete-ami {
-      background-color: red;
-      color: white;
+      border: 1px solid var(--dangerred);
+      background-color: white;
+      color: var(--dangerred);
+      transition: var(--transitionTime);
+
+      &:hover {
+        background-color: var(--dangerred);
+        color: white;
+      }
     }
 
     .refuse-demand {
@@ -87,7 +92,7 @@
 
       &:hover {
         color: white;
-        background-color: red;
+        background-color: var(--dangerred);
 
         p {
           color: transparent;
