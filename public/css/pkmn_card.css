@@ -148,7 +148,7 @@
 }
 
 .nbRencontres {
-  color: #d10000;
+  color: var(--dangerred);
   font-weight: 600;
 }
 
