@@ -10,7 +10,8 @@
 
 {% for dresseur in usersData %}
 
-  {% if not dresseur.user == app.user %}
+  {% if dresseur.user == app.user %}
+{% else %}
     <div class="dresseur">
 
         <a class="user-link" href="{{ path('profile_user', {'pseudo': dresseur.user.pseudo}) }}">
@@ -38,7 +39,7 @@
 
         {% for user in amis %}
           {% if user.user == dresseur.user %}
-                          <a href="{{ path('delete_ami', {'id': user.id}) }}" class="delete-ami">supprimer l'ami</a>
+                          <a href="{{ path('delete_ami', {'id': user.id}) }}" class="delete-ami">Supprimer l'ami</a>
 
             {% set count = 1 %}
           {% endif %}
@@ -46,21 +47,21 @@
 
         {% for user in demandeEnvoyee %}
           {% if user.user == dresseur.user %}
-                        <a href="{{ path('delete_ami', {'id': user.id}) }}" class="refuse-demand"><p>demande envoyée</p><i class="fa-solid fa-xmark"></i></a>
+                        <a href="{{ path('delete_ami', {'id': user.id}) }}" class="refuse-demand"><p>Demande envoyée</p><i class="fa-solid fa-xmark"></i></a>
             {% set count = 1 %}
           {% endif %}
         {% endfor %}
 
         {% for user in demandeRecue %}
           {% if user.user == dresseur.user %}
-                        <a href="{{ path('accept_ami', {'id': user.id}) }}" class="accept-demand">accepter</a>
-                        <a href="{{ path('delete_ami', {'id': user.id}) }}" class="refuse-demand"><p>refuser</p><i class="fa-solid fa-xmark"></i></a>
+                        <a href="{{ path('accept_ami', {'id': user.id}) }}" class="accept-demand">Accepter</a>
+                        <a href="{{ path('delete_ami', {'id': user.id}) }}" class="refuse-demand"><p>Refuser</p><i class="fa-solid fa-xmark"></i></a>
             {% set count = 1 %}
           {% endif %}
         {% endfor %}
 
         {% if count == 0 %}
-                  <a href="{{ path('demande_ami', {'id': dresseur.user.id}) }}" class="send-demand">demande d'ami</a>
+                  <a href="{{ path('demande_ami', {'id': dresseur.user.id}) }}" class="send-demand">Ajouter en ami</a>
         {% endif %}
 
           </div>
