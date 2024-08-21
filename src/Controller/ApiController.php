@@ -30,10 +30,24 @@ class ApiController extends AbstractController
     ]);
   }
 
+  #[Route('/api/pokemons', name: 'all_pokemons')]
+  public function getPokemons(ApiHttpClient $apiHttpClient): Response
+  {
+    $pokemons = $apiHttpClient->getPokedex();
+
+    return $this->json($pokemons);
+  }
+
+  #[Route('/api/games', name: 'all_games')]
+  public function getGames(ApiHttpClient $apiHttpClient): Response
+  {
+    $games = $apiHttpClient->getAllGamesVersions();
+    return $this->json($games);
+  }
+
   #[Route('/{pseudo}/shinydex', name: 'app_shinydex')]
   public function shinydex(ApiHttpClient $apiHttpClient, User $user, CaptureRepository $captureRepository, UserRepository $userRepository): Response
   {
-
     // Get tous les pokemons
     $pokemons = $apiHttpClient->getPokedex();
 
@@ -76,8 +90,6 @@ class ApiController extends AbstractController
       }
     }
 
-    // dd($pokemonVarieties);
-
     // récupération du nom du pokemon
     $name = "";
     foreach ($pokemon["pkmnSpec"]["names"] as $lang) {
@@ -87,8 +99,6 @@ class ApiController extends AbstractController
     // récupération de la chaîne d'évolution du pokémon
     $url = $pokemon["pkmnSpec"]["evolution_chain"]["url"];
     $evolutionChain =  $apiHttpClient->getEvolutionChain($url);
-
-    // dd($evolutionChain);
 
     // récupération des statss du pokemon
     $stats = [];
@@ -100,8 +110,6 @@ class ApiController extends AbstractController
         "details_stat" => $apiHttpClient->getRequestByUrl($url),
       ];
     };
-
-    // dd($stats);
 
     // récupération des captures du pokemon
     $captures = $captureRepository->findCapturesByPokemonId($id);
@@ -124,22 +132,9 @@ class ApiController extends AbstractController
   }
 
   #[Route('/api/balls', name: 'api_balls', methods: ['GET'])]
-  public function getGames(ApiHttpClient $apiHttpClient): JsonResponse
+  public function getBalls(ApiHttpClient $apiHttpClient): JsonResponse
   {
     $balls = $apiHttpClient->getAllBalls();
     return new JsonResponse($balls);
   }
-
-  // #[Route('/test', name: 'test')]
-  // public function test(ApiHttpClient $apiHttpClient): Response
-  // {
-
-  //   $games = $apiHttpClient->getAllGamesVersions();
-
-  //   dd($games);
-
-  //   return $this->render('api/index.html.twig', [
-  //     // on récupère les clés du tableau d'IDs.
-  //   ]);
-  // }
 }

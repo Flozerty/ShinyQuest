@@ -11,11 +11,11 @@
 {% block javascripts %}
 <script src="{{asset('js/shasseModal.js')}}"></script>
 <script src="{{asset('js/otherShasseToggleLinks.js')}}"></script>
+<script src="{{asset('js/catchPokemonSong.js')}}"></script>
 <script src="{{asset('js/ajaxCompteur.js')}}"></script>
-<script src="{{asset('js/ajaxFormNewShasse.js')}}"></script>
-<script src="{{asset('js/ajaxFormSubmit.js')}}"></script>
 <script src="{{asset('js/ajaxAllBalls.js')}}"></script>
-<script src="{{asset('js/catchPokemon.js')}}"></script>
+<script src="{{asset('js/ajaxGetFormShasseData.js')}}"></script>
+
 {% endblock %}
 
 {% block body %}
@@ -37,7 +37,26 @@
 <h2>Débuter une shasse</h2>
 
 <section id="new-shasse">
-  {# créer une shasse (AJAX) #}
+  {{ form_start(formNewShasse) }}
+  <div>
+    <label for="pokemonId">Nom du pokemon :</label>
+    <select name="pokemonId" id="pokemonId">
+      <option value="">Sélectionnez le pokémon</option>
+      {# {% for pokemon in allPokemons %}
+      <option value="{{ pokemon.pokedex_id }}">{{ pokemon.pokedex_id }} - {{ pokemon.name }}</option>
+      {% endfor %} #}
+    </select>
+  </div>
+  {{ form_row(formNewShasse.nbRencontres) }}
+  {{ form_row(formNewShasse.jeu) }}
+  {{ form_row(formNewShasse.lieu) }}
+  {{ form_row(formNewShasse.methodeCapture) }}
+  <div class="chroma-container">
+    <img src="{{ asset('img/sprite-charme-chroma.png') }}" alt='charme chroma'>
+    {{ form_row(formNewShasse.charmeChroma) }}
+  </div>
+  <button type="submit" class="submit-btn"><span><span>A la shasse!</span></span></button>
+  {{ form_end(formNewShasse) }}
 </section>
 
 <h2>Liste de mes autres shasses</h2>

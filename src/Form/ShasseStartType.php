@@ -26,9 +26,6 @@ class ShasseStartType extends AbstractType
                 "label" => "Charme chroma"
             ])
 
-            // ->add('nomPokemon')
-            // ->add('idPokemon')
-
             ->add('jeu', ChoiceType::class, [
                 'choices' => $options['games'],
                 'placeholder' => 'Choisissez un jeu',

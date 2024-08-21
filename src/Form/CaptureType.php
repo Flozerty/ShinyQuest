@@ -29,18 +29,6 @@ class CaptureType extends AbstractType
                 'expanded' => true,
                 'multiple' => false,
             ])
-
-            // ->add('ball', ChoiceType::class, [
-            //     'choices' => $this->getBallChoices($options['balls']),
-            //     // 'choice_label' => function($choice, $key, $value) {
-            //     //     return $choice['name'];
-            //     // },
-            //     // 'group_by' => function($choice, $key, $value) {
-            //     //     return $choice['categoryName'];
-            //     // },
-            //     'expanded' => false,
-            //     'multiple' => false,
-            // ])
             ;
     }
 
@@ -51,21 +39,4 @@ class CaptureType extends AbstractType
             'balls' => [],
         ]);
     }
-
-    // private function getBallChoices(array $balls): array
-    // {
-    //     $choices = [];
-    //     foreach ($balls as $category) {
-    //         foreach ($category['ballsData'] as $ball) {
-    //             $choices[$ball['name']] = [
-    //                 'name' => $ball['name'],
-    //                 'categoryName' => $category['categoryName'],
-    //                 'sprite' => $ball['sprite'],
-    //             ];
-    //         }
-    //     }
-    //     // dd($choices);
-    //     return $choices;
-    
-    // }
 }

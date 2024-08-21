@@ -46,6 +46,41 @@ class CaptureController extends AbstractController
 
     $shasse = new Capture;
 
+    // $games = $apiHttpClient->getAllGamesVersions();
+
+    //////////////////////////  formulaire de nouvelle shasse  //////////////////////////
+    $formNewShasse = $this->createForm(ShasseStartType::class, $shasse, [
+      // 'games' => $games,
+    ]);
+
+    $formNewShasse->handleRequest($request);
+
+    // validation du formulaire de nouvelle shasse
+    if ($formNewShasse->isSubmitted() && $formNewShasse->isValid()) {
+
+      $pokemonId = filter_input(INPUT_POST, "pokemonId", FILTER_VALIDATE_INT);
+
+      // on récupère le nom du pokemon, son sprite, etc.
+      $pokemon = $apiHttpClient->getPokemonInfos($pokemonId);
+      $nomPokemon = $apiHttpClient->getPokemonNameById($pokemonId);
+
+      $shasse = $formNewShasse->getData(); //filter tous les inputs du FormType
+
+      $shasse->setFavori(false);
+      $shasse->setSuivi(true);
+      $shasse->setTermine(false);
+      $shasse->setPokedexId($pokemonId);
+      $shasse->setImgShiny($pokemon["pkmnStats"]["sprites"]["other"]["official-artwork"]["front_shiny"]);
+      $shasse->setNomPokemon($nomPokemon);
+      $shasse->setUser($user);
+
+      // prepare() and execute()
+      $entityManager->persist($shasse);
+      $entityManager->flush();
+
+      return $this->redirectToRoute('my_shasses');
+    }
+
     //////////////////////////  formulaire de shasse terminée //////////////////////////
     $formCapture = $this->createForm(CaptureType::class, $shasse);
     $formCapture->handleRequest($request);
@@ -71,8 +106,7 @@ class CaptureController extends AbstractController
 
       $entityManager->flush();
 
-
-      $this->addFlash('success', 'Félicitations, vous avez capturé '.$capture->getnomPokemon());
+      $this->addFlash('success', 'Félicitations, vous avez capturé ' . $capture->getnomPokemon());
     }
 
     $captures = $captureRepository->findBy(['user' => $user, 'termine' => 0]);
@@ -81,6 +115,7 @@ class CaptureController extends AbstractController
       "page_title" => 'Mes shasses',
       "captures" => $captures,
       "formCapture" => $formCapture,
+      "formNewShasse" => $formNewShasse,
       "allPokemons" => [],
       "balls" => [],
     ]);
@@ -89,32 +124,6 @@ class CaptureController extends AbstractController
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////
-
-  #[Route('/shasse/new', name: 'new_shasse_form', methods: ['GET'])]
-  public function newShasseForm(Request $request, ApiHttpClient $apiHttpClient): JsonResponse
-  {
-    $user = $this->getUser();
-    if (!$user) {
-      return new JsonResponse(['success' => false], 403);
-    }
-
-    // Récupération des jeux et des pokémons
-    $games = $apiHttpClient->getAllGamesVersions();
-    $allPokemons = $apiHttpClient->getAllPokemons();
-
-    $shasse = new Capture();
-    $formNewShasse = $this->createForm(ShasseStartType::class, $shasse, [
-      'games' => $games,
-    ]);
-
-    // Rendre uniquement le formulaire
-    $formHtml = $this->renderView('capture/form_new_shasse.html.twig', [
-      'formNewShasse' => $formNewShasse->createView(),
-      'allPokemons' => $allPokemons,
-    ]);
-
-    return new JsonResponse(['html' => $formHtml]);
-  }
 
   // supprimer une shasses
   #[Route('/shasse/{id}/delete', name: 'delete_shasse')]
