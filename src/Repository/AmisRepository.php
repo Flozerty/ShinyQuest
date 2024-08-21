@@ -26,4 +26,16 @@ class AmisRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findIfAmis(User $user, User $user2)
+    {
+        return $this->createQueryBuilder('a')
+            ->where('(a.userDemande = :user AND a.userRecoit = :user2)')
+            ->orwhere('(a.userRecoit = :user AND a.userDemande = :user2)')
+            ->andWhere('a.statut = 1')
+            ->setParameter('user', $user)
+            ->setParameter('user2', $user2)
+            ->getQuery()
+            ->getResult();
+    }
 }
