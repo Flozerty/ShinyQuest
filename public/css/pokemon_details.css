@@ -65,7 +65,7 @@ section {
         justify-content: center;
 
         figure {
-            height: 100%;
+            height: auto;
             display: flex;
             flex-direction: column;
             justify-content: space-between;

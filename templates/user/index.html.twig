@@ -1,9 +1,79 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('css/dresseurs.css')}}">
+{% endblock %}
+
 {% block body %}
 
-{% for dresseur in users %}
-{{dresseur.pseudo}}<br>
+<section id="dresseurs">
+
+{% for dresseur in usersData %}
+
+
+    <div class="dresseur">
+
+        <a class="user-link" href="{{ path('profile_user', {'pseudo': dresseur.user.pseudo}) }}">
+            <figure>
+                <img src="{{dresseur.user.avatar ? asset('img/' ~ dresseur.user.avatar) : asset('img/unknown_user.png') }}"
+                    alt="avatar de {{dresseur.user.pseudo}}">
+            </figure>
+            <span class="pseudo">
+                {{dresseur.user.pseudo}}
+            </span>
+        </a>
+
+          <div id="dex-completion">
+              <p>{{dresseur.capturedPokemonIds | length}} / {{allPokemons | length}}</p>
+              {# completion bar : capturés / total #}
+              <div id="completion-bar" style="width:{{ (dresseur.capturedPokemonIds | length / allPokemons | length) * 100}}%">
+              </div>
+          </div>
+
+    {% if app.user is not empty %}
+      
+      <div class="demande-links">
+      
+        {% set count = 0 %}
+
+        {% if dresseur.user == app.user %}
+        {% set count = 1 %}
+        {% endif %}
+
+        {% for user in amis %}
+          {% if user.user == dresseur.user %}
+                          <a href="{{ path('delete_ami', {'id': user.id}) }}" class="delete-ami">Supprimer l'ami</a>
+
+            {% set count = 1 %}
+          {% endif %}
+        {% endfor %}
+
+        {% for user in demandeEnvoyee %}
+          {% if user.user == dresseur.user %}
+                        <a href="{{ path('delete_ami', {'id': user.id}) }}" class="refuse-demand"><p>Demande envoyée</p><i class="fa-solid fa-xmark"></i></a>
+            {% set count = 1 %}
+          {% endif %}
+        {% endfor %}
+
+        {% for user in demandeRecue %}
+          {% if user.user == dresseur.user %}
+                        <a href="{{ path('accept_ami', {'id': user.id}) }}" class="accept-demand">Accepter</a>
+                        <a href="{{ path('delete_ami', {'id': user.id}) }}" class="refuse-demand"><p>Refuser</p><i class="fa-solid fa-xmark"></i></a>
+            {% set count = 1 %}
+          {% endif %}
+        {% endfor %}
+
+        {% if count == 0 %}
+                  <a href="{{ path('demande_ami', {'id': dresseur.user.id}) }}" class="send-demand">Ajouter en ami</a>
+        {% endif %}
+
+          </div>
+
+    {% endif %}
+      </div>
+
 {% endfor %}
+
+</section>
 
 {% endblock %}

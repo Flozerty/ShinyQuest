@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\HttpClient\ApiHttpClient;
+use App\Repository\AmisRepository;
 use App\Repository\CaptureRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,13 +15,64 @@ use Symfony\Component\Routing\Attribute\Route;
 class UserController extends AbstractController
 {
     #[Route('/users', name: 'app_users')]
-    public function index(UserRepository $userRepository, ): Response
+    public function index(UserRepository $userRepository, AmisRepository $amisRepository, CaptureRepository $captureRepository, ApiHttpClient $apiHttpClient): Response
     {
         $users = $userRepository->findBy([], ["pseudo" => "ASC"]);
+        $usersData = [];
+
+        foreach ($users as $user) {
+            $usersData[] = [
+                'user' => $user,
+                "capturedPokemonIds" => $this->getUserPokedexData($user, $captureRepository),
+            ];
+        }
+        // dd($usersData);
+
+        $AmisByDemande = $amisRepository->findBy(["userDemande" => $this->getUser()]);
+        $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()], );
+
+        $amis = [];
+        $demandeEnvoyee = [];
+        $demandeRecue = [];
+
+        foreach ($AmisByDemande as $demande) {
+            if ($demande->getStatut() == true) {
+                $amis[] = [
+                    "id" => $demande->getId(),
+                    'user' => $demande->getUserRecoit(),
+                ];
+            } else {
+                $demandeEnvoyee[] = [
+                    "id" => $demande->getId(),
+                    "user" => $demande->getUserRecoit(),
+                ];
+            }
+        }
+
+        foreach ($AmisByRecoit as $demande) {
+            if ($demande->getStatut() == true) {
+                $amis[] = [
+                    "id" => $demande->getId(),
+                    'user' => $demande->getUserDemande(),
+                ];
+            } else {
+                $demandeRecue[] = [
+                    "id" => $demande->getId(),
+                    "user" => $demande->getUserDemande(),
+                ];
+            }
+        }
+
+        // dd($amis);
+        $pokemons = $apiHttpClient->getPokedex();
 
         return $this->render('user/index.html.twig', [
             "page_title" => "Liste des dresseurs",
-            "users" => $users,
+            "allPokemons" => $pokemons,
+            "usersData" => $usersData,
+            "amis" => $amis,
+            "demandeEnvoyee" => $demandeEnvoyee,
+            "demandeRecue" => $demandeRecue,
         ]);
     }
 
@@ -112,5 +164,23 @@ class UserController extends AbstractController
     public function changePseudo(): Response
     {
         return $this->redirectToRoute("my_profile");
+    }
+
+
+    ///////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////// PRIVATE METHODS ///////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////
+
+    private function getUserPokedexData($user, CaptureRepository $captureRepository)
+    {
+        $pokemonsCaptured = $captureRepository->findBy(['user' => $user->getId(), 'termine' => true]);
+        $capturedPokemonIds = [];
+
+        foreach ($pokemonsCaptured as $pokemon) {
+            $pokemonId = $pokemon->getPokedexId();
+            $capturedPokemonIds[$pokemonId] = true;
+        }
+
+        return $capturedPokemonIds;
     }
 }

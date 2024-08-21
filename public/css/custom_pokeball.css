@@ -1,16 +1,10 @@
-:root {
-  --darkblue: #003BB3;
-  --lightblue: #B9E7FF;
-  --transitionTime: 0.3s;
-}
-
 .custom-pokeball {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  width: 32px;
-  height: 32px;
+  width: var(--custom-ball-size);
+  height: var(--custom-ball-size);
   border-radius: 50%;
   border: 4px solid var(--darkblue);
 
