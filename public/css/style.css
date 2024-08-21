@@ -3,7 +3,7 @@
   --bluemedium: #003BB3;
   --lightblue: #B9E7FF;
   --transitionTime: 0.3s;
-  --custom-ball-size: 32px;
+  --custom-icons-size: 20px;
   --cardColor: #f8f8ff;
   --dangerred: #d10000;
 }
@@ -102,6 +102,11 @@ hr {
   }
 }
 
+.pseudo {
+  font-weight: 600;
+  color: var(--darkblue);
+}
+
 h1,
 h2,
 h3 {
@@ -158,18 +163,20 @@ header {
     ul {
       display: flex;
       align-items: center;
-
-      li {
-        padding: 0 10px;
-      }
+      gap: 15px;
+      margin: 0 15px;
     }
   }
 
   i {
-    font-size: var(--custom-ball-size);
+    font-size: var(--custom-icons-size);
     color: var(--darkblue);
     cursor: pointer;
-    /* font-size: 1.8rem; */
+    transition: var(--transitionTime);
+
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 }
 

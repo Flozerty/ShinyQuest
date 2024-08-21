@@ -48,11 +48,6 @@
   justify-content: start;
 }
 
-.pseudo {
-  color: var(--darkblue);
-  font-weight: 600;
-}
-
 .dex-completion {
   justify-content: center;
   gap: 10px;
@@ -69,8 +64,13 @@
   text-align: center;
 
   i {
-    font-size: 2rem;
+    font-size: var(--custom-icons-size);
     color: var(--darkblue);
+    transition: var(--transitionTime);
+
+    &:hover {
+      transform: scale(1.2) rotate(360deg);
+    }
   }
 }
 
