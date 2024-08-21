@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Repository\AmisRepository;
 use App\Repository\MessageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class MessageController extends AbstractController
 {
-    #[Route('/messages', name: 'messagerie')]
+    #[Route('/messagerie', name: 'messagerie')]
     public function index(MessageRepository $messageRepository, AmisRepository $amisRepository): Response
     {
         $liensAmis = $amisRepository->getAllAmis($this->getUser());
@@ -25,14 +26,33 @@ class MessageController extends AbstractController
         foreach ($amis as $ami) {
             $dernierMessage = $messageRepository->getDernierMessage($this->getUser(), $ami);
             $messagerieData[] = [
-                $ami,
-                $dernierMessage,
+                "ami" => $ami,
+                "message" => $dernierMessage,
             ];
         }
+        // dd($messagerieData);
 
         return $this->render('message/index.html.twig', [
             'page_title' => 'Messagerie',
             'messagerieData' =>  $messagerieData,
         ]);
+    }
+
+    #[Route('/messagerie/{pseudo}', name: 'messages')]
+    public function messages(MessageRepository $messageRepository, AmisRepository $amisRepository, User $ami): Response
+    {
+        if ($amisRepository->findIfAmis($this->getUser(), $ami)) {
+
+            $conversation = $messageRepository->getMessagesConversation($this->getUser(), $ami);
+
+            return $this->render('message/conversation.html.twig', [
+                // 'page_title' => 'Messages',
+                'conversation' =>  $conversation,
+                'ami' => $ami,
+            ]);
+        } else {
+            $this->addFlash('danger', "Vous ne pouvez envoyer un message qu'à vos amis");
+            return $this->redirectToRoute('app_home');
+        }
     }
 }
