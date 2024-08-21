@@ -26,16 +26,18 @@ class ShasseStartType extends AbstractType
                 "label" => "Charme chroma"
             ])
 
-            ->add('jeu', ChoiceType::class, [
-                'choices' => $options['games'],
-                'placeholder' => 'Choisissez un jeu',
+            // ->add('jeu', ChoiceType::class, [
+            //     'choices' => $options['games'],
+            //     'placeholder' => 'Choisissez un jeu',
 
-                'choice_label' => function ($value) {
-                    return $value;
-                },
+            //     'choice_label' => function ($value) {
+            //         return $value;
+            //     },
+            // ])
+
+            ->add('lieu', TextType::class, [
+                'required' => false,
             ])
-
-            ->add('lieu', TextType::class)
 
             ->add('methodeCapture', EntityType::class, [
                 'class' => MethodeCapture::class,
@@ -49,7 +51,7 @@ class ShasseStartType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Capture::class,
-            'games' => [],  // initialisation par défaut.
+            // 'games' => [],  // initialisation par défaut.
         ]);
     }
 }

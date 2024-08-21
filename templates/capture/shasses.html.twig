@@ -48,7 +48,15 @@
     </select>
   </div>
   {{ form_row(formNewShasse.nbRencontres) }}
-  {{ form_row(formNewShasse.jeu) }}
+
+  <div>
+    <label for="jeu">Jeu :</label>
+    <select name="jeu" id="jeu">
+      <option value="">Choisissez un jeu</option>
+      {# ajax #}
+    </select>
+  </div>
+
   {{ form_row(formNewShasse.lieu) }}
   {{ form_row(formNewShasse.methodeCapture) }}
   <div class="chroma-container">
