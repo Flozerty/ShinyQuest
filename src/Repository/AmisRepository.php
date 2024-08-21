@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Amis;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,28 +17,13 @@ class AmisRepository extends ServiceEntityRepository
         parent::__construct($registry, Amis::class);
     }
 
-    //    /**
-    //     * @return Amis[] Returns an array of Amis objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('a')
-    //            ->andWhere('a.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('a.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Amis
-    //    {
-    //        return $this->createQueryBuilder('a')
-    //            ->andWhere('a.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function getAllAmis(User $user)
+    {
+        return $this->createQueryBuilder('a')
+            ->where('(a.userDemande = :user OR a.userRecoit = :user)')
+            ->andWhere('a.statut = 1')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+    }
 }
