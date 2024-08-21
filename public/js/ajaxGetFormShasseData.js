@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const pokemonsContainer = document.getElementById('pokemonId');
-    const gamesContainer = document.getElementById('shasse_start_jeu');
+    const gamesContainer = document.getElementById('jeu');
 
     fetch('/api/pokemons')
         .then(response => response.json())
