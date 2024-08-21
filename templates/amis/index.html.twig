@@ -101,8 +101,8 @@
         </div>
 
         <ul class="dresseur-links">
-            <li><a href="">
-                    <i class="fa-regular fa-message"></i>
+            <li><a href="{{path('messages', {'pseudo': data.user.pseudo})}}">
+                    <i class="fa-solid fa-message"></i>
                 </a></li>
 
             <li><a href="{{ path('captures', {'pseudo': data.user.pseudo}) }}">
