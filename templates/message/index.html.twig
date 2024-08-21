@@ -2,6 +2,32 @@
 
 {% block title %}Messagerie{% endblock %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('css/messagerie.css')}}">
+{% endblock %}
+
 {% block body %}
-Bienvenue sur votre messagerie.
+<p class="intro">Bienvenue sur votre messagerie.</p>
+
+<section id="messagerieContent">
+    {% for data in messagerieData %}
+    {% if data.message is not empty %}
+    <a class="discussion-link" href="{{ path('messages', {'pseudo' : data.ami.pseudo}) }}">
+        <div class="user-infos">
+            <figure>
+                <img src="{{data.ami.avatar ? asset('img/' ~ data.ami.avatar) : asset('img/unknown_user.png') }}"
+                    alt="avatar de {{data.ami.pseudo}}">
+            </figure>
+            <span class="pseudo">
+                {{data.ami.pseudo}}
+            </span>
+        </div>
+        <p class="last-message">
+            {{data.message[0].contenuMessage}}
+        </p>
+    </a>
+    {% endif %}
+    {% endfor %}
+</section>
+
 {% endblock %}
