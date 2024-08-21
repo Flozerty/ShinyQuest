@@ -1,12 +1,13 @@
 <div class="pokemon-card">
 
   {# delete : capture ou shasse de l'user connecté ou admin #}
-  {% if app.user is defined and app.user is not empty %}
-  {% if app.user == capture.user or 'ROLE_ADMIN' in app.user.roles %}
-  <a class="del-btn" aria-label="Supprimer cette shasse" href="{{ path('delete_capture', {'id': capture.id}) }}">
+  {% if (app.user is defined and app.user is not empty) and (app.user == capture.user or 'ROLE_ADMIN' in app.user.roles)
+  %}
+  <a class="del-btn" aria-label="Supprimer cette shasse" {% if capture.termine==true %}
+    href="{{ path('delete_capture', {'id': capture.id}) }}" {% else %}
+    href="{{ path('delete_shasse', {'id': capture.id}) }}" {% endif %}>
     <i class="fa-solid fa-trash-can"></i>
   </a>
-  {% endif %}
   {% endif %}
 
   {# envoi de l'id pour la modal #}
