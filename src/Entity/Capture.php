@@ -64,6 +64,12 @@ class Capture
     #[ORM\Column(nullable: true)]
     private ?string $ball = null;
 
+    public function __construct() {
+        // $this->suivi = 1;
+        $this->termine = 0;
+        $this->favori = 0;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

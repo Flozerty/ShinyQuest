@@ -31,6 +31,14 @@ class Message
     #[ORM\JoinColumn(nullable: false)]
     private ?User $userRecoit = null;
 
+    #[ORM\Column]
+    private ?bool $lu = null;
+
+    public function __construct() {
+        $this->dateMessage = new \DateTime();
+        $this->lu = 0;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,6 +100,18 @@ class Message
     public function setUserRecoit(?User $userRecoit): static
     {
         $this->userRecoit = $userRecoit;
+
+        return $this;
+    }
+
+    public function isLu(): ?bool
+    {
+        return $this->lu;
+    }
+
+    public function setLu(bool $lu): static
+    {
+        $this->lu = $lu;
 
         return $this;
     }
