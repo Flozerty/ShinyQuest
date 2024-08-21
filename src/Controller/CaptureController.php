@@ -17,7 +17,6 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class CaptureController extends AbstractController
 {
-
   // Toutes mes captures
   #[Route('/{pseudo}/captures', name: 'captures')]
   public function captures(User $user, CaptureRepository $captureRepository): Response
@@ -59,6 +58,7 @@ class CaptureController extends AbstractController
     if ($formNewShasse->isSubmitted() && $formNewShasse->isValid()) {
 
       $pokemonId = filter_input(INPUT_POST, "pokemonId", FILTER_VALIDATE_INT);
+      $jeu = filter_input(INPUT_POST, "jeu", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
       // on récupère le nom du pokemon, son sprite, etc.
       $pokemon = $apiHttpClient->getPokemonInfos($pokemonId);
@@ -66,12 +66,11 @@ class CaptureController extends AbstractController
 
       $shasse = $formNewShasse->getData(); //filter tous les inputs du FormType
 
-      $shasse->setFavori(false);
       $shasse->setSuivi(true);
-      $shasse->setTermine(false);
       $shasse->setPokedexId($pokemonId);
       $shasse->setImgShiny($pokemon["pkmnStats"]["sprites"]["other"]["official-artwork"]["front_shiny"]);
       $shasse->setNomPokemon($nomPokemon);
+      $shasse->setJeu($jeu);
       $shasse->setUser($user);
 
       // prepare() and execute()
@@ -90,6 +89,7 @@ class CaptureController extends AbstractController
 
       $idCapture = filter_input(INPUT_POST, "IdCapture", FILTER_VALIDATE_INT);
       $ball = filter_input(INPUT_POST, "ball", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
 
       // on va récupérer la capture avec cet ID.
       $capture = $captureRepository->find($idCapture);
@@ -146,7 +146,7 @@ class CaptureController extends AbstractController
       $entityManager->flush();
     }
 
-    return $this->redirectToRoute("my_captures");
+    return $this->redirectToRoute('captures', ['pseudo' => $this->getUser()]);
   }
 
   // retirer du suivi des shasses
@@ -192,7 +192,8 @@ class CaptureController extends AbstractController
     $shasse = $captureRepository->find($id);
 
     if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
-      $shasse->setNbRencontres($shasse->getNbRencontres() - 1);
+
+      $shasse->getNbRencontres() >= 1 ? $shasse->setNbRencontres($shasse->getNbRencontres() - 1) : null;
       $entityManager->flush();
     }
     return $this->json(['nbRencontres' => $shasse->getNbRencontres()]);
@@ -218,7 +219,8 @@ class CaptureController extends AbstractController
     $shasse = $captureRepository->find($id);
 
     if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
-      $shasse->setNbRencontres($shasse->getNbRencontres() - 10);
+      $shasse->getNbRencontres() >= 10 ? $shasse->setNbRencontres($shasse->getNbRencontres() - 10) : $shasse->setNbRencontres(0);
+
       $entityManager->flush();
     }
     return $this->json(['nbRencontres' => $shasse->getNbRencontres()]);
