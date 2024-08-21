@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messages avec {{ami.pseudo}} {% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('css/conversation.css')}}">
+{% endblock %}
+
+{% block body %}
+
+{% set dateActuelle = "now" | date('m/d/y') %}
+{% for message in conversation %}
+
+{# On affiche la date si elle est différente. #}
+{% if dateMessageActuel is not defined or dateMessageActuel != (message.dateMessage | date('m/d/y')) %}
+{% set dateMessageActuel = message.dateMessage | date('m/d/y') %}
+
+{% set date1week = "now - 7 days" | date('m/d/y') %}
+{# Comparer si la date est il y a + de 7 jours #}
+{% if dateMessageActuel < date1week %} <p class="date">{{ message.dateMessage | date('m/d/y') }}</p>
+
+    {# si aujourd'hui #}
+    {% elseif dateMessageActuel == dateActuelle %}
+    <p class="date">Aujourd'hui</p>
+    {% else %}
+
+    {# si < 7 jours, alors on affiche le jour (traduit en FR) #} {% set daysTranslate={ "Monday" : "Lundi" , "Tuesday"
+        : "Mardi" , "Wednesday" : "Mercredi" , "Thursday" : "Jeudi" , "Friday" : "Vendredi" , "Saturday" : "Samedi"
+        , "Sunday" : "Dimanche" } %} {# on affiche le jour #} <p class="date">{{ daysTranslate[message.dateMessage |
+        date('l')] }}</p> {# 'l' : jour en toute lettre #}
+        {% endif %}
+        {% endif %}
+
+        <div {% if message.userEnvoi==app.user %} class="message-container my-message" {% else %}
+            class="message-container his-message" {% endif%}>
+            <a class="user-link profil-dresseur"
+                href="{{ path('profile_user', {'pseudo': message.userEnvoi.pseudo}) }}">
+                <figure>
+                    <img src="{{message.userEnvoi.avatar ? asset('img/' ~ message.userEnvoi.avatar) : asset('img/unknown_user.png') }}"
+                        alt="avatar de {{message.userEnvoi.pseudo}}">
+                </figure>
+            </a>
+
+            <p class="message">
+                <span class="heure">
+                    {# si user différent du dernier message ou dernier message envoyé il y a plus de 10 minutes, on affiche l'heure #}
+                    {% if (heureMessageActuel is not defined or heureMessageActuel < (message.dateMessage | date_modify('-10 minutes')) | date('H:i'))
+                    or (lastUserSent is not defined or lastUserSent != message.UserEnvoi) %}
+                    {{message.dateMessage | date('H:i')}}
+                    {% endif %}
+
+                    {% set heureMessageActuel = message.dateMessage | date('H:i') %}
+                    {% set lastUserSent = message.UserEnvoi %}
+                </span>
+                {{message.contenuMessage}}
+            </p>
+        </div>
+        {% endfor %}
+
+        {% endblock %}
