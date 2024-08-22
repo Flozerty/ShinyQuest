@@ -33,7 +33,7 @@ class ApiController extends AbstractController
   #[Route('/api/pokemons', name: 'all_pokemons')]
   public function getPokemons(ApiHttpClient $apiHttpClient): Response
   {
-    $pokemons = $apiHttpClient->getPokedex();
+    $pokemons = $apiHttpClient->getAllPokemons();
 
     return $this->json($pokemons);
   }
