@@ -57,7 +57,14 @@ Pokédex
 
   {# shinyDex #}
   {% if capturedPokemonIds is defined %}
+  {% if pokemon.pokedex_id in capturedPokemonIds|keys %}
+  {# lien seulement si on a des captures #}
+  <a href="">
+    {% include '.custom/pokedexCard.html.twig' %}
+  </a>
+  {% else %}
   {% include '.custom/pokedexCard.html.twig' %}
+  {% endif %}
 
   {# pokeDex #}
   {% else %}
