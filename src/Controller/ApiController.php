@@ -58,14 +58,16 @@ class ApiController extends AbstractController
     foreach ($pokemonsCaptured as $pokemon) {
       $pokemonId = $pokemon->getPokedexId();
 
-      $capturedPokemonIds[$pokemonId] = true; // On veut juste la clé (pas de doublons), on se fiche de la valeur.
+      // on récupère les ids des pokemons capturés et leur nombre de captures
+      isset($capturedPokemonIds[$pokemonId]) ? $capturedPokemonIds[$pokemonId] = $capturedPokemonIds[$pokemonId] + 1 : $capturedPokemonIds[$pokemonId] = 1;
     }
+    // dd($capturedPokemonIds);
 
     return $this->render('api/pokedex.html.twig', [
       "page_title" => 'Shinydex de ' . $user->getPseudo(),
       'allPokemons' => $pokemons,
       // on récupère les clés du tableau d'IDs.
-      'capturedPokemonIds' => array_keys($capturedPokemonIds),
+      'capturedPokemonIds' => $capturedPokemonIds,
       "dresseur" => $user,
     ]);
   }

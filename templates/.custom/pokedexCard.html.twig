@@ -1,6 +1,13 @@
 {# pour shinydex : grayscale aux pokemons jamais capturés #}
 <div
-  class="pokemon{% if capturedPokemonIds is defined and pokemon.pokedex_id not in capturedPokemonIds %} filtered-dex{% endif %}">
+  class="pokemon{% if capturedPokemonIds is defined and pokemon.pokedex_id not in capturedPokemonIds|keys %} filtered-dex{% endif %}">
+
+  {# shinydex : NB captures #}
+  {% if capturedPokemonIds is defined and pokemon.pokedex_id in capturedPokemonIds|keys %}
+  <span class="nb-captures">
+    {{ capturedPokemonIds[pokemon.pokedex_id] }}
+  </span>
+  {% endif %}
 
   <p class="pokemon-id">#{{ '%03d'|format(pokemon.pokedex_id) }}</p>
 
