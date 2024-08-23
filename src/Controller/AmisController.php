@@ -118,7 +118,7 @@ class AmisController extends AbstractController
     }
 
     // Envoyerune demande d'ami
-    #[Route('/amis/{id}/demand', name: 'demande_ami')]
+    #[Route('/amis/{pseudo}/demand', name: 'demande_ami')]
     public function demandeAmi(AmisRepository $amisRepository, EntityManagerInterface $entityManager, User $userEnvoi = null): Response
     {
         $user = $this->getUser();

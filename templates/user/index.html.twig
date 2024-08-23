@@ -64,9 +64,8 @@
         {% endfor %}
 
         {% if count == 0 %}
-                  <a href="{{ path('demande_ami', {'id': dresseur.user.id}) }}" class="send-demand">Ajouter en ami</a>
+                  <a href="{{ path('demande_ami', {'pseudo': dresseur.user.pseudo}) }}" class="send-demand">Ajouter en ami</a>
         {% endif %}
-
           </div>
 
     {% endif %}

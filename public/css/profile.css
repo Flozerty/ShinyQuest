@@ -58,6 +58,8 @@ main span {
       padding: 5px 15px;
       border-radius: 5px;
       margin: 5px;
+      display: flex;
+      align-items: center;
     }
 
     #shinydex-link {
@@ -68,6 +70,12 @@ main span {
     #captures-link {
       background-color: var(--darkblue);
       color: white;
+    }
+
+    #message-link {
+      border: 1px solid var(--darkblue);
+      background-color: white;
+      color: var(--darkblue);
     }
   }
 }
