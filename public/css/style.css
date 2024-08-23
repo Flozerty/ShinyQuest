@@ -8,7 +8,7 @@
 
   --darkred: #d10000;
   --redmedium: red;
-  --lightred: #ff9191;
+  --lightred: #ffd8d8;
 
   --transitionTime: 0.3s;
   --custom-icons-size: 20px;
@@ -72,7 +72,7 @@ input[type="number"] {
   font-size: 1.2rem;
 
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.5);
   }
 }
 

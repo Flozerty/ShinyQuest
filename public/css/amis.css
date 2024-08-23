@@ -63,14 +63,16 @@
   gap: 10px;
   text-align: center;
 
-  i {
-    font-size: var(--custom-icons-size);
-    color: var(--primary-color);
-    transition: var(--transitionTime);
 
-    &:hover {
-      transform: scale(1.2) rotate(360deg);
-    }
+}
+
+main i {
+  font-size: var(--custom-icons-size);
+  color: var(--primary-color);
+  transition: var(--transitionTime);
+
+  &:hover {
+    transform: scale(1.5);
   }
 }
 
@@ -80,10 +82,6 @@
   width: fit-content;
   margin: auto;
   transition: var(--transitionTime);
-
-  i {
-    font-size: 1.5rem;
-  }
 }
 
 
