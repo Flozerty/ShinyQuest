@@ -20,14 +20,7 @@ if (userContainer) {
   });
 
   // retire la nav quand on clique ailleurs
-  main.addEventListener("click", () => {
-    if (show) {
-      hideProfileNav()
-    }
-  })
-
-  // retire la nav quand on clique sur le header (sauf sur les displayers & la nav)
-  header.addEventListener("click", (event) => {
+  document.addEventListener("click", (event) => {
     if (show && !profileNav.contains(event.target) && !caret.contains(event.target) && !userContainer.contains(event.target)) {
       hideProfileNav()
     }
