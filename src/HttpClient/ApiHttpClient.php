@@ -244,10 +244,14 @@ class ApiHttpClient extends AbstractController
     $data = $this->getAllPokemons();
     $filteredPokemons = [];
 
-    foreach ($data as $pokemon) {
+    // iconv('utf-8', 'ascii//TRANSLIT//IGNORE', $str) => convertir tous les accents en non accents
+    $queryNormalized = strtolower(iconv('utf-8', 'ascii//TRANSLIT//IGNORE', $query));
 
-      // On ajoute bien !== false pour quand $query est en position [0] du strpos, 
-      if (strpos(strtolower($pokemon["name"]), strtolower($query)) !== false) {
+    foreach ($data as $pokemon) {
+      $pokemonNameNormalized = strtolower(iconv('utf-8', 'ascii//TRANSLIT//IGNORE', $pokemon["name"]));
+
+      // On ajoute bien " !== false " pour quand $query est en position [0] du strpos, 
+      if (strpos($pokemonNameNormalized, $queryNormalized) !== false) {
         $filteredPokemons[] = $pokemon;
       }
     }

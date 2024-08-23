@@ -23,7 +23,6 @@ class ApiController extends AbstractController
   public function pokedex(ApiHttpClient $apiHttpClient): Response
   {
     $pokemons = $apiHttpClient->getPokedex();
-
     return $this->render('api/pokedex.html.twig', [
       "page_title" => 'Recherche par Pokédex',
       'allPokemons' => $pokemons,
@@ -116,9 +115,11 @@ class ApiController extends AbstractController
     // récupération des captures du pokemon
     $captures = $captureRepository->findCapturesByPokemonId($id);
     $capturesByLieu = $captureRepository->getNbCapturesByGame($id);
-    // dd($capturesByLieu);
-    $bestSpots = $captureRepository->getPokemonCapturesByPlacesInGame($id, $capturesByLieu[0]["jeu"]);
-    // dd($bestSpots);
+
+    $bestSpots = [];
+    if (isset($capturesByLieu[0])) {
+      $bestSpots = $captureRepository->getPokemonCapturesByPlacesInGame($id, $capturesByLieu[0]["jeu"]);
+    }
 
     return $this->render('api/pokemonDetails.html.twig', [
       "name" => $name,

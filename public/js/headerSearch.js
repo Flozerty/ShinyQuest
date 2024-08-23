@@ -8,12 +8,12 @@ $(document).ready(function () {
 
   searchInput.forEach(inputElement => {
     inputElement.addEventListener('input', () => {
-      const query = inputElement.value;
+      const query = inputElement.value.toLowerCase();
       // si on a déjà un timeout actif, on le supprime
       clearTimeout(timeout);
 
       // conditions de réalisation de la requete
-      if (query.length <= 2) {
+      if (query.length <= 1) {
         searchResults.innerHTML = '';
         lastQuery = "";
         return;
