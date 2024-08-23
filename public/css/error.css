@@ -32,8 +32,8 @@ main {
 
 @media screen and (min-width: 800px) {
   main {
+    flex-direction: row;
 
-    iframe,
     div {
       max-width: 50%;
     }
@@ -42,9 +42,6 @@ main {
 
 @media screen and (max-width: 800px) {
   main {
-    flex-direction: column;
-
-    iframe,
     div {
       max-width: 90%;
     }
