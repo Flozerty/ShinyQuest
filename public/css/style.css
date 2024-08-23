@@ -6,6 +6,7 @@
   --custom-icons-size: 20px;
   --cardColor: #f8f8ff;
   --dangerred: #d10000;
+  --buttonsColor: #002a7e;
 }
 
 * {
@@ -267,7 +268,7 @@ header {
   display: flex;
   padding: 10px 15px;
   border-radius: 5px;
-  background-color: #f2f2f2;
+  background-color: whitesmoke;
   flex-direction: column;
   align-items: center;
   text-align: center;
