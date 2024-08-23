@@ -55,10 +55,12 @@
         <a href="{{ path('captures', {'pseudo': user.pseudo}) }}" id="captures-link">
             <i class="fa-solid fa-star"></i>&nbsp; Captures
         </a>
-        {% if myProfil is not defined or not myProfil %}
+
+        {% if myProfil is not defined and not (user == app.user) %}
+
         {# ajout des liens de messagerie / demande d'ami etc. #}
 
-        {% if isFriend is defined and isFriend[0].statut == true %}
+        {% if isFriend is defined and isFriend[0].statut is defined and isFriend[0].statut is not empty %}
         <a href="{{ path('messages', {'pseudo': user.pseudo}) }}" class="secondary-animated-button" id="message-link">
             <i class="fa-solid fa-envelope"></i>&nbsp; Message
         </a>
@@ -87,7 +89,6 @@
 {% if capturesTermine is defined and capturesTermine is not empty %}
 
 <section id="activity">
-
     <h2>Activité récente</h2>
 
     {% set counter = 0 %}
@@ -106,7 +107,6 @@
 
         <hr>
         {% endif %}
-
         {% set counter = counter + 1 %}
         {% endfor %}
 </section>

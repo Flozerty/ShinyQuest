@@ -84,7 +84,7 @@ class UserController extends AbstractController
         }
 
         $friend = $amisRepository->findFriendship($user, $this->getUser());
-// dd($friend);
+        
         $userCaptures = $captureRepository->findBy(["user" => $user], ["dateCapture" => "DESC"]);
 
         $capturesTermine = [];
