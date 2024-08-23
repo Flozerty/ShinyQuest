@@ -37,8 +37,8 @@ class RedirectExceptionListener
             // Not Found
             $response = new RedirectResponse($this->router->generate('error404'));
         } elseif ($exception instanceof AccessDeniedHttpException) {
-            $response = new RedirectResponse($this->router->generate('error403'));
             // Forbidden 
+            $response = new RedirectResponse($this->router->generate('error403'));
         } elseif ($exception instanceof HttpException) {
             switch ($exception->getStatusCode()) {
                 case 400:
