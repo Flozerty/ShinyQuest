@@ -29,7 +29,7 @@ class UserController extends AbstractController
         // dd($usersData);
 
         $AmisByDemande = $amisRepository->findBy(["userDemande" => $this->getUser()]);
-        $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()], );
+        $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()],);
 
         $amis = [];
         $demandeEnvoyee = [];
@@ -77,11 +77,13 @@ class UserController extends AbstractController
     }
 
     #[Route('/profile/{pseudo}', name: 'profile_user')]
-    public function profile(User $user = null, CaptureRepository $captureRepository, ApiHttpClient $apiHttpClient): Response
+    public function profile(User $user = null, CaptureRepository $captureRepository, AmisRepository $amisRepository, ApiHttpClient $apiHttpClient): Response
     {
         if (!$user) {
-            dd('test');
+            $this->addFlash('danger', 'utilisateur inexistant');
         }
+
+        $friend = $amisRepository->findIfAmis($user, $this->getUser()) ? true : false;
 
         $userCaptures = $captureRepository->findBy(["user" => $user], ["dateCapture" => "DESC"]);
 
@@ -111,6 +113,7 @@ class UserController extends AbstractController
             "totalRencontres" => $totalRencontres,
             "allPokemons" => $pokemons,
             "capturedPokemonIds" => $capturedPokemonIds,
+            'isFriend' => $friend,
         ]);
     }
 
