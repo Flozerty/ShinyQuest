@@ -15,6 +15,7 @@ Pokédex
 
 {% block javascripts %}
 <script src="{{asset('js/pokedexSpriteDisplay.js')}}"></script>
+<script src="{{asset('js/searchPokemon.js')}}"></script>
 {% endblock %}
 
 {% block body %}
@@ -51,6 +52,10 @@ Pokédex
 </button>
 {% endif %}
 
+<div id="searchPokemons-container">
+  <div class="search-img-container"></div>
+  <input type="text" id="searchPokemons" placeholder="Rechercher un Pokémon...">
+</div>
 
 <div id="pokedex-content">
   {% for pokemon in allPokemons %}
