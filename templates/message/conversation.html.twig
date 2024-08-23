@@ -33,6 +33,9 @@
 
         <div {% if message.userEnvoi==app.user %} class="message-container my-message" {% else %}
             class="message-container his-message" {% endif%}>
+
+            {# conditions d'affichage de l'avatar jour différent / user différent #}
+            {% if lastUserSent is not defined or (lastUserSent != message.UserEnvoi) or (dateMessagePrecedent is defined and (dateMessagePrecedent | date('Y-m-d')) != (message.dateMessage | date('Y-m-d'))) %}
             <a class="user-link profil-dresseur"
                 href="{{ path('profile_user', {'pseudo': message.userEnvoi.pseudo}) }}">
                 <figure>
@@ -40,21 +43,32 @@
                         alt="avatar de {{message.userEnvoi.pseudo}}">
                 </figure>
             </a>
+            {% else %}
+            <div class="user-link profil-dresseur"></div>
+            {% endif %}
 
             <p class="message">
                 <span class="heure">
-                    {# si user différent du dernier message ou dernier message envoyé il y a plus de 10 minutes, on affiche l'heure #}
-                    {% if (heureMessageActuel is not defined or heureMessageActuel < (message.dateMessage | date_modify('-10 minutes')) | date('H:i'))
-                    or (lastUserSent is not defined or lastUserSent != message.UserEnvoi) %}
-                    {{message.dateMessage | date('H:i')}}
-                    {% endif %}
 
-                    {% set heureMessageActuel = message.dateMessage | date('H:i') %}
-                    {% set lastUserSent = message.UserEnvoi %}
+                    {# si jour identique #}
+
+                    {# si user différent du dernier message ou dernier message envoyé il y a plus de 10 minutes, ou un autre jour que le précédent on affiche l'heure #}
+                    {% if 
+                        (heureMessagePrecedent is not defined or heureMessagePrecedent < (message.dateMessage | date_modify('-10 minutes')) | date('H:i'))
+                        or (lastUserSent is not defined or lastUserSent != message.UserEnvoi) 
+                        or (dateMessagePrecedent is defined and (dateMessagePrecedent | date('Y-m-d')) != (message.dateMessage | date('Y-m-d'))) %}
+                    
+                        {{message.dateMessage | date('H:i')}}
+                        
+                    {% endif %}
                 </span>
                 {{message.contenuMessage}}
             </p>
         </div>
+
+        {% set heureMessagePrecedent = message.dateMessage | date('H:i') %}
+        {% set lastUserSent = message.UserEnvoi %}
+        {% set dateMessagePrecedent = dateMessageActuel %}
         {% endfor %}
 
         {% endblock %}
