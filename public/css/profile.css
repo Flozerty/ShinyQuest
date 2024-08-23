@@ -53,22 +53,69 @@ main span {
     justify-self: center;
     flex-wrap: wrap;
 
-    &>* {
+    a {
       font-weight: 600;
       margin: 5px;
       display: flex;
       align-items: center;
+      border-radius: 5px;
+      padding: 5px 15px;
+      height: 30px;
     }
 
     #shinydex-link,
     #captures-link {
       background-color: var(--buttonsColor);
       color: white;
-      border-radius: 5px;
-      padding: 5px 15px;
+    }
+
+    .accept-demand {
+      color: var(--buttonsColor);
+      background-color: white;
+      border: 1px solid var(--buttonsColor);
+    }
+
+    .refuse-demand {
+      background-color: var(--secondary-color);
+      transition: var(--transitionTime);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      i {
+        position: absolute;
+        font-size: 1.5rem;
+        text-align: center;
+        color: transparent;
+        transition: var(--transitionTime);
+      }
+
+      p {
+        color: var(--primary-color);
+        transition: var(--transitionTime);
+      }
+
+      &:hover {
+        color: white;
+        background-color: var(--dangerred);
+
+        p {
+          color: transparent;
+        }
+
+        i {
+          color: white;
+        }
+      }
+    }
+
+    .accept-demand-condition {
+      display: flex;
     }
   }
 }
+
+
 
 #dex-completion {
   border: 1px solid var(--primary-color);

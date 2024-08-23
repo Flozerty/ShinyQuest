@@ -55,30 +55,31 @@
         <a href="{{ path('captures', {'pseudo': user.pseudo}) }}" id="captures-link">
             <i class="fa-solid fa-star"></i>&nbsp; Captures
         </a>
+        {% if myProfil is not defined or not myProfil %}
+        {# ajout des liens de messagerie / demande d'ami etc. #}
 
-        {% if isFriend %}
-        <a href="{{ path('messages', {'pseudo': user.pseudo}) }}" id="message-link">
+        {% if isFriend is defined and isFriend[0].statut == true %}
+        <a href="{{ path('messages', {'pseudo': user.pseudo}) }}" class="secondary-animated-button" id="message-link">
             <i class="fa-solid fa-envelope"></i>&nbsp; Message
         </a>
-        {% else %}
-        <a href="{{ path('demande_ami', {'pseudo': user.pseudo}) }}" id="message-link">
-            {# ATTENTION CHANGER L'ID POUR LE PSEUDO #}
-            {# ATTENTION CHANGER L'ID POUR LE PSEUDO #}
-            {# ATTENTION CHANGER L'ID POUR LE PSEUDO #}
-            {# ATTENTION CHANGER L'ID POUR LE PSEUDO #}
-            {# ATTENTION CHANGER L'ID POUR LE PSEUDO #}
-            {# ATTENTION CHANGER L'ID POUR LE PSEUDO #}
-            {# ATTENTION CHANGER L'ID POUR LE PSEUDO #}
-            {# ATTENTION CHANGER L'ID POUR LE PSEUDO #}
-            {# ATTENTION CHANGER L'ID POUR LE PSEUDO #}
-            {# ATTENTION CHANGER L'ID POUR LE PSEUDO #}
-            {# ATTENTION CHANGER L'ID POUR LE PSEUDO #}
-            {# ATTENTION CHANGER L'ID POUR LE PSEUDO #}
-            {# ATTENTION CHANGER L'ID POUR LE PSEUDO #}
+        {% elseif isFriend[0] is not defined %}
+        <a href="{{ path('demande_ami', {'pseudo': user.pseudo}) }}" class="secondary-animated-button" id="friend-link">
             <i class="fa-solid fa-user-plus"></i>&nbsp; Ajouter en ami
         </a>
+        {% elseif isFriend[0].userDemande == app.user %}
+        <a href="{{ path('delete_ami', {'id': user.id}) }}" class="refuse-demand">
+            <p>Demande envoyée</p><i class="fa-solid fa-xmark"></i>
+        </a>
+        {% else %}
+        <div class="accept-demand-condition">
+            <a href="{{ path('accept_ami', {'id': user.id}) }}" class="accept-demand"><i
+                    class="fa-solid fa-user-plus"></i>&nbsp; Accepter</a>
+            <a href="{{ path('delete_ami', {'id': user.id}) }}" class="refuse-demand">
+                <p>Refuser</p><i class="fa-solid fa-xmark"></i>
+            </a>
+        </div>
         {% endif %}
-
+        {% endif %}
     </div>
 
 </section>

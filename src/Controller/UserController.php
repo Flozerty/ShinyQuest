@@ -83,8 +83,8 @@ class UserController extends AbstractController
             $this->addFlash('danger', 'utilisateur inexistant');
         }
 
-        $friend = $amisRepository->findIfAmis($user, $this->getUser()) ? true : false;
-
+        $friend = $amisRepository->findFriendship($user, $this->getUser());
+// dd($friend);
         $userCaptures = $captureRepository->findBy(["user" => $user], ["dateCapture" => "DESC"]);
 
         $capturesTermine = [];
