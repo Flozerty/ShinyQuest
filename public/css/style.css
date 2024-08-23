@@ -636,6 +636,29 @@ footer {
   transform: translateY(100%)
 }
 
+#pika-run {
+  z-index: 9;
+  position: absolute;
+  transform: translateY(-100%);
+  top: 0;
+  left: 0;
+  width: 100px;
+}
+
+.run-animation {
+  animation: pika-run-animation 1s linear forwards;
+}
+
+@keyframes pika-run-animation {
+  0% {
+    left: 0;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
 /* ///////////////////////////////////////////////////////////////// */
 /* ///////////////////////// MEDIA QUERIES ///////////////////////// */
 /* ///////////////////////////////////////////////////////////////// */
