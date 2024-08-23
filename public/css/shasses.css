@@ -14,7 +14,7 @@
 
   .others-title {
     color: white;
-    background-color: var(--darkblue);
+    background-color: var(--primary-color);
   }
 
   .others-pokemon {
@@ -73,7 +73,7 @@
   display: contents;
 
   &:nth-child(even)>* {
-    background-color: var(--lightblue);
+    background-color: var(--secondary-color);
     padding: 5px;
   }
 }
@@ -164,7 +164,7 @@
 
     input,
     select {
-      border: 1px solid var(--darkblue);
+      border: 1px solid var(--primary-color);
       border-radius: 5px;
       padding: 5px;
     }

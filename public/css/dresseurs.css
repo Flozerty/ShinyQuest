@@ -25,19 +25,7 @@
     text-align: center;
 
     .send-demand {
-      color: var(--darkblue);
-      border: 1px solid var(--darkblue);
-      background-color: white;
       font-weight: 600;
-
-
-
-      &:hover {
-        background-color: var(--darkblue);
-        color: white;
-        font-weight: normal;
-        transition: all var(--transitionTime), font-weight 0s;
-      }
     }
   }
 
@@ -57,7 +45,7 @@
   }
 
   .pseudo {
-    color: var(--darkblue);
+    color: var(--primary-color);
     font-weight: 600;
   }
 
@@ -70,23 +58,11 @@
 
     .accept-demand {
       color: white;
-      background-color: var(--darkblue);
-    }
-
-    .delete-ami {
-      border: 1px solid var(--dangerred);
-      background-color: white;
-      color: var(--dangerred);
-      transition: var(--transitionTime);
-
-      &:hover {
-        background-color: var(--dangerred);
-        color: white;
-      }
+      background-color: var(--buttonsColor);
     }
 
     .refuse-demand {
-      background-color: var(--lightblue);
+      background-color: var(--secondary-color);
       transition: var(--transitionTime);
       display: flex;
       justify-content: center;
@@ -101,7 +77,7 @@
       }
 
       p {
-        color: var(--darkblue);
+        color: var(--primary-color);
         transition: var(--transitionTime);
       }
 
@@ -122,7 +98,7 @@
 }
 
 #dex-completion {
-  border: 1px solid var(--darkblue);
+  border: 1px solid var(--primary-color);
   width: 90%;
   height: 25px;
   margin: 0 auto;
@@ -138,12 +114,12 @@
   left: 0;
   height: 100%;
   z-index: -1;
-  background-color: #B9E7FF;
+  background-color: var(--secondary-color);
 }
 
 figure {
   border-radius: 50%;
-  background-color: var(--darkblue);
+  background-color: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -154,7 +130,7 @@ figure {
   img {
     border-radius: 50%;
     background-color: white;
-    max-height: 90%;
+    height: 90%;
     overflow: hidden;
   }
 }

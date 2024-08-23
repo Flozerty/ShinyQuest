@@ -28,15 +28,15 @@
     background-color: ghostwhite;
     transition: var(--transitionTime);
   }
+}
 
-  .search-img-container {
-    height: 80%;
-    width: 40px;
-    background-image: url(../img/zarbi-int-shiny.png);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+.search-img-container {
+  height: 80%;
+  width: 40px;
+  background-image: url(../img/zarbi-int-shiny.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 #search-results {
@@ -68,18 +68,18 @@
   }
 
   &::-webkit-scrollbar-track:hover {
-    background-color: var(--lightblue);
+    background-color: var(--secondary-color);
   }
 
   &::-webkit-scrollbar-thumb {
     min-height: 50px;
-    background-color: var(--darkblue);
+    background-color: var(--primary-color);
     border-radius: 5px;
     border: 1px solid white;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    border: var(--darkblue);
+    border: var(--primary-color);
   }
 
   ul {
@@ -101,7 +101,7 @@
   }
 
   .search-result {
-    color: var(--darkblue);
+    color: var(--primary-color);
     padding: 5px;
 
     &:hover {
@@ -112,6 +112,7 @@
   .search-title {
     color: black;
     padding-left: 5px;
+    text-align: center;
   }
 
   span {

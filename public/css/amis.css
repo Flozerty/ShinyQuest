@@ -22,15 +22,15 @@
 
 .dresseur {
   &:nth-child(2n+1) {
-    background-color: var(--lightblue);
+    background-color: var(--secondary-color);
 
     .pokeball-circle {
-      background-color: var(--lightblue);
+      background-color: var(--secondary-color);
     }
   }
 
   &:last-of-type {
-    border-bottom: 1px solid var(--lightblue);
+    border-bottom: 1px solid var(--secondary-color);
   }
 }
 
@@ -53,7 +53,7 @@
   gap: 10px;
 
   i {
-    color: var(--darkblue);
+    color: var(--primary-color);
   }
 }
 
@@ -65,7 +65,7 @@
 
   i {
     font-size: var(--custom-icons-size);
-    color: var(--darkblue);
+    color: var(--primary-color);
     transition: var(--transitionTime);
 
     &:hover {
@@ -92,7 +92,7 @@
   height: 100%;
   grid-column: 7/9;
   font-size: 1.5rem;
-  color: var(--darkblue);
+  color: var(--primary-color);
   display: flex;
   justify-content: center;
 
@@ -111,13 +111,19 @@
   justify-content: center;
   gap: 10px;
   text-align: center;
-  background-color: #f2f2f2;
-  border: 1px solid var(--darkblue);
+  background-color: ghostwhite;
+  border: 1px solid var(--primary-color);
   border-radius: 10px;
   padding: 5px 10px;
 
+  li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   i {
-    font-size: 2rem;
+    font-size: var(--custom-icons-size);
   }
 }
 
@@ -127,13 +133,17 @@
 
 #demandes {
   i {
-    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
     text-align: center;
     width: 2rem;
     height: 2rem;
+    border: 1px solid var(--primary-color);
     border-radius: 50%;
-    color: var(--darkblue);
-    background-color: var(--lightblue);
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
   }
 
   .demande-links {
@@ -143,12 +153,12 @@
 
     .accept-demand {
       color: white;
-      background-color: var(--darkblue);
+      background-color: var(--buttonsColor);
     }
 
     .refuse-demand {
-      background-color: var(--lightblue);
-      color: var(--darkblue);
+      background-color: var(--secondary-color);
+      color: var(--primary-color);
     }
   }
 
@@ -183,7 +193,7 @@
 
 figure {
   border-radius: 50%;
-  background-color: var(--darkblue);
+  background-color: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;

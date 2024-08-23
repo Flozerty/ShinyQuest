@@ -55,33 +55,23 @@ main span {
 
     &>* {
       font-weight: 600;
-      padding: 5px 15px;
-      border-radius: 5px;
       margin: 5px;
       display: flex;
       align-items: center;
     }
 
-    #shinydex-link {
-      background-color: var(--darkblue);
-      color: white;
-    }
-
+    #shinydex-link,
     #captures-link {
-      background-color: var(--darkblue);
+      background-color: var(--buttonsColor);
       color: white;
-    }
-
-    #message-link {
-      border: 1px solid var(--darkblue);
-      background-color: white;
-      color: var(--darkblue);
+      border-radius: 5px;
+      padding: 5px 15px;
     }
   }
 }
 
 #dex-completion {
-  border: 1px solid var(--darkblue);
+  border: 1px solid var(--primary-color);
   width: 80%;
   height: 50px;
   margin: 0 auto;
@@ -97,7 +87,7 @@ main span {
   left: 0;
   height: 100%;
   z-index: -1;
-  background-color: #B9E7FF;
+  background-color: var(--secondary-color);
 }
 
 #edit-account {
@@ -107,16 +97,19 @@ main span {
   &>* {
     padding: 5px 15px;
     border-radius: 5px;
-    color: var(--darkblue);
     border: 1px solid var(--darkblue);
-    background-color: white;
     font-size: 1rem;
     cursor: pointer;
+  }
 
-    &.del-account-btn {
-      color: red;
-      border-color: red;
-    }
+  button {
+    color: var(--darkblue);
+    background-color: white;
+  }
+
+  .del-account-btn {
+    color: var(--dangerred);
+    border-color: var(--dangerred);
   }
 }
 

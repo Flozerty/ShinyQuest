@@ -6,7 +6,7 @@
   width: var(--custom-icons-size);
   height: var(--custom-icons-size);
   border-radius: 50%;
-  border: 2px solid var(--darkblue);
+  border: 2px solid var(--primary-color);
 
   /* box sizing counter effect */
   box-sizing: initial;
@@ -22,7 +22,7 @@
     height: 30%;
     background-color: white;
     border-radius: 50%;
-    border: 3px solid var(--darkblue);
+    border: 3px solid var(--primary-color);
     z-index: 2;
   }
 
@@ -30,7 +30,7 @@
     position: absolute;
     width: 20%;
     height: 20%;
-    background-color: var(--darkblue);
+    background-color: var(--primary-color);
     border-radius: 50%;
     z-index: 3;
   }
@@ -39,7 +39,7 @@
     position: absolute;
     width: 100%;
     height: 18%;
-    background-color: var(--darkblue);
+    background-color: var(--primary-color);
     z-index: 1;
   }
 

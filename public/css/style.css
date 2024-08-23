@@ -1,10 +1,18 @@
 :root {
+  --primary-color: #002a7e;
+  --secondary-color: #B9E7FF;
+
   --darkblue: #002a7e;
   --bluemedium: #003BB3;
   --lightblue: #B9E7FF;
+
+  --darkred: #d10000;
+  --redmedium: red;
+  --lightred: #ff9191;
+
   --transitionTime: 0.3s;
   --custom-icons-size: 20px;
-  --cardColor: #f8f8ff;
+  --cardColor: ghostwhite;
   --dangerred: #d10000;
   --buttonsColor: #002a7e;
 }
@@ -81,7 +89,7 @@ hr {
   height: 1px;
   margin: auto;
   border: none;
-  background: linear-gradient(to right, var(--lightblue), var(--darkblue), var(--lightblue));
+  background: linear-gradient(to right, var(--secondary-color), var(--primary-color), var(--secondary-color));
 }
 
 .visually-hidden {
@@ -105,7 +113,7 @@ hr {
 
 .pseudo {
   font-weight: 600;
-  color: var(--darkblue);
+  color: var(--primary-color);
 }
 
 h1,
@@ -125,13 +133,66 @@ h2 {
   margin: 80px 50px 30px 50px;
 }
 
+
+.main-animated-button {
+  background: linear-gradient(to left, var(--buttonsColor) 50%, white 50%);
+  background-size: 200% 100%;
+  background-position: right;
+  color: white;
+  border: 1px solid var(--buttonsColor);
+  border-radius: 5px;
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: 0.5s;
+
+  &:hover {
+    background-position: left;
+    color: var(--buttonsColor);
+  }
+}
+
+.delete-animated-button {
+  background: linear-gradient(to right, var(--dangerred) 50%, white 50%);
+  background-size: 200% 100%;
+  background-position: right;
+  color: var(--dangerred);
+  border: 1px solid var(--dangerred);
+  border-radius: 5px;
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: 0.5s;
+
+  &:hover {
+    background-position: left;
+    color: white;
+  }
+}
+
+
+.secondary-animated-button {
+  background: linear-gradient(to right, var(--buttonsColor) 50%, white 50%);
+  background-size: 200% 100%;
+  background-position: right;
+  color: var(--buttonsColor);
+  border: 1px solid var(--buttonsColor);
+  border-radius: 5px;
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: 0.5s;
+
+  &:hover {
+    background-position: left;
+    color: white;
+  }
+}
+
 /* dans pokedex & pokemonDetails */
 #shiny-mode {
   margin: 5px;
 
   background: none;
   border-radius: 50%;
-  border: 2px solid var(--darkblue);
+  border: 2px solid var(--primary-color);
   overflow: hidden;
   cursor: pointer;
   transition: var(--transitionTime);
@@ -150,7 +211,7 @@ header {
   justify-content: space-between;
   align-items: center;
   height: 80px;
-  border-bottom: 1px solid var(--darkblue);
+  border-bottom: 1px solid var(--primary-color);
   background-color: rgba(255, 255, 255, 0.7);
 
   backdrop-filter: blur(5px);
@@ -171,7 +232,7 @@ header {
 
   i {
     font-size: var(--custom-icons-size);
-    color: var(--darkblue);
+    color: var(--primary-color);
     cursor: pointer;
     transition: var(--transitionTime);
 
@@ -193,7 +254,7 @@ header {
 
   #logo-title {
     font-family: "Concert One", sans-serif;
-    color: var(--darkblue);
+    color: var(--primary-color);
   }
 
   &:hover svg {
@@ -208,7 +269,7 @@ header {
   align-items: center;
   position: relative;
   padding: 8px 40px 8px 15px;
-  background-color: var(--darkblue);
+  background-color: var(--primary-color);
   border-radius: 15px 0 0 15px;
   /* margin from 50% figure 60px absolute */
   margin-right: 30px;
@@ -232,11 +293,11 @@ header {
     height: 60px;
     width: 60px;
     transform: translateX(50%);
-    background-color: var(--darkblue);
+    background-color: var(--primary-color);
     border-radius: 50%;
 
     img {
-      background-color: white;
+      background-color: var(--secondary-color);
       border-radius: 50%;
       height: 80%;
       overflow: hidden;
@@ -278,7 +339,7 @@ header {
 
   li {
     width: 100%;
-    color: var(--darkblue);
+    color: var(--primary-color);
     display: flex;
 
     a {
@@ -414,7 +475,7 @@ main {
   display: flex;
   flex-direction: column;
   width: 300px;
-  border-right: 1px solid var(--darkblue);
+  border-right: 1px solid var(--primary-color);
   transition: var(--transitionTime);
   background-color: white;
 
@@ -443,13 +504,13 @@ main {
     }
 
     h3 {
-      color: var(--darkblue);
+      color: var(--primary-color);
     }
   }
 
   #toggle-nav-btn {
     font-size: 3rem;
-    color: var(--darkblue);
+    color: var(--primary-color);
     position: absolute;
     top: 10%;
     right: 0;
@@ -483,9 +544,12 @@ footer {
   align-items: center;
   justify-content: space-evenly;
   z-index: 8;
-  background-color: var(--lightblue);
+  background-color: var(--secondary-color);
+  opacity: 0.9;
   gap: 20px;
   padding: 20px 0;
+  margin-top: 100px;
+
 
   section {
     display: flex;
@@ -534,7 +598,7 @@ footer {
 
   i {
     transition: var(--transitionTime);
-    color: var(--darkblue);
+    color: var(--primary-color);
 
     &:hover {
       color: black;

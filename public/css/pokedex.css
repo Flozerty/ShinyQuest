@@ -16,6 +16,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 5px;
   margin: 5px;
@@ -72,7 +73,8 @@ p {
   border: 1px solid var(--darkblue);
   width: 80%;
   height: 50px;
-  margin: auto;
+  margin-bottom: 50px;
+  align-self: center;
   position: relative;
   display: flex;
   align-items: center;
@@ -86,6 +88,31 @@ p {
   height: 100%;
   z-index: -1;
   background-color: #B9E7FF;
+}
+
+#searchPokemons-container {
+  display: flex;
+  align-self: center;
+  margin-bottom: 50px;
+  height: 40px;
+  border: 1px solid var(--darkblue);
+  align-items: center;
+  width: 60%;
+  min-width: 250px;
+  border-radius: 15px;
+  background-color: ghostwhite;
+  transition: var(--transitionTime);
+
+  #searchPokemons {
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding-left: 10px;
+    border-radius: 8px 15px 15px 8px;
+    background-color: white;
+    background-color: ghostwhite;
+    transition: var(--transitionTime);
+  }
 }
 
 .nb-captures {

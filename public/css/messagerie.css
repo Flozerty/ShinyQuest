@@ -1,53 +1,53 @@
 #messagerieContent {
-    margin: 100px 0;
+  margin: 100px 0;
 
-    .discussion-link {
+  .discussion-link {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    .user-infos {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
+      width: 30%;
+      height: 60px;
+
+      figure {
+        border-radius: 50%;
+        background-color: var(--primary-color);
         display: flex;
-        gap: 10px;
         align-items: center;
+        justify-content: center;
 
-        .user-infos {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            padding: 10px;
-            width: 30%;
-            height: 60px;
+        height: 50px;
+        width: 50px;
 
-            figure {
-                border-radius: 50%;
-                background-color: var(--darkblue);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                height: 50px;
-                width: 50px;
-
-                img {
-                    border-radius: 50%;
-                    background-color: white;
-                    height: 88%;
-                    overflow: hidden;
-                }
-            }
-
-
+        img {
+          border-radius: 50%;
+          background-color: white;
+          height: 88%;
+          overflow: hidden;
         }
+      }
 
-        &:hover {
-            background-color: whitesmoke;
-        }
 
-        .last-message {
-            width: 60%;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
     }
 
-    .intro {
-        text-align: center;
+    &:hover {
+      background-color: whitesmoke;
     }
+
+    .last-message {
+      width: 60%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .intro {
+    text-align: center;
+  }
 }
