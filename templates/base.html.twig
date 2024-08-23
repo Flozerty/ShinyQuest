@@ -69,11 +69,7 @@
 
         <li title="Mes captures" class="header-link">
           <a aria-label="voir mes captures" href="{{ path('captures', {'pseudo' : app.user.pseudo}) }}">
-            <div class="custom-pokeball">
-              <div class="pokeball-circle"></div>
-              <div class="pokeball-center"></div>
-              <div class="pokeball-line"></div>
-            </div>
+            {% include '.custom/customPokeball.html.twig' %}
           </a>
         </li>
 

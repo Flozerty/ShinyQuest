@@ -101,17 +101,16 @@
         </div>
 
         <ul class="dresseur-links">
-            <li><a href="{{path('messages', {'pseudo': data.user.pseudo})}}">
+            <li>
+                <a href="{{path('messages', {'pseudo': data.user.pseudo})}}">
                     <i class="fa-solid fa-message"></i>
-                </a></li>
-
-            <li><a href="{{ path('captures', {'pseudo': data.user.pseudo}) }}">
-                    <div class="custom-pokeball">
-                        <div class="pokeball-circle"></div>
-                        <div class="pokeball-center"></div>
-                        <div class="pokeball-line"></div>
-                    </div>
-                </a></li>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('captures', {'pseudo': data.user.pseudo}) }}">
+                    {% include '.custom/customPokeball.html.twig' %}
+                </a>
+            </li>
         </ul>
         <a class="del-ami" href="{{ path('delete_ami', {'id': data.id}) }}">
             <i class="fa-solid fa-trash-can"></i>
@@ -120,17 +119,16 @@
             <i class="fa-solid fa-ellipsis toggle-menu"></i>
 
             <ul class="dresseur-links-mobile hide">
-                <li><a href="">
+                <li>
+                    <a href="">
                         <i class="fa-regular fa-message"></i>
-                    </a></li>
-
-                <li><a href="{{ path('captures', {'pseudo': data.user.pseudo}) }}">
-                        <div class="custom-pokeball">
-                            <div class="pokeball-circle"></div>
-                            <div class="pokeball-center"></div>
-                            <div class="pokeball-line"></div>
-                        </div>
-                    </a></li>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('captures', {'pseudo': data.user.pseudo}) }}">
+                        {% include '.custom/customPokeball.html.twig' %}
+                    </a>
+                </li>
                 <li>
                     <a class="del-ami" href="{{ path('delete_ami', {'id': data.id}) }}">
                         <i class="fa-solid fa-trash-can"></i>
