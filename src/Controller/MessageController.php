@@ -41,7 +41,10 @@ class MessageController extends AbstractController
     #[Route('/messagerie/{pseudo}', name: 'messages')]
     public function messages(MessageRepository $messageRepository, AmisRepository $amisRepository, User $ami): Response
     {
-        if ($amisRepository->findIfAmis($this->getUser(), $ami)) {
+        $relationship = $amisRepository->findFriendship($this->getUser(), $ami);
+        // dd($relationship[0]->getStatut());
+        
+        if (isset($relationship[0]) && $relationship[0]->getStatut() == true) {
 
             $conversation = $messageRepository->getMessagesConversation($this->getUser(), $ami);
 
