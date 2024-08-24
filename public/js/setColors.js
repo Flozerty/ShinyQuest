@@ -25,17 +25,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function changeColorsBasedOnSelection(selectedId) {
         if (selectedId === 'pokeball-toggle' || selectedId === 'pokeball-toggle2') {
-            setColors('--darkred', '--lightred', '--light-background');
+            setColors('--darkred', '--lightred', '--light-background', '--black');
         } else if (selectedId === 'superball-toggle' || selectedId === 'superball-toggle2') {
-            setColors('--darkblue', '--lightblue', '--light-background');
+            setColors('--darkblue', '--lightblue', '--light-background', '--black');
         } else if (selectedId === 'hyperball-toggle' || selectedId === 'hyperball-toggle2') {
-            setColors('--yellow', '--white', '--background-dark-main');
+            setColors('--yellow', '--white', '--background-dark-main', '--white');
         }
     }
 
-    function setColors(primaryColor, secondaryColor, backgroundColor) {
+    function setColors(primaryColor, secondaryColor, backgroundColor, fontMainColor) {
         document.documentElement.style.setProperty('--primary-color', `var(${primaryColor})`);
         document.documentElement.style.setProperty('--secondary-color', `var(${secondaryColor})`);
         document.documentElement.style.setProperty('--background-color', `var(${backgroundColor})`);
+        document.documentElement.style.setProperty('--font-main-color', `var(${fontMainColor})`);
     }
 });

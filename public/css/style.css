@@ -17,11 +17,14 @@
   --redmedium: red;
   --lightred: #ffd8d8;
 
+  --black: black;
   --yellow: #db9c35;
   --white: ghostwhite;
 
   --transitionTime: 0.3s;
   --custom-icons-size: 20px;
+
+  --font-main-color: black;
   --cardColor: ghostwhite;
   --dangerred: #d10000;
   --buttonsColor: #002a7e;
@@ -48,6 +51,7 @@ html {
 
 body {
   overflow-x: hidden;
+  color: var(--font-main-color);
 }
 
 body,
