@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', () => {
     const statsComp = document.querySelectorAll('.stat-completion')
 
     statsComp.forEach((element) => {

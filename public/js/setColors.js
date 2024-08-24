@@ -93,7 +93,7 @@ function setColors(
   primaryColor,
   secondaryColor,
   backgroundColor,
-  backgroundSecondaryColor,
+  backgroundSecondary,
   fontMainColor,
   cardColor,
   cardSecondaryColor,
@@ -102,7 +102,7 @@ function setColors(
   document.documentElement.style.setProperty('--primary-color', `var(${primaryColor})`);
   document.documentElement.style.setProperty('--secondary-color', `var(${secondaryColor})`);
   document.documentElement.style.setProperty('--background-color', `var(${backgroundColor})`);
-  document.documentElement.style.setProperty('--background-secondary', `var(${backgroundSecondaryColor})`);
+  document.documentElement.style.setProperty('--background-secondary', `var(${backgroundSecondary})`);
   document.documentElement.style.setProperty('--font-main-color', `var(${fontMainColor})`);
   document.documentElement.style.setProperty('--cardColor', `var(${cardColor})`);
   document.documentElement.style.setProperty('--cardSecondaryColor', `var(${cardSecondaryColor})`);

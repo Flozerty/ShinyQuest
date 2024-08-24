@@ -139,6 +139,7 @@ section {
     justify-content: center;
     overflow: hidden;
     border-radius: 8px;
+    background-color: var(--background-secondary);
 }
 
 .completion-bar {
@@ -146,11 +147,10 @@ section {
     top: 0;
     left: 0;
     height: 100%;
-    z-index: -1;
     background-color: var(--primary-color);
     border-radius: 0 8px 8px 0;
 
-    transition: 1s;
+    transition: width 1s;
     width: 0;
 }
 
