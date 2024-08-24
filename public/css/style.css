@@ -14,11 +14,11 @@
 
   --darkblue: #002a7e;
   --bluemedium: #003BB3;
-  --lightblue: #B9E7FF;
+  --lightblue: #dcf2ff;
 
   --darkred: #d10000;
   --redmedium: red;
-  --lightred: #ffd8d8;
+  --lightred: #ffe0e0;
 
   --black: black;
   --yellow: #F4A32C;
@@ -406,6 +406,7 @@ header {
   border-radius: 30px;
   padding: var(--color-selection-padding);
   box-shadow: inset 0px 5px 15px var(--secondary-color), inset 0px -5px 15px rgba(255, 255, 255, 0.4);
+  overflow: hidden;
 
   .toggle-label {
     display: flex;
@@ -423,6 +424,7 @@ header {
 
   .toggle-button {
     position: absolute;
+    left: -50px;
     width: var(--color-selection-toggle-button-dimension);
     height: var(--color-selection-toggle-button-dimension);
     background: linear-gradient(180deg, #ffcc89, #d8860b);

@@ -27,7 +27,7 @@ main {
 
       img {
         border-radius: 50%;
-        background-color: white;
+        background-color: var(--secondary-color);
         height: 90%;
         overflow: hidden;
       }
