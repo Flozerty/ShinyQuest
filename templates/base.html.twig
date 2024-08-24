@@ -50,11 +50,24 @@
     </form>
 
     <div class="l_d_mode-main">
-      <input id="darkmode-toggle" name="darkmode-toggle" type="checkbox">
-      <label for="darkmode-toggle">
-        <i class="fa-regular fa-sun"></i>
-        <i class="fa-regular fa-moon"></i>
+    
+      <input id="pokeball-toggle" name="mode-toggle" type="radio" checked>
+      <label for="pokeball-toggle" class="toggle-label">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" alt="pokeball">
       </label>
+
+      <input id="superball-toggle" name="mode-toggle" type="radio">
+      <label for="superball-toggle" class="toggle-label">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/great-ball.png" alt="superball">
+      </label>
+
+      <input id="hyperball-toggle" name="mode-toggle" type="radio">
+      <label for="hyperball-toggle" class="toggle-label">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png" alt="hyperball">
+      </label>
+
+      {# Bouton de bascule #}
+      <div class="toggle-button"></div>
     </div>
 
     <nav id="nav-header">
@@ -121,11 +134,24 @@
       </form>
 
       <div class="l_d_mode">
-        <input id="darkmode-toggle2" name="darkmode-toggle2" type="checkbox">
-        <label for="darkmode-toggle2">
+    
+        <input id="pokeball-toggle2" name="mode-toggle2" type="radio" checked>
+        <label for="pokeball-toggle2" class="toggle-label">
           <i class="fa-regular fa-sun"></i>
+        </label>
+  
+        <input id="superball-toggle2" name="mode-toggle2" type="radio">
+        <label for="superball-toggle2" class="toggle-label">
           <i class="fa-regular fa-moon"></i>
         </label>
+  
+        <input id="hyperball-toggle2" name="mode-toggle2" type="radio">
+        <label for="hyperball-toggle2" class="toggle-label">
+          <i class="fa-regular fa-palette"></i>
+        </label>
+  
+        {# Bouton de bascule #}
+        <div class="toggle-button"></div>
       </div>
 
     </ul>

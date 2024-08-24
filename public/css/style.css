@@ -1,6 +1,7 @@
 :root {
   --primary-color: #002a7e;
   --secondary-color: #B9E7FF;
+  --background-color: white;
 
   --darkblue: #002a7e;
   --bluemedium: #003BB3;
@@ -15,6 +16,10 @@
   --cardColor: ghostwhite;
   --dangerred: #d10000;
   --buttonsColor: #002a7e;
+
+  --color-selection-width: 130px;
+  --color-selection-toggle-button-dimension: 38px;
+  --color-selection-padding: 5px;
 }
 
 * {
@@ -30,6 +35,10 @@ html {
   letter-spacing: -0.2px;
   scroll-behavior: smooth;
   height: 100%;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 body,
@@ -228,18 +237,20 @@ header {
       gap: 15px;
       margin: 0 15px;
     }
-  }
 
-  i {
-    font-size: var(--custom-icons-size);
-    color: var(--primary-color);
-    cursor: pointer;
-    transition: var(--transitionTime);
+    i {
+      font-size: var(--custom-icons-size);
+      color: var(--primary-color);
+      cursor: pointer;
+      transition: var(--transitionTime);
 
-    &:hover {
-      transform: scale(1.5);
+      &:hover {
+        transform: scale(1.5);
+      }
     }
   }
+
+
 }
 
 #logo-container {
@@ -364,87 +375,67 @@ header {
   display: none;
 }
 
-.l_d_mode,
-.l_d_mode-main {
+.l_d_mode-main,
+.l_d_mode {
+  position: relative;
+  width: var(--color-selection-width);
+  justify-content: space-around;
+  align-items: center;
+  background: ghostwhite;
+  border-radius: 30px;
+  padding: var(--color-selection-padding);
+  box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.4), inset 0px -5px 15px rgba(255, 255, 255, 0.4);
 
-  label {
-    width: 100px;
-    height: 40px;
-    position: relative;
-    display: block;
-    background: #ebebeb;
-    border-radius: 40px;
-    box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.4), inset 0px -5px 15px rgba(255, 255, 255, 0.4);
+  .toggle-label {
+    display: flex;
+    width: var(--color-selection-toggle-button-dimension);
+    height: var(--color-selection-toggle-button-dimension);
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
+    z-index: 2;
+    flex: 1;
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--buttonsColor);
   }
 
-  label:after {
-    content: "";
-    width: 36px;
-    height: 36px;
+  .toggle-button {
     position: absolute;
-    top: 2px;
-    left: 2px;
+    width: var(--color-selection-toggle-button-dimension);
+    height: var(--color-selection-toggle-button-dimension);
     background: linear-gradient(180deg, #ffcc89, #d8860b);
-    border-radius: 36px;
+    border-radius: 50%;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease, background 0.3s ease;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, var(--secondary-color), var(--primary-color));
   }
 
   input {
-    width: 0;
-    height: 0;
-    visibility: hidden;
+    display: none;
+
+    &:checked+.toggle-label {
+      color: var(--background-color);
+    }
   }
 
-  input:checked+label {
-    background: #242424;
+  /* déplacement du button */
+  #pokeball-toggle:checked~.toggle-button,
+  #pokeball-toggle2:checked~.toggle-button {
+    left: calc(var(--color-selection-padding) + ((var(--color-selection-width) - 2 * var(--color-selection-padding)) / 6));
   }
 
-  input:checked+label:after {
-    left: 98px;
-    transform: translateX(-100%);
-    background: linear-gradient(180deg, #777, #3a3a3a);
+  #superball-toggle:checked~.toggle-button,
+  #superball-toggle2:checked~.toggle-button {
+    left: 50%;
   }
 
-  label,
-  label:after {
-    transition: var(--transitionTime)
+  #hyperball-toggle:checked~.toggle-button,
+  #hyperball-toggle2:checked~.toggle-button {
+    left: calc(100% - ((var(--color-selection-width) - 2 * var(--color-selection-padding)) / 6) - var(--color-selection-padding));
   }
 
-  label:hover:after {
-    width: 40px;
-  }
-
-  label:active:after {
-    width: 52px;
-  }
-
-  label i {
-    position: absolute;
-    font-size: 1.5rem;
-    top: 8px;
-    z-index: 2;
-  }
-
-  label i.fa-sun {
-    left: 7px;
-    color: #fff;
-    transition: var(--transitionTime);
-  }
-
-  label i.fa-moon {
-    right: 10px;
-    color: #7e7e7e;
-    transition: var(--transitionTime);
-  }
-
-  input:checked+label i.fa-sun {
-    color: #7e7e7e;
-  }
-
-  input:checked+label i.fa-moon {
-    color: #fff;
-  }
 }
 
 /* ------------------- MAIN ------------------ */
@@ -519,10 +510,6 @@ main {
     transition: var(--transitionTime);
     transform: translateX(60%);
     border-radius: 50%;
-
-    &:hover {
-      /* transform: translateX(100%); */
-    }
   }
 }
 
@@ -549,7 +536,6 @@ footer {
   gap: 20px;
   padding: 20px 0;
   margin-top: 100px;
-
 
   section {
     display: flex;
