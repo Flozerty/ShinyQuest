@@ -4,18 +4,38 @@ document.addEventListener('DOMContentLoaded', function () {
 
     colorSelection.forEach(choice => {
         choice.addEventListener('change', function () {
-            if (this.id === 'pokeball-toggle' || this.id === 'pokeball-toggle2') {
-                setColors('--darkred', '--lightred');
-            } else if (this.id === 'superball-toggle' || this.id === 'superball-toggle2') {
-                setColors('--darkblue', '--lightblue');
-            } else if (this.id === 'hyperball-toggle' || this.id === 'hyperball-toggle2') {
-                setColors('--darkred', '--lightblue');
-            }
+            syncSelection(this.id);
+            changeColorsBasedOnSelection(this.id);
         });
     });
 
-    function setColors(primaryColor, secondaryColor) {
+    function syncSelection(selectedId) {
+        // On s'assure que les 2 sélecteurs se mettent à jour
+        if (selectedId === 'pokeball-toggle' || selectedId === 'pokeball-toggle2') {
+            document.getElementById('pokeball-toggle').checked = true;
+            document.getElementById('pokeball-toggle2').checked = true;
+        } else if (selectedId === 'superball-toggle' || selectedId === 'superball-toggle2') {
+            document.getElementById('superball-toggle').checked = true;
+            document.getElementById('superball-toggle2').checked = true;
+        } else if (selectedId === 'hyperball-toggle' || selectedId === 'hyperball-toggle2') {
+            document.getElementById('hyperball-toggle').checked = true;
+            document.getElementById('hyperball-toggle2').checked = true;
+        }
+    }
+
+    function changeColorsBasedOnSelection(selectedId) {
+        if (selectedId === 'pokeball-toggle' || selectedId === 'pokeball-toggle2') {
+            setColors('--darkred', '--lightred', '--light-background');
+        } else if (selectedId === 'superball-toggle' || selectedId === 'superball-toggle2') {
+            setColors('--darkblue', '--lightblue', '--light-background');
+        } else if (selectedId === 'hyperball-toggle' || selectedId === 'hyperball-toggle2') {
+            setColors('--yellow', '--white', '--background-dark-main');
+        }
+    }
+
+    function setColors(primaryColor, secondaryColor, backgroundColor) {
         document.documentElement.style.setProperty('--primary-color', `var(${primaryColor})`);
         document.documentElement.style.setProperty('--secondary-color', `var(${secondaryColor})`);
+        document.documentElement.style.setProperty('--background-color', `var(${backgroundColor})`);
     }
 });
