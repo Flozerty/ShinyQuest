@@ -7,8 +7,10 @@
   --background-dark-main: #333333;
   --background-light-main: white;
 
+  --dark-secondary-full: #444444;
   --dark-secondary: rgba(68, 68, 68, 0.7);
   --light-secondary: rgba(255, 255, 255, 0.7);
+  --light-secondary-full: whitesmoke;
 
   --darkblue: #002a7e;
   --bluemedium: #003BB3;
@@ -19,10 +21,11 @@
   --lightred: #ffd8d8;
 
   --black: black;
-  --yellow: #db9c35;
+  --yellow: #F4A32C;
   --white: ghostwhite;
 
   --cardColor: ghostwhite;
+  --cardSecondaryColor: ghostwhite;
   --dark-card-color: #cccccc;
 
   --font-main-color: black;
@@ -358,7 +361,7 @@ header {
   display: flex;
   padding: 10px 15px;
   border-radius: 5px;
-  background-color: whitesmoke;
+  background-color: var(--cardSecondaryColor);
   flex-direction: column;
   align-items: center;
   text-align: center;
@@ -486,6 +489,8 @@ main {
   border-right: 1px solid var(--primary-color);
   transition: var(--transitionTime);
   background-color: var(--background-secondary);
+
+  backdrop-filter: blur(25px);
 
   div {
     padding: 10px 30px;

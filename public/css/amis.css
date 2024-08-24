@@ -142,6 +142,9 @@ main i {
     border-radius: 50%;
     color: var(--primary-color);
     background-color: var(--secondary-color);
+    &:hover{
+      transform: scale(1.2);
+    }
   }
 
   .demande-links {
@@ -179,6 +182,7 @@ main i {
       display: flex;
       max-width: 200px;
       gap: 5px;
+      background-color: var(--cardSecondaryColor);
 
       flex-direction: column;
       align-items: center;

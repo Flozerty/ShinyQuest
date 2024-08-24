@@ -144,19 +144,19 @@ main span {
   &>* {
     padding: 5px 15px;
     border-radius: 5px;
-    border: 1px solid var(--darkblue);
+    border: 1px solid var(--blue-main);
     font-size: 1rem;
     cursor: pointer;
   }
 
   button {
-    color: var(--darkblue);
-    background-color: white;
+    color: var(--blue-main);
+    background-color: var(--background-color);
   }
 
   .del-account-btn {
-    color: var(--dangerred);
-    border-color: var(--dangerred);
+    color: var(--red-main);
+    border-color: var(--red-main);
   }
 }
 
