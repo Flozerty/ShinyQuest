@@ -435,7 +435,6 @@ header {
   #hyperball-toggle2:checked~.toggle-button {
     left: calc(100% - ((var(--color-selection-width) - 2 * var(--color-selection-padding)) / 6) - var(--color-selection-padding));
   }
-
 }
 
 /* ------------------- MAIN ------------------ */
