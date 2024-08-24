@@ -313,7 +313,7 @@
 }
 
 @media (min-width: 700px) {
-  label {
+  #new-shasse label {
     padding-right: 20px;
   }
 

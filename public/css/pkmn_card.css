@@ -51,6 +51,7 @@
   align-items: center;
   justify-content: space-between;
   background-color: var(--cardColor);
+  color: black;
   width: 300px;
   padding: 15px;
   margin: 15px;

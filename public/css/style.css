@@ -2,12 +2,13 @@
   --primary-color: #002a7e;
   --secondary-color: #B9E7FF;
   --background-color: white;
+  --background-secondary: white;
 
   --background-dark-main: #333333;
-  --light-background: white;
+  --background-light-main: white;
 
-  --background-dark-secondary: #333333;
-  --background-light-secondary: white;
+  --dark-secondary: rgba(68, 68, 68, 0.7);
+  --light-secondary: rgba(255, 255, 255, 0.7);
 
   --darkblue: #002a7e;
   --bluemedium: #003BB3;
@@ -21,13 +22,16 @@
   --yellow: #db9c35;
   --white: ghostwhite;
 
-  --transitionTime: 0.3s;
-  --custom-icons-size: 20px;
+  --cardColor: ghostwhite;
+  --dark-card-color: #cccccc;
 
   --font-main-color: black;
-  --cardColor: ghostwhite;
+
   --dangerred: #d10000;
   --buttonsColor: #002a7e;
+
+  --transitionTime: 0.3s;
+  --custom-icons-size: 20px;
 
   --color-selection-width: 130px;
   --color-selection-toggle-button-dimension: 38px;
@@ -156,6 +160,7 @@ h2 {
   margin: 80px 50px 30px 50px;
 }
 
+/* -------------------ANIMATED BUTTONS------------------ */
 
 .main-animated-button {
   background: linear-gradient(to left, var(--buttonsColor) 50%, white 50%);
@@ -190,7 +195,6 @@ h2 {
     color: white;
   }
 }
-
 
 .secondary-animated-button {
   background: linear-gradient(to right, var(--buttonsColor) 50%, white 50%);
@@ -235,7 +239,7 @@ header {
   align-items: center;
   height: 80px;
   border-bottom: 1px solid var(--primary-color);
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: var(--background-secondary);
 
   backdrop-filter: blur(5px);
   z-index: 10;
@@ -395,10 +399,10 @@ header {
   width: var(--color-selection-width);
   justify-content: space-around;
   align-items: center;
-  background: ghostwhite;
+  background: var(--background-secondary);
   border-radius: 30px;
   padding: var(--color-selection-padding);
-  box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.4), inset 0px -5px 15px rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0px 5px 15px var(--secondary-color), inset 0px -5px 15px rgba(255, 255, 255, 0.4);
 
   .toggle-label {
     display: flex;
@@ -481,7 +485,7 @@ main {
   width: 300px;
   border-right: 1px solid var(--primary-color);
   transition: var(--transitionTime);
-  background-color: white;
+  background-color: var(--background-secondary);
 
   div {
     padding: 10px 30px;
@@ -641,7 +645,7 @@ footer {
   transform: translateY(-100%);
   top: 0;
   left: 0;
-  width: 100px;
+  width: 150px;
 }
 
 .run-animation {
@@ -743,7 +747,7 @@ footer {
 
   #main-wrapper {
     width: 100%;
-    padding: 0 5px;
+    padding: 80px 5px;
   }
 
   #footer-content {

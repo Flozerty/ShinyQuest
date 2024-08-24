@@ -4,9 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="description"
-    content="Suivez et répertoriez vos shasses de Pokémon shiny sur cette plateforme dédiée. Trouvez des renseignements utiles et partagez vos succès avec la communauté des shiny-hunters">
+    content="Suivez et répertoriez vos Pokémon shiny sur cette plateforme dédiée. Trouvez des renseignements utiles et partagez vos succès avec la communauté des shiny-hunters">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Floris Louërat">
+
   <title>{% block title %}Welcome!{% endblock %}</title>
+
   <link rel="icon" href="{{asset('favicon.svg')}}">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -298,7 +301,7 @@
   <script src="{{asset('js/headerProfileNav.js')}}"></script>
   <script src="{{asset('js/scrollUp.js')}}"></script>
   <script src="{{asset('js/pikaRun.js')}}"></script>
-  <script src="{{asset('js/setColors.js')}}"></script>
+  <script src="{{asset('js/setColors.js')}}" defer></script>
   {% block javascripts %}{% endblock %}
 </body>
 
