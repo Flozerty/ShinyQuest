@@ -13,11 +13,11 @@
   --light-secondary-full: whitesmoke;
 
   --darkblue: #002a7e;
-  --bluemedium: #003BB3;
+  --bluemedium: #84a3e1;
   --lightblue: #dcf2ff;
 
   --darkred: #d10000;
-  --redmedium: red;
+  --redmedium: #ff6b6b;
   --lightred: #ffe0e0;
 
   --black: black;
@@ -29,9 +29,11 @@
   --dark-card-color: #cccccc;
 
   --font-main-color: black;
+  --blue-main: #002a7e;
+  --red-main: #d10000;
 
   --dangerred: #d10000;
-  --buttonsColor: #002a7e;
+  --buttonsColor: var(--blue-main);
 
   --transitionTime: 0.3s;
   --custom-icons-size: 20px;
@@ -97,7 +99,7 @@ input[type="number"] {
 
 .fa-circle-xmark,
 .fa-trash-can {
-  color: var(--dangerred);
+  color: var(--red-main);
   transition: var(--transitionTime);
   font-size: 1.2rem;
 
@@ -166,11 +168,11 @@ h2 {
 /* -------------------ANIMATED BUTTONS------------------ */
 
 .main-animated-button {
-  background: linear-gradient(to left, var(--buttonsColor) 50%, white 50%);
+  background: linear-gradient(to left, var(--blue-main) 50%, var(--background-color) 50%);
   background-size: 200% 100%;
   background-position: right;
   color: white;
-  border: 1px solid var(--buttonsColor);
+  border: 1px solid var(--blue-main);
   border-radius: 5px;
   padding: 5px 15px;
   cursor: pointer;
@@ -178,16 +180,16 @@ h2 {
 
   &:hover {
     background-position: left;
-    color: var(--buttonsColor);
+    color: var(--blue-main);
   }
 }
 
 .delete-animated-button {
-  background: linear-gradient(to right, var(--dangerred) 50%, white 50%);
+  background: linear-gradient(to right, var(--red-main) 50%, var(--background-color) 50%);
   background-size: 200% 100%;
   background-position: right;
-  color: var(--dangerred);
-  border: 1px solid var(--dangerred);
+  color: var(--red-main);
+  border: 1px solid var(--red-main);
   border-radius: 5px;
   padding: 5px 15px;
   cursor: pointer;
@@ -195,16 +197,16 @@ h2 {
 
   &:hover {
     background-position: left;
-    color: white;
+    color: var(--background-color);
   }
 }
 
 .secondary-animated-button {
-  background: linear-gradient(to right, var(--buttonsColor) 50%, white 50%);
+  background: linear-gradient(to right, var(--blue-main) 50%, var(--background-color) 50%);
   background-size: 200% 100%;
   background-position: right;
-  color: var(--buttonsColor);
-  border: 1px solid var(--buttonsColor);
+  color: var(--blue-main);
+  border: 1px solid var(--blue-main);
   border-radius: 5px;
   padding: 5px 15px;
   cursor: pointer;
@@ -212,7 +214,7 @@ h2 {
 
   &:hover {
     background-position: left;
-    color: white;
+    color: var(--background-color);
   }
 }
 
@@ -313,7 +315,7 @@ header {
   }
 
   p {
-    color: white;
+    color: var(--background-color);
     font-weight: 600;
   }
 
@@ -417,10 +419,8 @@ header {
     align-items: center;
     cursor: pointer;
     z-index: 2;
-    flex: 1;
     text-align: center;
     font-size: 1.5rem;
-    color: var(--buttonsColor);
   }
 
   .toggle-button {
@@ -431,7 +431,7 @@ header {
     background: linear-gradient(180deg, #ffcc89, #d8860b);
     border-radius: 50%;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-    transition: left 0.3s ease, background 0.3s ease;
+    transition: var(--transitionTime);
     transform: translateX(-50%);
     background: linear-gradient(180deg, var(--secondary-color), var(--primary-color));
   }
@@ -602,7 +602,7 @@ footer {
     font-size: 0.8rem;
 
     #legal-mentions {
-      color: var(--darkblue);
+      color: var(--blue-main);
       text-decoration: underline;
     }
   }

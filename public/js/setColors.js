@@ -50,7 +50,7 @@ function loadSavedSelection() {
   }
 }
 
-// attribue les couleurs en fonction de l'input sélectionné
+// attribue les couleurs liées à l'input sélectionné
 function changeSelectedColor(selectedId) {
   if (selectedId === 'pokeball-toggle' || selectedId === 'pokeball-toggle2') {
     setColors(
@@ -61,7 +61,8 @@ function changeSelectedColor(selectedId) {
       '--black',
       '--white',
       '--light-secondary-full',
-      '--darkblue'
+      '--darkblue',
+      '--darkred',
     );
   } else if (selectedId === 'superball-toggle' || selectedId === 'superball-toggle2') {
     setColors(
@@ -72,7 +73,8 @@ function changeSelectedColor(selectedId) {
       '--black',
       '--white',
       '--light-secondary-full',
-      '--darkblue'
+      '--darkblue',
+      '--darkred',
     );
   } else if (selectedId === 'hyperball-toggle' || selectedId === 'hyperball-toggle2') {
     setColors(
@@ -83,8 +85,11 @@ function changeSelectedColor(selectedId) {
       '--white',
       '--dark-card-color',
       '--dark-secondary-full',
-      '--lightblue'
+      '--bluemedium',
+      '--redmedium',
     );
+  } else {
+    console.log("problème dans l'attribution des couleurs")
   }
 }
 
@@ -98,6 +103,7 @@ function setColors(
   cardColor,
   cardSecondaryColor,
   blueMain,
+  redMain,
 ) {
   document.documentElement.style.setProperty('--primary-color', `var(${primaryColor})`);
   document.documentElement.style.setProperty('--secondary-color', `var(${secondaryColor})`);
@@ -107,4 +113,5 @@ function setColors(
   document.documentElement.style.setProperty('--cardColor', `var(${cardColor})`);
   document.documentElement.style.setProperty('--cardSecondaryColor', `var(${cardSecondaryColor})`);
   document.documentElement.style.setProperty('--blue-main', `var(${blueMain})`);
+  document.documentElement.style.setProperty('--red-main', `var(${redMain})`);
 }

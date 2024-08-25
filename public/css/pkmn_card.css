@@ -56,7 +56,7 @@
   padding: 15px;
   margin: 15px;
   border-radius: 20px;
-  box-shadow: rgb(38, 57, 77) 0px 10px 15px -5px;
+  box-shadow: var(--primary-color) 3px 3px 10px -5px;
 }
 
 .main-card-content {
@@ -243,6 +243,9 @@
   position: absolute;
   top: 15px;
   right: 15px;
+  i{
+    color: var(--dangerred);
+  }
 }
 
 .shasse-trouve {

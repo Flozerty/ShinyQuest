@@ -57,7 +57,7 @@
     gap: 5px;
 
     .accept-demand {
-      color: white;
+      color: var(--background-color);
       background-color: var(--buttonsColor);
     }
 
@@ -82,15 +82,14 @@
       }
 
       &:hover {
-        color: white;
-        background-color: var(--dangerred);
+        background-color: var(--red-main);
 
         p {
           color: transparent;
         }
 
         i {
-          color: white;
+          color: var(--background-color);
         }
       }
     }
@@ -129,7 +128,7 @@ figure {
 
   img {
     border-radius: 50%;
-    background-color: white;
+    background-color: var(--background-color);
     height: 90%;
     overflow: hidden;
   }
