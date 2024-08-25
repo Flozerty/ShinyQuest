@@ -10,7 +10,7 @@
 
   /* box sizing counter effect */
   box-sizing: initial;
-  transition: var(--transitionTime);
+  transition: transform var(--transitionTime);
 
   * {
     box-sizing: initial;
