@@ -9,6 +9,7 @@
     display: flex;
     width: 220px;
     gap: 15px;
+    background-color: var(--cardSecondaryColor);
 
     flex-direction: column;
     justify-content: space-between;
@@ -128,7 +129,7 @@ figure {
 
   img {
     border-radius: 50%;
-    background-color: var(--background-color);
+    background-color: var(--cardColor);
     height: 90%;
     overflow: hidden;
   }

@@ -1,5 +1,6 @@
 main span {
   font-weight: 600;
+  /* color: var(--primary-color); */
 }
 
 #activity hr {
@@ -22,7 +23,8 @@ main span {
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(3, 1fr);
 
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: var(--cardSecondaryColor);
+  box-shadow: var(--primary-color) 3px 3px 10px -5px;
   padding: 15px;
 
   &>* {
@@ -115,8 +117,6 @@ main span {
   }
 }
 
-
-
 #dex-completion {
   border: 1px solid var(--primary-color);
   width: 80%;
@@ -161,7 +161,6 @@ main span {
 }
 
 @media (min-width: 850px) {
-
   #user-infos {
     figure {
       grid-column: 1/3;
