@@ -646,7 +646,6 @@ footer {
 .hide-scroll {
   bottom: 0;
   transform: translateY(100%);
-  display: none;
 }
 
 #pika-run {

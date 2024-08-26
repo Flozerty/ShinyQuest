@@ -3,51 +3,55 @@ document.addEventListener('DOMContentLoaded', function () {
 
   colorSelection.forEach(choice => {
     choice.addEventListener('change', function () {
-      syncSelection(this.id);
-      changeSelectedColor(this.id);
-      saveSelection(this.id)
+      syncSelection(choice.id);
+      changeSelectedColor(choice.id);
+      saveSelection(choice.id)
+      changeSelectedBall();
     })
   });
-
-  function syncSelection(selectedId) {
-    // On s'assure que les 2 sélecteurs se mettent à jour
-    if (selectedId === 'pokeball-toggle' || selectedId === 'pokeball-toggle2') {
-      document.getElementById('pokeball-toggle').checked = true;
-      document.getElementById('pokeball-toggle2').checked = true;
-
-    } else if (selectedId === 'superball-toggle' || selectedId === 'superball-toggle2') {
-      document.getElementById('superball-toggle').checked = true;
-      document.getElementById('superball-toggle2').checked = true;
-
-    } else if (selectedId === 'hyperball-toggle' || selectedId === 'hyperball-toggle2') {
-      document.getElementById('hyperball-toggle').checked = true;
-      document.getElementById('hyperball-toggle2').checked = true;
-    }
-  }
-
-  // sauvegarde de la sélection dans le Local Storage
-  function saveSelection(selectedId) {
-    localStorage.setItem('colorSelection', selectedId);
-  }
 });
 
-
-///////////////////////////////////////////////////////////////////////
-/////////////////////////// INITIALISATION ////////////////////////////
-///////////////////////////////////////////////////////////////////////
 loadSavedSelection();
 
-function loadSavedSelection() {
-  const savedId = localStorage.getItem('colorSelection');
-  if (savedId) {
-    changeSelectedColor(savedId);
+///////////////////////////////////////////////////////////////////////
+///////////////////////////// FONCTIONS ///////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
-    // on va changer l'input sélectionné dès le chargement de la page terminé
-    document.addEventListener('DOMContentLoaded', function () {
-      const input = document.getElementById(savedId);
-      input.checked = true;
-    })
+function loadSavedSelection() {
+  let savedId = localStorage.getItem('colorSelection');
+  if (!savedId) {
+    savedId = "superball-toggle";
   }
+  changeSelectedColor(savedId);
+
+  // on va changer l'input sélectionné dès le chargement de la page terminé
+  document.addEventListener('DOMContentLoaded', function () {
+    syncSelection(savedId);
+  })
+}
+
+// synchronisation des deux sélecteurs de ball/palette
+function syncSelection(selectedId) {
+  if (selectedId === 'pokeball-toggle' || selectedId === 'pokeball-toggle2') {
+    document.getElementById('pokeball-toggle').checked = true;
+    document.getElementById('pokeball-toggle2').checked = true;
+
+  } else if (selectedId === 'superball-toggle' || selectedId === 'superball-toggle2') {
+    document.getElementById('superball-toggle').checked = true;
+    document.getElementById('superball-toggle2').checked = true;
+
+  } else if (selectedId === 'hyperball-toggle' || selectedId === 'hyperball-toggle2') {
+    document.getElementById('hyperball-toggle').checked = true;
+    document.getElementById('hyperball-toggle2').checked = true;
+  } else {
+    document.getElementById('superball-toggle').checked = true;
+    document.getElementById('superball-toggle2').checked = true;
+  }
+}
+
+// sauvegarde de la sélection dans le Local Storage
+function saveSelection(selectedId) {
+  localStorage.setItem('colorSelection', selectedId);
 }
 
 // attribue les couleurs liées à l'input sélectionné

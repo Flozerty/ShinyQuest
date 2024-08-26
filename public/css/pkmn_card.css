@@ -107,7 +107,6 @@
     align-items: center;
     justify-content: center;
 
-
     .ball-img {
       position: absolute;
       top: 0;
@@ -257,9 +256,9 @@
 }
 
 .shasse-trouve {
-  background: none;
-  border-radius: 50%;
+  background: transparent;
   border-color: transparent;
+  border-radius: 50%;
   overflow: hidden;
   cursor: pointer;
   transition: var(--transitionTime);
@@ -267,7 +266,7 @@
   margin: 5px;
 
   img {
-    transform: scale(1.2);
+    height: 36px;
     filter: grayscale(1);
     transition: var(--transitionTime);
   }

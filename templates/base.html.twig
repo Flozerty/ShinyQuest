@@ -120,7 +120,6 @@
       {% endif %}
     </nav>
 
-
     {% if app.user is defined and app.user is not empty %}
 
     <ul id="profile-nav">
@@ -300,10 +299,10 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{{asset('js/toggleSideNav.js')}}"></script>
   <script src="{{asset('js/headerProfileNav.js')}}"></script>
-  <script src="{{asset('js/headerDisplay.js')}}"></script>
   <script src="{{asset('js/pikaRun.js')}}"></script>
-  <script src="{{asset('js/scrollUp.js')}}"></script>
+  <script src="{{asset('js/scrollListener.js')}}"></script>
   <script src="{{asset('js/headerSearch.js')}}"></script>
+<script src="{{asset('js/captureBallChange.js')}}"></script>
   {% block javascripts %}{% endblock %}
 </body>
 
