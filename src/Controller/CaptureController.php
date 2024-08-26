@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class CaptureController extends AbstractController
 {
   // Toutes mes captures
-  #[Route('/{pseudo}/captures', name: 'captures')]
+  #[Route('/user/{pseudo}/captures', name: 'captures')]
   public function captures(User $user, CaptureRepository $captureRepository): Response
   {
     if (!$user) {

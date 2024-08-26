@@ -8,14 +8,16 @@ use App\Repository\AmisRepository;
 use App\Repository\CaptureRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class UserController extends AbstractController
 {
     #[Route('/users', name: 'app_users')]
-    public function index(UserRepository $userRepository, AmisRepository $amisRepository, CaptureRepository $captureRepository, ApiHttpClient $apiHttpClient): Response
+    public function index(UserRepository $userRepository, PaginatorInterface $paginator, AmisRepository $amisRepository, CaptureRepository $captureRepository, Request $request, ApiHttpClient $apiHttpClient): Response
     {
         $users = $userRepository->findBy([], ["pseudo" => "ASC"]);
         $usersData = [];
@@ -27,9 +29,16 @@ class UserController extends AbstractController
             ];
         }
         // dd($usersData);
+        $query = $usersData;
+
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            6 /*limit per page*/
+        );
 
         $AmisByDemande = $amisRepository->findBy(["userDemande" => $this->getUser()]);
-        $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()],);
+        $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()], );
 
         $amis = [];
         $demandeEnvoyee = [];
@@ -63,13 +72,15 @@ class UserController extends AbstractController
             }
         }
 
-        // dd($amis);
         $pokemons = $apiHttpClient->getPokedex();
 
         return $this->render('user/index.html.twig', [
             "page_title" => "Liste des dresseurs",
             "allPokemons" => $pokemons,
+
+            'pagination' => $pagination,
             "usersData" => $usersData,
+
             "amis" => $amis,
             "demandeEnvoyee" => $demandeEnvoyee,
             "demandeRecue" => $demandeRecue,
@@ -84,7 +95,7 @@ class UserController extends AbstractController
         }
 
         $friend = $amisRepository->findFriendship($user, $this->getUser());
-        
+
         $userCaptures = $captureRepository->findBy(["user" => $user], ["dateCapture" => "DESC"]);
 
         $capturesTermine = [];

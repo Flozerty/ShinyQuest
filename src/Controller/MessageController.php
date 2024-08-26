@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Message;
 use App\Entity\User;
+use App\Form\MessageType;
 use App\Repository\AmisRepository;
 use App\Repository\MessageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -34,26 +37,37 @@ class MessageController extends AbstractController
 
         return $this->render('message/index.html.twig', [
             'page_title' => 'Messagerie',
-            'messagerieData' =>  $messagerieData,
+            'messagerieData' => $messagerieData,
         ]);
     }
 
     #[Route('/messagerie/{pseudo}', name: 'messages')]
-    public function messages(MessageRepository $messageRepository, AmisRepository $amisRepository, User $ami): Response
+    public function messages(MessageRepository $messageRepository, AmisRepository $amisRepository, User $ami, Request $request): Response
     {
         $relationship = $amisRepository->findFriendship($this->getUser(), $ami);
         // dd($relationship[0]->getStatut());
-        
+
         if (isset($relationship[0]) && $relationship[0]->getStatut() == true) {
+            // si ami
 
             $conversation = $messageRepository->getMessagesConversation($this->getUser(), $ami);
 
+            $message = new Message();
+            $formMessage = $this->createForm(MessageType::class, $message);
+
+            $formMessage->handleRequest($request);
+
+
+
             return $this->render('message/conversation.html.twig', [
                 // 'page_title' => 'Messages',
-                'conversation' =>  $conversation,
+                'conversation' => $conversation,
                 'ami' => $ami,
+                'formMessage' => $formMessage,
             ]);
+
         } else {
+            // si pas ami
             $this->addFlash('danger', "Vous ne pouvez envoyer un message qu'à vos amis");
             return $this->redirectToRoute('app_home');
         }

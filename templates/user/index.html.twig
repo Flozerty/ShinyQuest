@@ -2,15 +2,14 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{asset('css/dresseurs.css')}}">
+{{ knp_pagination_rel_links(pagination) }}
 {% endblock %}
 
 {% block body %}
 
 <section id="dresseurs">
 
-  {% for dresseur in usersData %}
-
-
+    {% for dresseur in pagination %}
   <div class="dresseur">
 
     <a class="user-link" href="{{ path('profile_user', {'pseudo': dresseur.user.pseudo}) }}">
@@ -77,9 +76,14 @@
 
     {% endif %}
   </div>
-
-  {% endfor %}
-
+       
+    {% endfor %}
 </section>
+
+{# display navigation #}
+<div class="navigation">
+    {{ knp_pagination_render(pagination) }}
+</div>
+
 
 {% endblock %}

@@ -78,6 +78,14 @@ main {
   color: var(--primary-color);
 }
 
+/* ///////////////////// FORM //////////////////// */
+form {
+
+  margin: auto;
+}
+
+#message
+/* //////////////// MEDIA QUERIES //////////////// */
 @media screen and (max-width: 500px) {
   .message-container {
     max-width: 75%;

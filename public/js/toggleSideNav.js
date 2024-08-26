@@ -1,6 +1,8 @@
 const sideNavContainer = document.querySelector('#main-side-nav'),
   toggleBtn = document.querySelector('#toggle-nav-btn'),
-  mainContainer = document.querySelector('main')
+  mainContainer = document.querySelector('main'),
+  footer = document.querySelector('footer')
+
 
 let toggleNav = false;
 
@@ -30,11 +32,13 @@ function verifyToggle() {
     sideNavContainer.classList.add('toggle-nav');
     sideNavContainer.classList.remove('hide-nav');
     mainContainer.classList.add("main-blur")
+    footer.classList.add("main-blur")
 
   } else {
     sideNavContainer.classList.add('hide-nav');
     sideNavContainer.classList.remove('toggle-nav');
     mainContainer.classList.remove("main-blur")
+    footer.classList.remove("main-blur")
   }
 }
 

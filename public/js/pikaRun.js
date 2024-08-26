@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   const pikaRun = document.getElementById('pika-run');
+  const inputs = document.querySelectorAll('input');
 
   function checkVisibility() {
     const rect = pikaRun.getBoundingClientRect();
@@ -16,5 +17,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   window.addEventListener('scroll', checkVisibility);
+
+  inputs.forEach(input => {
+    input.addEventListener('input', () => {
+      checkVisibility();
+    })
+  })
+
   checkVisibility();
+  // intervalle de vérification pour les autres cas possibles
+  setInterval(checkVisibility, 500)
 });
