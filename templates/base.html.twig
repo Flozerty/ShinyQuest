@@ -238,7 +238,9 @@
 
   {# footer #}
   <footer>
+{% if pika is defined and pika == true %}
     <img id="pika-run" src="{{asset('img/pikaRun.gif')}}" alt="pikachu running" loading="lazy">
+{% endif %}
 
     {% for label, messages in app.flashes %}
     {% for message in messages %}

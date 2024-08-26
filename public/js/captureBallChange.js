@@ -1,7 +1,6 @@
 function changeSelectedBall() {
   const imgBall = document.querySelectorAll('.capture-ball-img')
   let selectedBall = localStorage.getItem('colorSelection')
-  console.log(selectedBall);
 
   imgBall.forEach(img => {
 

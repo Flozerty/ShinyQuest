@@ -2,6 +2,9 @@
 
 {% block title %}Formulaire d'inscription{% endblock %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('css/security.css')}}">
+{% endblock %}
 {% block body %}
 {% for flash_error in app.flashes('verify_email_error') %}
 <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
@@ -19,7 +22,10 @@ label: 'Password'
 }) }}
 {{ form_row(registrationForm.agreeTerms) }}
 
-<input type="checkbox" name="_remember_me">Se souvenir de moi<br>
+<div class="checkbox-container">
+<label for="_remember_me">Se souvenir de moi</label>
+<input type="checkbox" name="_remember_me" id="_remember_me">
+</div>
 
 <button type="submit" class="btn">S'enregistrer</button>
 {{ form_end(registrationForm) }}

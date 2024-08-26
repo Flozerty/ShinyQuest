@@ -26,6 +26,7 @@ class ApiController extends AbstractController
     return $this->render('api/pokedex.html.twig', [
       "page_title" => 'Recherche par Pokédex',
       'allPokemons' => $pokemons,
+      "pika" => true,
     ]);
   }
 
@@ -99,18 +100,19 @@ class ApiController extends AbstractController
 
     // récupération de la chaîne d'évolution du pokémon
     $url = $pokemon["pkmnSpec"]["evolution_chain"]["url"];
-    $evolutionChain =  $apiHttpClient->getEvolutionChain($url);
+    $evolutionChain = $apiHttpClient->getEvolutionChain($url);
 
     // récupération des statss du pokemon
     $stats = [];
     foreach ($pokemon["pkmnStats"]["stats"] as $stat) {
       $url = $stat["stat"]["url"];
 
-      $stats[] =  [
+      $stats[] = [
         "base_stat" => $stat["base_stat"],
         "details_stat" => $apiHttpClient->getRequestByUrl($url),
       ];
-    };
+    }
+    ;
 
     // récupération des captures du pokemon
     $captures = $captureRepository->findCapturesByPokemonId($id);

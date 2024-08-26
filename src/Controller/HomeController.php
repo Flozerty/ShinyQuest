@@ -24,6 +24,7 @@ class HomeController extends AbstractController
                 "page_title" => "Bienvenue sur SHINYQUEST",
                 "shasses" => $shasses,
                 "captures" => $captures,
+                "pika" => true,
             ]);
         } else {
             $captures = $captureRepository->findBy(['termine' => 1], ["dateCapture" => "DESC"], 10);
@@ -31,6 +32,7 @@ class HomeController extends AbstractController
             return $this->render('home/homeDisconnected.html.twig', [
                 "page_title" => "Bienvenue sur SHINYQUEST",
                 "captures" => $captures,
+                "pika" => true,
             ]);
         }
     }

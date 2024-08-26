@@ -34,18 +34,25 @@ function loadSavedSelection() {
 function syncSelection(selectedId) {
   if (selectedId === 'pokeball-toggle' || selectedId === 'pokeball-toggle2') {
     document.getElementById('pokeball-toggle').checked = true;
-    document.getElementById('pokeball-toggle2').checked = true;
+    if (document.getElementById('pokeball-toggle2')) {
+      document.getElementById('pokeball-toggle2').checked = true;
+    }
 
   } else if (selectedId === 'superball-toggle' || selectedId === 'superball-toggle2') {
     document.getElementById('superball-toggle').checked = true;
-    document.getElementById('superball-toggle2').checked = true;
-
+    if (document.getElementById('superball-toggle2')) {
+      document.getElementById('superball-toggle2').checked = true;
+    }
   } else if (selectedId === 'hyperball-toggle' || selectedId === 'hyperball-toggle2') {
     document.getElementById('hyperball-toggle').checked = true;
-    document.getElementById('hyperball-toggle2').checked = true;
+    if (document.getElementById('hyperball-toggle2')) {
+      document.getElementById('hyperball-toggle2').checked = true;
+    }
   } else {
     document.getElementById('superball-toggle').checked = true;
-    document.getElementById('superball-toggle2').checked = true;
+    if (document.getElementById('superball-toggle2')) {
+      document.getElementById('superball-toggle2').checked = true;
+    }
   }
 }
 
