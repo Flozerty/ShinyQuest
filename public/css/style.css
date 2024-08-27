@@ -6,11 +6,14 @@
 
   --background-dark-main: #333333;
   --background-light-main: white;
+  --darker: #222222;
 
   --dark-secondary-full: #444444;
   --dark-secondary: rgba(68, 68, 68, 0.7);
   --light-secondary: rgba(255, 255, 255, 0.7);
   --light-secondary-full: whitesmoke;
+
+  --hover-main-color: #cccccc;
 
   --darkblue: #002a7e;
   --bluemedium: #84a3e1;
@@ -24,15 +27,15 @@
   --yellow: #F4A32C;
   --white: ghostwhite;
 
-  --cardColor: ghostwhite;
-  --cardSecondaryColor: ghostwhite;
+  --cardColor: var(--white);
+  --cardSecondaryColor: var(--white);
   --dark-card-color: #cccccc;
 
   --font-main-color: black;
   --blue-main: #002a7e;
   --red-main: #d10000;
 
-  --dangerred: #d10000;
+  --dangerred: var(--darkred);
   --buttonsColor: var(--blue-main);
 
   --transitionTime: 0.3s;
@@ -384,7 +387,7 @@ header {
       width: 100%;
 
       &:hover {
-        background-color: var(--lightblue);
+        background-color: var(--hover-main-color);
       }
     }
   }
