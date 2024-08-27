@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `amis` (
   CONSTRAINT `FK_9FE2E761A3409E4` FOREIGN KEY (`user_recoit_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table shinyquest.amis : ~0 rows (environ)
+-- Listage des données de la table shinyquest.amis : ~5 rows (environ)
 DELETE FROM `amis`;
 INSERT INTO `amis` (`id`, `user_demande_id`, `user_recoit_id`, `statut`, `date_demande`) VALUES
 	(1, 16, 2, 0, '2024-07-16'),
@@ -105,14 +105,15 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Listage des données de la table shinyquest.doctrine_migration_versions : ~4 rows (environ)
+-- Listage des données de la table shinyquest.doctrine_migration_versions : ~5 rows (environ)
 DELETE FROM `doctrine_migration_versions`;
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 	('DoctrineMigrations\\Version20240716143607', NULL, NULL),
 	('DoctrineMigrations\\Version20240719144440', '2024-07-19 14:44:49', 288),
 	('DoctrineMigrations\\Version20240802131931', '2024-08-02 13:19:44', 246),
 	('DoctrineMigrations\\Version20240819071051', '2024-08-19 07:10:55', 135),
-	('DoctrineMigrations\\Version20240822092732', '2024-08-22 09:27:41', 67);
+	('DoctrineMigrations\\Version20240822092732', '2024-08-22 09:27:41', 67),
+	('DoctrineMigrations\\Version20240827133539', '2024-08-27 13:35:47', 170);
 
 -- Listage de la structure de table shinyquest. message
 DROP TABLE IF EXISTS `message`;
@@ -120,28 +121,36 @@ CREATE TABLE IF NOT EXISTS `message` (
   `id` int NOT NULL AUTO_INCREMENT,
   `date_message` datetime NOT NULL,
   `contenu_message` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `piece_jointe` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pj_id` int DEFAULT NULL,
   `user_envoi_id` int NOT NULL,
   `user_recoit_id` int NOT NULL,
   `lu` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_B6BD307FDF1A08E5` (`user_envoi_id`),
   KEY `IDX_B6BD307FA3409E4` (`user_recoit_id`),
+  KEY `IDX_B6BD307FF26B1C97` (`pj_id`),
   CONSTRAINT `FK_B6BD307FA3409E4` FOREIGN KEY (`user_recoit_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `FK_B6BD307FDF1A08E5` FOREIGN KEY (`user_envoi_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  CONSTRAINT `FK_B6BD307FDF1A08E5` FOREIGN KEY (`user_envoi_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `FK_B6BD307FF26B1C97` FOREIGN KEY (`pj_id`) REFERENCES `capture` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table shinyquest.message : ~8 rows (environ)
 DELETE FROM `message`;
-INSERT INTO `message` (`id`, `date_message`, `contenu_message`, `piece_jointe`, `user_envoi_id`, `user_recoit_id`, `lu`) VALUES
-	(1, '2024-08-19 10:13:49', 'test', NULL, 2, 24, 0),
+INSERT INTO `message` (`id`, `date_message`, `contenu_message`, `pj_id`, `user_envoi_id`, `user_recoit_id`, `lu`) VALUES
+	(1, '2024-08-19 10:13:49', 'test', 3, 2, 24, 0),
 	(2, '2024-08-21 10:13:49', 'test', NULL, 2, 24, 0),
 	(3, '2024-08-21 20:13:49', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis, accusantium ducimus quas dolore atque perspiciatis similique cupiditate nobis omnis suscipit debitis delectus vel amet maiores? Quae eos aut optio magnam explicabo eaque quibusdam sit expedita quo ea est impedit a omnis voluptatem esse rerum recusandae, vero quam sequi totam, cupiditate ab qui aliquam. Iure, cumque enim vero at error, repudiandae ipsum soluta dolor sequi ad natus, perferendis laudantium consequuntur consequatur harum dignissimos. Provident est repellat veritatis possimus corporis maiores laborum vel consequuntur ducimus perferendis ut laboriosam cum recusandae dicta quis, ipsa minus sapiente? At sequi cum quae obcaecati vel ratione!', NULL, 24, 2, 0),
 	(4, '2024-08-19 10:13:49', 'test', NULL, 24, 2, 0),
 	(5, '2024-08-21 10:13:49', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis, accusantium ducimus quas dolore atque perspiciatis similique cupiditate nobis omnis suscipit debitis delectus vel amet maiores? Quae eos aut optio magnam explicabo eaque quibusdam sit expedita quo ea est impedit a omnis voluptatem esse rerum recusandae, vero quam sequi totam, cupiditate ab qui aliquam. Iure, cumque enim vero at error, repudiandae ipsum soluta dolor sequi ad natus, perferendis laudantium consequuntur consequatur harum dignissimos. Provident est repellat veritatis possimus corporis maiores laborum vel consequuntur ducimus perferendis ut laboriosam cum recusandae dicta quis, ipsa minus sapiente? At sequi cum quae obcaecati vel ratione!', NULL, 2, 24, 0),
 	(6, '2024-08-21 10:13:49', 'test', NULL, 2, 20, 0),
 	(7, '2024-08-21 10:13:49', 'test', NULL, 20, 2, 0),
-	(8, '2024-08-21 10:13:49', 'test', NULL, 2, 20, 0);
+	(8, '2024-08-21 10:13:49', 'test', 3, 2, 20, 0),
+	(9, '2024-08-27 08:29:58', 'test', NULL, 2, 24, 0),
+	(10, '2024-08-27 08:30:36', 'test', NULL, 2, 24, 0),
+	(11, '2024-08-27 08:45:41', 'ets', NULL, 2, 24, 0),
+	(12, '2024-08-27 14:39:26', 'rzetrthg', NULL, 2, 24, 0),
+	(13, '2024-08-27 14:39:37', 'cfcbhdfwhqdthjhj', 3, 2, 24, 0),
+	(14, '2024-08-27 14:40:12', 'sqtsrg', NULL, 2, 24, 0);
 
 -- Listage de la structure de table shinyquest. messenger_messages
 DROP TABLE IF EXISTS `messenger_messages`;
