@@ -19,9 +19,8 @@ dialog {
   margin: auto;
   min-width: 25%;
   border-color: var(--primary-color);
-  background-color: var(--cardSecondaryColor);
-  color: var(--font-main-color);
-
+  background-color: var(--cardColor);
+  color: black;
 
   .dialog-content {
     padding: 20px;
@@ -39,7 +38,7 @@ dialog {
         margin: 10px 0;
 
         &>button i,
-        p i {
+        &>i {
           font-size: 2rem;
           margin: 0 10px;
         }

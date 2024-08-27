@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Capture;
 use App\Entity\Message;
 use App\Entity\User;
 use App\Form\MessageType;
 use App\Repository\AmisRepository;
+use App\Repository\CaptureRepository;
 use App\Repository\MessageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,30 +45,29 @@ class MessageController extends AbstractController
     }
 
     #[Route('/messagerie/{pseudo}', name: 'messages')]
-    public function messages(MessageRepository $messageRepository, AmisRepository $amisRepository, EntityManagerInterface $entityManager, User $ami, Request $request): Response
+    public function messages(MessageRepository $messageRepository, AmisRepository $amisRepository, EntityManagerInterface $entityManager, Request $request, CaptureRepository $captureRepository, User $ami, Capture $pjSend = null): Response
     {
+        // vérification de si ami
         $relationship = $amisRepository->findFriendship($this->getUser(), $ami);
-        // dd($relationship[0]->getStatut());
-
         if (isset($relationship[0]) && $relationship[0]->getStatut() == true) {
-            // si ami
 
             $conversation = $messageRepository->getMessagesConversation($this->getUser(), $ami);
 
             $message = new Message();
 
-            // validation du formulaire
             $formMessage = $this->createForm(MessageType::class, $message);
             $formMessage->handleRequest($request);
 
+            // validation du formulaire
             if ($formMessage->isSubmitted() && $formMessage->isValid()) {
 
                 $pj = filter_input(INPUT_POST, "pj", FILTER_VALIDATE_INT);
+                $capturePj = $captureRepository->findOneBy(['id' => $pj]);
 
                 $message = $formMessage->getData(); //filter tous les inputs du FormType
                 $message->setUserEnvoi($this->getUser());
                 $message->setUserRecoit($ami);
-                $message->setPieceJointe($pj);
+                $message->setPj($capturePj);
 
                 $entityManager->persist($message);
                 $entityManager->flush();
@@ -79,6 +80,7 @@ class MessageController extends AbstractController
                 'conversation' => $conversation,
                 'ami' => $ami,
                 'formMessage' => $formMessage,
+                'pj' => $pjSend,
             ]);
 
         } else {

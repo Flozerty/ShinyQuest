@@ -5,11 +5,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const dialog = document.querySelector('dialog');
   const dialogContent = dialog.querySelector('.dialog-content');
-  const cancelButton = dialog.querySelector(".cancel");
+  const cancelButton = dialog.querySelector(".cancelBtn");
 
   const IdCaptureInputHidden = dialog.querySelector("#IdCapture")
-
-
 
   cards.forEach(card => {
     const buttonFind = card.querySelector(".shasse-trouve");

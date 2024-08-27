@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\CaptureType;
 use App\Form\ShasseStartType;
 use App\HttpClient\ApiHttpClient;
+use App\Repository\AmisRepository;
 use App\Repository\CaptureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +20,7 @@ class CaptureController extends AbstractController
 {
   // Toutes mes captures
   #[Route('/user/{pseudo}/captures', name: 'captures')]
-  public function captures(User $user, CaptureRepository $captureRepository): Response
+  public function captures(User $user, CaptureRepository $captureRepository, AmisRepository $amisRepository): Response
   {
     if (!$user) {
       return $this->redirectToRoute('app_login');
@@ -27,10 +28,20 @@ class CaptureController extends AbstractController
 
     $captures = $captureRepository->findBy(['user' => $user, 'termine' => 1], ['dateCapture' => "DESC"]);
 
+    // récupération des amis
+    $amisData = $amisRepository->getAllAmis($this->getUser());
+    $amis = [];
+
+    foreach ($amisData as $ami) {
+      $amis[] = $ami->getUserRecoit() == $this->getUser() ? $ami->getUserDemande() : $ami->getUserRecoit();
+    }
+    // dd($amis);
+
     return $this->render('capture/captures.html.twig', [
       "page_title" => $this->getUser() == $user ? 'Mes captures' : "Captures de " . $user->getPseudo(),
       "captures" => $captures,
       "user" => $user,
+      "amis" => $amis,
     ]);
   }
 
@@ -89,7 +100,6 @@ class CaptureController extends AbstractController
 
       $idCapture = filter_input(INPUT_POST, "IdCapture", FILTER_VALIDATE_INT);
       $ball = filter_input(INPUT_POST, "ball", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
 
       // on va récupérer la capture avec cet ID.
       $capture = $captureRepository->find($idCapture);

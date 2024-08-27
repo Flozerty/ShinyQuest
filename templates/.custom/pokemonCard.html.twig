@@ -1,7 +1,7 @@
 <div class="pokemon-card">
 
-  {# delete : capture ou shasse de l'user connecté ou admin #}
-  {% if (app.user is defined and app.user is not empty) and (app.user == capture.user or 'ROLE_ADMIN' in app.user.roles)
+  {# delete : capture ou shasse de l'user connecté ou admin / sauf noBtns var #}
+  {% if (app.user is defined and app.user is not empty) and (app.user == capture.user or 'ROLE_ADMIN' in app.user.roles) and not (noBtns is defined)
   %}
 
 <div id="links-btns">

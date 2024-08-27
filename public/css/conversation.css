@@ -6,10 +6,13 @@
   margin-top: 100px;
 }
 
+.pokemon-card {
+  margin: 0;
+}
+
 .message-container {
   display: flex;
   width: 100%;
-  max-width: 60%;
   box-sizing: border-box;
   gap: 10px;
 
@@ -45,20 +48,31 @@
     margin-top: 20px;
   }
 
-  .message {
-    background-color: var(--background-secondary);
-    padding: 10px;
+  .message-content {
     height: fit-content;
     align-self: center;
     position: relative;
-    border-radius: 15px;
-    border: 1px solid var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .message {
+      background-color: var(--background-secondary);
+      padding: 10px;
+      border-radius: 15px;
+      border: 1px solid var(--primary-color);
+      max-width: 50vh;
+    }
   }
 }
 
 .my-message {
   align-self: flex-end;
   flex-direction: row-reverse;
+
+  .message-content {
+    align-items: flex-end;
+  }
 
   .heure {
     right: 0;
@@ -67,6 +81,10 @@
 
 .his-message {
   align-self: baseline;
+
+  .message-content {
+    align-items: flex-start;
+  }
 
   .heure {
     left: 0;
@@ -96,7 +114,12 @@ form[name="message"] {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 20px;
+  width: fit-content;
+  align-self: center;
+
+  &>p {
+    margin-bottom: 10px;
+  }
 
   button {
     color: var(--primary-color);
@@ -112,6 +135,7 @@ form[name="message"] {
     background-color: var(--cardColor);
     border-radius: 10px;
     padding: 5px 10px;
+    margin: 5px 0 10px 0;
 
     &:focus {
       outline: none;
@@ -127,7 +151,7 @@ form[name="message"] {
     &::-webkit-scrollbar-track {
       background-color: #f1f1f1;
       border-radius: 5px;
-
+      cursor: pointer;
     }
 
     &::-webkit-scrollbar-track:hover {
@@ -139,6 +163,7 @@ form[name="message"] {
       background-color: var(--primary-color);
       border-radius: 5px;
       border: 1px solid white;
+      cursor: pointer;
     }
 
     &::-webkit-scrollbar-thumb:hover {
@@ -148,8 +173,43 @@ form[name="message"] {
   }
 }
 
+#pjToSend,
+#pjToSend div {
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+#pjContainer {
+  width: 100%;
+}
+
+#pjToSend {
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  background-color: var(--hover-main-color);
+  padding: 5px;
+  width: 100%;
+  justify-content: space-between;
+
+  img {
+    height: 100%;
+    margin-right: 10px;
+  }
+
+  span {
+    color: var(--primary-color);
+    font-weight: 600;
+  }
+
+  i {
+    justify-self: flex-end;
+    cursor: pointer;
+  }
+}
+
 /* //////////////// MEDIA QUERIES //////////////// */
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 700px) {
   .message-container {
     max-width: 75%;
     margin: 0 10px;

@@ -3,7 +3,12 @@
 {% block title %}Messages avec {{ami.pseudo}} {% endblock %}
 
 {% block stylesheets %}
+<link rel="stylesheet" href="{{asset('css/pkmn_card.css')}}">
 <link rel="stylesheet" href="{{asset('css/conversation.css')}}">
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{asset('js/messagerieRemovePj.js')}}"></script>
 {% endblock %}
 
 {% block body %}
@@ -33,10 +38,11 @@
         {% endif %}
         {% endif %}
 
+        {# container #}
         <div {% if message.userEnvoi==app.user %} class="message-container my-message" {% else %}
             class="message-container his-message" {% endif%}>
 
-            {# conditions d'affichage de l'avatar jour différent / user différent #}
+            {# avatar : si jour différent / user différent #}
             {% if lastUserSent is not defined or (lastUserSent != message.UserEnvoi) or (dateMessagePrecedent is defined and (dateMessagePrecedent | date('Y-m-d')) != (message.dateMessage | date('Y-m-d'))) %}
             <a class="user-link profil-dresseur"
                 href="{{ path('profile_user', {'pseudo': message.userEnvoi.pseudo}) }}">
@@ -49,35 +55,59 @@
             <div class="profil-dresseur hidden-profil"></div>
             {% endif %}
 
-                    {# si jour identique #}
+            {# heure : si user différent du dernier message ou dernier message envoyé il y a plus de 10 minutes, ou un autre jour que le précédent #}
+            {% if 
+                (heureMessagePrecedent is not defined or heureMessagePrecedent < (message.dateMessage | date_modify('-10 minutes')) | date('H:i'))
+                or (lastUserSent is not defined or lastUserSent != message.UserEnvoi) 
+                or (dateMessagePrecedent is defined and (dateMessagePrecedent | date('Y-m-d')) != (message.dateMessage | date('Y-m-d'))) %}
+            
+                <div class="message-content space-message">
+                    <span class="heure">
+                            {{message.dateMessage | date('H:i')}}
+                    </span>
+            {% else %}
+                
+                <div class="message-content">
+            {% endif %}
 
-                    {# si user différent du dernier message ou dernier message envoyé il y a plus de 10 minutes, ou un autre jour que le précédent on affiche l'heure #}
-                    {% if 
-                        (heureMessagePrecedent is not defined or heureMessagePrecedent < (message.dateMessage | date_modify('-10 minutes')) | date('H:i'))
-                        or (lastUserSent is not defined or lastUserSent != message.UserEnvoi) 
-                        or (dateMessagePrecedent is defined and (dateMessagePrecedent | date('Y-m-d')) != (message.dateMessage | date('Y-m-d'))) %}
-                    
-            <p class="message space-message">
-                <span class="heure">
-                        {{message.dateMessage | date('H:i')}}
-                </span>
-                       {% else %}
-                         
-            <p class="message">
-                    {% endif %}
-                {{message.contenuMessage}}
-            </p>
+            {# inclusion de la card en PJ #}
+            {% if message.pj is defined and message.pj is not null %}
+            {% set capture = message.pj %}
+
+            {# on retire les btns de la card #}
+            {% set noBtns = true %}
+            {% include '.custom/pokemonCard.html.twig' %}
+            {% endif %}
+
+            <p class="message">{{message.contenuMessage}}</p>
         </div>
+    </div>
 
-        {% set heureMessagePrecedent = message.dateMessage | date('H:i') %}
-        {% set lastUserSent = message.UserEnvoi %}
-        {% set dateMessagePrecedent = dateMessageActuel %}
-        {% endfor %}
+    {% set heureMessagePrecedent = message.dateMessage | date('H:i') %}
+    {% set lastUserSent = message.UserEnvoi %}
+    {% set dateMessagePrecedent = dateMessageActuel %}
+    {% endfor %}
 </section>
 
     {{ form_start(formMessage) }}
-{{ form_row(formMessage.contenuMessage) }}
-<button type="submit">envoyer</button>
-    {{ form_end(formMessage) }}
+<p>Nouveau message :</p>
 
-        {% endblock %}
+{% if pj is defined and pj is not empty %}
+<div id="pjContainer">
+    <input type="hidden" name="pj" value="{{pj.id}}">
+
+    <label id="pjToSend" for="pj">
+        <div>
+            <img src="{{pj.imgShiny}}" alt="{{pj.nomPokemon}} shiny">
+            <p>capture de <span>{{pj.nomPokemon}}</span></p>
+        </div>
+        <i class="fa-solid fa-trash-can"></i>
+    </label>
+</div>
+{% endif %}
+
+{{ form_row(formMessage.contenuMessage) }}
+    <button type="submit">envoyer</button>
+{{ form_end(formMessage) }}
+
+{% endblock %}

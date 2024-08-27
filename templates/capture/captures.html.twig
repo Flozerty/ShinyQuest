@@ -11,6 +11,7 @@ Captures de {{user.pseudo}}
 {% block stylesheets %}
 <link rel="stylesheet" href="{{asset('css/pkmn_card.css')}}">
 <link rel="stylesheet" href="{{asset('css/captures.css')}}">
+<link rel="stylesheet" href="{{asset('css/modals.css')}}">
 {% endblock %}
 
 {% block javascripts %}
@@ -30,10 +31,26 @@ Captures de {{user.pseudo}}
 <dialog id="sendCaptureDialog">
   <div class="dialog-content">
 
-<input type="hidden" id="" name="" value="">
+    <form action="" id="contactForm">
+      <input type="hidden" id="id-capture" name="id-capture" value="">
 
+      <label for="ami">choisissez votre contact</label>
+      <select id="ami" name="ami">
+        {% for ami in amis %}
+          <option value="{{ami.pseudo}}">{{ami.pseudo}}</option>
+        {% endfor %}
+      </select>
+
+      <div class="modalNav">
+        <button type="submit">
+          <i class="fa-solid fa-circle-check"></i>
+        </button>
+
+        <i class="cancelBtn fa-solid fa-circle-xmark"></i>
+      </div>
+
+    </form>
   </div>
 </dialog>
-
 
 {% endblock %}
