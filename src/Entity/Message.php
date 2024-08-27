@@ -20,9 +20,6 @@ class Message
     #[ORM\Column(type: Types::TEXT)]
     private ?string $contenuMessage = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $pieceJointe = null;
-
     #[ORM\ManyToOne(inversedBy: 'messagesEnvoi')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $userEnvoi = null;
@@ -33,6 +30,9 @@ class Message
 
     #[ORM\Column]
     private ?bool $lu = null;
+
+    #[ORM\ManyToOne]
+    private ?Capture $pj = null;
 
     public function __construct()
     {
@@ -70,18 +70,6 @@ class Message
         return $this;
     }
 
-    public function getPieceJointe(): ?string
-    {
-        return $this->pieceJointe;
-    }
-
-    public function setPieceJointe(?string $pieceJointe): static
-    {
-        $this->pieceJointe = $pieceJointe;
-
-        return $this;
-    }
-
     public function getUserEnvoi(): ?User
     {
         return $this->userEnvoi;
@@ -114,6 +102,18 @@ class Message
     public function setLu(bool $lu): static
     {
         $this->lu = $lu;
+
+        return $this;
+    }
+
+    public function getPj(): ?Capture
+    {
+        return $this->pj;
+    }
+
+    public function setPj(?Capture $pj): static
+    {
+        $this->pj = $pj;
 
         return $this;
     }
