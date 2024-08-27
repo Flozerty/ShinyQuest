@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\MessageType;
 use App\Repository\AmisRepository;
 use App\Repository\MessageRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,7 +43,7 @@ class MessageController extends AbstractController
     }
 
     #[Route('/messagerie/{pseudo}', name: 'messages')]
-    public function messages(MessageRepository $messageRepository, AmisRepository $amisRepository, User $ami, Request $request): Response
+    public function messages(MessageRepository $messageRepository, AmisRepository $amisRepository, EntityManagerInterface $entityManager, User $ami, Request $request): Response
     {
         $relationship = $amisRepository->findFriendship($this->getUser(), $ami);
         // dd($relationship[0]->getStatut());
@@ -53,11 +54,25 @@ class MessageController extends AbstractController
             $conversation = $messageRepository->getMessagesConversation($this->getUser(), $ami);
 
             $message = new Message();
-            $formMessage = $this->createForm(MessageType::class, $message);
 
+            // validation du formulaire
+            $formMessage = $this->createForm(MessageType::class, $message);
             $formMessage->handleRequest($request);
 
+            if ($formMessage->isSubmitted() && $formMessage->isValid()) {
 
+                $pj = filter_input(INPUT_POST, "pj", FILTER_VALIDATE_INT);
+
+                $message = $formMessage->getData(); //filter tous les inputs du FormType
+                $message->setUserEnvoi($this->getUser());
+                $message->setUserRecoit($ami);
+                $message->setPieceJointe($pj);
+
+                $entityManager->persist($message);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('messages', ['pseudo' => $ami]);
+            }
 
             return $this->render('message/conversation.html.twig', [
                 // 'page_title' => 'Messages',

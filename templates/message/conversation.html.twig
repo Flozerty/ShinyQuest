@@ -9,6 +9,8 @@
 {% block body %}
 
 {% set dateActuelle = "now" | date('m/d/y') %}
+
+<section id="conversation">
 {% for message in conversation %}
 
 {# On affiche la date si elle est différente. #}
@@ -44,11 +46,8 @@
                 </figure>
             </a>
             {% else %}
-            <div class="user-link profil-dresseur"></div>
+            <div class="profil-dresseur hidden-profil"></div>
             {% endif %}
-
-            <p class="message">
-                <span class="heure">
 
                     {# si jour identique #}
 
@@ -58,10 +57,14 @@
                         or (lastUserSent is not defined or lastUserSent != message.UserEnvoi) 
                         or (dateMessagePrecedent is defined and (dateMessagePrecedent | date('Y-m-d')) != (message.dateMessage | date('Y-m-d'))) %}
                     
+            <p class="message space-message">
+                <span class="heure">
                         {{message.dateMessage | date('H:i')}}
-                        
-                    {% endif %}
                 </span>
+                       {% else %}
+                         
+            <p class="message">
+                    {% endif %}
                 {{message.contenuMessage}}
             </p>
         </div>
@@ -70,7 +73,11 @@
         {% set lastUserSent = message.UserEnvoi %}
         {% set dateMessagePrecedent = dateMessageActuel %}
         {% endfor %}
+</section>
 
-    {{ form(formMessage) }}
+    {{ form_start(formMessage) }}
+{{ form_row(formMessage.contenuMessage) }}
+<button type="submit">envoyer</button>
+    {{ form_end(formMessage) }}
 
         {% endblock %}

@@ -245,14 +245,35 @@
   margin: 10px 0;
 }
 
-.del-btn {
+#links-btns {
   position: absolute;
   top: 15px;
   right: 15px;
+  gap: 15px;
+  display: flex;
+  font-size: 1.2rem;
 
   i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .fa-share-from-square {
+    cursor: pointer;
+    transition: var(--transitionTime);
+    color: var(--darkblue);
+
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
+
+
+  .del-btn {
     color: var(--dangerred);
   }
+
 }
 
 .shasse-trouve {

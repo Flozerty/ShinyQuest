@@ -13,8 +13,11 @@ Captures de {{user.pseudo}}
 <link rel="stylesheet" href="{{asset('css/captures.css')}}">
 {% endblock %}
 
-{% block body %}
+{% block javascripts %}
+<script src="{{asset('js/captureModal.js')}}"></script>
+{% endblock %}
 
+{% block body %}
 
 <section id="my-captures">
   {% for capture in captures %}
@@ -23,6 +26,14 @@ Captures de {{user.pseudo}}
 
   {% endfor %}
 </section>
+
+<dialog id="sendCaptureDialog">
+  <div class="dialog-content">
+
+<input type="hidden" id="" name="" value="">
+
+  </div>
+</dialog>
 
 
 {% endblock %}

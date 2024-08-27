@@ -9,12 +9,12 @@ window.addEventListener('scroll', () => {
     fullHeader.style.transform = 'translateY(-100%)';
     sideNav.style.top = '0';
     sideNav.style.paddingTop = '80px';
-    toggleNavBtn.style.top = 'calc(10% + 80px)';
+    toggleNavBtn.style.top = 'calc(10vh + 80px)';
   } else {
     fullHeader.style.transform = 'translateY(0)';
     sideNav.style.top = '80px';
     sideNav.style.paddingTop = '0';
-    toggleNavBtn.style.top = '10%';
+    toggleNavBtn.style.top = '10vh';
   }
   lastScrollY = window.scrollY;
 })

@@ -17,10 +17,11 @@ class MessageType extends AbstractType
     {
         $builder
             ->add('contenuMessage', TextareaType::class, [
-                'label' => ' '
-            ])
-            ->add('pieceJointe', FileType::class, [
-                'label' => ' '
+                'label' => ' ',
+                'attr' => [
+                    'rows'=>8, 
+                    'cols'=>50,
+                ],
             ])
         ;
     }

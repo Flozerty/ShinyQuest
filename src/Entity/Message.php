@@ -34,7 +34,9 @@ class Message
     #[ORM\Column]
     private ?bool $lu = null;
 
-    public function __construct() {
+    public function __construct()
+    {
+        // initialisation d'un nouveau message
         $this->dateMessage = new \DateTime();
         $this->lu = 0;
     }

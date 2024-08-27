@@ -74,6 +74,7 @@ function changeSelectedColor(selectedId) {
       '--light-secondary-full',
       '--darkblue',
       '--darkred',
+      '--dark-card-color',
     );
   } else if (selectedId === 'superball-toggle' || selectedId === 'superball-toggle2') {
     setColors(
@@ -86,6 +87,7 @@ function changeSelectedColor(selectedId) {
       '--light-secondary-full',
       '--darkblue',
       '--darkred',
+      '--dark-card-color',
     );
   } else if (selectedId === 'hyperball-toggle' || selectedId === 'hyperball-toggle2') {
     setColors(
@@ -98,6 +100,7 @@ function changeSelectedColor(selectedId) {
       '--dark-secondary-full',
       '--bluemedium',
       '--redmedium',
+      '--darker',
     );
   } else {
     console.log("problème dans l'attribution des couleurs")
@@ -115,6 +118,7 @@ function setColors(
   cardSecondaryColor,
   blueMain,
   redMain,
+  HoverMain,
 ) {
   document.documentElement.style.setProperty('--primary-color', `var(${primaryColor})`);
   document.documentElement.style.setProperty('--secondary-color', `var(${secondaryColor})`);
@@ -125,4 +129,5 @@ function setColors(
   document.documentElement.style.setProperty('--cardSecondaryColor', `var(${cardSecondaryColor})`);
   document.documentElement.style.setProperty('--blue-main', `var(${blueMain})`);
   document.documentElement.style.setProperty('--red-main', `var(${redMain})`);
+  document.documentElement.style.setProperty('--hover-main-color', `var(${HoverMain})`);
 }
