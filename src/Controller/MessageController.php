@@ -60,8 +60,10 @@ class MessageController extends AbstractController
             $formMessage = $this->createForm(MessageType::class, $message);
             $formMessage->handleRequest($request);
 
-            if (isset($_POST['pjSend'])) {
-                $pjSend = $captureRepository->findOneBy(['id' => $_POST['pjSend']]);
+            // récupération de PJ si elle existe
+            $pjSendId = $request->request->get('pjSend'); //  <=>   =  $_POST['pjSend']
+            if ($pjSendId) {
+                $pjSend = $captureRepository->findOneBy(['id' => $pjSendId]);
             }
 
             // validation du formulaire
@@ -81,6 +83,13 @@ class MessageController extends AbstractController
                 return $this->redirectToRoute('messages', ['pseudo' => $ami]);
             }
 
+            foreach ($conversation as $message) {
+                if ($message->getUserRecoit() == $this->getUser()) {
+                    $message->setLu(true);
+                    $entityManager->flush();
+                }
+            };
+
             return $this->render('message/conversation.html.twig', [
                 // 'page_title' => 'Messages',
                 'conversation' => $conversation,
@@ -88,7 +97,6 @@ class MessageController extends AbstractController
                 'formMessage' => $formMessage,
                 'pj' => $pjSend,
             ]);
-
         } else {
             // si pas ami
             $this->addFlash('danger', "Vous ne pouvez envoyer un message qu'à vos amis");
