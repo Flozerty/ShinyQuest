@@ -659,7 +659,14 @@ footer {
   border-radius: 25%;
   font-size: 1.5em;
   transition: var(--transitionTime);
-  color: white;
+
+  i {
+    color: var(--white);
+
+    &:hover {
+      transform: scale(1);
+    }
+  }
 
   &:hover {
     transform: translateY(-10px) scale(1.2);

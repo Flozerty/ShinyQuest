@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch('/newMessages')
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             if (data && data > 0) {
                 messagerieContainers.forEach(container => {
 
