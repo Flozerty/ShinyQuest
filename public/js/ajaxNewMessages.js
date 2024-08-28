@@ -4,14 +4,17 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch('/newMessages')
         .then(response => response.json())
         .then(data => {
+            console.log(data)
             if (data && data > 0) {
                 messagerieContainers.forEach(container => {
 
-                    let newMessages = document.createElement('span');
+                    const newMessages = document.createElement('span');
                     newMessages.classList.add('new-messages-header');
                     newMessages.innerHTML = data;
                     container.appendChild(newMessages);
                 });
+            } else {
+                console.log('pas de nouveaux messages')
             }
         })
         .catch(error => console.error('Erreur lors du chargement des nouveaux messages :', error));

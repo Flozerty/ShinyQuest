@@ -13,6 +13,7 @@
     {% for data in messagerieData %}
     {% if data.message is not empty %}
     <a class="discussion-link" href="{{ path('messages', {'pseudo' : data.ami.pseudo}) }}">
+
         <div class="user-infos">
             <figure>
                 <img src="{{data.ami.avatar ? asset('img/' ~ data.ami.avatar) : asset('img/unknown_user.png') }}"
@@ -21,7 +22,14 @@
             <span class="pseudo">
                 {{data.ami.pseudo}}
             </span>
+
+            {% if data.newMessages is defined and data.newMessages > 0 %}
+            <span class="new-messages-conversation">
+                {{data.newMessages}}
+            </span>
+            {% endif %}
         </div>
+
         <p class="last-message">
             {{data.message[0].contenuMessage}}
         </p>

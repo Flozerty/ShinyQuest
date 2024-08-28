@@ -32,11 +32,21 @@ class MessageController extends AbstractController
 
         foreach ($amis as $ami) {
             $dernierMessage = $messageRepository->getDernierMessage($this->getUser(), $ami);
+            $newMessages = $messageRepository->getConversationNewMessages($this->getUser(), $ami);
+
+            if ($newMessages) {
+                $newMessages = $newMessages[0]["nb_messages"];
+            } else {
+                $newMessages = 0;
+            }
+
             $messagerieData[] = [
                 "ami" => $ami,
                 "message" => $dernierMessage,
+                "newMessages" => $newMessages
             ];
         }
+
         // dd($messagerieData);
 
         return $this->render('message/index.html.twig', [
@@ -109,6 +119,7 @@ class MessageController extends AbstractController
     public function getNewMessages(MessageRepository $messageRepository): Response
     {
         $messages = $messageRepository->getAllNewMessages($this->getUser());
-        return $this->json($messages[0]["nb_messages"]);
+
+        return ($messages ? $this->json($messages[0]["nb_messages"]) : $this->json(0));
     }
 }
