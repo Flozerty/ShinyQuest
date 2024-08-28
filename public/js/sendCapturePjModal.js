@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-  const body = document.querySelector('body');
-
   const
+    body = document.querySelector('body'),
     cardLinks = document.querySelectorAll(".fa-share-from-square"),
     sendCaptureDialog = document.querySelector("#sendCaptureDialog"),
     inputId = document.querySelector('#id-capture')
@@ -18,6 +17,13 @@ document.addEventListener('DOMContentLoaded', function () {
       })
     });
   }
+
+  const form = document.querySelector('#contactForm'),
+    select = document.querySelector('#ami');
+
+  select.addEventListener('change', (event) => {
+    form.action = "/messagerie/" + event.target.value
+  })
 
   ////////////// FUNCTIONS //////////////
 

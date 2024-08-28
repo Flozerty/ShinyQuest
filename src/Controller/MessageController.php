@@ -58,6 +58,10 @@ class MessageController extends AbstractController
             $formMessage = $this->createForm(MessageType::class, $message);
             $formMessage->handleRequest($request);
 
+            if (isset($_POST['pjSend'])) {
+                $pjSend = $captureRepository->findOneBy(['id' => $_POST['pjSend']]);
+            }
+
             // validation du formulaire
             if ($formMessage->isSubmitted() && $formMessage->isValid()) {
 

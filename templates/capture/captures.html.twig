@@ -15,7 +15,7 @@ Captures de {{user.pseudo}}
 {% endblock %}
 
 {% block javascripts %}
-<script src="{{asset('js/captureModal.js')}}"></script>
+<script src="{{asset('js/sendCapturePjModal.js')}}"></script>
 {% endblock %}
 
 {% block body %}
@@ -31,11 +31,14 @@ Captures de {{user.pseudo}}
 <dialog id="sendCaptureDialog">
   <div class="dialog-content">
 
-    <form action="" id="contactForm">
-      <input type="hidden" id="id-capture" name="id-capture" value="">
-
+    <form action="{{ path('messages', {'pseudo': 0}) }}" id="contactForm" method="POST">
+      
+      <input type="hidden" id="id-capture" name="pjSend" value="">
       <label for="ami">choisissez votre contact</label>
-      <select id="ami" name="ami">
+
+      <select id="ami" name="ami" required>
+
+        <option value="" selected disabled>Sélectionnez un ami</option>
         {% for ami in amis %}
           <option value="{{ami.pseudo}}">{{ami.pseudo}}</option>
         {% endfor %}
@@ -52,5 +55,4 @@ Captures de {{user.pseudo}}
     </form>
   </div>
 </dialog>
-
 {% endblock %}

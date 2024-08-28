@@ -66,6 +66,16 @@
   }
 }
 
+.card-container {
+  display: flex;
+  flex-direction: column;
+
+  .pj-intro {
+    margin-bottom: 5px;
+    align-self: center;
+  }
+}
+
 .my-message {
   align-self: flex-end;
   flex-direction: row-reverse;

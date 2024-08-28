@@ -74,10 +74,14 @@
             {% if message.pj is defined and message.pj is not null %}
             {% set capture = message.pj %}
 
-            {# on retire les btns de la card #}
-            {% set noBtns = true %}
-            {% include '.custom/pokemonCard.html.twig' %}
-            {% endif %}
+            <div class="card-container">
+                <p class="pj-intro">capture de <span class="pseudo">{{message.pj.user.pseudo}}</span></p>
+                
+                {# on retire les btns de la card #}
+                {% set noBtns = true %}
+                {% include '.custom/pokemonCard.html.twig' %}
+            </div>
+                {% endif %}
 
             <p class="message">{{message.contenuMessage}}</p>
         </div>
