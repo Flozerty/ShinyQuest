@@ -143,9 +143,10 @@ form[name="message"] {
   textarea {
     border: 1px solid var(--primary-color);
     background-color: var(--cardColor);
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 5px 10px;
     margin: 5px 0 10px 0;
+    resize: none;
 
     &:focus {
       outline: none;
@@ -159,7 +160,7 @@ form[name="message"] {
     }
 
     &::-webkit-scrollbar-track {
-      background-color: #f1f1f1;
+      background-color: var(--white);
       border-radius: 5px;
       cursor: pointer;
     }
