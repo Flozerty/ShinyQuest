@@ -22,9 +22,9 @@
 {% if dateMessageActuel is not defined or dateMessageActuel != (message.dateMessage | date('m/d/y')) %}
 {% set dateMessageActuel = message.dateMessage | date('m/d/y') %}
 
-{% set date1week = "now - 7 days" | date('m/d/y') %}
-{# Comparer si la date est il y a + de 7 jours #}
-{% if dateMessageActuel < date1week %} <p class="date">{{ message.dateMessage | date('m/d/y') }}</p>
+{% set date1week = "now - 6 days" | date('m/d/y') %}
+{# Comparer si la date est il y a + de 6 jours #}
+{% if dateMessageActuel < date1week %} <p class="date">{{ message.dateMessage | date('d-m-y') }}</p>
 
     {# si aujourd'hui #}
     {% elseif dateMessageActuel == dateActuelle %}
