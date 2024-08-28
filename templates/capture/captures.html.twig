@@ -32,7 +32,7 @@ Captures de {{user.pseudo}}
   <div class="dialog-content">
 
     <form action="{{ path('messages', {'pseudo': 0}) }}" id="contactForm" method="POST">
-      
+
       <input type="hidden" id="id-capture" name="pjSend" value="">
       <label for="ami">choisissez votre contact</label>
 
@@ -40,7 +40,7 @@ Captures de {{user.pseudo}}
 
         <option value="" selected disabled>Sélectionnez un ami</option>
         {% for ami in amis %}
-          <option value="{{ami.pseudo}}">{{ami.pseudo}}</option>
+        <option value="{{ami.pseudo}}">{{ami.pseudo}}</option>
         {% endfor %}
       </select>
 

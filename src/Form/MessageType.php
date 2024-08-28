@@ -24,8 +24,7 @@ class MessageType extends AbstractType
                     'cols' => 50,
                     '' => false,
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

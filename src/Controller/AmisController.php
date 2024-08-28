@@ -19,7 +19,7 @@ class AmisController extends AbstractController
 
     // Afficher toutes mes demandes d'amis
     #[Route('/amis', name: 'app_amis')]
-    public function index(ApiHttpClient $apiHttpClient, AmisRepository $amisRepository, CaptureRepository $captureRepository, UserRepository $userRepository, ): Response
+    public function index(ApiHttpClient $apiHttpClient, AmisRepository $amisRepository, CaptureRepository $captureRepository, UserRepository $userRepository,): Response
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute("app_home");
@@ -28,7 +28,7 @@ class AmisController extends AbstractController
         $allPokemons = $apiHttpClient->getPokedex();
 
         $AmisByDemande = $amisRepository->findBy(["userDemande" => $this->getUser()]);
-        $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()], );
+        $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()],);
 
         $dresseursData = [];
         $demandeEnvoyee = [];

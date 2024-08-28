@@ -9,7 +9,7 @@
 
 <section id="dresseurs">
 
-    {% for dresseur in pagination %}
+  {% for dresseur in pagination %}
   <div class="dresseur">
 
     <a class="user-link" href="{{ path('profile_user', {'pseudo': dresseur.user.pseudo}) }}">
@@ -67,22 +67,22 @@
       {% endfor %}
 
       {% if count == 0 %}
-      <a href="{{ path('demande_ami', {'pseudo': dresseur.user.pseudo}) }}" class="send-demand secondary-animated-button">
-        <i
-          class="fa-solid fa-user-plus"></i>&nbsp;Ajouter en ami
-        </a>
+      <a href="{{ path('demande_ami', {'pseudo': dresseur.user.pseudo}) }}"
+        class="send-demand secondary-animated-button">
+        <i class="fa-solid fa-user-plus"></i>&nbsp;Ajouter en ami
+      </a>
       {% endif %}
     </div>
 
     {% endif %}
   </div>
-       
-    {% endfor %}
+
+  {% endfor %}
 </section>
 
 {# display navigation #}
 <div class="navigation">
-    {{ knp_pagination_render(pagination) }}
+  {{ knp_pagination_render(pagination) }}
 </div>
 
 

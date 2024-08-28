@@ -38,7 +38,7 @@ class UserController extends AbstractController
         );
 
         $AmisByDemande = $amisRepository->findBy(["userDemande" => $this->getUser()]);
-        $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()], );
+        $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()],);
 
         $amis = [];
         $demandeEnvoyee = [];

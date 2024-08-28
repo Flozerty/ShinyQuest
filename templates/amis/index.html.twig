@@ -71,7 +71,7 @@
 </section>
 
 {# amis confirmés #}
-    {% if dresseursAmis is not empty %}
+{% if dresseursAmis is not empty %}
 
 <section id="dresseurs-amis">
     <h1>Liste d'amis</h1>
@@ -144,7 +144,7 @@
 </section>
 {% endif %}
 
-    {% if dresseursAmis is empty and demandesEnvoyees is empty and demandesRecues is empty %}
+{% if dresseursAmis is empty and demandesEnvoyees is empty and demandesRecues is empty %}
 
 <p id="friendLess">Sans ami :'(</p>
 

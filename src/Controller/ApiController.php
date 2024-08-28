@@ -111,8 +111,7 @@ class ApiController extends AbstractController
         "base_stat" => $stat["base_stat"],
         "details_stat" => $apiHttpClient->getRequestByUrl($url),
       ];
-    }
-    ;
+    };
 
     // récupération des captures du pokemon
     $captures = $captureRepository->findCapturesByPokemonId($id);
