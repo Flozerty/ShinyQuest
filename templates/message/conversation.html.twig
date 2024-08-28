@@ -16,86 +16,84 @@
 {% set dateActuelle = "now" | date('m/d/y') %}
 
 <section id="conversation">
-    {% for message in conversation %}
+{% for message in conversation %}
 
-    {# On affiche la date si elle est différente. #}
-    {% if dateMessageActuel is not defined or dateMessageActuel != (message.dateMessage | date('m/d/y')) %}
-    {% set dateMessageActuel = message.dateMessage | date('m/d/y') %}
+{# On affiche la date si elle est différente. #}
+{% if dateMessageActuel is not defined or dateMessageActuel != (message.dateMessage | date('m/d/y')) %}
+{% set dateMessageActuel = message.dateMessage | date('m/d/y') %}
 
-    {% set date1week = "now - 7 days" | date('m/d/y') %}
-    {# Comparer si la date est il y a + de 7 jours #}
-    {% if dateMessageActuel < date1week %} <p class="date">{{ message.dateMessage | date('m/d/y') }}</p>
+{% set date1week = "now - 7 days" | date('m/d/y') %}
+{# Comparer si la date est il y a + de 7 jours #}
+{% if dateMessageActuel < date1week %} <p class="date">{{ message.dateMessage | date('m/d/y') }}</p>
 
-        {# si aujourd'hui #}
-        {% elseif dateMessageActuel == dateActuelle %}
-        <p class="date">Aujourd'hui</p>
-        {% else %}
+    {# si aujourd'hui #}
+    {% elseif dateMessageActuel == dateActuelle %}
+    <p class="date">Aujourd'hui</p>
+    {% else %}
 
-        {# si < 7 jours, alors on affiche le jour (traduit en FR) #} {% set daysTranslate={ "Monday" : "Lundi"
-            , "Tuesday" : "Mardi" , "Wednesday" : "Mercredi" , "Thursday" : "Jeudi" , "Friday" : "Vendredi" , "Saturday"
-            : "Samedi" , "Sunday" : "Dimanche" } %} {# on affiche le jour #} <p class="date">{{
-            daysTranslate[message.dateMessage |
-            date('l')] }}</p> {# 'l' : jour en toute lettre #}
+    {# si < 7 jours, alors on affiche le jour (traduit en FR) #} {% set daysTranslate={ "Monday" : "Lundi" , "Tuesday"
+        : "Mardi" , "Wednesday" : "Mercredi" , "Thursday" : "Jeudi" , "Friday" : "Vendredi" , "Saturday" : "Samedi"
+        , "Sunday" : "Dimanche" } %} {# on affiche le jour #} <p class="date">{{ daysTranslate[message.dateMessage |
+        date('l')] }}</p> {# 'l' : jour en toute lettre #}
+        {% endif %}
+        {% endif %}
+
+        {# container #}
+        <div {% if message.userEnvoi==app.user %} class="message-container my-message" {% else %}
+            class="message-container his-message" {% endif%}>
+
+            {# avatar : si jour différent / user différent #}
+            {% if lastUserSent is not defined or (lastUserSent != message.UserEnvoi) or (dateMessagePrecedent is defined and (dateMessagePrecedent | date('Y-m-d')) != (message.dateMessage | date('Y-m-d'))) %}
+            <a class="user-link profil-dresseur"
+                href="{{ path('profile_user', {'pseudo': message.userEnvoi.pseudo}) }}">
+                <figure>
+                    <img src="{{message.userEnvoi.avatar ? asset('img/' ~ message.userEnvoi.avatar) : asset('img/unknown_user.png') }}"
+                        alt="avatar de {{message.userEnvoi.pseudo}}">
+                </figure>
+            </a>
+            {% else %}
+            <div class="profil-dresseur hidden-profil"></div>
             {% endif %}
+
+            {# heure : si user différent du dernier message ou dernier message envoyé il y a plus de 10 minutes, ou un autre jour que le précédent #}
+            {% if 
+                (heureMessagePrecedent is not defined or heureMessagePrecedent < (message.dateMessage | date_modify('-10 minutes')) | date('H:i'))
+                or (lastUserSent is not defined or lastUserSent != message.UserEnvoi) 
+                or (dateMessagePrecedent is defined and (dateMessagePrecedent | date('Y-m-d')) != (message.dateMessage | date('Y-m-d'))) %}
+            
+                <div class="message-content space-message">
+                    <span class="heure">
+                            {{message.dateMessage | date('H:i')}}
+                    </span>
+            {% else %}
+                
+                <div class="message-content">
             {% endif %}
 
-            {# container #}
-            <div {% if message.userEnvoi==app.user %} class="message-container my-message" {% else %}
-                class="message-container his-message" {% endif%}>
+            {# inclusion de la card en PJ #}
+            {% if message.pj is defined and message.pj is not null %}
+            {% set capture = message.pj %}
 
-                {# avatar : si jour différent / user différent #}
-                {% if lastUserSent is not defined or (lastUserSent != message.UserEnvoi) or (dateMessagePrecedent is
-                defined and (dateMessagePrecedent | date('Y-m-d')) != (message.dateMessage | date('Y-m-d'))) %}
-                <a class="user-link profil-dresseur"
-                    href="{{ path('profile_user', {'pseudo': message.userEnvoi.pseudo}) }}">
-                    <figure>
-                        <img src="{{message.userEnvoi.avatar ? asset('img/' ~ message.userEnvoi.avatar) : asset('img/unknown_user.png') }}"
-                            alt="avatar de {{message.userEnvoi.pseudo}}">
-                    </figure>
-                </a>
-                {% else %}
-                <div class="profil-dresseur hidden-profil"></div>
+            <div class="card-container">
+                <p class="pj-intro">capture de <span class="pseudo">{{message.pj.user.pseudo}}</span></p>
+                
+                {# on retire les btns de la card #}
+                {% set noBtns = true %}
+                {% include '.custom/pokemonCard.html.twig' %}
+            </div>
                 {% endif %}
 
-                {# heure : si user différent du dernier message ou dernier message envoyé il y a plus de 10 minutes, ou
-                un autre jour que le précédent #}
-                {% if
-                (heureMessagePrecedent is not defined or heureMessagePrecedent < (message.dateMessage | date_modify('-10
-                    minutes')) | date('H:i')) or (lastUserSent is not defined or lastUserSent !=message.UserEnvoi) or
-                    (dateMessagePrecedent is defined and (dateMessagePrecedent | date('Y-m-d')) !=(message.dateMessage |
-                    date('Y-m-d'))) %} <div class="message-content space-message">
-                    <span class="heure">
-                        {{message.dateMessage | date('H:i')}}
-                    </span>
-                    {% else %}
+            <p class="message">{{message.contenuMessage}}</p>
+        </div>
+    </div>
 
-                    <div class="message-content">
-                        {% endif %}
-
-                        {# inclusion de la card en PJ #}
-                        {% if message.pj is defined and message.pj is not null %}
-                        {% set capture = message.pj %}
-
-                        <div class="card-container">
-                            <p class="pj-intro">capture de <span class="pseudo">{{message.pj.user.pseudo}}</span></p>
-
-                            {# on retire les btns de la card #}
-                            {% set noBtns = true %}
-                            {% include '.custom/pokemonCard.html.twig' %}
-                        </div>
-                        {% endif %}
-
-                        <p class="message">{{message.contenuMessage}}</p>
-                    </div>
-            </div>
-
-            {% set heureMessagePrecedent = message.dateMessage | date('H:i') %}
-            {% set lastUserSent = message.UserEnvoi %}
-            {% set dateMessagePrecedent = dateMessageActuel %}
-            {% endfor %}
+    {% set heureMessagePrecedent = message.dateMessage | date('H:i') %}
+    {% set lastUserSent = message.UserEnvoi %}
+    {% set dateMessagePrecedent = dateMessageActuel %}
+    {% endfor %}
 </section>
 
-{{ form_start(formMessage) }}
+    {{ form_start(formMessage) }}
 <p>Nouveau message :</p>
 
 {% if pj is defined and pj is not empty %}
@@ -113,7 +111,7 @@
 {% endif %}
 
 {{ form_row(formMessage.contenuMessage) }}
-<button type="submit">envoyer</button>
+    <button type="submit">envoyer</button>
 {{ form_end(formMessage) }}
 
 {% endblock %}
