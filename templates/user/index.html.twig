@@ -41,7 +41,7 @@
 
       {% for user in amis %}
       {% if user.user == dresseur.user %}
-      <a href="{{ path('delete_ami', {'id': user.id}) }}" class="delete-animated-button">Supprimer l'ami</a>
+      <a href="{{ path('delete_ami_users', {'id': user.id}) }}" class="delete-animated-button">Supprimer l'ami</a>
 
       {% set count = 1 %}
       {% endif %}
@@ -49,7 +49,7 @@
 
       {% for user in demandeEnvoyee %}
       {% if user.user == dresseur.user %}
-      <a href="{{ path('delete_ami', {'id': user.id}) }}" class="refuse-demand">
+      <a href="{{ path('delete_ami_users', {'id': user.id}) }}" class="refuse-demand">
         <p>Demande envoyée</p><i class="fa-solid fa-xmark"></i>
       </a>
       {% set count = 1 %}
@@ -58,8 +58,8 @@
 
       {% for user in demandeRecue %}
       {% if user.user == dresseur.user %}
-      <a href="{{ path('accept_ami', {'id': user.id}) }}" class="accept-demand">Accepter</a>
-      <a href="{{ path('delete_ami', {'id': user.id}) }}" class="refuse-demand">
+      <a href="{{ path('accept_ami_users', {'id': user.id}) }}" class="accept-demand">Accepter</a>
+      <a href="{{ path('delete_ami_users', {'id': user.id}) }}" class="refuse-demand">
         <p>Refuser</p><i class="fa-solid fa-xmark"></i>
       </a>
       {% set count = 1 %}

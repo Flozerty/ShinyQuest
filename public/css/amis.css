@@ -82,6 +82,10 @@ main i {
   width: fit-content;
   margin: auto;
   transition: var(--transitionTime);
+
+  i {
+    color: var(--red-main);
+  }
 }
 
 
@@ -161,6 +165,7 @@ main i {
     .refuse-demand {
       background-color: var(--secondary-color);
       color: var(--primary-color);
+      border: 1px solid var(--primary-color);
     }
   }
 

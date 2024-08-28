@@ -98,7 +98,7 @@
         </li>
 
         <li title="Messagerie" class="header-link">
-          <a aria-label="voir ma messagerie" href="{{ path('messagerie') }}"><i class="fa-solid fa-message"></i></a>
+          <a aria-label="voir ma messagerie" href="{{ path('messagerie') }}" class="messagerie-header-link"><i class="fa-solid fa-message"></i></a>
         </li>
       </ul>
 
@@ -129,8 +129,8 @@
           captures</a></li>
       {# <li><a class="nav-link" href="">Ma carte</a></li> #}
       <li class="profile-link"><a class="nav-link" href="{{ path('app_amis') }}">Mes amis</a></li>
-      <li class="profile-link"><a class="nav-link" href="{{ path('messagerie') }}">Messagerie</a></li>
-      <li class="profile-link"><a class="nav-link" href="">Forum</a></li>
+      <li class="profile-link"><a class="nav-link messagerie-header-link" href="{{ path('messagerie') }}">Messagerie</a></li>
+      {# <li class="profile-link"><a class="nav-link" href="">Forum</a></li> #}
 
       <li><a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a></li>
 
@@ -206,9 +206,9 @@
           {% endif %}
 
           <li><a class="nav-link" href="{{ path('app_users') }}">Les dresseurs</a></li>
-          <li><a class="nav-link" href="">Le top des shasses</a></li>
-          <li><a class="nav-link" href="">Shasses en cours</a></li>
-          <li><a class="nav-link" href="">Forum</a></li>
+          <li><a class="nav-link" href="" style="text-decoration:line-through">Le top des shasses</a></li>
+          <li><a class="nav-link" href="" style="text-decoration:line-through">Shasses en cours</a></li>
+          <li><a class="nav-link" href="" style="text-decoration:line-through">Forum</a></li>
         </ul>
       </div>
 
@@ -305,6 +305,7 @@
   <script src="{{asset('js/scrollListener.js')}}"></script>
   <script src="{{asset('js/headerSearch.js')}}"></script>
 <script src="{{asset('js/captureBallChange.js')}}"></script>
+<script src="{{asset('js/ajaxNewMessages.js')}}"></script>
   {% block javascripts %}{% endblock %}
 </body>
 

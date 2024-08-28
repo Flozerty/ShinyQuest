@@ -300,6 +300,27 @@ header {
   }
 }
 
+.messagerie-header-link {
+  position: relative;
+
+  .new-messages-header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2px 4px;
+    color: white;
+    background-color: red;
+    border-radius: 8px;
+    font-size: 0.7rem;
+  }
+}
+
+.header-link .new-messages-header {
+  transform: translate(50%, -50%);
+}
+
+
+
 /* -------------------HEADER PROFILE------------------ */
 
 #header-profile {

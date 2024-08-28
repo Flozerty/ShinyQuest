@@ -17,6 +17,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class MessageController extends AbstractController
 {
+    // Page d'accueil de la messagerie
     #[Route('/messagerie', name: 'messagerie')]
     public function index(MessageRepository $messageRepository, AmisRepository $amisRepository): Response
     {
@@ -44,6 +45,7 @@ class MessageController extends AbstractController
         ]);
     }
 
+    // Page de conversation entre les 2 utilisateurs
     #[Route('/messagerie/{pseudo}', name: 'messages')]
     public function messages(MessageRepository $messageRepository, AmisRepository $amisRepository, EntityManagerInterface $entityManager, Request $request, CaptureRepository $captureRepository, User $ami, Capture $pjSend = null): Response
     {
@@ -92,5 +94,13 @@ class MessageController extends AbstractController
             $this->addFlash('danger', "Vous ne pouvez envoyer un message qu'à vos amis");
             return $this->redirectToRoute('app_home');
         }
+    }
+
+    // renvoie le nombre de messages non lus
+    #[Route('/newMessages', name: 'new_messages')]
+    public function getNewMessages(MessageRepository $messageRepository): Response
+    {
+        $messages = $messageRepository->getAllNewMessages($this->getUser());
+        return $this->json($messages[0]["nb_messages"]);
     }
 }
