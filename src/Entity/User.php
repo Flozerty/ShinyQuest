@@ -90,10 +90,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'user')]
     private Collection $posts;
 
+    #[ORM\Column]
+    private ?bool $ban = null;
+
     // On donne la valeur par défaut de new DateTime dans le construct
     public function __construct()
     {
         $this->dateInscription = new \DateTime();
+        $this->ban = false;
+
         $this->captures = new ArrayCollection();
         $this->amisDemande = new ArrayCollection();
         $this->amisRecoit = new ArrayCollection();
@@ -437,6 +442,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $post->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isBan(): ?bool
+    {
+        return $this->ban;
+    }
+
+    public function setBan(bool $ban): static
+    {
+        $this->ban = $ban;
 
         return $this;
     }

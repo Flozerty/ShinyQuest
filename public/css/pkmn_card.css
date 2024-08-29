@@ -53,6 +53,7 @@
   background-color: var(--cardColor);
   color: black;
   width: 300px;
+  max-width: 100vh;
   padding: 15px;
   margin: 15px;
   border-radius: 20px;

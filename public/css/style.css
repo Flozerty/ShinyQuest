@@ -64,6 +64,34 @@ html {
 body {
   overflow-x: hidden;
   color: var(--font-main-color);
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--background-color);
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar-track:hover {
+    background-color: var(--secondary-color);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    min-height: 50px;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    border: 1px solid var(--background-color);
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    border: var(--primary-color);
+  }
+
 }
 
 body,

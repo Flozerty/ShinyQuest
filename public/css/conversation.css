@@ -180,7 +180,6 @@ form[name="message"] {
     &::-webkit-scrollbar-thumb:hover {
       border: var(--primary-color);
     }
-
   }
 }
 
