@@ -18,6 +18,11 @@ main form {
     cursor: pointer;
   }
 
+  li{
+    color: var(--red-main);
+    font-size: 0.8rem;
+  }
+
   .checkbox {
     margin: 10px 0;
 
