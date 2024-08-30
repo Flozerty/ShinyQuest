@@ -1,24 +1,25 @@
 <div class="pokemon-card">
 
   {# delete : capture ou shasse de l'user connecté ou admin / sauf noBtns var #}
-  {% if (app.user is defined and app.user is not empty) and (app.user == capture.user or 'ROLE_ADMIN' in app.user.roles) and not (noBtns is defined)
+  {% if (app.user is defined and app.user is not empty) and (app.user == capture.user or 'ROLE_ADMIN' in app.user.roles)
+  and not (noBtns is defined)
   %}
 
-<div id="links-btns">
-{% if capture.termine==true %}
-<i class="fa-solid fa-share-from-square" id="{{capture.id}}"></i>
+  <div id="links-btns">
+    {% if capture.termine==true %}
+    <i class="fa-solid fa-share-from-square" id="{{capture.id}}"></i>
 
-<a class="del-btn" aria-label="Supprimer la capture" href="{{ path('delete_capture', {'id': capture.id}) }}">
-<i class="fa-solid fa-trash-can"></i>
-  </a>
-{% else %}
-<a class="del-btn" aria-label="Supprimer cette shasse" href="{{ path('delete_shasse', {'id': capture.id}) }}">
-<i class="fa-solid fa-trash-can"></i>
-  </a>
+    <a class="del-btn" aria-label="Supprimer la capture" href="{{ path('delete_capture', {'id': capture.id}) }}">
+      <i class="fa-solid fa-trash-can"></i>
+    </a>
+    {% else %}
+    <a class="del-btn" aria-label="Supprimer cette shasse" href="{{ path('delete_shasse', {'id': capture.id}) }}">
+      <i class="fa-solid fa-trash-can"></i>
+    </a>
 
-{% endif %}
-</div>
-{% endif %}
+    {% endif %}
+  </div>
+  {% endif %}
 
   {# envoi de l'id pour la modal #}
   <p class="hidden">{{capture.id}}</p>

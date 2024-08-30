@@ -19,7 +19,7 @@ class AmisController extends AbstractController
 
     // Afficher toutes mes demandes d'amis
     #[Route('/amis', name: 'app_amis')]
-    public function index(ApiHttpClient $apiHttpClient, AmisRepository $amisRepository, CaptureRepository $captureRepository, UserRepository $userRepository, ): Response
+    public function index(ApiHttpClient $apiHttpClient, AmisRepository $amisRepository, CaptureRepository $captureRepository, UserRepository $userRepository,): Response
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute("app_home");
@@ -28,7 +28,7 @@ class AmisController extends AbstractController
         $allPokemons = $apiHttpClient->getPokedex();
 
         $AmisByDemande = $amisRepository->findBy(["userDemande" => $this->getUser()]);
-        $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()], );
+        $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()],);
 
         $dresseursData = [];
         $demandeEnvoyee = [];
@@ -98,6 +98,24 @@ class AmisController extends AbstractController
         return $this->redirectToRoute("app_amis");
     }
 
+    #[Route('/users/{id}/delete', name: 'delete_ami_users')]
+    public function deleteAmiUsers(AmisRepository $amisRepository, EntityManagerInterface $entityManager, int $id): Response
+    {
+        $lienAmis = $amisRepository->find($id);
+
+        if ($lienAmis) {
+            $entityManager->remove($lienAmis);
+            $entityManager->flush();
+        }
+
+        $this->addFlash(
+            'notice',
+            "La demande d'ami a été refusée."
+        );
+
+        return $this->redirectToRoute("app_users");
+    }
+
     // Accepter une demande d'ami
     #[Route('/amis/{id}/accept', name: 'accept_ami')]
     public function acceptAmi(AmisRepository $amisRepository, EntityManagerInterface $entityManager, int $id): Response
@@ -115,6 +133,24 @@ class AmisController extends AbstractController
         );
 
         return $this->redirectToRoute("app_amis");
+    }
+
+    #[Route('/users/{id}/accept', name: 'accept_ami_users')]
+    public function acceptAmiUsers(AmisRepository $amisRepository, EntityManagerInterface $entityManager, int $id): Response
+    {
+        $lienAmis = $amisRepository->find($id);
+
+        if ($lienAmis) {
+            $lienAmis->setStatut(true);
+            $entityManager->flush();
+        }
+
+        $this->addFlash(
+            'notice',
+            "La demande d'ami a été acceptée!"
+        );
+
+        return $this->redirectToRoute("app_users");
     }
 
     // Envoyerune demande d'ami

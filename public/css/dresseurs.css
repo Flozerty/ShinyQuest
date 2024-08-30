@@ -68,6 +68,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      border: 1px solid var(--primary-color);
 
       i {
         position: absolute;
@@ -84,6 +85,7 @@
 
       &:hover {
         background-color: var(--red-main);
+        border-color: transparent;
 
         p {
           color: transparent;

@@ -2,8 +2,7 @@
   margin: 100px 0;
 
   .discussion-link {
-    display: flex;
-    gap: 10px;
+    display: grid;
     align-items: center;
 
     .user-infos {
@@ -11,8 +10,8 @@
       gap: 10px;
       align-items: center;
       padding: 10px;
-      width: 30%;
-      height: 60px;
+      min-width: fit-content;
+      position: relative;
 
       figure {
         border-radius: 50%;
@@ -31,8 +30,6 @@
           overflow: hidden;
         }
       }
-
-
     }
 
     &:hover {
@@ -40,14 +37,67 @@
     }
 
     .last-message {
-      width: 60%;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
     }
+
+    .new-messages-conversation {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 2px 4px;
+      color: var(--white);
+      background-color: red;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+  }
+}
+
+
+.intro {
+  text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  .user-infos {
+    flex-direction: column;
+  }
+}
+
+
+@media screen and (min-width: 400px) {
+  .discussion-link {
+    grid-template-columns: repeat(3, 1fr);
   }
 
-  .intro {
-    text-align: center;
+  .user-infos {
+    grid-column: 1;
+  }
+
+  .last-message {
+    grid-column: 2/4;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .discussion-link {
+    grid-template-rows: repeat(2, 1fr);
+    border-bottom: 1px solid var(--primary-color);
+
+    &:first-of-type {
+      border-top: 1px solid var(--primary-color);
+
+    }
+  }
+
+  .user-infos {
+    grid-row: 1;
+  }
+
+  .last-message {
+    grid-row: 2;
   }
 }

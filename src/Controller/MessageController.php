@@ -17,6 +17,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class MessageController extends AbstractController
 {
+    // Page d'accueil de la messagerie
     #[Route('/messagerie', name: 'messagerie')]
     public function index(MessageRepository $messageRepository, AmisRepository $amisRepository): Response
     {
@@ -31,11 +32,21 @@ class MessageController extends AbstractController
 
         foreach ($amis as $ami) {
             $dernierMessage = $messageRepository->getDernierMessage($this->getUser(), $ami);
+            $newMessages = $messageRepository->getConversationNewMessages($this->getUser(), $ami);
+
+            if ($newMessages) {
+                $newMessages = $newMessages[0]["nb_messages"];
+            } else {
+                $newMessages = 0;
+            }
+
             $messagerieData[] = [
                 "ami" => $ami,
                 "message" => $dernierMessage,
+                "newMessages" => $newMessages
             ];
         }
+
         // dd($messagerieData);
 
         return $this->render('message/index.html.twig', [
@@ -44,6 +55,7 @@ class MessageController extends AbstractController
         ]);
     }
 
+    // Page de conversation entre les 2 utilisateurs
     #[Route('/messagerie/{pseudo}', name: 'messages')]
     public function messages(MessageRepository $messageRepository, AmisRepository $amisRepository, EntityManagerInterface $entityManager, Request $request, CaptureRepository $captureRepository, User $ami, Capture $pjSend = null): Response
     {
@@ -57,6 +69,12 @@ class MessageController extends AbstractController
 
             $formMessage = $this->createForm(MessageType::class, $message);
             $formMessage->handleRequest($request);
+
+            // récupération de PJ si elle existe
+            $pjSendId = $request->request->get('pjSend'); //  <=>   =  $_POST['pjSend']
+            if ($pjSendId) {
+                $pjSend = $captureRepository->findOneBy(['id' => $pjSendId]);
+            }
 
             // validation du formulaire
             if ($formMessage->isSubmitted() && $formMessage->isValid()) {
@@ -75,6 +93,13 @@ class MessageController extends AbstractController
                 return $this->redirectToRoute('messages', ['pseudo' => $ami]);
             }
 
+            foreach ($conversation as $message) {
+                if ($message->getUserRecoit() == $this->getUser()) {
+                    $message->setLu(true);
+                    $entityManager->flush();
+                }
+            };
+
             return $this->render('message/conversation.html.twig', [
                 // 'page_title' => 'Messages',
                 'conversation' => $conversation,
@@ -82,11 +107,19 @@ class MessageController extends AbstractController
                 'formMessage' => $formMessage,
                 'pj' => $pjSend,
             ]);
-
         } else {
             // si pas ami
             $this->addFlash('danger', "Vous ne pouvez envoyer un message qu'à vos amis");
             return $this->redirectToRoute('app_home');
         }
+    }
+
+    // renvoie le nombre de messages non lus
+    #[Route('/newMessages', name: 'new_messages')]
+    public function getNewMessages(MessageRepository $messageRepository): Response
+    {
+        $messages = $messageRepository->getAllNewMessages($this->getUser());
+
+        return ($messages ? $this->json($messages[0]["nb_messages"]) : $this->json(0));
     }
 }

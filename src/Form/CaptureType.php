@@ -29,7 +29,7 @@ class CaptureType extends AbstractType
                 'expanded' => true,
                 'multiple' => false,
             ])
-            ;
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

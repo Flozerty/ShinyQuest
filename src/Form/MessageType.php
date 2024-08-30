@@ -19,11 +19,12 @@ class MessageType extends AbstractType
             ->add('contenuMessage', TextareaType::class, [
                 'label' => ' ',
                 'attr' => [
-                    'rows'=>8, 
-                    'cols'=>50,
+                    'onkeyup' => 'textAreaAdjust(this)',
+                    'rows' => 8,
+                    'cols' => 50,
+                    '' => false,
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

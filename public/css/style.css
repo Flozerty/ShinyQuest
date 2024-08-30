@@ -64,6 +64,34 @@ html {
 body {
   overflow-x: hidden;
   color: var(--font-main-color);
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--background-color);
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar-track:hover {
+    background-color: var(--secondary-color);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    min-height: 50px;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    border: 1px solid var(--background-color);
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    border: var(--primary-color);
+  }
+
 }
 
 body,
@@ -299,6 +327,28 @@ header {
     transform: scale(1.2);
   }
 }
+
+.messagerie-header-link {
+  position: relative;
+
+  .new-messages-header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2px 4px;
+    color: var(--white);
+    background-color: red;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+}
+
+.header-link .new-messages-header {
+  transform: translate(50%, -50%);
+}
+
+
 
 /* -------------------HEADER PROFILE------------------ */
 
@@ -637,7 +687,14 @@ footer {
   border-radius: 25%;
   font-size: 1.5em;
   transition: var(--transitionTime);
-  color: white;
+
+  i {
+    color: var(--white);
+
+    &:hover {
+      transform: scale(1);
+    }
+  }
 
   &:hover {
     transform: translateY(-10px) scale(1.2);

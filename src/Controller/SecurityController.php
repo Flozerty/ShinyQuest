@@ -35,9 +35,11 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/user/delete', name: 'delete_account')]
-    public function deleteAccount(EntityManagerInterface $entityManager,TokenStorageInterface $tokenStorage, SessionInterface $session
-): Response
-    {
+    public function deleteAccount(
+        EntityManagerInterface $entityManager,
+        TokenStorageInterface $tokenStorage,
+        SessionInterface $session
+    ): Response {
         $user = $this->getUser();
 
         if ($user) {

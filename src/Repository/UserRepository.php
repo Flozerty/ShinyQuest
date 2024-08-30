@@ -50,8 +50,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         // % = toute la chaîne de caractères.
     }
 
-
-
     //    /**
     //     * @return User[] Returns an array of User objects
     //     */

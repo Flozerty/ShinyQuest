@@ -50,4 +50,29 @@ class MessageRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getAllNewMessages(User $user)
+    {
+        return $this->createQueryBuilder('m')
+            ->select('COUNT(m.lu) as nb_messages')
+            ->where('m.userRecoit = :user')
+            ->andWhere('m.lu = 0')
+            ->setParameter('user', $user)
+            ->groupBy('m.lu')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getConversationNewMessages(User $user, User $user2)
+    {
+        return $this->createQueryBuilder('m')
+            ->select('COUNT(m.lu) as nb_messages')
+            ->where('m.userRecoit = :user AND m.userEnvoi = :user2')
+            ->andWhere('m.lu = 0')
+            ->setParameter('user', $user)
+            ->setParameter('user2', $user2)
+            ->groupBy('m.lu')
+            ->getQuery()
+            ->getResult();
+    }
 }

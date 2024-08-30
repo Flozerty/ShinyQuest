@@ -22,9 +22,9 @@
 {% if dateMessageActuel is not defined or dateMessageActuel != (message.dateMessage | date('m/d/y')) %}
 {% set dateMessageActuel = message.dateMessage | date('m/d/y') %}
 
-{% set date1week = "now - 7 days" | date('m/d/y') %}
-{# Comparer si la date est il y a + de 7 jours #}
-{% if dateMessageActuel < date1week %} <p class="date">{{ message.dateMessage | date('m/d/y') }}</p>
+{% set date1week = "now - 6 days" | date('m/d/y') %}
+{# Comparer si la date est il y a + de 6 jours #}
+{% if dateMessageActuel < date1week %} <p class="date">{{ message.dateMessage | date('d-m-y') }}</p>
 
     {# si aujourd'hui #}
     {% elseif dateMessageActuel == dateActuelle %}
@@ -57,9 +57,10 @@
 
             {# heure : si user différent du dernier message ou dernier message envoyé il y a plus de 10 minutes, ou un autre jour que le précédent #}
             {% if 
-                (heureMessagePrecedent is not defined or heureMessagePrecedent < (message.dateMessage | date_modify('-10 minutes')) | date('H:i'))
+                (heureMessagePrecedent is not defined or heureMessagePrecedent < (message.dateMessage | date_modify('-15 minutes')) | date('H:i'))
                 or (lastUserSent is not defined or lastUserSent != message.UserEnvoi) 
-                or (dateMessagePrecedent is defined and (dateMessagePrecedent | date('Y-m-d')) != (message.dateMessage | date('Y-m-d'))) %}
+                or (dateMessagePrecedent is defined and (dateMessagePrecedent | date('Y-m-d')) != (message.dateMessage | date('Y-m-d'))) 
+                %}
             
                 <div class="message-content space-message">
                     <span class="heure">
@@ -74,10 +75,14 @@
             {% if message.pj is defined and message.pj is not null %}
             {% set capture = message.pj %}
 
-            {# on retire les btns de la card #}
-            {% set noBtns = true %}
-            {% include '.custom/pokemonCard.html.twig' %}
-            {% endif %}
+            <div class="card-container">
+                <p class="pj-intro">capture de <span class="pseudo">{{message.pj.user.pseudo}}</span></p>
+                
+                {# on retire les btns de la card #}
+                {% set noBtns = true %}
+                {% include '.custom/pokemonCard.html.twig' %}
+            </div>
+                {% endif %}
 
             <p class="message">{{message.contenuMessage}}</p>
         </div>

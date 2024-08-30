@@ -28,6 +28,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     checkVisibility();
     // intervalle de vérification pour les autres cas possibles
-    setInterval(checkVisibility, 500)
+    setInterval(checkVisibility, 100)
   }
 });

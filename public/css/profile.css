@@ -83,6 +83,7 @@ main span {
       display: flex;
       justify-content: center;
       align-items: center;
+      border: 1px solid var(--primary-color);
 
       i {
         position: absolute;
@@ -100,6 +101,7 @@ main span {
       &:hover {
         color: white;
         background-color: var(--dangerred);
+        border-color: transparent;
 
         p {
           color: transparent;
