@@ -95,7 +95,8 @@
     {% set counter = 0 %}
     {% for capture in capturesTermine %}
 
-    {% if counter < 5 %} <p class="activity-capture">
+    {% if counter < 5 %} 
+        <p class="activity-capture">
         {{ capture.dateCapture|date('d/m/Y') }} : &nbsp;
         <span>{{ capture.user.pseudo }}</span> &nbsp; a trouvé &nbsp;<img src="{{capture.imgShiny}}"
             alt="{{capture.nomPokemon}} shiny"> <span>{{
@@ -119,7 +120,7 @@
     <div class="dialog-content">
 
             <figure id="avatar-preview">
-                <img src="{{ asset('img/avatars/' ~ app.user.avatar) }}" alt="avatar de {{app.user}}" id="avatar-image">
+                <img src="{{user.avatar ? asset('img/avatars/' ~ user.avatar) : asset('img/unknown_user.png') }}" alt="avatar de {{app.user}}" id="avatar-image">
             </figure>
 
             {{ form_start(formAvatar) }}

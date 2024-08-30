@@ -16,6 +16,13 @@ class ApiHttpClient extends AbstractController
     $this->httpClient = $jph;
   }
 
+  // récupération de base depuis une url
+  public function getRequestByUrl($url)
+  {
+    $response = $this->httpClient->request('GET', $url);
+    return $response->toArray();
+  }
+
   // Get all pkmns with name + gen + id + img + types
   public function getPokedex(): array
   {
@@ -58,12 +65,6 @@ class ApiHttpClient extends AbstractController
     $pokemonSpec = $this->getRequestByUrl($urlSpec);
 
     return ["pkmnStats" => $pokemon, "pkmnSpec" => $pokemonSpec];
-  }
-
-  public function getRequestByUrl($url)
-  {
-    $response = $this->httpClient->request('GET', $url);
-    return $response->toArray();
   }
 
   // Récupérer la chaîne d'évolution d'un pokémon
@@ -120,7 +121,6 @@ class ApiHttpClient extends AbstractController
       }
     }
     // dd($tree);
-
     return $tree;
   }
 
@@ -153,7 +153,6 @@ class ApiHttpClient extends AbstractController
     return $pokemon["name"]["fr"];
   }
 
-
   // Récupération de toutes les versions & leurs id
   public function getAllGamesVersions()
   {
@@ -171,14 +170,11 @@ class ApiHttpClient extends AbstractController
       // $idVersion = $gameNames["id"];
 
       foreach ($gameNames['names'] as $name) {
-
         if ($name["language"]["name"] === "fr") {
-
           $frGames[] = $name["name"];
         }
       }
     }
-
     return $frGames;
   }
 
@@ -191,7 +187,6 @@ class ApiHttpClient extends AbstractController
     $allBallsData = [];
 
     foreach ($allBallsCategories as $category) {
-
       $url = $category["url"];
 
       // on effectue une nouvelle requête pour la catégorie de  ballsen cours
@@ -205,7 +200,6 @@ class ApiHttpClient extends AbstractController
       foreach ($categoryData['items'] as $ball) {
 
         $url = $ball["url"];
-
         $ballsOfCategory[] = $this->getBallData($url);
       }
 
@@ -227,7 +221,6 @@ class ApiHttpClient extends AbstractController
 
     // on cherche le nom de la ball en français.
     foreach ($ballData['names'] as $name) {
-
       if ($name["language"]["name"] === "fr") {
 
         return [

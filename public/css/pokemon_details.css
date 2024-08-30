@@ -2,6 +2,37 @@ section {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+h2 {
+    margin-top: 50px;
+}
+
+h1 {
+    margin-bottom: 0;
+}
+
+#main-active-pkmn {
+    width: 300px;
+    align-self: center;
+
+    img {
+        width: 100%;
+    }
+}
+
+#types {
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+}
+
+#pokemon-description {
+    width: 50%;
+    text-align: center;
+    align-self: center;
+    margin: 50px 0;
 }
 
 #main-content {
@@ -108,7 +139,7 @@ section {
 
 #stats {
     width: 70%;
-    margin: auto;
+    align-self: center;
 
     ul {
         width: 100%;
@@ -121,13 +152,9 @@ section {
     align-items: center;
     height: 40px;
 
-
-
     .stat-amount {
         text-align: end;
     }
-
-
 }
 
 .stat-completion {
@@ -152,6 +179,35 @@ section {
 
     transition: width 1s;
     width: 0;
+}
+
+#other-details {
+    flex-wrap: nowrap;
+
+    i {
+        color: var(--primary-color);
+    }
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &>div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-right: 1px solid var(--primary-color);
+        width: 100%;
+        padding: 15px 8px;
+        gap: 10px;
+        align-items: center;
+
+        &:last-of-type {
+            border-right: none;
+        }
+    }
 }
 
 #locations {
@@ -205,10 +261,6 @@ section {
         .non-active-pkmn {
             width: 150px;
         }
-
-        .active-pkmn {
-            width: 200px;
-        }
     }
 
     #evolution {
@@ -227,10 +279,6 @@ section {
         .non-active-pkmn {
             width: 50%;
         }
-
-        .active-pkmn {
-            width: 75%;
-        }
     }
 
     #evolution {
@@ -241,5 +289,12 @@ section {
         .active-pkmn {
             width: 60%;
         }
+    }
+}
+
+
+@media screen and (max-width: 700px) {
+    .english-name {
+        display: none;
     }
 }

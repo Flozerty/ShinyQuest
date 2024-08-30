@@ -76,7 +76,6 @@ class ApiController extends AbstractController
   public function pokemonDetails(ApiHttpClient $apiHttpClient, int $id, CaptureRepository $captureRepository): Response
   {
     $pokemon = $apiHttpClient->getPokemonInfos($id);
-    // dd($pokemon);
 
     // récupération des différentes formes du pokémon
     $pokemonVarieties = [];
@@ -111,7 +110,33 @@ class ApiController extends AbstractController
         "base_stat" => $stat["base_stat"],
         "details_stat" => $apiHttpClient->getRequestByUrl($url),
       ];
-    };
+    }
+    ;
+
+    // récupération des capacités spéciales du pokemon
+    $abilities = [];
+    foreach ($pokemon["pkmnStats"]["abilities"] as $ability) {
+      $url = $ability["ability"]["url"];
+
+      $abilities[] = $apiHttpClient->getRequestByUrl($url);
+    }
+
+    // récupération des types du pokemon
+    $types = [];
+
+    foreach ($pokemon["pkmnStats"]["types"] as $type) {
+      $url = $type["type"]["url"];
+      $result = $apiHttpClient->getRequestByUrl($url);
+
+      foreach ($result["names"] as $lang) {
+        if ($lang["language"]["name"] == "fr") {
+          $types[] = [
+            "name" => $lang["name"],
+            "img" => $result["sprites"]["generation-viii"]["brilliant-diamond-and-shining-pearl"]["name_icon"]
+          ];
+        }
+      }
+    }
 
     // récupération des captures du pokemon
     $captures = $captureRepository->findCapturesByPokemonId($id);
@@ -122,16 +147,22 @@ class ApiController extends AbstractController
       $bestSpots = $captureRepository->getPokemonCapturesByPlacesInGame($id, $capturesByLieu[0]["jeu"]);
     }
 
+    // dd($abilities);
+    // dd($pokemon);
+
     return $this->render('api/pokemonDetails.html.twig', [
       "name" => $name,
       'pokemon' => $pokemon,
       'stats' => $stats,
+      'types' => $types,
+      "abilities" => $abilities,
       'pokemonVarieties' => $pokemonVarieties,
       "evolutionChain" => $evolutionChain,
       "currentPokemonId" => $pokemon["pkmnStats"]["id"],
       "capturesByLieu" => $capturesByLieu,
       "captures" => $captures,
       "bestSpots" => $bestSpots,
+      "pika" => true,
     ]);
   }
 

@@ -14,11 +14,16 @@ main form {
     margin: 10px 0;
   }
 
+  .alert {
+    color: var(--red-main);
+    text-align: center;
+  }
+
   label {
     cursor: pointer;
   }
 
-  li{
+  li {
     color: var(--red-main);
     font-size: 0.8rem;
   }
