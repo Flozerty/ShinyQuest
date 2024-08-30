@@ -77,66 +77,8 @@ class ApiController extends AbstractController
   {
     $pokemon = $apiHttpClient->getPokemonInfos($id);
 
-    // récupération des différentes formes du pokémon
-    $pokemonVarieties = [];
-    $varieties = $pokemon["pkmnSpec"]["varieties"];
-
-    if (count($varieties) > 0) {
-      foreach ($varieties as $variety) {
-        $url = $variety["pokemon"]["url"];
-        $pokemonVarieties[] = [
-          "pkmnStats" => $apiHttpClient->getRequestByUrl($url),
-          "pkmnSpec" => $pokemon["pkmnSpec"]
-        ];
-      }
-    }
-
-    // récupération du nom du pokemon
-    $name = "";
-    foreach ($pokemon["pkmnSpec"]["names"] as $lang) {
-      $lang["language"]["name"] == "fr" ? $name = $lang["name"] : null;
-    }
-
-    // récupération de la chaîne d'évolution du pokémon
-    $url = $pokemon["pkmnSpec"]["evolution_chain"]["url"];
-    $evolutionChain = $apiHttpClient->getEvolutionChain($url);
-
-    // récupération des statss du pokemon
-    $stats = [];
-    foreach ($pokemon["pkmnStats"]["stats"] as $stat) {
-      $url = $stat["stat"]["url"];
-
-      $stats[] = [
-        "base_stat" => $stat["base_stat"],
-        "details_stat" => $apiHttpClient->getRequestByUrl($url),
-      ];
-    }
-    ;
-
-    // récupération des capacités spéciales du pokemon
-    $abilities = [];
-    foreach ($pokemon["pkmnStats"]["abilities"] as $ability) {
-      $url = $ability["ability"]["url"];
-
-      $abilities[] = $apiHttpClient->getRequestByUrl($url);
-    }
-
-    // récupération des types du pokemon
-    $types = [];
-
-    foreach ($pokemon["pkmnStats"]["types"] as $type) {
-      $url = $type["type"]["url"];
-      $result = $apiHttpClient->getRequestByUrl($url);
-
-      foreach ($result["names"] as $lang) {
-        if ($lang["language"]["name"] == "fr") {
-          $types[] = [
-            "name" => $lang["name"],
-            "img" => $result["sprites"]["generation-viii"]["brilliant-diamond-and-shining-pearl"]["name_icon"]
-          ];
-        }
-      }
-    }
+    // récupération de toutes les infos du pokemon
+    $data = $apiHttpClient->getDataByPokemonDetails($pokemon);
 
     // récupération des captures du pokemon
     $captures = $captureRepository->findCapturesByPokemonId($id);
@@ -151,13 +93,14 @@ class ApiController extends AbstractController
     // dd($pokemon);
 
     return $this->render('api/pokemonDetails.html.twig', [
-      "name" => $name,
+      "data" => $data,
       'pokemon' => $pokemon,
-      'stats' => $stats,
-      'types' => $types,
-      "abilities" => $abilities,
-      'pokemonVarieties' => $pokemonVarieties,
-      "evolutionChain" => $evolutionChain,
+      // "name" => $name,
+      // 'stats' => $stats,
+      // 'types' => $types,
+      // "abilities" => $abilities,
+      // 'pokemonVarieties' => $pokemonVarieties,
+      // "evolutionChain" => $evolutionChain,
       "currentPokemonId" => $pokemon["pkmnStats"]["id"],
       "capturesByLieu" => $capturesByLieu,
       "captures" => $captures,
@@ -168,6 +111,13 @@ class ApiController extends AbstractController
 
   #[Route('/api/balls', name: 'api_balls', methods: ['GET'])]
   public function getBalls(ApiHttpClient $apiHttpClient): JsonResponse
+  {
+    $balls = $apiHttpClient->getAllBalls();
+    return new JsonResponse($balls);
+  }
+
+  #[Route('/api/pokemonDetails', name: 'api_details', methods: ['GET'])]
+  public function getPokemonDetails(ApiHttpClient $apiHttpClient): JsonResponse
   {
     $balls = $apiHttpClient->getAllBalls();
     return new JsonResponse($balls);

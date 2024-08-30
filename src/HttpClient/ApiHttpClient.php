@@ -55,6 +55,14 @@ class ApiHttpClient extends AbstractController
     return end($parts);
   }
 
+  // Get les infos de base d'un pkmn
+  public function getPokemonById($id)
+  {
+    $response = $this->httpClient->request('GET', "pokemon/$id");
+    return $response->toArray();
+  }
+
+
   // Get a single pkmn "allInfos"
   public function getPokemonInfos($id)
   {
@@ -249,5 +257,99 @@ class ApiHttpClient extends AbstractController
       }
     }
     return $filteredPokemons;
+  }
+
+  // Recherche d'un pokemon par chaîne de caractère / id
+  public function getPokemonStatsByPokemonDetails($pokemon): array
+  {
+    $stats = [];
+    foreach ($pokemon["pkmnStats"]["stats"] as $stat) {
+      $url = $stat["stat"]["url"];
+
+      $stats[] = [
+        "base_stat" => $stat["base_stat"],
+        "details_stat" => $this->getRequestByUrl($url),
+      ];
+    };
+    return $stats;
+  }
+
+  public function getPokemonAbilitiesByPokemonDetails($pokemon): array
+  {
+    $abilities = [];
+    foreach ($pokemon["pkmnStats"]["abilities"] as $ability) {
+      $url = $ability["ability"]["url"];
+      $abilities[] = $this->getRequestByUrl($url);
+    }
+    return $abilities;
+  }
+
+  public function getPokemonTypesByPokemonDetails($pokemon): array
+  {
+    $types = [];
+    foreach ($pokemon["pkmnStats"]["types"] as $type) {
+      $url = $type["type"]["url"];
+      $result = $this->getRequestByUrl($url);
+
+      foreach ($result["names"] as $lang) {
+        if ($lang["language"]["name"] == "fr") {
+          $types[] = [
+            "name" => $lang["name"],
+            "img" => $result["sprites"]["generation-viii"]["brilliant-diamond-and-shining-pearl"]["name_icon"]
+          ];
+        }
+      }
+    }
+    return $types;
+  }
+
+  public function getPokemonVarietiesByPokemonDetails($pokemon): array
+  {
+    $pokemonVarieties = [];
+    $varieties = $pokemon["pkmnSpec"]["varieties"];
+
+    if (count($varieties) > 0) {
+      foreach ($varieties as $variety) {
+        $url = $variety["pokemon"]["url"];
+        $pokemonVarieties[] = [
+          "pkmnStats" => $this->getRequestByUrl($url),
+          "pkmnSpec" => $pokemon["pkmnSpec"]
+        ];
+      }
+    }
+    return $pokemonVarieties;
+  }
+
+  public function getPokemonNameByPokemonDetails($pokemon): string
+  {
+    $name = "";
+    foreach ($pokemon["pkmnSpec"]["names"] as $lang) {
+      $lang["language"]["name"] == "fr" ? $name = $lang["name"] : null;
+    }
+    return $name;
+  }
+
+  public function getDataByPokemonDetails($pokemon): array
+  {
+    $urlEvolution = $pokemon["pkmnSpec"]["evolution_chain"]["url"];
+    return [
+      // récupération des différentes formes du pokémon
+      "pokemonVarieties" => $this->getPokemonVarietiesByPokemonDetails($pokemon),
+
+      // récupération du nom du pokemon
+      "name" => $this->getPokemonNameByPokemonDetails($pokemon),
+
+      // récupération de la chaîne d'évolution du pokémon
+      "evolutionChain" => $this->getEvolutionChain($urlEvolution),
+
+      // récupération des statss du pokemon
+      "stats" => $this->getPokemonStatsByPokemonDetails($pokemon),
+
+      // récupération des capacités spéciales du pokemon
+      "abilities" => $this->getPokemonAbilitiesByPokemonDetails($pokemon),
+
+      // récupération des types du pokemon
+      "types" => $this->getPokemonTypesByPokemonDetails($pokemon),
+    ];
   }
 }
