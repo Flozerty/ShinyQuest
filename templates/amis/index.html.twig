@@ -13,7 +13,6 @@
 {% block body %}
 
 <section id="demandes">
-
     {% if demandesEnvoyees is not empty %}
 
     {# Demandes d'ami envoyées #}
@@ -24,7 +23,7 @@
 
             <a class="user-link" href="{{ path('profile_user', {'pseudo': demande.user.pseudo}) }}">
                 <figure>
-                    <img src="{{demande.user.avatar ? asset('img/' ~ demande.user.avatar) : asset('img/unknown_user.png') }}"
+                    <img src="{{demande.user.avatar ? asset('img/avatars/' ~ demande.user.avatar) : asset('img/unknown_user.png') }}"
                         alt="avatar de {{demande.user.pseudo}}">
                 </figure>
                 <span class="pseudo">
@@ -51,7 +50,7 @@
 
             <a class="user-link" href="{{ path('profile_user', {'pseudo': demande.user.pseudo}) }}">
                 <figure>
-                    <img src="{{demande.user.avatar ? asset('img/' ~ demande.user.avatar) : asset('img/unknown_user.png') }}"
+                    <img src="{{demande.user.avatar ? asset('img/avatars/' ~ demande.user.avatar) : asset('img/unknown_user.png') }}"
                         alt="avatar de {{demande.user.pseudo}}">
                 </figure>
                 <span class="pseudo">
@@ -89,7 +88,7 @@
 
         <a class="user-link profil-dresseur" href="{{ path('profile_user', {'pseudo': data.user.pseudo}) }}">
             <figure>
-                <img src="{{data.user.avatar ? asset('img/' ~ data.user.avatar) : asset('img/unknown_user.png') }}"
+                <img src="{{data.user.avatar ? asset('img/avatars/' ~ data.user.avatar) : asset('img/unknown_user.png') }}"
                     alt="avatar de {{data.user.pseudo}}">
             </figure>
             <span class="pseudo">

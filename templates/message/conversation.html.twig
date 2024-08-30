@@ -47,7 +47,7 @@
             <a class="user-link profil-dresseur"
                 href="{{ path('profile_user', {'pseudo': message.userEnvoi.pseudo}) }}">
                 <figure>
-                    <img src="{{message.userEnvoi.avatar ? asset('img/' ~ message.userEnvoi.avatar) : asset('img/unknown_user.png') }}"
+                    <img src="{{message.userEnvoi.avatar ? asset('img/avatars/' ~ message.userEnvoi.avatar) : asset('img/unknown_user.png') }}"
                         alt="avatar de {{message.userEnvoi.pseudo}}">
                 </figure>
             </a>

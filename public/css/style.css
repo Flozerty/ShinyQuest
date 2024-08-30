@@ -389,6 +389,7 @@ header {
       background-color: var(--secondary-color);
       border-radius: 50%;
       height: 80%;
+      max-width: 80%;
       overflow: hidden;
     }
   }

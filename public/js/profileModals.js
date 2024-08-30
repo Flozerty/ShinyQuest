@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function showDialog(dialog) {
       dialog.showModal();
       const dialogContent = dialog.querySelector('.dialog-content');
-      const cancelButton = dialog.querySelector(".cancelBtn");
+      const cancelButton = dialog.querySelector(".fa-circle-xmark");
 
       cancelButton.addEventListener("click", () => {
 

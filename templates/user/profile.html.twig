@@ -9,6 +9,7 @@
 
 {% block javascripts %}
 <script src="{{asset('js/profileModals.js')}}"></script>
+<script src="{{asset('js/avatarPreview.js')}}"></script>
 {% endblock %}
 
 {% block body %}
@@ -28,7 +29,7 @@
 <h2>Infos sur le dresseur</h2>
 <section id="user-infos">
     <figure>
-        <img src="{{user.avatar ? asset('img/' ~ user.avatar) : asset('img/unknown_user.png') }}"
+        <img src="{{user.avatar ? asset('img/avatars/' ~ user.avatar) : asset('img/unknown_user.png') }}"
             alt="avatar de {{user.pseudo}}">
     </figure>
 
@@ -117,24 +118,21 @@
 <dialog id="avatarDialog">
     <div class="dialog-content">
 
-        <form action="{{path('change_avatar')}}">
-            <img src="{{ asset('img/' ~ app.user.avatar) }}" alt="avatar de {{app.user}}">
+            <figure id="avatar-preview">
+                <img src="{{ asset('img/avatars/' ~ app.user.avatar) }}" alt="avatar de {{app.user}}" id="avatar-image">
+            </figure>
 
-            <label for="avatar">Choisissez un avatar</label>
-            <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" required>
-
-            <div class="modalNav">
-                <button type="submit">
-                    <i class="fa-solid fa-circle-check"></i>
-                </button>
-                <p class="cancelBtn">
-                    <i class="cancel fa-solid fa-circle-xmark"></i>
-                </p>
-            </div>
-        </form>
+            {{ form_start(formAvatar) }}
+            {{ form_row(formAvatar.avatar) }}
+                <div class="modalNav">
+                    <button type="submit">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </button>
+                        <i class="cancel fa-solid fa-circle-xmark"></i>
+                </div>
+            {{ form_end(formAvatar) }}
     </div>
 </dialog>
-
 
 <dialog id="pseudoDialog">
     <div class="dialog-content">
@@ -146,9 +144,7 @@
                 <button type="submit">
                     <i class="fa-solid fa-circle-check"></i>
                 </button>
-                <p class="cancelBtn">
                     <i class="cancel fa-solid fa-circle-xmark"></i>
-                </p>
             </div>
         </form>
     </div>

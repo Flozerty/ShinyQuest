@@ -25,7 +25,6 @@
 
   <script src="https://kit.fontawesome.com/7252ea4d54.js" crossorigin="anonymous"></script>
   <script src="{{asset('js/setColors.js')}}"></script>
-
 </head>
 
 <body>
@@ -106,7 +105,7 @@
       <div id="header-profile">
         <p>{{app.user}}</p>
         <figure>
-          <img src="{{app.user.avatar ? asset('img/' ~ app.user.avatar) : asset('img/unknown_user.png') }}"
+          <img src="{{app.user.avatar ? asset('img/avatars/' ~ app.user.avatar) : asset('img/unknown_user.png') }}"
             alt="avatar de {{app.user}}">
         </figure>
 

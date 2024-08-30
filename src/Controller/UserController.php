@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\AvatarType;
 use App\HttpClient\ApiHttpClient;
 use App\Repository\AmisRepository;
 use App\Repository\CaptureRepository;
@@ -10,6 +11,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -38,7 +40,7 @@ class UserController extends AbstractController
         );
 
         $AmisByDemande = $amisRepository->findBy(["userDemande" => $this->getUser()]);
-        $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()],);
+        $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()], );
 
         $amis = [];
         $demandeEnvoyee = [];
@@ -129,11 +131,14 @@ class UserController extends AbstractController
     }
 
     #[Route('/user/profile', name: 'my_profile')]
-    public function myProfile(CaptureRepository $captureRepository, ApiHttpClient $apiHttpClient): Response
+    public function myProfile(CaptureRepository $captureRepository, EntityManagerInterface $entityManager, Request $request, ApiHttpClient $apiHttpClient): Response
     {
+        /**
+         * @var User $user
+         */
         $user = $this->getUser();
         if (!$user) {
-            dd('test');
+            return $this->redirectToRoute("error403");
         }
 
         $userCaptures = $captureRepository->findBy(["user" => $user], ["dateCapture" => "DESC"]);
@@ -156,6 +161,46 @@ class UserController extends AbstractController
             $capturedPokemonIds[$pokemonId] = true; // On veut juste la clé (pas de doublons), on se fiche de la valeur.
         }
 
+        // /////////////////////// Form Avatar
+
+        $formAvatar = $this->createForm(AvatarType::class);
+        $formAvatar->handleRequest($request);
+
+        if ($formAvatar->isSubmitted() && $formAvatar->isValid()) {
+            $avatarFile = $formAvatar->get('avatar')->getData();
+
+            if ($avatarFile) {
+                $newAvatar = uniqid() . '.' . $avatarFile->guessExtension();
+
+                try {
+                    $avatarFile->move(
+                        $this->getParameter('avatars_directory'), // /public/img/avatars,
+                        $newAvatar
+                    );
+                } catch (FileException $e) {
+                }
+
+                // si l'user avait déjà un avatar : supprimer
+                $lastAvatar = $user->getAvatar();
+                if ($lastAvatar) {
+                    $lastAvatarPath = $this->getParameter('avatars_directory') . '/' . $lastAvatar;
+
+                    if (file_exists($lastAvatarPath)) {
+                        unlink($lastAvatarPath); // Supprime l'avatar précédent
+                    }
+                }
+
+                $user->setAvatar($newAvatar);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Avatar updated successfully!');
+
+                return $this->redirectToRoute('my_profile');
+            }
+        }
+
+        // ///////////////////////
+
         return $this->render('user/profile.html.twig', [
             "page_title" => "Mon profil",
             "myProfil" => true,
@@ -165,12 +210,15 @@ class UserController extends AbstractController
             "totalRencontres" => $totalRencontres,
             "allPokemons" => $pokemons,
             "capturedPokemonIds" => $capturedPokemonIds,
+            "formAvatar" => $formAvatar,
         ]);
     }
 
     #[Route('/user/editAvatar', name: 'change_avatar')]
     public function changeAvatar(): Response
     {
+
+        $this->addFlash("success", "Votre nouvel avatar a été choisi.");
         return $this->redirectToRoute("my_profile");
     }
 

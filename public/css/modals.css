@@ -64,3 +64,36 @@ dialog {
     }
   }
 }
+
+#avatarDialog {
+
+  #avatar-preview {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    width: 200px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+
+    img {
+      background-color: var(--secondary-color);
+      border-radius: 50%;
+      height: 90%;
+      max-width: 90%;
+      overflow: hidden;
+    }
+
+    .avatar-container {
+      flex-direction: column;
+
+      &>* {
+        width: fit-content;
+      }
+
+      label {
+        align-self: center;
+      }
+    }
+  }

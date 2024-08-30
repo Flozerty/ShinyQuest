@@ -14,7 +14,7 @@
 
     <a class="user-link" href="{{ path('profile_user', {'pseudo': dresseur.user.pseudo}) }}">
       <figure>
-        <img src="{{dresseur.user.avatar ? asset('img/' ~ dresseur.user.avatar) : asset('img/unknown_user.png') }}"
+        <img src="{{dresseur.user.avatar ? asset('img/avatars/' ~ dresseur.user.avatar) : asset('img/unknown_user.png') }}"
           alt="avatar de {{dresseur.user.pseudo}}">
       </figure>
       <span class="pseudo">

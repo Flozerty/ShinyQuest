@@ -35,6 +35,7 @@
         border-radius: 50%;
         background-color: var(--secondary-color);
         height: 90%;
+        max-width: 90%;
         overflow: hidden;
       }
     }
