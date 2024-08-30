@@ -13,6 +13,20 @@ h1 {
     margin-bottom: 0;
 }
 
+#nav-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: sticky;
+    top: 15%;
+    width: fit-content;
+
+    i {
+        font-size: 2rem;
+        color: var(--primary-color);
+    }
+}
+
 #main-active-pkmn {
     width: 300px;
     align-self: center;
