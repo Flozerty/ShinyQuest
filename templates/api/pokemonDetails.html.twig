@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{name}}{% endblock %}
+{% block title %}{{data.name}}{% endblock %}
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{asset('css/pokemon_details.css')}}">
@@ -8,13 +8,12 @@
 
 {% block javascripts %}
 <script src="{{asset('js/pokedexSpriteDisplay.js')}}"></script>
-<script src="{{asset('js/pokemonStats.js')}}"></script>
-<script src="{{asset('js/pokemonForms.js')}}"></script>
+<script src="{{asset('js/pokemonDetails.js')}}"></script>
+<script src="{{asset('js/pokemonDetailsSwap.js')}}"></script>
 {% endblock %}
 
 {% block body %}
-
-<h1>{{name}} - #{{'%03d'|format(pokemon.pkmnSpec.id)}}</h1>
+<h1>{{data.name}} - #{{'%03d'|format(pokemon.pkmnSpec.id)}}</h1>
 
 <div id="nav-buttons">
     <button id="shiny-mode">
@@ -33,51 +32,60 @@
                 fill="#F4A32C" />
         </svg>
     </button>
-
-    <i class="fa-solid fa-arrow-rotate-left"></i>
+    <a href="{{path('app_pokedex')}}">
+        <i class="fa-solid fa-arrow-rotate-left"></i>
+    </a>
 </div>
 
-<figure id="main-active-pkmn">
-    <img class="sprite-normal" src="{{pokemon.pkmnStats.sprites.other['official-artwork'].front_default}}"
-        alt="{{pokemon.pkmnStats.name}}">
-    <img class="sprite-shiny" src="{{pokemon.pkmnStats.sprites.other['official-artwork'].front_shiny}}"
-        alt="{{pokemon.pkmnStats.name}} shiny" loading="lazy">
-</figure>
+<section id="navigation">
+    <a href="#" id="previous"><i class="fa-solid fa-angle-left"></i></a>
+    <figure id="main-active-pkmn">
+        <img class="sprite-normal" src="{{pokemon.pkmnStats.sprites.other['official-artwork'].front_default}}"
+            alt="{{pokemon.pkmnStats.name}}">
+        <img class="sprite-shiny" src="{{pokemon.pkmnStats.sprites.other['official-artwork'].front_shiny}}"
+            alt="{{pokemon.pkmnStats.name}} shiny" loading="lazy">
+    </figure>
+    <a href="#" id="next"><i class="fa-solid fa-angle-right"></i></a>
+</section>
 
-<p id="pokemon-description">
+<section id="pokemon-description">
     {% set text = "" %}
     {% for description in pokemon.pkmnSpec.flavor_text_entries %}
-        {% if description.language.name == "fr" %}
-            {% set text = description.flavor_text %}
-        {% endif %}
+    {% if description.language.name == "fr" %}
+    {% set text = description.flavor_text %}
+    {% endif %}
     {% endfor %}
-    {{text}}
-</p>
+    <p>{{text}}</p>
+</section>
 
-<div id="types">
-    {% for type in types %}
-        <img src="{{type.img}}" alt="type {{type.name}}">
+<section id="types">
+    {% for type in data.types %}
+    <img src="{{type.img}}" alt="type {{type.name}}">
     {% endfor %}
-</div>
+</section>
 
 <div id="main-content">
+    {% if data.pokemonVarieties[1] is defined %}
+
     <h2>Les différentes formes</h2>
     <section id="varieties">
-        {% for pokemonV in pokemonVarieties %}
+        {% for pokemonV in data.pokemonVarieties %}
         {% if pokemonV.pkmnStats.id != pokemon.pkmnStats.id%}
 
-                <a href="{{path('pokemon_details', {'id': pokemonV.pkmnStats.id})}}">
-                    <figure class="non-active-pkmn">
-                        <img class="sprite-normal" src="{{pokemonV.pkmnStats.sprites.other['official-artwork'].front_default}}"
-                            alt="{{pokemonV.pkmnStats.name}}">
-                        <img class="sprite-shiny" src="{{pokemonV.pkmnStats.sprites.other['official-artwork'].front_shiny}}"
-                            alt="{{pokemonV.pkmnStats.name}} shiny" loading="lazy">
-                        <figcaption>{{pokemonV.pkmnStats.name}}</figcaption>
-                    </figure>
-                </a>
+        <a href="{{path('pokemon_details', {'id': pokemonV.pkmnStats.id})}}">
+            <figure class="non-active-pkmn">
+                <img class="sprite-normal" src="{{pokemonV.pkmnStats.sprites.other['official-artwork'].front_default}}"
+                    alt="{{pokemonV.pkmnStats.name}}">
+                <img class="sprite-shiny" src="{{pokemonV.pkmnStats.sprites.other['official-artwork'].front_shiny}}"
+                    alt="{{pokemonV.pkmnStats.name}} shiny" loading="lazy">
+                <figcaption>{{pokemonV.pkmnStats.name}}</figcaption>
+            </figure>
+        </a>
         {% endif %}
         {% endfor %}
     </section>
+
+    {% endif %}
 
     <h2>Chaîne d'évolution</h2>
 
@@ -118,7 +126,7 @@
 
     {# affichage de l'arbre d'évolution #}
     <section id="evolution">
-        {% for pokemon in evolutionChain %}
+        {% for pokemon in data.evolutionChain %}
         {{ _self.displayEvolution(pokemon, currentPokemonId) }}
         {% endfor %}
     </section>
@@ -127,7 +135,7 @@
 <section id="stats">
     <h2>Stats du pokémon sur une base 220</h2>
     <ul id="stats-container">
-        {% for stat in stats %}
+        {% for stat in data.stats %}
         <li class="stat">
             {% for lang in stat.details_stat.names %}
             {% if lang.language.name == "fr" %}
@@ -151,7 +159,7 @@
             <i class="fa-solid fa-up-right-and-down-left-from-center"></i>&nbsp;
             {{pokemon.pkmnStats.height / 10}} m
         </span>
-    </div> 
+    </div>
 
     <div id="weight">
         <strong>Poids</strong>
@@ -165,14 +173,15 @@
             <strong>Capacités spéciales</strong>
 
             <ul id="abilities">
-                {% for ability in abilities %}
+                {% for ability in data.abilities %}
                 <li>
                     {% for lang in ability.names %}
                     {% if lang.language.name == "fr" %}
-                        {{lang.name}} {# nom fr #}
+                    {{lang.name}} {# nom fr #}
                     {% endif %}
                     {% endfor %}
-                <span class="english-name">({{ability.name}})</span></li> {# nom en #}
+                    <span class="english-name">({{ability.name}})</span>
+                </li> {# nom en #}
                 {% endfor %}
             </ul>
         </div>
@@ -203,7 +212,7 @@
     </p>
 
     {% else %}
-    <p>{{name}} n'a encore jamais été capturé par la communauté!</p>
+    <p>{{data.name}} n'a encore jamais été capturé par la communauté!</p>
     {% endif %}
 
 </section>

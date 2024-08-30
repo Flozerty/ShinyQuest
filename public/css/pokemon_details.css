@@ -18,21 +18,67 @@ h1 {
     flex-direction: column;
     align-items: center;
     position: sticky;
+    gap: 15px;
     top: 15%;
     width: fit-content;
+    height: 50px;
+
+    #shiny-mode {
+        transform: none;
+        flex-shrink: 0;
+    }
 
     i {
         font-size: 2rem;
         color: var(--primary-color);
+        transition: var(--transitionTime);
+
+        &:hover {
+            transform: rotate(-360deg);
+            transition: 1.5s;
+        }
     }
 }
 
-#main-active-pkmn {
-    width: 300px;
-    align-self: center;
+#navigation {
+    align-items: center;
+    justify-content: space-evenly;
 
-    img {
-        width: 100%;
+    #main-active-pkmn {
+        width: 300px;
+        align-self: center;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    a {
+        font-size: 3rem;
+        color: var(--primary-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--secondary-color);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+    }
+
+    #previous {
+        transition: var(--transitionTime);
+
+        &:hover {
+            transform: translateX(-20%);
+        }
+    }
+
+    #next {
+        transition: var(--transitionTime);
+
+        &:hover {
+            transform: translateX(20%);
+        }
     }
 }
 
@@ -46,12 +92,10 @@ h1 {
     width: 50%;
     text-align: center;
     align-self: center;
-    margin: 50px 0;
 }
 
 #main-content {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, auto);
 
     section {
@@ -82,7 +126,6 @@ h1 {
     &::-webkit-scrollbar-track {
         background-color: #f1f1f1;
         border-radius: 5px;
-
     }
 
     &::-webkit-scrollbar-track:hover {
@@ -206,6 +249,12 @@ h1 {
         display: flex;
         flex-direction: column;
         gap: 10px;
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
     }
 
     &>div {
@@ -222,6 +271,9 @@ h1 {
             border-right: none;
         }
     }
+    .english-name{
+        font-size: 0.9rem;
+    }
 }
 
 #locations {
@@ -235,9 +287,12 @@ h1 {
     }
 }
 
+/* //////////////// MEDIA QUERIES //////////////// */
+
 @media screen and (min-width: 450px) {
     #main-content {
         column-gap: 25px;
+        justify-content: center;
     }
 
     .stat-name {
@@ -253,7 +308,6 @@ h1 {
         grid-column: 5/9;
     }
 }
-
 
 @media screen and (max-width: 450px) {
     .stat-name {
@@ -306,9 +360,21 @@ h1 {
     }
 }
 
-
 @media screen and (max-width: 700px) {
     .english-name {
         display: none;
+    }
+}
+
+@media (max-width: 900px) {
+    #nav-buttons {
+        align-self: flex-end;
+    }
+}
+
+@media (min-width: 1200px) {
+    #nav-buttons {
+        transform: translateX(-100%);
+        align-self: flex-start;
     }
 }
