@@ -72,10 +72,6 @@ p {
   .pokemon-sprites img {
     filter: brightness(0%);
   }
-
-  .pokemon-name {
-    display: none;
-  }
 }
 
 #dex-completion {

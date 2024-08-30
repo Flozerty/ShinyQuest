@@ -12,9 +12,13 @@
   <p class="pokemon-id">#{{ '%03d'|format(pokemon.pokedex_id) }}</p>
 
   <div class="types">
+  {% if capturedPokemonIds is defined and pokemon.pokedex_id in capturedPokemonIds|keys %}
     {% for type in pokemon.types %}
     <img src="{{type.image}}" alt="type {{type.name}}">
     {% endfor %}
+  {% else %}
+    &nbsp;  
+  {% endif %}  
   </div>
 
   <div class="pokemon-sprites">
@@ -23,5 +27,9 @@
     <img class="sprite-shiny" src="{{pokemon.spriteS}}" alt="sprite shiny de {{pokemon.name}}" loading="lazy">
   </div>
 
+  {% if capturedPokemonIds is defined and pokemon.pokedex_id in capturedPokemonIds|keys %}
   <p class="pokemon-name">{{pokemon.name}}</p>
+  {% else %}
+  <p class="pokemon-name">&nbsp;</p>
+  {% endif %}
 </div>
