@@ -53,7 +53,7 @@ h1 {
         }
     }
 
-    a {
+    button {
         font-size: 3rem;
         color: var(--primary-color);
         display: flex;
@@ -63,6 +63,8 @@ h1 {
         border-radius: 50%;
         width: 50px;
         height: 50px;
+        border: none;
+        cursor: pointer;
     }
 
     #previous {
@@ -271,7 +273,8 @@ h1 {
             border-right: none;
         }
     }
-    .english-name{
+
+    .english-name {
         font-size: 0.9rem;
     }
 }

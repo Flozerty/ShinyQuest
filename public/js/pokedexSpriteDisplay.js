@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   let shinyMode = false;
 
-  const shinySprites = document.querySelectorAll('.sprite-shiny');
-  const normalSprites = document.querySelectorAll('.sprite-normal');
   const button = document.getElementById('shiny-mode');
 
   if (button) { // On est dans le pokedex
@@ -13,10 +11,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   } else { // Pour le Shinydex
     shinyMode = true;
+    verifyDisplayMode();
   }
 
   // Affichage
   function verifyDisplayMode() {
+    const shinySprites = document.querySelectorAll('.sprite-shiny');
+    const normalSprites = document.querySelectorAll('.sprite-normal');
     if (shinyMode) {
       shinySprites.forEach(sprite => {
         sprite.style.display = "block"
@@ -34,4 +35,5 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
   verifyDisplayMode()
+  const interval = setInterval(verifyDisplayMode, 500);
 })

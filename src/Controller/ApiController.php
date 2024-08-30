@@ -72,41 +72,20 @@ class ApiController extends AbstractController
     ]);
   }
 
+  // Page de détails d'un pokémon
   #[Route('/pokemon/{id}', name: 'pokemon_details')]
   public function pokemonDetails(ApiHttpClient $apiHttpClient, int $id, CaptureRepository $captureRepository): Response
   {
-    $pokemon = $apiHttpClient->getPokemonInfos($id);
+    $data = $this->getPokemonData($apiHttpClient, $id, $captureRepository);
+    return $this->render('api/pokemonDetails.html.twig', $data);
+  }
 
-    // récupération de toutes les infos du pokemon
-    $data = $apiHttpClient->getDataByPokemonDetails($pokemon);
-
-    // récupération des captures du pokemon
-    $captures = $captureRepository->findCapturesByPokemonId($id);
-    $capturesByLieu = $captureRepository->getNbCapturesByGame($id);
-
-    $bestSpots = [];
-    if (isset($capturesByLieu[0])) {
-      $bestSpots = $captureRepository->getPokemonCapturesByPlacesInGame($id, $capturesByLieu[0]["jeu"]);
-    }
-
-    // dd($abilities);
-    // dd($pokemon);
-
-    return $this->render('api/pokemonDetails.html.twig', [
-      "data" => $data,
-      'pokemon' => $pokemon,
-      // "name" => $name,
-      // 'stats' => $stats,
-      // 'types' => $types,
-      // "abilities" => $abilities,
-      // 'pokemonVarieties' => $pokemonVarieties,
-      // "evolutionChain" => $evolutionChain,
-      "currentPokemonId" => $pokemon["pkmnStats"]["id"],
-      "capturesByLieu" => $capturesByLieu,
-      "captures" => $captures,
-      "bestSpots" => $bestSpots,
-      "pika" => true,
-    ]);
+  // Détails d'un pokémon en ajax
+  #[Route('/api/pokemonDetailsChange/{id}', name: 'api_details_change', methods: ['GET'])]
+  public function getPokemonDetails(ApiHttpClient $apiHttpClient, int $id, CaptureRepository $captureRepository): JsonResponse
+  {
+    $data = $this->getPokemonData($apiHttpClient, $id, $captureRepository);
+    return new JsonResponse($data);
   }
 
   #[Route('/api/balls', name: 'api_balls', methods: ['GET'])]
@@ -116,10 +95,38 @@ class ApiController extends AbstractController
     return new JsonResponse($balls);
   }
 
-  #[Route('/api/pokemonDetails', name: 'api_details', methods: ['GET'])]
-  public function getPokemonDetails(ApiHttpClient $apiHttpClient): JsonResponse
+
+  ///////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////// PRIVATE METHODS ///////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////
+  private function getPokemonData(ApiHttpClient $apiHttpClient, int $id, CaptureRepository $captureRepository): array
   {
-    $balls = $apiHttpClient->getAllBalls();
-    return new JsonResponse($balls);
+    $pokemon = $apiHttpClient->getPokemonInfos($id);
+    $data = $apiHttpClient->getDataByPokemonDetails($pokemon);
+    $captures = $captureRepository->findCapturesByPokemonId($id);
+    $capturesByLieu = $captureRepository->getNbCapturesByGame($id);
+
+    $bestSpots = [];
+    if (isset($capturesByLieu[0])) {
+      $bestSpots = $captureRepository->getPokemonCapturesByPlacesInGame($id, $capturesByLieu[0]["jeu"]);
+    }
+    // dd([
+    //   'pokemon' => $pokemon,
+    //   'data' => $data,
+    //   'currentPokemonId' => $pokemon["pkmnStats"]["id"],
+    //   'capturesByLieu' => $capturesByLieu,
+    //   'captures' => $captures,
+    //   'bestSpots' => $bestSpots,
+    //   'pika' => true,
+    // ]);
+    return [
+      'pokemon' => $pokemon,
+      'data' => $data,
+      'currentPokemonId' => $pokemon["pkmnStats"]["id"],
+      'capturesByLieu' => $capturesByLieu,
+      'captures' => $captures,
+      'bestSpots' => $bestSpots,
+      'pika' => true,
+    ];
   }
 }

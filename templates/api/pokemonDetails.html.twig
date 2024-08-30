@@ -10,6 +10,7 @@
 <script src="{{asset('js/pokedexSpriteDisplay.js')}}"></script>
 <script src="{{asset('js/pokemonDetails.js')}}"></script>
 <script src="{{asset('js/pokemonDetailsSwap.js')}}"></script>
+<script src="{{asset('js/criPokemon.js')}}"></script>
 {% endblock %}
 
 {% block body %}
@@ -38,14 +39,18 @@
 </div>
 
 <section id="navigation">
-    <a href="#" id="previous"><i class="fa-solid fa-angle-left"></i></a>
+    <button id="previous" data-id="{{ currentPokemonId - 1 }}">
+        <i class="fa-solid fa-angle-left"></i>
+    </button>
     <figure id="main-active-pkmn">
         <img class="sprite-normal" src="{{pokemon.pkmnStats.sprites.other['official-artwork'].front_default}}"
             alt="{{pokemon.pkmnStats.name}}">
         <img class="sprite-shiny" src="{{pokemon.pkmnStats.sprites.other['official-artwork'].front_shiny}}"
             alt="{{pokemon.pkmnStats.name}} shiny" loading="lazy">
     </figure>
-    <a href="#" id="next"><i class="fa-solid fa-angle-right"></i></a>
+    <button id="next" data-id="{{ currentPokemonId + 1 }}">
+        <i class="fa-solid fa-angle-right"></i>
+    </button>
 </section>
 
 <section id="pokemon-description">
@@ -65,7 +70,7 @@
 </section>
 
 <div id="main-content">
-    {% if data.pokemonVarieties[1] is defined %}
+    {# {% if data.pokemonVarieties[1] is defined %} #}
 
     <h2>Les différentes formes</h2>
     <section id="varieties">
@@ -85,7 +90,7 @@
         {% endfor %}
     </section>
 
-    {% endif %}
+    {# {% endif %} #}
 
     <h2>Chaîne d'évolution</h2>
 
@@ -194,7 +199,7 @@
 
     {% if captures | length > 0 %}
     <p>
-        {{name}} a été capturé <strong>{{captures | length}}</strong> fois par la communauté, dont
+        {{data.name}} a été capturé <strong>{{captures | length}}</strong> fois par la communauté, dont
         <strong>{{capturesByLieu.0.nb_captures}}</strong> fois sur <strong>{{capturesByLieu.0.jeu}}</strong>!
     </p>
     <p>
