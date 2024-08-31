@@ -1,66 +1,81 @@
-$(document).ready(function () { // ~= document.addEventListener('DOMContentLoaded', () {
+document.addEventListener('DOMContentLoaded', function () {
+  const incrementButtons = document.querySelectorAll('.increment');
+  const decrementButtons = document.querySelectorAll('.decrement');
+  const increment10Buttons = document.querySelectorAll('.increment10');
+  const decrement10Buttons = document.querySelectorAll('.decrement10');
+  const compteurInputs = document.querySelectorAll('.compteur-input');
 
-  $('.increment').click(function () {
+  function updateCounter(url, captureId) {
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        verifyToRemoveLoading()
+        const compteurElement = document.getElementById('compteur-' + captureId);
+        if (compteurElement) {
+          compteurElement.value = data.nbRencontres;
+        }
+      })
+  }
 
-    // <button class="decrement" data-id="{{ capture.id }}">-1</button>
-    let captureId = $(this).data('id');
-    $.ajax({
-      url: '/shasse/' + captureId + '/increment',
-      type: 'POST',
-      success: function (data) {
-
-        //   <p class="compteur" id="compteur-{{ capture.id }}">{{capture.nbRencontres}}</p>
-        $('#compteur-' + captureId).val(data.nbRencontres);
-      }
+  // increment
+  incrementButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      const captureId = this.getAttribute('data-id');
+      verifyToStartLoading()
+      updateCounter(`/shasse/${captureId}/increment`, captureId);
+    });
+  });
+  // decrement
+  decrementButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      const captureId = this.getAttribute('data-id');
+      verifyToStartLoading()
+      updateCounter(`/shasse/${captureId}/decrement`, captureId);
+    });
+  });
+  // increment 10
+  increment10Buttons.forEach(button => {
+    button.addEventListener('click', function () {
+      const captureId = this.getAttribute('data-id');
+      verifyToStartLoading()
+      updateCounter(`/shasse/${captureId}/increment10`, captureId);
+    });
+  });
+  // decrement 10
+  decrement10Buttons.forEach(button => {
+    button.addEventListener('click', function () {
+      const captureId = this.getAttribute('data-id');
+      verifyToStartLoading()
+      updateCounter(`/shasse/${captureId}/decrement10`, captureId);
     });
   });
 
-  $('.decrement').click(function () {
-    let captureId = $(this).data('id');
-    $.ajax({
-      url: '/shasse/' + captureId + '/decrement',
-      type: 'POST',
-      success: function (data) {
-        $('#compteur-' + captureId).val(data.nbRencontres);
-      }
+  // compteur input change
+  compteurInputs.forEach(input => {
+    input.addEventListener('change', function () {
+      const captureId = this.id.split('-')[1];
+      const newValue = this.value;
+
+      const url = `/shasse/${captureId}/updateCounter/${newValue}`;
+
+      fetch(url, { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+          verifyToRemoveLoading()
+
+          const compteurElement = document.getElementById('compteur-' + captureId);
+          if (compteurElement) {
+            compteurElement.value = data.nbRencontres;
+          }
+        })
     });
   });
 
-  $('.increment10').click(function () {
-    let captureId = $(this).data('id');
-    $.ajax({
-      url: '/shasse/' + captureId + '/increment10',
-      type: 'POST',
-      success: function (data) {
-        $('#compteur-' + captureId).val(data.nbRencontres);
-      }
-    });
-  });
+  function verifyToRemoveLoading() {
 
-  $('.decrement10').click(function () {
-    let captureId = $(this).data('id');
-    $.ajax({
-      url: '/shasse/' + captureId + '/decrement10',
-      type: 'POST',
-      success: function (data) {
-        $('#compteur-' + captureId).val(data.nbRencontres);
-      }
-    });
-  });
+  }
 
-  $('.compteur-input').change(function () {
-    let captureId = $(this).attr('id').split('-')[1]; // Extraction de l'id à partir de l'id de l'input (id="compteur-{{ capture.id }}")
-    let newValue = $(this).val(); // Nouvelle valeur entrée par l'utilisateur
+  function verifyToStartLoading() {
 
-    $.ajax({
-      url: '/shasse/' + captureId + '/updateCounter',
-      type: 'POST',
-      data: {
-        nbRencontres: newValue
-      },
-      success: function (data) {
-        $('#compteur-' + captureId).val(data.nbRencontres);
-      }
-    });
-  });
+  }
 });

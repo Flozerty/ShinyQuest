@@ -237,16 +237,16 @@ class CaptureController extends AbstractController
   }
 
   // update counter manually on the input
-  #[Route('/shasse/{id}/updateCounter', name: 'shasse_updateCounter')]
-  public function updateCounter(int $id, EntityManagerInterface $entityManager, CaptureRepository $captureRepository, Request $request): Response
+  #[Route('/shasse/{id}/updateCounter/{newValue}', name: 'shasse_updateCounter')]
+  public function updateCounter(int $id, int $newValue, EntityManagerInterface $entityManager, CaptureRepository $captureRepository): Response
   {
     $shasse = $captureRepository->find($id);
-    $newValue = $request->request->get('nbRencontres');
 
     if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
       $shasse->setNbRencontres($newValue);
       $entityManager->flush();
     }
+
     return $this->json(['nbRencontres' => $shasse->getNbRencontres()]);
   }
 }

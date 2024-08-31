@@ -123,10 +123,11 @@
   </div>
 
   {# affichage du compteur #}
-  <label for="compteur-{{ capture.id }}" class="visually-hidden">Compteur</label>
-  <input type="number" class="compteur-input" name="compteur-{{ capture.id }}" id="compteur-{{ capture.id }}"
-    value="{{capture.nbRencontres}}"></input>
-
+  <div id="form-like-compteur" class="loading-container">
+    <label for="compteur-{{ capture.id }}" class="visually-hidden">Compteur</label>
+    <input type="number" class="compteur-input" name="compteur-{{ capture.id }}" id="compteur-{{ capture.id }}"
+      value="{{capture.nbRencontres}}"></input>
+  </div>
   {# ?? ajouter ici le taux de capture ?? #}
 
   <a class="stop_suivi" href="{{ path('stop_suivi', {'id': capture.id}) }}">retirer du suivi</a>
