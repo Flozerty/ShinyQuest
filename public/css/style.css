@@ -751,6 +751,11 @@ footer {
   z-index: 4;
 }
 
+.wait,
+.wait * {
+  cursor: wait;
+}
+
 @keyframes loading {
   0% {
     transform: rotate(0);

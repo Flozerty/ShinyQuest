@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const previousButton = document.querySelector('#previous');
-  const nextButton = document.querySelector('#next');
+  const previousButton = document.querySelector('#previous'),
+    nextButton = document.querySelector('#next'),
+    body = document.querySelector('body');
 
   previousButton.addEventListener('click', () => {
     const pokemonId = parseInt(previousButton.getAttribute('data-id'));
@@ -31,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
           previousButton.disabled = false;
           nextButton.disabled = false;
         })
-
     }
   }
 
@@ -143,11 +143,10 @@ document.addEventListener('DOMContentLoaded', function () {
       });
 
       li.className = 'stat';
-      li.innerHTML = `
-        <span class="stat-name">${statName} : </span>
+      li.innerHTML = `<span class="stat-name">${statName} : </span>
         <span class="stat-amount">${stat.base_stat}</span>
         <div class="stat-completion" title="${stat.base_stat}/220">
-            <div class="completion-bar" style="width: ${(stat.base_stat / 220) * 100}%;"></div>
+          <div class="completion-bar" style="width: ${(stat.base_stat / 220) * 100}%;"></div>
         </div>`;
       statsContainer.appendChild(li);
     });
@@ -256,18 +255,24 @@ document.addEventListener('DOMContentLoaded', function () {
     return evolutionContainer;
   }
 
+  /////////////////////////////////////////////////////////////////
+  //////////////////////// SWIPE & LOADING ////////////////////////
+  /////////////////////////////////////////////////////////////////
   function showLoading() {
     const nav = document.querySelector('#navigation'),
       spinner = document.createElement('i');
     spinner.className = "fa-brands fa-cloudscale loading";
     nav.appendChild(spinner)
 
+    body.classList.add("wait")
   }
 
   function hideLoading() {
     const spinners = document.querySelectorAll('.loading')
     spinners.forEach(spinner => {
       spinner.remove()
+
+      body.classList.remove("wait")
     })
   }
 

@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // Stats
-    const statsComp = document.querySelectorAll('.stat-completion');
 
     function checkVisibility() {
+        // on vérifie les stats en cas de changement (ajax)
+        const statsComp = document.querySelectorAll('.stat-completion');
+
         statsComp.forEach((element) => {
             const rect = element.getBoundingClientRect();
             const windowHeight = window.innerHeight || document.documentElement.clientHeight;
@@ -11,7 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // Si l'image est visible
             if (rect.top <= windowHeight) {
                 displayStat(element);
-                // window.removeEventListener('scroll', checkVisibility)
+            } else {
+                const completionBar = element.querySelector('.completion-bar');
+                completionBar.style.width = 0;
+                completionBar.style.transition = "0s";
             }
         })
     }
@@ -20,10 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const stat = comp.getAttribute('title').split('/')[0];
         const percentage = (stat / 220) * 100;
         const completionBar = comp.querySelector('.completion-bar');
+        completionBar.style.transition = "1s";
 
         setTimeout(() => {
             completionBar.style.width = percentage + '%';
-        }, 500);
+        }, 150);
     }
 
     window.addEventListener('scroll', checkVisibility);
