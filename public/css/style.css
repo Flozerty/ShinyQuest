@@ -740,12 +740,15 @@ footer {
   }
 }
 
+.loading-container {
+  position: relative;
+}
+
 .loading {
   font-size: 2rem;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   color: var(--primary-color);
   animation: loading .5s linear infinite;
   z-index: 4;

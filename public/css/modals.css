@@ -21,6 +21,7 @@ dialog {
   border-color: var(--primary-color);
   background-color: var(--cardColor);
   color: black;
+  overflow: visible;
 
   .dialog-content {
     padding: 20px;
@@ -66,7 +67,6 @@ dialog {
 }
 
 #avatarDialog {
-
   #avatar-preview {
     margin: auto;
     display: flex;
@@ -99,3 +99,4 @@ dialog {
       }
     }
   }
+}

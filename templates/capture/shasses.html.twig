@@ -4,8 +4,8 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{asset('css/pkmn_card.css')}}">
-<link rel="stylesheet" href="{{asset('css/shasses.css')}}">
 <link rel="stylesheet" href="{{asset('css/modals.css')}}">
+<link rel="stylesheet" href="{{asset('css/shasses.css')}}">
 {% endblock %}
 
 {% block javascripts %}
@@ -13,7 +13,6 @@
 <script src="{{asset('js/otherShasseToggleLinks.js')}}"></script>
 <script src="{{asset('js/catchPokemonSong.js')}}"></script>
 <script src="{{asset('js/ajaxCompteur.js')}}"></script>
-<script src="{{asset('js/ajaxAllBalls.js')}}"></script>
 <script src="{{asset('js/ajaxGetFormShasseData.js')}}"></script>
 {% endblock %}
 
@@ -37,7 +36,7 @@
 
 <section id="new-shasse">
   {{ form_start(formNewShasse) }}
-  <div>
+  <div class="loading-container">
     <label for="pokemonId">Nom du pokemon :</label>
     <select name="pokemonId" id="pokemonId">
       <option value="">Sélectionnez le pokémon</option>
@@ -45,15 +44,18 @@
       <option value="{{ pokemon.pokedex_id }}">{{ pokemon.pokedex_id }} - {{ pokemon.name }}</option>
       {% endfor %} #}
     </select>
+    <i class="fa-brands fa-cloudscale loading nom-pokemon-loading"></i>
   </div>
   {{ form_row(formNewShasse.nbRencontres) }}
 
-  <div>
+  <div class="loading-container">
     <label for="jeu">Jeu :</label>
     <select name="jeu" id="jeu">
       <option value="">Choisissez un jeu</option>
       {# ajax #}
     </select>
+    <i class="fa-brands fa-cloudscale loading jeu-loading"></i>
+
   </div>
 
   {{ form_row(formNewShasse.lieu) }}
@@ -136,7 +138,7 @@
   {% endfor %}
 
   {% if count == 0 %}
-  <p>Cliquez sur "<span id="stop-suivi-tip">arrêter le suivi</span>" pour garder votre shasse de côté</p>
+  <p>Cliquez sur "<span id="stop-suivi-tip">retirer du suivi</span>" pour garder votre shasse de côté</p>
   {% endif %}
 
 </section>
@@ -171,25 +173,22 @@
     </div>
 
     {# select balls #}
-    <div>
+    <div class="loading-container">
       <label for="ball">Ball</label>
       <select id="ball" name="ball">
 
         {# {% for group in balls %}
         <optgroup label="{{group.categoryName}}">
-
           {% for ball in group.ballsData %}
-
           {% if ball is defined and ball is not empty %}
           <option value="{{ball.spriteName}}">{{ball.name}}</option>
           {% endif %}
-
           {% endfor %}
         </optgroup>
-
         {% endfor %} #}
-
       </select>
+
+      <i class="fa-brands fa-cloudscale loading ball-loading"></i>
     </div>
 
     {# hidden captureID #}
