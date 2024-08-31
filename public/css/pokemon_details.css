@@ -240,7 +240,6 @@ h1 {
     height: 100%;
     background-color: var(--primary-color);
     border-radius: 0 8px 8px 0;
-
     transition: width 1s;
     width: 0;
 }
@@ -248,8 +247,18 @@ h1 {
 #other-details {
     flex-wrap: nowrap;
 
+    .fa-up-right-and-down-left-from-center {
+        transform: rotate(-45deg);
+    }
+
     i {
         color: var(--primary-color);
+        margin-right: 5px;
+    }
+
+    p {
+        display: flex;
+        align-items: center;
     }
 
     .wrapper {

@@ -103,9 +103,9 @@ class ApiController extends AbstractController
   {
     $pokemon = $apiHttpClient->getPokemonInfos($id);
     $data = $apiHttpClient->getDataByPokemonDetails($pokemon);
+
     $captures = $captureRepository->findCapturesByPokemonId($id);
     $capturesByLieu = $captureRepository->getNbCapturesByGame($id);
-
     $bestSpots = [];
     if (isset($capturesByLieu[0])) {
       $bestSpots = $captureRepository->getPokemonCapturesByPlacesInGame($id, $capturesByLieu[0]["jeu"]);

@@ -17,207 +17,206 @@
 <h1>{{data.name}} - #{{'%03d'|format(pokemon.pkmnSpec.id)}}</h1>
 
 <div id="nav-buttons">
-    <button id="shiny-mode">
-        <svg width="41" height="40" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-                d="M15.246 10.2708C14.97 9.69792 14.3867 9.33337 13.7462 9.33337C13.1056 9.33337 12.5276 9.69792 12.2464 10.2708L8.89778 17.1606L1.41945 18.2647C0.794518 18.3584 0.273743 18.7959 0.0810558 19.3947C-0.111631 19.9936 0.0446014 20.655 0.492468 21.0977L5.91894 26.4669L4.63784 34.0546C4.53368 34.6795 4.79407 35.3148 5.30964 35.6846C5.8252 36.0543 6.50742 36.1012 7.06986 35.8044L13.7514 32.2371L20.4329 35.8044C20.9954 36.1012 21.6776 36.0595 22.1932 35.6846C22.7087 35.3096 22.9691 34.6795 22.865 34.0546L21.5786 26.4669L27.0051 21.0977C27.453 20.655 27.6144 19.9936 27.4165 19.3947C27.2186 18.7959 26.7031 18.3584 26.0781 18.2647L18.5946 17.1606L15.246 10.2708Z"
-                fill="#F4A32C" />
-            <path
-                d="M30.4783 33.5677C30.4093 33.4245 30.2634 33.3334 30.1033 33.3334C29.9432 33.3334 29.7986 33.4245 29.7283 33.5677L28.8912 35.2902L27.0216 35.5662C26.8654 35.5896 26.7352 35.699 26.687 35.8487C26.6388 35.9984 26.6779 36.1638 26.7899 36.2745L28.1465 37.6167L27.8262 39.5137C27.8002 39.6699 27.8653 39.8287 27.9942 39.9212C28.123 40.0136 28.2936 40.0253 28.4342 39.9511L30.1046 39.0593L31.775 39.9511C31.9156 40.0253 32.0861 40.0149 32.215 39.9212C32.3439 39.8274 32.409 39.6699 32.383 39.5137L32.0614 37.6167L33.418 36.2745C33.53 36.1638 33.5704 35.9984 33.5209 35.8487C33.4714 35.699 33.3425 35.5896 33.1863 35.5662L31.3154 35.2902L30.4783 33.5677Z"
-                fill="#F4A32C" />
-            <path
-                d="M34.2898 0.468698C34.1518 0.182271 33.8601 0 33.5398 0C33.2196 0 32.9305 0.182271 32.7899 0.468698L31.1156 3.91362L27.3765 4.46565C27.064 4.51252 26.8036 4.73124 26.7073 5.03069C26.6109 5.33013 26.689 5.66082 26.913 5.88215L29.6262 8.56675L28.9857 12.3606C28.9336 12.6731 29.0638 12.9907 29.3216 13.1756C29.5794 13.3605 29.9205 13.3839 30.2017 13.2355L33.5424 11.4518L36.8832 13.2355C37.1644 13.3839 37.5055 13.3631 37.7633 13.1756C38.0211 12.9881 38.1513 12.6731 38.0992 12.3606L37.4561 8.56675L40.1693 5.88215C40.3932 5.66082 40.474 5.33013 40.375 5.03069C40.2761 4.73124 40.0183 4.51252 39.7058 4.46565L35.9641 3.91362L34.2898 0.468698Z"
-                fill="#F4A32C" />
-            <path
-                d="M23.8115 5.56772C23.7425 5.42451 23.5967 5.33337 23.4365 5.33337C23.2764 5.33337 23.1319 5.42451 23.0616 5.56772L22.2244 7.29019L20.3549 7.5662C20.1986 7.58963 20.0684 7.69899 20.0203 7.84872C19.9721 7.99844 20.0112 8.16379 20.1231 8.27445L21.4797 9.61675L21.1595 11.5137C21.1334 11.6699 21.1985 11.8287 21.3274 11.9212C21.4563 12.0136 21.6269 12.0253 21.7675 11.9511L23.4379 11.0593L25.1082 11.9511C25.2488 12.0253 25.4194 12.0149 25.5483 11.9212C25.6772 11.8274 25.7423 11.6699 25.7162 11.5137L25.3947 9.61675L26.7513 8.27445C26.8632 8.16379 26.9036 7.99844 26.8541 7.84872C26.8047 7.69899 26.6758 7.58963 26.5195 7.5662L24.6487 7.29019L23.8115 5.56772Z"
-                fill="#F4A32C" />
-        </svg>
-    </button>
-    <a href="{{path('app_pokedex')}}">
-        <i class="fa-solid fa-arrow-rotate-left"></i>
-    </a>
+  <button id="shiny-mode">
+    <svg width="41" height="40" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M15.246 10.2708C14.97 9.69792 14.3867 9.33337 13.7462 9.33337C13.1056 9.33337 12.5276 9.69792 12.2464 10.2708L8.89778 17.1606L1.41945 18.2647C0.794518 18.3584 0.273743 18.7959 0.0810558 19.3947C-0.111631 19.9936 0.0446014 20.655 0.492468 21.0977L5.91894 26.4669L4.63784 34.0546C4.53368 34.6795 4.79407 35.3148 5.30964 35.6846C5.8252 36.0543 6.50742 36.1012 7.06986 35.8044L13.7514 32.2371L20.4329 35.8044C20.9954 36.1012 21.6776 36.0595 22.1932 35.6846C22.7087 35.3096 22.9691 34.6795 22.865 34.0546L21.5786 26.4669L27.0051 21.0977C27.453 20.655 27.6144 19.9936 27.4165 19.3947C27.2186 18.7959 26.7031 18.3584 26.0781 18.2647L18.5946 17.1606L15.246 10.2708Z"
+        fill="#F4A32C" />
+      <path
+        d="M30.4783 33.5677C30.4093 33.4245 30.2634 33.3334 30.1033 33.3334C29.9432 33.3334 29.7986 33.4245 29.7283 33.5677L28.8912 35.2902L27.0216 35.5662C26.8654 35.5896 26.7352 35.699 26.687 35.8487C26.6388 35.9984 26.6779 36.1638 26.7899 36.2745L28.1465 37.6167L27.8262 39.5137C27.8002 39.6699 27.8653 39.8287 27.9942 39.9212C28.123 40.0136 28.2936 40.0253 28.4342 39.9511L30.1046 39.0593L31.775 39.9511C31.9156 40.0253 32.0861 40.0149 32.215 39.9212C32.3439 39.8274 32.409 39.6699 32.383 39.5137L32.0614 37.6167L33.418 36.2745C33.53 36.1638 33.5704 35.9984 33.5209 35.8487C33.4714 35.699 33.3425 35.5896 33.1863 35.5662L31.3154 35.2902L30.4783 33.5677Z"
+        fill="#F4A32C" />
+      <path
+        d="M34.2898 0.468698C34.1518 0.182271 33.8601 0 33.5398 0C33.2196 0 32.9305 0.182271 32.7899 0.468698L31.1156 3.91362L27.3765 4.46565C27.064 4.51252 26.8036 4.73124 26.7073 5.03069C26.6109 5.33013 26.689 5.66082 26.913 5.88215L29.6262 8.56675L28.9857 12.3606C28.9336 12.6731 29.0638 12.9907 29.3216 13.1756C29.5794 13.3605 29.9205 13.3839 30.2017 13.2355L33.5424 11.4518L36.8832 13.2355C37.1644 13.3839 37.5055 13.3631 37.7633 13.1756C38.0211 12.9881 38.1513 12.6731 38.0992 12.3606L37.4561 8.56675L40.1693 5.88215C40.3932 5.66082 40.474 5.33013 40.375 5.03069C40.2761 4.73124 40.0183 4.51252 39.7058 4.46565L35.9641 3.91362L34.2898 0.468698Z"
+        fill="#F4A32C" />
+      <path
+        d="M23.8115 5.56772C23.7425 5.42451 23.5967 5.33337 23.4365 5.33337C23.2764 5.33337 23.1319 5.42451 23.0616 5.56772L22.2244 7.29019L20.3549 7.5662C20.1986 7.58963 20.0684 7.69899 20.0203 7.84872C19.9721 7.99844 20.0112 8.16379 20.1231 8.27445L21.4797 9.61675L21.1595 11.5137C21.1334 11.6699 21.1985 11.8287 21.3274 11.9212C21.4563 12.0136 21.6269 12.0253 21.7675 11.9511L23.4379 11.0593L25.1082 11.9511C25.2488 12.0253 25.4194 12.0149 25.5483 11.9212C25.6772 11.8274 25.7423 11.6699 25.7162 11.5137L25.3947 9.61675L26.7513 8.27445C26.8632 8.16379 26.9036 7.99844 26.8541 7.84872C26.8047 7.69899 26.6758 7.58963 26.5195 7.5662L24.6487 7.29019L23.8115 5.56772Z"
+        fill="#F4A32C" />
+    </svg>
+  </button>
+  <a href="{{path('app_pokedex')}}">
+    <i class="fa-solid fa-arrow-rotate-left"></i>
+  </a>
 </div>
 
 <section id="navigation">
-    <button id="previous" data-id="{{ currentPokemonId - 1 }}">
-        <i class="fa-solid fa-angle-left"></i>
-    </button>
-    <figure id="main-active-pkmn">
-        <img class="sprite-normal" src="{{pokemon.pkmnStats.sprites.other['official-artwork'].front_default}}"
-            alt="{{pokemon.pkmnStats.name}}">
-        <img class="sprite-shiny" src="{{pokemon.pkmnStats.sprites.other['official-artwork'].front_shiny}}"
-            alt="{{pokemon.pkmnStats.name}} shiny" loading="lazy">
-    </figure>
-    <button id="next" data-id="{{ currentPokemonId + 1 }}">
-        <i class="fa-solid fa-angle-right"></i>
-    </button>
+  <button id="previous" data-id="{{ currentPokemonId - 1 }}">
+    <i class="fa-solid fa-angle-left"></i>
+  </button>
+  <figure id="main-active-pkmn">
+    <img class="sprite-normal" src="{{pokemon.pkmnStats.sprites.other['official-artwork'].front_default}}"
+      alt="{{pokemon.pkmnStats.name}}">
+    <img class="sprite-shiny" src="{{pokemon.pkmnStats.sprites.other['official-artwork'].front_shiny}}"
+      alt="{{pokemon.pkmnStats.name}} shiny" loading="lazy">
+  </figure>
+  <button id="next" data-id="{{ currentPokemonId + 1 }}">
+    <i class="fa-solid fa-angle-right"></i>
+  </button>
 </section>
 
 <section id="pokemon-description">
-    {% set text = "" %}
-    {% for description in pokemon.pkmnSpec.flavor_text_entries %}
-    {% if description.language.name == "fr" %}
-    {% set text = description.flavor_text %}
-    {% endif %}
-    {% endfor %}
-    <p>{{text}}</p>
+  {% set text = "" %}
+  {% for description in pokemon.pkmnSpec.flavor_text_entries %}
+  {% if description.language.name == "fr" %}
+  {% set text = description.flavor_text %}
+  {% endif %}
+  {% endfor %}
+  <p>{{text}}</p>
 </section>
 
 <section id="types">
-    {% for type in data.types %}
-    <img src="{{type.img}}" alt="type {{type.name}}">
-    {% endfor %}
+  {% for type in data.types %}
+  <img src="{{type.img}}" alt="type {{type.name}}">
+  {% endfor %}
 </section>
 
 <div id="main-content">
 
-    <h2 id="varieties-title" {% if data.pokemonVarieties[1] is not defined %} class="hidden" {% endif %}>Les différentes
-        formes</h2>
-    <section id="varieties" {% if data.pokemonVarieties[1] is not defined %} class="hidden" {% endif %}>
-        {% for pokemonV in data.pokemonVarieties %}
-        {% if pokemonV.pkmnStats.id != pokemon.pkmnStats.id%}
+  <h2 id="varieties-title" {% if data.pokemonVarieties[1] is not defined %} class="hidden" {% endif %}>Les différentes
+    formes</h2>
+  <section id="varieties" {% if data.pokemonVarieties[1] is not defined %} class="hidden" {% endif %}>
+    {% for pokemonV in data.pokemonVarieties %}
+    {% if pokemonV.pkmnStats.id != pokemon.pkmnStats.id%}
 
-        <a href="{{path('pokemon_details', {'id': pokemonV.pkmnStats.id})}}">
-            <figure class="non-active-pkmn">
-                <img class="sprite-normal" src="{{pokemonV.pkmnStats.sprites.other['official-artwork'].front_default}}"
-                    alt="{{pokemonV.pkmnStats.name}}">
-                <img class="sprite-shiny" src="{{pokemonV.pkmnStats.sprites.other['official-artwork'].front_shiny}}"
-                    alt="{{pokemonV.pkmnStats.name}} shiny" loading="lazy">
-                <figcaption>{{pokemonV.pkmnStats.name}}</figcaption>
-            </figure>
-        </a>
-        {% endif %}
-        {% endfor %}
-    </section>
+    <a href="{{path('pokemon_details', {'id': pokemonV.pkmnStats.id})}}">
+      <figure class="non-active-pkmn">
+        <img class="sprite-normal" src="{{pokemonV.pkmnStats.sprites.other['official-artwork'].front_default}}"
+          alt="{{pokemonV.pkmnStats.name}}">
+        <img class="sprite-shiny" src="{{pokemonV.pkmnStats.sprites.other['official-artwork'].front_shiny}}"
+          alt="{{pokemonV.pkmnStats.name}} shiny" loading="lazy">
+        <figcaption>{{pokemonV.pkmnStats.name}}</figcaption>
+      </figure>
+    </a>
+    {% endif %}
+    {% endfor %}
+  </section>
 
 
-    <h2>Chaîne d'évolution</h2>
+  <h2>Chaîne d'évolution</h2>
 
-    {% macro displayEvolution(pokemon, currentPokemonId) %}
-    {# affichage du pokémon en cours dans l'arbre #}
-    <div class="evolution-details">
-        <a href="{{ path('pokemon_details', {'id': pokemon.pokemon.pkmnStats.id}) }}">
-            <figure {% if pokemon.pokemon.pkmnStats.id==currentPokemonId %} class="active-pkmn" {% else %}
-                class="non-active-pkmn" {% endif %}>
-                <img class="sprite-normal"
-                    src="{{ pokemon.pokemon.pkmnStats.sprites.other['official-artwork'].front_default }}"
-                    alt="{{ pokemon.pokemon.pkmnSpec.name }}">
-                <img class="sprite-shiny"
-                    src="{{ pokemon.pokemon.pkmnStats.sprites.other['official-artwork'].front_shiny }}"
-                    alt="{{ pokemon.pokemon.pkmnSpec.name }} shiny" loading="lazy">
-                <figcaption>
-                    {% for lang in pokemon.pokemon.pkmnSpec.names %}
-                    {% if lang.language.name == 'fr' %}
-                    <p>{{ lang.name }}</p>
-                    {% endif %}
-                    {% endfor %}
-                </figcaption>
-            </figure>
-        </a>
+  {% macro displayEvolution(pokemon, currentPokemonId) %}
+  {# affichage du pokémon en cours dans l'arbre #}
+  <div class="evolution-details">
+    <a href="{{ path('pokemon_details', {'id': pokemon.pokemon.pkmnStats.id}) }}">
+      <figure {% if pokemon.pokemon.pkmnStats.id==currentPokemonId %} class="active-pkmn" {% else %}
+        class="non-active-pkmn" {% endif %}>
+        <img class="sprite-normal" src="{{ pokemon.pokemon.pkmnStats.sprites.other['official-artwork'].front_default }}"
+          alt="{{ pokemon.pokemon.pkmnSpec.name }}">
+        <img class="sprite-shiny" src="{{ pokemon.pokemon.pkmnStats.sprites.other['official-artwork'].front_shiny }}"
+          alt="{{ pokemon.pokemon.pkmnSpec.name }} shiny" loading="lazy">
+        <figcaption>
+          {% for lang in pokemon.pokemon.pkmnSpec.names %}
+          {% if lang.language.name == 'fr' %}
+          <p>{{ lang.name }}</p>
+          {% endif %}
+          {% endfor %}
+        </figcaption>
+      </figure>
+    </a>
 
-        {# affichage des évolutions du pokémon s'il y en a #}
-        {% if pokemon.children is defined and pokemon.children|length > 0 %}
-        <i class="fa-solid fa-down-long separator"></i>
-        <div class="evolution-children">
-            {# on boucle dans toutes les évolutions #}
-            {% for child in pokemon.children %}
-            {{ _self.displayEvolution(child, currentPokemonId) }}
-            {% endfor %}
-        </div>
-        {% endif %}
+    {# affichage des évolutions du pokémon s'il y en a #}
+    {% if pokemon.children is defined and pokemon.children|length > 0 %}
+    <i class="fa-solid fa-down-long separator"></i>
+    <div class="evolution-children">
+      {# on boucle dans toutes les évolutions #}
+      {% for child in pokemon.children %}
+      {{ _self.displayEvolution(child, currentPokemonId) }}
+      {% endfor %}
     </div>
-    {% endmacro %}
+    {% endif %}
+  </div>
+  {% endmacro %}
 
-    {# affichage de l'arbre d'évolution #}
-    <section id="evolution">
-        {% for pokemon in data.evolutionChain %}
-        {{ _self.displayEvolution(pokemon, currentPokemonId) }}
-        {% endfor %}
-    </section>
+  {# affichage de l'arbre d'évolution #}
+  <section id="evolution">
+    {% for pokemon in data.evolutionChain %}
+    {{ _self.displayEvolution(pokemon, currentPokemonId) }}
+    {% endfor %}
+  </section>
 </div>
 
 <section id="stats">
-    <h2>Stats du pokémon sur une base 220</h2>
-    <ul id="stats-container">
-        {% for stat in data.stats %}
-        <li class="stat">
-            {% for lang in stat.details_stat.names %}
-            {% if lang.language.name == "fr" %}
-            <span class="stat-name">{{lang.name}} : </span>
-            {% endif %}
-            {% endfor %}
+  <h2>Stats du pokémon sur une base 220</h2>
+  <ul id="stats-container">
+    {% for stat in data.stats %}
+    <li class="stat">
+      {% for lang in stat.details_stat.names %}
+      {% if lang.language.name == "fr" %}
+      <span class="stat-name">{{lang.name}} : </span>
+      {% endif %}
+      {% endfor %}
 
-            <span class="stat-amount">{{stat.base_stat}}</span>
-            <div class="stat-completion" title="{{stat.base_stat}}/220">
-                <div class="completion-bar"></div>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
+      <span class="stat-amount">{{stat.base_stat}}</span>
+      <div class="stat-completion" title="{{stat.base_stat}}/220">
+        <div class="completion-bar"></div>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
 </section>
 
 <section id="other-details">
-    <div id="height">
-        <h3>Taille</h3>
-        <p>
-            <i class="fa-solid fa-up-right-and-down-left-from-center"></i>&nbsp;
-            <span id="height-number">{{pokemon.pkmnStats.height / 10}}</span> m
-        </p>
-    </div>
+  <div id="height">
+    <h3>Taille</h3>
+    <p>
+      <i class="fa-solid fa-up-right-and-down-left-from-center"></i>&nbsp;
+      <span id="height-number">{{pokemon.pkmnStats.height / 10}}</span> &nbsp; m
+    </p>
+  </div>
 
-    <div id="weight">
-        <h3>Poids</h3>
-        <p>
-            <i class="fa-solid fa-weight-hanging"></i>&nbsp;
-            <span id="weight-number">{{pokemon.pkmnStats.weight / 10}}</span> kg
-        </p>
-    </div>
-    <div id="special-ability">
-        <div class="wrapper">
-            <h3>Capacités spéciales</h3>
+  <div id="weight">
+    <h3>Poids</h3>
+    <p>
+      <i class="fa-solid fa-weight-hanging"></i>&nbsp;
+      <span id="weight-number">{{pokemon.pkmnStats.weight / 10}}</span> &nbsp; kg
+    </p>
+  </div>
+  <div id="special-ability">
+    <div class="wrapper">
+      <h3>Capacités spéciales</h3>
 
-            <ul id="abilities">
-                {% for ability in data.abilities %}
-                <li>
-                    {% for lang in ability.names %}
-                    {% if lang.language.name == "fr" %}
-                    {{lang.name}} {# nom fr #}
-                    {% endif %}
-                    {% endfor %}
-                    <span class="english-name">({{ability.name}})</span>
-                </li> {# nom en #}
-                {% endfor %}
-            </ul>
-        </div>
+      <ul id="abilities">
+        {% for ability in data.abilities %}
+        <li>
+          {% for lang in ability.names %}
+          {% if lang.language.name == "fr" %}
+          {{lang.name}} {# nom fr #}
+          {% endif %}
+          {% endfor %}
+          <span class="english-name">({{ability.name}})</span>
+        </li> {# nom en #}
+        {% endfor %}
+      </ul>
     </div>
+  </div>
 </section>
 
 {# infos capture #}
 <section id="locations">
-    <h2>Infos de shasse</h2>
+  <h2>Infos de shasse</h2>
 
+  <div id="text-wrapper">
     {% if captures | length > 0 %}
     <p>
-        {{data.name}} a été capturé <strong>{{captures | length}}</strong> fois par la communauté, dont
-        <strong>{{capturesByLieu.0.nb_captures}}</strong> fois sur <strong>{{capturesByLieu.0.jeu}}</strong>!
+      {{data.name}} a été capturé <strong>{{captures | length}}</strong> fois par la communauté, dont
+      <strong>{{capturesByLieu[0].nb_captures}}</strong> fois sur <strong>{{capturesByLieu[0].jeu}}</strong>!
     </p>
     <p>
-        Le meilleur spot :
-        {% if bestSpots[0] is defined and bestSpots[0] is not null %}
-        <strong>{{bestSpots[0].lieu}}</strong>, capturé <strong>{{bestSpots[0].nb_captures}}</strong> fois, avec une
-        moyenne de <strong>{{bestSpots[0].moyenne_rencontres | round(0)}}</strong> rencontres.
+      Le meilleur spot :
+      {% if bestSpots[0] is defined and bestSpots[0] is not null %}
+      <strong>{{bestSpots[0].lieu}}</strong>, capturé <strong>{{bestSpots[0].nb_captures}}</strong> fois, avec une
+      moyenne de <strong>{{bestSpots[0].moyenne_rencontres | round(0)}}</strong> rencontres.
 
-        {% elseif bestSpots[1] is defined %}
-        <strong>{{bestSpots[1].lieu}}</strong>, capturé <strong>{{bestSpots[0].nb_captures}}</strong> fois, avec une
-        moyenne de <strong>{{bestSpots[0].moyenne_rencontres | round(0)}}</strong> rencontres.
-        {% else %}
-        aucun lieu enregistré dans ce jeu.
-        {% endif %}
+      {% elseif bestSpots[1] is defined %}
+      <strong>{{bestSpots[1].lieu}}</strong>, capturé <strong>{{bestSpots[0].nb_captures}}</strong> fois, avec une
+      moyenne de <strong>{{bestSpots[0].moyenne_rencontres | round(0)}}</strong> rencontres.
+      {% else %}
+      aucun lieu enregistré dans ce jeu.
+      {% endif %}
     </p>
 
     {% else %}
     <p>{{data.name}} n'a encore jamais été capturé par la communauté!</p>
     {% endif %}
-
+  </div>
 </section>
 {% endblock %}
