@@ -100,6 +100,7 @@ main {
   display: flex;
   flex-direction: column;
   background-color: var(--background-color);
+  transition: background-color var(--transitionTime);
 }
 
 ul {
@@ -139,10 +140,6 @@ input[type="number"] {
   }
 }
 
-.hidden {
-  display: none;
-}
-
 .main-blur {
   filter: blur(10px);
 }
@@ -177,6 +174,10 @@ hr {
 .pseudo {
   font-weight: 600;
   color: var(--primary-color);
+}
+
+.hidden {
+  display: none;
 }
 
 h1,
@@ -721,6 +722,10 @@ footer {
   width: 150px;
 }
 
+/* ///////////////////////////////////////////////////////////////// */
+/* /////////////////////////// KEYFRAMES /////////////////////////// */
+/* ///////////////////////////////////////////////////////////////// */
+
 .run-animation {
   animation: pika-run-animation 1s linear forwards;
 }
@@ -732,6 +737,27 @@ footer {
 
   100% {
     left: 100%;
+  }
+}
+
+.loading {
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--primary-color);
+  animation: loading .5s linear infinite;
+  z-index: 4;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }
 

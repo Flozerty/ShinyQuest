@@ -2,31 +2,41 @@ document.addEventListener('DOMContentLoaded', function () {
   const previousButton = document.querySelector('#previous');
   const nextButton = document.querySelector('#next');
 
-  previousButton.addEventListener('click', function (e) {
+  previousButton.addEventListener('click', () => {
     const pokemonId = parseInt(previousButton.getAttribute('data-id'));
-    changePokemon(pokemonId);
+    if (pokemonId > 0) {
+      slideRight();
+      changePokemon(pokemonId);
+    }
   });
 
-  nextButton.addEventListener('click', function (e) {
+  nextButton.addEventListener('click', () => {
     const pokemonId = parseInt(nextButton.getAttribute('data-id'));
+    slideLeft();
     changePokemon(pokemonId);
   });
 
   function changePokemon(pokemonId) {
     if (pokemonId > 0) {
+      showLoading();
+      previousButton.disabled = true;
+      nextButton.disabled = true;
+
       fetch(`/api/pokemonDetailsChange/${pokemonId}`)
         .then(response => response.json())
         .then(data => {
           updatePokemonDetails(data);
+          hideLoading();
+          recoverSlide();
+          previousButton.disabled = false;
+          nextButton.disabled = false;
         })
-        .catch(error => console.error('Erreur pendant la récupération:', error));
+
     }
   }
 
   // Update la page avec le nouveau Pokémon
   function updatePokemonDetails(dataReceived) {
-
-    console.log(dataReceived);
 
     // updates basics
     document.querySelector('h1').textContent = `${dataReceived.data.name} - #${dataReceived.pokemon.pkmnStats.id.toString().padStart(3, '0')}`;
@@ -109,12 +119,38 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // update chaine d'évolution
+    const evolutionSection = document.querySelector('#evolution');
+    evolutionSection.innerHTML = ''; // Vide le contenu actuel
 
-
+    dataReceived.data.evolutionChain.forEach(pokemon => {
+      const evolutionElement = renderEvolutionChain(pokemon, dataReceived.currentPokemonId);
+      evolutionSection.appendChild(evolutionElement);
+    });
 
     // update stats
+    const statsContainer = document.querySelector('#stats-container');
+    statsContainer.innerHTML = '';
 
+    dataReceived.data.stats.forEach(stat => {
+      const li = document.createElement('li');
 
+      // recherche du nom français
+      let statName = '';
+      stat.details_stat.names.forEach(lang => {
+        if (lang.language.name === "fr") {
+          statName = lang.name;
+        }
+      });
+
+      li.className = 'stat';
+      li.innerHTML = `
+        <span class="stat-name">${statName} : </span>
+        <span class="stat-amount">${stat.base_stat}</span>
+        <div class="stat-completion" title="${stat.base_stat}/220">
+            <div class="completion-bar" style="width: ${(stat.base_stat / 220) * 100}%;"></div>
+        </div>`;
+      statsContainer.appendChild(li);
+    });
 
     // update "other-details"
     document.querySelector('#height-number').innerText = dataReceived.pokemon.pkmnStats.height
@@ -169,5 +205,93 @@ document.addEventListener('DOMContentLoaded', function () {
       pNoCapture.innerHTML = `${dataReceived.data.name} n'a encore jamais été capturé par la communauté!`
       textContainer.appendChild(pNoCapture)
     }
+  }
+
+  ////////////////////////////////////////////////////////////////////////
+  //////////// Fonction de création de la chaine d'évolution /////////////
+  ////////////////////////////////////////////////////////////////////////
+  function renderEvolutionChain(pokemon, currentPokemonId) {
+
+    let pokemonName = '';
+    pokemon.pokemon.pkmnSpec.names.forEach(lang => {
+      if (lang.language.name === 'fr') {
+        pokemonName = lang.name;
+      }
+    });
+
+    const evolutionContainer = document.createElement('div');
+    evolutionContainer.className = 'evolution-details';
+
+    // Créer le contenu du pokemon d'origine de l'évolution
+    const pokemonContainer = document.createElement('a');
+    pokemonContainer.href = `/pokemon/${pokemon.pokemon.pkmnStats.id}`;
+    pokemonContainer.innerHTML =
+      `<figure class="${pokemon.pokemon.pkmnStats.id === currentPokemonId ? 'active-pkmn' : 'non-active-pkmn'}">
+          <img class="sprite-normal" src="${pokemon.pokemon.pkmnStats.sprites.other['official-artwork'].front_default}" alt="${pokemon.pokemon.pkmnSpec.name}">
+          <img class="sprite-shiny" src="${pokemon.pokemon.pkmnStats.sprites.other['official-artwork'].front_shiny}" alt="${pokemon.pokemon.pkmnSpec.name} shiny" loading="lazy">
+          <figcaption>
+            <p>${pokemonName}</p>
+          </figcaption>
+        </figure>`;
+    evolutionContainer.appendChild(pokemonContainer);
+
+    // séparateur si le Pokémon a des enfants (évolutions)
+    if (pokemon.children && pokemon.children.length > 0) {
+      const separator = document.createElement('i');
+      separator.className = 'fa-solid fa-down-long separator';
+      evolutionContainer.appendChild(separator);
+    }
+
+    // Si le Pokémon a des évolutions, on boucle pour les ajouter
+    if (pokemon.children && pokemon.children.length > 0) {
+      const evolutionChildrenDiv = document.createElement('div');
+      evolutionChildrenDiv.className = 'evolution-children';
+
+      pokemon.children.forEach(child => {
+        evolutionChildrenDiv.appendChild(renderEvolutionChain(child, currentPokemonId));
+      });
+
+      evolutionContainer.appendChild(evolutionChildrenDiv);
+    }
+    return evolutionContainer;
+  }
+
+  function showLoading() {
+    const nav = document.querySelector('#navigation'),
+      spinner = document.createElement('i');
+    spinner.className = "fa-brands fa-cloudscale loading";
+    nav.appendChild(spinner)
+
+  }
+
+  function hideLoading() {
+    const spinners = document.querySelectorAll('.loading')
+    spinners.forEach(spinner => {
+      spinner.remove()
+    })
+  }
+
+  function slideLeft() {
+    const figMain = document.querySelector('#main-active-pkmn');
+    figMain.classList.add('slideLeft');
+    setTimeout(() => {
+      figMain.classList.remove('slideLeft');
+      figMain.classList.add('slideRight');
+    }, 500);
+  }
+
+  function slideRight() {
+    const figMain = document.querySelector('#main-active-pkmn');
+    figMain.classList.add('slideRight');
+    setTimeout(() => {
+      figMain.classList.remove('slideRight');
+      figMain.classList.add('slideLeft');
+    }, 500);
+  }
+
+  function recoverSlide() {
+    const figMain = document.querySelector('#main-active-pkmn');
+    figMain.classList.remove('slideRight');
+    figMain.classList.remove('slideLeft');
   }
 });

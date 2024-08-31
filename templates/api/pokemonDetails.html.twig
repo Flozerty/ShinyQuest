@@ -42,12 +42,14 @@
   <button id="previous" data-id="{{ currentPokemonId - 1 }}">
     <i class="fa-solid fa-angle-left"></i>
   </button>
+
   <figure id="main-active-pkmn">
     <img class="sprite-normal" src="{{pokemon.pkmnStats.sprites.other['official-artwork'].front_default}}"
       alt="{{pokemon.pkmnStats.name}}">
     <img class="sprite-shiny" src="{{pokemon.pkmnStats.sprites.other['official-artwork'].front_shiny}}"
       alt="{{pokemon.pkmnStats.name}} shiny" loading="lazy">
   </figure>
+
   <button id="next" data-id="{{ currentPokemonId + 1 }}">
     <i class="fa-solid fa-angle-right"></i>
   </button>

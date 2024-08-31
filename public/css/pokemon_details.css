@@ -47,11 +47,15 @@ h1 {
 #navigation {
     align-items: center;
     justify-content: space-evenly;
+    position: relative;
 
     #main-active-pkmn {
         width: 300px;
+        height: 300px;
         align-self: center;
         cursor: pointer;
+        transition: .5s;
+        z-index: 5;
 
         img {
             width: 100%;
@@ -88,6 +92,7 @@ h1 {
         }
     }
 }
+
 
 #types {
     display: flex;
@@ -240,7 +245,6 @@ h1 {
     height: 100%;
     background-color: var(--primary-color);
     border-radius: 0 8px 8px 0;
-    transition: width 1s;
     width: 0;
 }
 
@@ -302,6 +306,17 @@ h1 {
     h2 {
         text-align: center;
     }
+}
+
+
+.slideLeft {
+    transform: translateX(-100%) rotate(-90deg);
+    filter: opacity(0);
+}
+
+.slideRight {
+    transform: translateX(100%) rotate(90deg);
+    filter: opacity(0);
 }
 
 /* //////////////// MEDIA QUERIES //////////////// */
