@@ -123,15 +123,14 @@ p {
   position: absolute;
   top: 15%;
   right: 10px;
-  background-color: var(--darkblue);
-  border: 1px solid var(--darkblue);
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--background-color);
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   height: 20px;
   width: 20px;
-  font-size: 0.7rem;
+  font-size: 0.8em;
   font-weight: 600;
 }

@@ -212,8 +212,11 @@ figure {
   img {
     border-radius: 50%;
     background-color: var(--cardColor);
+    width: 90%;
     height: 90%;
     overflow: hidden;
+    object-fit: cover;
+    object-position: center;
   }
 }
 

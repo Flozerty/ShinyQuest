@@ -71,7 +71,7 @@ body {
   }
 
   &::-webkit-scrollbar-track {
-    background-color: var(--background-color);
+    background-color: var(--hover-main-color);
     border-radius: 5px;
     cursor: pointer;
   }
@@ -84,7 +84,7 @@ body {
     min-height: 50px;
     background-color: var(--primary-color);
     border-radius: 5px;
-    border: 1px solid var(--background-color);
+    border: 1px solid var(--hover-main-color);
     cursor: pointer;
   }
 
@@ -385,12 +385,15 @@ header {
     background-color: var(--primary-color);
     border-radius: 50%;
 
+
     img {
+      height: 80%;
+      width: 80%;
       background-color: var(--secondary-color);
       border-radius: 50%;
-      height: 80%;
-      max-width: 80%;
       overflow: hidden;
+      object-fit: cover;
+      object-position: center;
     }
   }
 }
