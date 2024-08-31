@@ -70,10 +70,10 @@
 </section>
 
 <div id="main-content">
-    {# {% if data.pokemonVarieties[1] is defined %} #}
 
-    <h2>Les différentes formes</h2>
-    <section id="varieties">
+    <h2 id="varieties-title" {% if data.pokemonVarieties[1] is not defined %} class="hidden" {% endif %}>Les différentes
+        formes</h2>
+    <section id="varieties" {% if data.pokemonVarieties[1] is not defined %} class="hidden" {% endif %}>
         {% for pokemonV in data.pokemonVarieties %}
         {% if pokemonV.pkmnStats.id != pokemon.pkmnStats.id%}
 
@@ -90,7 +90,6 @@
         {% endfor %}
     </section>
 
-    {# {% endif %} #}
 
     <h2>Chaîne d'évolution</h2>
 
@@ -159,23 +158,23 @@
 
 <section id="other-details">
     <div id="height">
-        <strong>Taille</strong>
-        <span>
+        <h3>Taille</h3>
+        <p>
             <i class="fa-solid fa-up-right-and-down-left-from-center"></i>&nbsp;
-            {{pokemon.pkmnStats.height / 10}} m
-        </span>
+            <span id="height-number">{{pokemon.pkmnStats.height / 10}}</span> m
+        </p>
     </div>
 
     <div id="weight">
-        <strong>Poids</strong>
-        <span>
+        <h3>Poids</h3>
+        <p>
             <i class="fa-solid fa-weight-hanging"></i>&nbsp;
-            {{pokemon.pkmnStats.weight / 10}} kg
-        </span>
+            <span id="weight-number">{{pokemon.pkmnStats.weight / 10}}</span> kg
+        </p>
     </div>
     <div id="special-ability">
         <div class="wrapper">
-            <strong>Capacités spéciales</strong>
+            <h3>Capacités spéciales</h3>
 
             <ul id="abilities">
                 {% for ability in data.abilities %}

@@ -3,12 +3,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const nextButton = document.querySelector('#next');
 
     previousButton.addEventListener('click', function (e) {
-        const pokemonId = parseInt(previousButton.getAttribute('data-id'), 10);
+        const pokemonId = parseInt(previousButton.getAttribute('data-id'));
         changePokemon(pokemonId);
     });
 
     nextButton.addEventListener('click', function (e) {
-        const pokemonId = parseInt(nextButton.getAttribute('data-id'), 10);
+        const pokemonId = parseInt(nextButton.getAttribute('data-id'));
         changePokemon(pokemonId);
     });
 
@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Update la page avec le nouveau Pokémon
     function updatePokemonDetails(dataReceived) {
+
+        console.log(dataReceived);
 
         // updates basics
         document.querySelector('h1').textContent = `${dataReceived.data.name} - #${dataReceived.pokemon.pkmnStats.id.toString().padStart(3, '0')}`;
@@ -48,32 +50,38 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('#pokemon-description').textContent = description;
 
         // update types
+        const typesSection = document.querySelector('#types');
+        typesSection.innerHTML = "";
+        dataReceived.data.types.forEach(type => {
+            img = document.createElement('img');
+            img.src = type.img;
+            img.alt = "type " + type.name;
+            typesSection.appendChild(img);
+        })
 
-        // update formes
-        // Update formes (varieties)
-        const varietiesSection = document.getElementById('varieties');
-        varietiesSection.innerHTML = ''; // On vide le contenu actuel
+        // Update formes
+        const varietiesSection = document.querySelector('#varieties');
+        varietiesSection.innerHTML = '';
 
         // Vérifie s'il y a plusieurs variétés
         if (dataReceived.data.pokemonVarieties.length > 1) {
             dataReceived.data.pokemonVarieties.forEach(pokemonV => {
                 if (pokemonV.pkmnStats.id !== dataReceived.pokemon.pkmnStats.id) {
-                    // Crée un élément de lien pour chaque variété
-                    const link = document.createElement('a');
-                    link.href = `/pokemon/${pokemonV.pkmnStats.id}`; // Met à jour l'URL en conséquence
 
-                    // Crée un élément figure pour la variété
+                    // <a><figure><img>*2<figcaption><///////>
+
+                    const link = document.createElement('a');
+                    link.href = `/pokemon/${pokemonV.pkmnStats.id}`;
+
                     const figure = document.createElement('figure');
                     figure.className = 'non-active-pkmn';
 
-                    // Image normale
                     const imgNormal = document.createElement('img');
                     imgNormal.className = 'sprite-normal';
                     imgNormal.src = pokemonV.pkmnStats.sprites.other['official-artwork'].front_default;
                     imgNormal.alt = pokemonV.pkmnStats.name;
                     figure.appendChild(imgNormal);
 
-                    // Image shiny
                     const imgShiny = document.createElement('img');
                     imgShiny.className = 'sprite-shiny';
                     imgShiny.src = pokemonV.pkmnStats.sprites.other['official-artwork'].front_shiny;
@@ -81,7 +89,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     imgShiny.loading = 'lazy';
                     figure.appendChild(imgShiny);
 
-                    // Nom du Pokémon
                     const figcaption = document.createElement('figcaption');
                     figcaption.textContent = pokemonV.pkmnStats.name;
                     figure.appendChild(figcaption);
@@ -91,6 +98,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         }
+        varietiesTitle = document.querySelector('#varieties-title');
+        // update visible ou non
+        if (varietiesSection.children.length > 0) {
+            varietiesSection.classList.remove('hidden')
+            varietiesTitle.classList.remove('hidden')
+        } else {
+            varietiesSection.classList.add('hidden')
+            varietiesTitle.classList.add('hidden')
+        }
 
         // update chaine d'évolution
 
@@ -98,7 +114,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // update stats
 
+
+
         // update "other-details"
+        document.querySelector('#height-number').innerText = dataReceived.pokemon.pkmnStats.height
+        document.querySelector('#weight-number').innerText = dataReceived.pokemon.pkmnStats.weight
+
+        const abilitiesContainer = document.querySelector('#abilities')
+        abilitiesContainer.innerHTML = "";
+        dataReceived.data.abilities.forEach(ability => {
+
+            ability.names.forEach(lang => {
+                if (lang.language.name == "fr") {
+                    const li = document.createElement('li');
+                    li.innerHTML = `${lang.name} <span class="english-name">(${ability.name})</span>`;
+                    abilitiesContainer.appendChild(li);
+                }
+            });
+        });
 
         // update infos de shasse
 
