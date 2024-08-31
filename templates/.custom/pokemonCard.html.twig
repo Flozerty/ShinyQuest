@@ -123,7 +123,7 @@
   </div>
 
   {# affichage du compteur #}
-  <div id="form-like-compteur" class="loading-container">
+  <div id="form-like-compteur-{{ capture.id }}" class="loading-container">
     <label for="compteur-{{ capture.id }}" class="visually-hidden">Compteur</label>
     <input type="number" class="compteur-input" name="compteur-{{ capture.id }}" id="compteur-{{ capture.id }}"
       value="{{capture.nbRencontres}}"></input>
