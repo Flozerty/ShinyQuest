@@ -16,10 +16,12 @@
 
 
 -- Listage de la structure de la base pour shinyquest
+DROP DATABASE IF EXISTS `shinyquest`;
 CREATE DATABASE IF NOT EXISTS `shinyquest` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `shinyquest`;
 
 -- Listage de la structure de table shinyquest. amis
+DROP TABLE IF EXISTS `amis`;
 CREATE TABLE IF NOT EXISTS `amis` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_demande_id` int NOT NULL,
@@ -43,6 +45,7 @@ INSERT INTO `amis` (`id`, `user_demande_id`, `user_recoit_id`, `statut`, `date_d
 	(8, 24, 2, 1, '2024-07-16');
 
 -- Listage de la structure de table shinyquest. capture
+DROP TABLE IF EXISTS `capture`;
 CREATE TABLE IF NOT EXISTS `capture` (
   `id` int NOT NULL AUTO_INCREMENT,
   `pokedex_id` int NOT NULL,
@@ -77,23 +80,24 @@ INSERT INTO `capture` (`id`, `pokedex_id`, `surnom`, `nb_rencontres`, `date_capt
 	(10, 1, 'bulbu', 645, NULL, 1, 0, 16, 1, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png', 'Bulbizarre', 'Émeraude', 'bourg palette', 'male', 0, ''),
 	(11, 1, 'bulbu', 645, NULL, 1, 0, 16, 1, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png', 'Bulbizarre', 'Émeraude', 'bourg palette', 'male', 0, ''),
 	(12, 1, 'bulbu', 645, NULL, 1, 0, 16, 1, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png', 'Bulbizarre', 'Platine', 'bourg palette', 'male', 0, ''),
-	(13, 3, NULL, 1019, NULL, 1, 0, 2, 17, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/3.png', 'Florizarre', 'Jaune', 'qf', NULL, 1, NULL),
+	(13, 3, NULL, 1423, NULL, 1, 0, 2, 17, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/3.png', 'Florizarre', 'Jaune', 'qf', NULL, 1, NULL),
 	(14, 19, NULL, 8471, '2024-07-17 12:16:15', 1, 0, 2, 9, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/19.png', 'Rattata', 'X', 'tddd', NULL, 0, 'safari-ball'),
 	(15, 862, 'test', 453, '2024-07-16 11:01:00', 1, 0, 2, 15, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/862.png', 'Ixon', 'Émeraude', 'db', 'male', 0, 'love-ball'),
 	(18, 700, 'qesrgdh', 74947, '2024-07-18 16:43:00', 1, 0, 2, 16, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/700.png', 'Nymphali', 'Or HeartGold', 'route 104', 'femelle', 0, 'poke-ball'),
 	(25, 7, 'test', 778, '2024-07-17 16:45:00', 0, 0, 2, 17, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/7.png', 'Carapuce', 'X', 'sdf', 'femelle', 0, 'nest-ball'),
-	(27, 600, NULL, 500, NULL, 1, 0, 2, 3, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/600.png', 'Clic', 'X', 'bourg-en vol', NULL, 0, NULL),
+	(27, 600, NULL, 3910, NULL, 1, 0, 2, 3, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/600.png', 'Clic', 'X', 'bourg-en vol', NULL, 1, NULL),
 	(28, 5, NULL, 3, '2024-01-17 12:16:04', 0, 0, 2, 16, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/5.png', 'Reptincel', 'Jaune', 'rtyhj', NULL, 0, 'great-ball'),
 	(29, 1, 'bulbu', 645, '2024-06-10 10:48:56', 1, 0, 19, 1, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png', 'Bulbizarre', 'Émeraude', 'bourg palette', 'male', 0, 'park-ball'),
 	(30, 9, NULL, 45, NULL, 0, 0, 2, 17, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/9.png', 'Tortank', 'Perle', 're', NULL, 1, NULL),
-	(32, 16, NULL, 10, NULL, 0, 0, 2, 1, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/16.png', 'Roucool', 'Émeraude', 'route 102', NULL, 1, NULL),
+	(32, 16, NULL, 138, NULL, 0, 0, 2, 1, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/16.png', 'Roucool', 'Émeraude', 'route 102', NULL, 1, NULL),
 	(33, 66, NULL, 496, NULL, 1, 0, 24, 4, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/66.png', 'Machoc', 'Jaune', 'bourg-en vol', NULL, 1, NULL),
 	(34, 726, NULL, 54, NULL, 1, 0, 2, 12, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/726.png', 'Matoufeu', 'Or HeartGold', 'd', NULL, 1, NULL),
 	(35, 401, NULL, 45, NULL, 0, 0, 2, 20, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/401.png', 'Crikzik', 'Rubis', 'bourg-en vol', NULL, 0, NULL),
-	(36, 13, NULL, 777, NULL, 1, 0, 2, 3, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/13.png', 'Aspicot', 'Rubis', 'bourg-en vol', NULL, 1, NULL),
-	(38, 16, NULL, 75, NULL, 0, 0, 2, 15, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/16.png', 'Roucool', 'Perle', 're', NULL, 1, NULL);
+	(36, 13, NULL, 209, NULL, 1, 0, 2, 3, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/13.png', 'Aspicot', 'Rubis', 'bourg-en vol', NULL, 1, NULL),
+	(38, 16, NULL, 75, NULL, 0, 0, 2, 15, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/16.png', 'Roucool', 'Perle', 're', NULL, 0, NULL);
 
 -- Listage de la structure de table shinyquest. doctrine_migration_versions
+DROP TABLE IF EXISTS `doctrine_migration_versions`;
 CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
   `version` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `executed_at` datetime DEFAULT NULL,
@@ -101,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Listage des données de la table shinyquest.doctrine_migration_versions : ~6 rows (environ)
+-- Listage des données de la table shinyquest.doctrine_migration_versions : ~8 rows (environ)
 DELETE FROM `doctrine_migration_versions`;
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 	('DoctrineMigrations\\Version20240716143607', NULL, NULL),
@@ -114,6 +118,7 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 	('DoctrineMigrations\\Version20240829224149', '2024-08-29 22:42:47', 145);
 
 -- Listage de la structure de table shinyquest. message
+DROP TABLE IF EXISTS `message`;
 CREATE TABLE IF NOT EXISTS `message` (
   `id` int NOT NULL AUTO_INCREMENT,
   `date_message` datetime NOT NULL,
@@ -129,9 +134,9 @@ CREATE TABLE IF NOT EXISTS `message` (
   CONSTRAINT `FK_B6BD307FA3409E4` FOREIGN KEY (`user_recoit_id`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_B6BD307FDF1A08E5` FOREIGN KEY (`user_envoi_id`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_B6BD307FF26B1C97` FOREIGN KEY (`pj_id`) REFERENCES `capture` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table shinyquest.message : ~14 rows (environ)
+-- Listage des données de la table shinyquest.message : ~16 rows (environ)
 DELETE FROM `message`;
 INSERT INTO `message` (`id`, `date_message`, `contenu_message`, `pj_id`, `user_envoi_id`, `user_recoit_id`, `lu`) VALUES
 	(1, '2024-08-19 10:13:49', 'test', 3, 2, 24, 1),
@@ -139,9 +144,9 @@ INSERT INTO `message` (`id`, `date_message`, `contenu_message`, `pj_id`, `user_e
 	(3, '2024-08-21 20:13:49', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis, accusantium ducimus quas dolore atque perspiciatis similique cupiditate nobis omnis suscipit debitis delectus vel amet maiores? Quae eos aut optio magnam explicabo eaque quibusdam sit expedita quo ea est impedit a omnis voluptatem esse rerum recusandae, vero quam sequi totam, cupiditate ab qui aliquam. Iure, cumque enim vero at error, repudiandae ipsum soluta dolor sequi ad natus, perferendis laudantium consequuntur consequatur harum dignissimos. Provident est repellat veritatis possimus corporis maiores laborum vel consequuntur ducimus perferendis ut laboriosam cum recusandae dicta quis, ipsa minus sapiente? At sequi cum quae obcaecati vel ratione!', NULL, 24, 2, 1),
 	(4, '2024-08-19 10:13:49', 'test', NULL, 24, 2, 1),
 	(5, '2024-08-28 20:13:49', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis, accusantium ducimus quas dolore atque perspiciatis similique cupiditate nobis omnis suscipit debitis delectus vel amet maiores? Quae eos aut optio magnam explicabo eaque quibusdam sit expedita quo ea est impedit a omnis voluptatem esse rerum recusandae, vero quam sequi totam, cupiditate ab qui aliquam. Iure, cumque enim vero at error, repudiandae ipsum soluta dolor sequi ad natus, perferendis laudantium consequuntur consequatur harum dignissimos. Provident est repellat veritatis possimus corporis maiores laborum vel consequuntur ducimus perferendis ut laboriosam cum recusandae dicta quis, ipsa minus sapiente? At sequi cum quae obcaecati vel ratione!', NULL, 2, 24, 1),
-	(6, '2024-08-21 10:13:49', 'test', NULL, 2, 20, 0),
+	(6, '2024-08-21 10:13:49', 'test', NULL, 2, 20, 1),
 	(7, '2024-08-21 10:13:49', 'test', NULL, 20, 2, 1),
-	(8, '2024-08-21 10:13:49', 'test', 3, 2, 20, 0),
+	(8, '2024-08-21 10:13:49', 'test', 3, 2, 20, 1),
 	(9, '2024-08-27 08:29:58', 'test', NULL, 2, 24, 1),
 	(10, '2024-08-27 08:30:36', 'test', NULL, 2, 24, 1),
 	(11, '2024-08-27 08:45:41', 'ets', NULL, 2, 24, 1),
@@ -149,9 +154,13 @@ INSERT INTO `message` (`id`, `date_message`, `contenu_message`, `pj_id`, `user_e
 	(13, '2024-08-27 14:39:37', 'cfcbhdfwhqdthjhj', 3, 2, 24, 1),
 	(14, '2024-08-27 14:40:12', 'sqtsrg', NULL, 2, 24, 1),
 	(15, '2024-08-28 17:13:58', 'test', 18, 2, 24, 1),
-	(16, '2024-08-29 06:53:41', 'hey regardes mon carapuce!', 25, 2, 17, 0);
+	(16, '2024-08-29 06:53:41', 'hey regardes mon carapuce!', 25, 2, 17, 0),
+	(17, '2024-08-30 21:26:04', 'test', NULL, 2, 24, 0),
+	(18, '2024-08-31 12:37:32', 'test', NULL, 2, 20, 0),
+	(19, '2024-09-01 12:46:38', 'etst', 18, 2, 17, 0);
 
 -- Listage de la structure de table shinyquest. messenger_messages
+DROP TABLE IF EXISTS `messenger_messages`;
 CREATE TABLE IF NOT EXISTS `messenger_messages` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `body` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -183,6 +192,7 @@ INSERT INTO `messenger_messages` (`id`, `body`, `headers`, `queue_name`, `create
 	(12, 'O:36:\\"Symfony\\\\Component\\\\Messenger\\\\Envelope\\":2:{s:44:\\"\\0Symfony\\\\Component\\\\Messenger\\\\Envelope\\0stamps\\";a:1:{s:46:\\"Symfony\\\\Component\\\\Messenger\\\\Stamp\\\\BusNameStamp\\";a:1:{i:0;O:46:\\"Symfony\\\\Component\\\\Messenger\\\\Stamp\\\\BusNameStamp\\":1:{s:55:\\"\\0Symfony\\\\Component\\\\Messenger\\\\Stamp\\\\BusNameStamp\\0busName\\";s:21:\\"messenger.bus.default\\";}}}s:45:\\"\\0Symfony\\\\Component\\\\Messenger\\\\Envelope\\0message\\";O:51:\\"Symfony\\\\Component\\\\Mailer\\\\Messenger\\\\SendEmailMessage\\":2:{s:60:\\"\\0Symfony\\\\Component\\\\Mailer\\\\Messenger\\\\SendEmailMessage\\0message\\";O:39:\\"Symfony\\\\Bridge\\\\Twig\\\\Mime\\\\TemplatedEmail\\":5:{i:0;s:41:\\"registration/confirmation_email.html.twig\\";i:1;N;i:2;a:3:{s:9:\\"signedUrl\\";s:169:\\"http://127.0.0.1:8000/verify/email?expires=1716993012&signature=zecRWFl8BOqFPqZfbYb6Pv6WwDEdv7AFTpls5K9urYE%3D&token=8e3Ub%2F4S6s%2Bk7oZR8rYLjYaq4KG1S7%2FnFoM5LcPVdls%3D\\";s:19:\\"expiresAtMessageKey\\";s:26:\\"%count% hour|%count% hours\\";s:20:\\"expiresAtMessageData\\";a:1:{s:7:\\"%count%\\";i:1;}}i:3;a:6:{i:0;N;i:1;N;i:2;N;i:3;N;i:4;a:0:{}i:5;a:2:{i:0;O:37:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\Headers\\":2:{s:46:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\Headers\\0headers\\";a:3:{s:4:\\"from\\";a:1:{i:0;O:47:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\":5:{s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0name\\";s:4:\\"From\\";s:56:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lineLength\\";i:76;s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lang\\";N;s:53:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0charset\\";s:5:\\"utf-8\\";s:58:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\0addresses\\";a:1:{i:0;O:30:\\"Symfony\\\\Component\\\\Mime\\\\Address\\":2:{s:39:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0address\\";s:20:\\"admin@shinyquest.com\\";s:36:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0name\\";s:16:\\"Admin ShinyQuest\\";}}}}s:2:\\"to\\";a:1:{i:0;O:47:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\":5:{s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0name\\";s:2:\\"To\\";s:56:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lineLength\\";i:76;s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lang\\";N;s:53:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0charset\\";s:5:\\"utf-8\\";s:58:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\0addresses\\";a:1:{i:0;O:30:\\"Symfony\\\\Component\\\\Mime\\\\Address\\":2:{s:39:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0address\\";s:15:\\"ezr.fr@mail.com\\";s:36:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0name\\";s:0:\\"\\";}}}}s:7:\\"subject\\";a:1:{i:0;O:48:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\UnstructuredHeader\\":5:{s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0name\\";s:7:\\"Subject\\";s:56:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lineLength\\";i:76;s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lang\\";N;s:53:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0charset\\";s:5:\\"utf-8\\";s:55:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\UnstructuredHeader\\0value\\";s:25:\\"Please Confirm your Email\\";}}}s:49:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\Headers\\0lineLength\\";i:76;}i:1;N;}}i:4;N;}s:61:\\"\\0Symfony\\\\Component\\\\Mailer\\\\Messenger\\\\SendEmailMessage\\0envelope\\";N;}}', '[]', 'default', '2024-05-29 13:30:14', '2024-05-29 13:30:14', NULL);
 
 -- Listage de la structure de table shinyquest. methode_capture
+DROP TABLE IF EXISTS `methode_capture`;
 CREATE TABLE IF NOT EXISTS `methode_capture` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nom_methode` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -227,6 +237,7 @@ INSERT INTO `methode_capture` (`id`, `nom_methode`) VALUES
 	(34, 'ultra brèches');
 
 -- Listage de la structure de table shinyquest. post
+DROP TABLE IF EXISTS `post`;
 CREATE TABLE IF NOT EXISTS `post` (
   `id` int NOT NULL AUTO_INCREMENT,
   `sujet_id` int NOT NULL,
@@ -244,6 +255,7 @@ CREATE TABLE IF NOT EXISTS `post` (
 DELETE FROM `post`;
 
 -- Listage de la structure de table shinyquest. sujet
+DROP TABLE IF EXISTS `sujet`;
 CREATE TABLE IF NOT EXISTS `sujet` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
@@ -266,6 +278,7 @@ INSERT INTO `sujet` (`id`, `user_id`, `titre`, `date_création`, `date_update`, 
 	(5, 17, 'Ya pas une faute dans le mot shasse là?', '2024-08-05 16:52:04', '2024-08-05 16:52:04', 'Y a que moi qui trouve ça bizarre d\'appeler ça une "shasse" ? Il s\'est trompé dans l\'orthographe ou quoi?');
 
 -- Listage de la structure de table shinyquest. user
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -284,12 +297,12 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Listage des données de la table shinyquest.user : ~7 rows (environ)
 DELETE FROM `user`;
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `is_verified`, `pseudo`, `date_inscription`, `avatar`, `ban`) VALUES
-	(2, 'floris.louerat@gmail.com', '["ROLE_ADMIN"]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'Flozerty', '2024-05-29 12:26:53', 'zarbi-int-shiny.png', 0),
-	(16, 'ezar@efz.fr', '[]', '$2y$13$bbS.cw0g4KPW2HwlnYTuW.2whjxiGCnMBnQAHM6sc.7PTkzmdIFom', 0, 'patate', '2024-05-29 15:33:17', 'wenSearch.png', 0),
-	(17, 'ezaertr@efz.fr', '[]', '$2y$13$bbS.cw0g4KPW2HwlnYTuW.2whjxiGCnMBnQAHM6sc.7PTkzmdIFom', 0, 'patataze', '2024-05-29 15:33:17', NULL, 0),
-	(19, 'ezaezertrtr@efz.fr', '[]', '$2y$13$bbS.cw0g4KPW2HwlnYTuW.2whjxiGCnMBnQAHM6sc.7PTkzmdIFom', 0, 'patatazdfzreh gefgehdfzgedfeghje', '2024-05-29 15:33:17', NULL, 0),
-	(20, 'ezaezerertyutrtr@efz.fr', '[]', '$2y$13$bbS.cw0g4KPW2HwlnYTuW.2whjxiGCnMBnQAHM6sc.7PTkzmdIFom', 0, 'azetryzethry', '2024-05-29 15:33:17', NULL, 0),
-	(23, 'test@test.fr', '[]', '$2y$13$YT45xYgJs0rSPRWZvxT0Ye7jVncgl.L00olsWeKoJZUcogYQsWuJ.', 1, 'test', '2024-07-30 06:53:47', NULL, 0),
+	(2, 'floris.louerat@gmail.com', '["ROLE_ADMIN"]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 1, 'Flozerty', '2024-05-29 12:26:53', '66d23756bfb27.jpg', 0),
+	(16, 'ezar@efz.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'patate', '2024-05-29 15:33:17', '66d3096f0058d.jpg', 0),
+	(17, 'ezaertr@efz.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'patataze', '2024-05-29 15:33:17', '66d309cd850cc.jpg', 0),
+	(19, 'ezaezertrtr@efz.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'patatazdfzreh', '2024-05-29 15:33:17', NULL, 0),
+	(20, 'ezaezerertyutrtr@efz.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'azetryzethry', '2024-05-29 15:33:17', '66d30b11cd071.png', 0),
+	(23, 'test@test.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 1, 'test', '2024-07-30 06:53:47', '66d309f7118c7.jpg', 0),
 	(24, '123456abcABC@zz.fr', '[]', '$2y$13$RayFje38xsQrQCYXfhltZetsNg/9Cv3MUpf/8Lz8pXgpK2lmWDC76', 0, '123456abcABC.', '2024-07-31 17:16:24', NULL, 0);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;

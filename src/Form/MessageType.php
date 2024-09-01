@@ -19,7 +19,7 @@ class MessageType extends AbstractType
             ->add('contenuMessage', TextareaType::class, [
                 'label' => ' ',
                 'attr' => [
-                    'onkeyup' => 'textAreaAdjust(this)',
+                    // 'onkeyup' => 'textAreaAdjust(this)',
                     'rows' => 8,
                     'cols' => 50,
                     '' => false,
