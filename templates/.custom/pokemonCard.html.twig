@@ -116,14 +116,14 @@
   {# if shasse #}
   {% if capture.termine == false %}
   <div class="counter-buttons">
-    <button class="decrement10" data-id="{{ capture.id }}"><span>-10</span></button>
-    <button class="decrement" data-id="{{ capture.id }}"><span>-1</span></button>
-    <button class="increment" data-id="{{ capture.id }}"><span>+1</span></button>
-    <button class="increment10" data-id="{{ capture.id }}"><span>+10</span></button>
+    <button class="decrement10"><span>-10</span></button>
+    <button class="decrement"><span>-1</span></button>
+    <button class="increment"><span>+1</span></button>
+    <button class="increment10"><span>+10</span></button>
   </div>
 
   {# affichage du compteur #}
-  <div id="form-like-compteur-{{ capture.id }}" class="loading-container form-like-compteur">
+  <div class="loading-container form-like-compteur">
     <label for="compteur-{{ capture.id }}" class="visually-hidden">Compteur</label>
     <input type="number" class="compteur-input" name="compteur-{{ capture.id }}" id="compteur-{{ capture.id }}"
       value="{{capture.nbRencontres}}"></input>
