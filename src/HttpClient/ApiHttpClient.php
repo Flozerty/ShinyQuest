@@ -75,14 +75,13 @@ class ApiHttpClient extends AbstractController
     return ["pkmnStats" => $pokemon, "pkmnSpec" => $pokemonSpec];
   }
 
-  // Récupérer la chaîne d'évolution d'un pokémon
+  // récupération de la chaîne d'évolution du pokémon
   public function getEvolutionChain($url)
   {
     $evolutionChain = $this->getRequestByUrl($url);
     $pokemons = [];
 
     $this->extractEvolutionDetails($evolutionChain['chain'], $pokemons);
-    // dd($pokemons);
 
     // on renvoie le tri de la chaîne d'évolution (voir 2 fonctions plus bas)
     return $this->sortEvolutionChain($pokemons);
@@ -259,7 +258,7 @@ class ApiHttpClient extends AbstractController
     return $filteredPokemons;
   }
 
-  // Recherche d'un pokemon par chaîne de caractère / id
+  // récupération des statss du pokemon
   public function getPokemonStatsByPokemonDetails($pokemon): array
   {
     $stats = [];
@@ -284,6 +283,7 @@ class ApiHttpClient extends AbstractController
     return $stats;
   }
 
+  // récupération des capacités spéciales du pokemon
   public function getPokemonAbilitiesByPokemonDetails($pokemon): array
   {
     $abilities = [];
@@ -294,6 +294,7 @@ class ApiHttpClient extends AbstractController
     return $abilities;
   }
 
+  // récupération des types du pokemon
   public function getPokemonTypesByPokemonDetails($pokemon): array
   {
     $types = [];
@@ -313,6 +314,7 @@ class ApiHttpClient extends AbstractController
     return $types;
   }
 
+  // récupération des formes du pokémon
   public function getPokemonVarietiesByPokemonDetails($pokemon): array
   {
     $pokemonVarieties = [];
@@ -330,6 +332,7 @@ class ApiHttpClient extends AbstractController
     return $pokemonVarieties;
   }
 
+  // récupération du nom du pokemon
   public function getPokemonNameByPokemonDetails($pokemon): string
   {
     $name = "";
@@ -343,22 +346,11 @@ class ApiHttpClient extends AbstractController
   {
     $urlEvolution = $pokemon["pkmnSpec"]["evolution_chain"]["url"];
     return [
-      // récupération des différentes formes du pokémon
       "pokemonVarieties" => $this->getPokemonVarietiesByPokemonDetails($pokemon),
-
-      // récupération du nom du pokemon
       "name" => $this->getPokemonNameByPokemonDetails($pokemon),
-
-      // récupération de la chaîne d'évolution du pokémon
       "evolutionChain" => $this->getEvolutionChain($urlEvolution),
-
-      // récupération des statss du pokemon
       "stats" => $this->getPokemonStatsByPokemonDetails($pokemon),
-
-      // récupération des capacités spéciales du pokemon
       "abilities" => $this->getPokemonAbilitiesByPokemonDetails($pokemon),
-
-      // récupération des types du pokemon
       "types" => $this->getPokemonTypesByPokemonDetails($pokemon),
     ];
   }
