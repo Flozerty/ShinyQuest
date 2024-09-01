@@ -182,61 +182,7 @@ class CaptureController extends AbstractController
     return $this->redirectToRoute("my_shasses");
   }
 
-  // +1 button
-  #[Route('/shasse/{id}/increment', name: 'increment_shasse')]
-  public function incrementCounter(int $id, EntityManagerInterface $entityManager, CaptureRepository $captureRepository, Request $request): Response
-  {
-    $shasse = $captureRepository->find($id);
-
-    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
-      $shasse->setNbRencontres($shasse->getNbRencontres() + 1);
-      $entityManager->flush();
-    }
-    return $this->json(['nbRencontres' => $shasse->getNbRencontres()]);
-  }
-
-  // -1 button
-  #[Route('/shasse/{id}/decrement', name: 'decrement_shasse')]
-  public function decrementCounter(int $id, EntityManagerInterface $entityManager, CaptureRepository $captureRepository, Request $request): Response
-  {
-    $shasse = $captureRepository->find($id);
-
-    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
-
-      $shasse->getNbRencontres() >= 1 ? $shasse->setNbRencontres($shasse->getNbRencontres() - 1) : null;
-      $entityManager->flush();
-    }
-    return $this->json(['nbRencontres' => $shasse->getNbRencontres()]);
-  }
-
-  // +10 button
-  #[Route('/shasse/{id}/increment10', name: 'increment10_shasse')]
-  public function increment10Counter(int $id, EntityManagerInterface $entityManager, CaptureRepository $captureRepository, Request $request): Response
-  {
-    $shasse = $captureRepository->find($id);
-
-    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
-      $shasse->setNbRencontres($shasse->getNbRencontres() + 10);
-      $entityManager->flush();
-    }
-    return $this->json(['nbRencontres' => $shasse->getNbRencontres()]);
-  }
-
-  // -10 button
-  #[Route('/shasse/{id}/decrement10', name: 'decrement10_shasse')]
-  public function decrement10Counter(int $id, EntityManagerInterface $entityManager, CaptureRepository $captureRepository, Request $request): Response
-  {
-    $shasse = $captureRepository->find($id);
-
-    if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
-      $shasse->getNbRencontres() >= 10 ? $shasse->setNbRencontres($shasse->getNbRencontres() - 10) : $shasse->setNbRencontres(0);
-
-      $entityManager->flush();
-    }
-    return $this->json(['nbRencontres' => $shasse->getNbRencontres()]);
-  }
-
-  // update counter manually on the input
+  // update counter input
   #[Route('/shasse/{id}/updateCounter/{newValue}', name: 'shasse_updateCounter')]
   public function updateCounter(int $id, int $newValue, EntityManagerInterface $entityManager, CaptureRepository $captureRepository): Response
   {
