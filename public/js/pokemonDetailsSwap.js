@@ -315,7 +315,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function recoverSlide() {
     const figMain = document.querySelector('#main-active-pkmn');
-    figMain.classList.remove('slideRight');
-    figMain.classList.remove('slideLeft');
+    setTimeout(() => {
+      figMain.classList.remove('slideRight');
+      figMain.classList.remove('slideLeft');
+    }, 200);
   }
 });
