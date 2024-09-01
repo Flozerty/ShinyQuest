@@ -52,13 +52,14 @@ document.addEventListener('DOMContentLoaded', function () {
     function verifyToUpdate() {
       if (timeout) {
         clearTimeout(timeout);
-        spinner = formCompteur.querySelector('.input-loading');
-        spinner ? spinner.remove() : null;
       }
 
-      const i = document.createElement('i')
-      i.className = "fa-brands fa-cloudscale loading input-loading";
-      formCompteur.appendChild(i)
+      spinner = formCompteur.querySelector('.input-loading');
+      if (!spinner) {
+        const i = document.createElement('i')
+        i.className = "fa-brands fa-cloudscale loading input-loading";
+        formCompteur.appendChild(i)
+      }
 
       timeout = setTimeout(() => {
         updateCounter()
