@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     nextButton = document.querySelector('#next'),
     body = document.querySelector('body');
 
+  // previous pokemon
   previousButton.addEventListener('click', () => {
     const pokemonId = parseInt(previousButton.getAttribute('data-id'));
     if (pokemonId > 0) {
@@ -11,12 +12,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
+  // next pokemon
   nextButton.addEventListener('click', () => {
     const pokemonId = parseInt(nextButton.getAttribute('data-id'));
     slideLeft();
     changePokemon(pokemonId);
   });
 
+  // request
   function changePokemon(pokemonId) {
     if (pokemonId > 0) {
       showLoading();
@@ -152,20 +155,36 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // update "other-details"
-    document.querySelector('#height-number').innerText = dataReceived.pokemon.pkmnStats.height
-    document.querySelector('#weight-number').innerText = dataReceived.pokemon.pkmnStats.weight
+    document.querySelector('#height-number').innerText = dataReceived.pokemon.pkmnStats.height / 10;
+    document.querySelector('#weight-number').innerText = dataReceived.pokemon.pkmnStats.weight / 10;
+    document.querySelector('#capture-rate-number').innerText = dataReceived.pokemon.pkmnSpec.capture_rate;
 
+
+    // update "ablities"
     const abilitiesContainer = document.querySelector('#abilities')
     abilitiesContainer.innerHTML = "";
     dataReceived.data.abilities.forEach(ability => {
+      const li = document.createElement('li');
 
+      // nom
+      let strong = document.createElement('strong');
       ability.names.forEach(lang => {
         if (lang.language.name == "fr") {
-          const li = document.createElement('li');
-          li.innerHTML = `${lang.name} <span class="english-name">(${ability.name})</span>`;
-          abilitiesContainer.appendChild(li);
+          strong.innerHTML = `${lang.name}<span class="english-name">(${ability.name})</span>`;
         }
       });
+      li.appendChild(strong);
+
+      // description
+      let description = document.createElement('span');
+      ability.flavor_text_entries.forEach(text => {
+        if (text.language.name == "fr") {
+          description.innerHTML = " : " + text.flavor_text;
+        }
+      });
+      li.appendChild(description);
+
+      abilitiesContainer.appendChild(li);
     });
 
     // update infos de shasse

@@ -172,24 +172,43 @@
       <span id="weight-number">{{pokemon.pkmnStats.weight / 10}}</span> &nbsp; kg
     </p>
   </div>
-  <div id="special-ability">
-    <div class="wrapper">
-      <h3>Capacités spéciales</h3>
 
-      <ul id="abilities">
-        {% for ability in data.abilities %}
-        <li>
-          {% for lang in ability.names %}
-          {% if lang.language.name == "fr" %}
-          {{lang.name}} {# nom fr #}
-          {% endif %}
-          {% endfor %}
-          <span class="english-name">({{ability.name}})</span>
-        </li> {# nom en #}
-        {% endfor %}
-      </ul>
-    </div>
+  <div id="capture-rate">
+    <h3>Taux de capture</h3>
+    <p>
+      <i class="fa-solid fa-temperature-half"></i>&nbsp;
+      <span id="capture-rate-number">{{pokemon.pkmnSpec.capture_rate}}</span>
+    </p>
   </div>
+</section>
+
+<section id="special-ability">
+  <h2>Capacités spéciales</h2>
+
+  <ul id="abilities">
+    {% for ability in data.abilities %}
+    <li>
+      <strong>
+        {% for lang in ability.names %}
+        {% if lang.language.name == "fr" %}
+        {{lang.name}} {# nom fr #}
+        {% endif %}
+        {% endfor %}
+        <span class="english-name">({{ability.name}})</span>{# nom en #}
+      </strong>
+
+      {# description #}
+      {% set description = '' %}
+      {% for text in ability.flavor_text_entries %}
+      {% if text.language.name =="fr" %}
+      {% set description = text.flavor_text %}
+      {% endif %}
+      {% endfor %}
+      <span>: {{description}}</span>
+
+    </li>
+    {% endfor %}
+  </ul>
 </section>
 
 {# infos capture #}

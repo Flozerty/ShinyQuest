@@ -265,18 +265,6 @@ h1 {
         align-items: center;
     }
 
-    .wrapper {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-
-        ul {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-    }
-
     &>div {
         display: flex;
         flex-direction: column;
@@ -291,9 +279,27 @@ h1 {
             border-right: none;
         }
     }
+}
+
+#special-ability {
+    flex-direction: column;
+    align-items: center;
+
+    strong {
+        color: var(--primary-color);
+    }
 
     .english-name {
         font-size: 0.9rem;
+    }
+
+    li {
+        list-style: circle;
+        margin: 5px 5px 10px 25px;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
     }
 }
 
