@@ -1,4 +1,4 @@
-<div class="pokemon-card">
+<div class="pokemon-card" data-id="{{ capture.id }}">
 
   {# delete : capture ou shasse de l'user connecté ou admin / sauf noBtns var #}
   {% if (app.user is defined and app.user is not empty) and (app.user == capture.user or 'ROLE_ADMIN' in app.user.roles)
@@ -123,7 +123,7 @@
   </div>
 
   {# affichage du compteur #}
-  <div id="form-like-compteur-{{ capture.id }}" class="loading-container">
+  <div id="form-like-compteur-{{ capture.id }}" class="loading-container form-like-compteur">
     <label for="compteur-{{ capture.id }}" class="visually-hidden">Compteur</label>
     <input type="number" class="compteur-input" name="compteur-{{ capture.id }}" id="compteur-{{ capture.id }}"
       value="{{capture.nbRencontres}}"></input>

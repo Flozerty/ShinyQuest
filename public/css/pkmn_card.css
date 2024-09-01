@@ -155,10 +155,15 @@
   }
 }
 
-#form-like-compteur {
+.form-like-compteur {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.input-loading {
+  top: auto;
+  left: 10%;
 }
 
 .nbRencontres {
