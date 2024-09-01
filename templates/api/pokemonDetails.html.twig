@@ -138,16 +138,13 @@
 
 <section id="stats">
   <h2>Stats du pokémon sur une base 220</h2>
+
   <ul id="stats-container">
     {% for stat in data.stats %}
     <li class="stat">
-      {% for lang in stat.details_stat.names %}
-      {% if lang.language.name == "fr" %}
-      <span class="stat-name">{{lang.name}} : </span>
-      {% endif %}
-      {% endfor %}
-
+      <span class="stat-name">{{stat.name_stat}} : </span>
       <span class="stat-amount">{{stat.base_stat}}</span>
+
       <div class="stat-completion" title="{{stat.base_stat}}/220">
         <div class="completion-bar"></div>
       </div>

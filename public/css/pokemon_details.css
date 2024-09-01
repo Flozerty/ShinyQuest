@@ -7,6 +7,7 @@ section {
 
 h2 {
     margin-top: 50px;
+    text-align: center;
 }
 
 h1 {
@@ -116,7 +117,6 @@ h1 {
 
     h2 {
         grid-row: 1;
-        text-align: center;
     }
 }
 
@@ -221,8 +221,16 @@ h1 {
     align-items: center;
     height: 40px;
 
+    .stat-name {
+        color: var(--primary-color);
+    }
+
     .stat-amount {
         text-align: end;
+    }
+
+    .stat-completion {
+        margin-left: 10px;
     }
 }
 
@@ -308,20 +316,16 @@ h1 {
     justify-content: baseline;
     width: fit-content;
     align-self: center;
-
-    h2 {
-        text-align: center;
-    }
 }
 
 
 .slideLeft {
-    transform: translateX(-100%) rotate(-90deg) scale(.5);
+    transform: translateX(-100%) rotate(-45deg) scale(.5);
     filter: opacity(0);
 }
 
 .slideRight {
-    transform: translateX(100%) rotate(90deg) scale(.5);
+    transform: translateX(100%) rotate(45deg) scale(.5);
     filter: opacity(0);
 }
 
@@ -338,22 +342,22 @@ h1 {
     }
 
     .stat-amount {
-        grid-column: 3/5;
+        grid-column: 3;
         padding: 0 15px;
     }
 
     .stat-completion {
-        grid-column: 5/9;
+        grid-column: 4/9;
     }
 }
 
 @media screen and (max-width: 450px) {
     .stat-name {
-        grid-column: 1/4;
+        grid-column: 1/3;
     }
 
     .stat-amount {
-        grid-column: 4/5;
+        grid-column: 3/5;
         padding: 0 5px;
     }
 

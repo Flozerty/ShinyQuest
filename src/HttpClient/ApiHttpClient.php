@@ -263,12 +263,22 @@ class ApiHttpClient extends AbstractController
   public function getPokemonStatsByPokemonDetails($pokemon): array
   {
     $stats = [];
+
+    $statConverter = [
+      'hp' => 'HP',
+      'attack' => 'ATK',
+      'defense' => 'DEF',
+      'special-attack' => 'S.ATK',
+      'special-defense' => 'S.DEF',
+      'speed' => 'VIT',
+    ];
+
     foreach ($pokemon["pkmnStats"]["stats"] as $stat) {
-      $url = $stat["stat"]["url"];
+      $nameShort = $statConverter[$stat["stat"]["name"]] ?? 'stat non trouvée';
 
       $stats[] = [
         "base_stat" => $stat["base_stat"],
-        "details_stat" => $this->getRequestByUrl($url),
+        "name_stat" => $nameShort,
       ];
     };
     return $stats;

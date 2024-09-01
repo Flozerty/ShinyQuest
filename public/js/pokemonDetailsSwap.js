@@ -137,16 +137,9 @@ document.addEventListener('DOMContentLoaded', function () {
     dataReceived.data.stats.forEach(stat => {
       const li = document.createElement('li');
 
-      // recherche du nom français
-      let statName = '';
-      stat.details_stat.names.forEach(lang => {
-        if (lang.language.name === "fr") {
-          statName = lang.name;
-        }
-      });
-
       li.className = 'stat';
-      li.innerHTML = `<span class="stat-name">${statName} : </span>
+      li.innerHTML =
+        `<span class="stat-name">${stat.name_stat} : </span>
         <span class="stat-amount">${stat.base_stat}</span>
         <div class="stat-completion" title="${stat.base_stat}/220">
           <div class="completion-bar" style="width: ${(stat.base_stat / 220) * 100}%;"></div>
