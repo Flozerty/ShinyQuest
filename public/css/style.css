@@ -342,6 +342,7 @@ header {
     border-radius: 8px;
     font-size: 0.7rem;
     font-weight: 600;
+    transform: translate(25%, -25%);
   }
 }
 
@@ -435,6 +436,11 @@ header {
     width: 100%;
     color: var(--primary-color);
     display: flex;
+    border-bottom: 1px solid var(--hover-main-color);
+
+    &:last-of-type {
+      border-bottom: none;
+    }
 
     a {
       display: block;
@@ -446,7 +452,13 @@ header {
       }
     }
   }
+
+  .music-button {
+    order: -1;
+  }
 }
+
+
 
 /* ------------------- LIGHT / DARK ------------------ */
 
