@@ -9,6 +9,7 @@
     align-items: center;
     box-shadow: 5px 0 15px -10px var(--primary-color);
     border-radius: 10px;
+    position: relative;
 
     .user-infos {
       display: flex;
@@ -16,7 +17,6 @@
       align-items: center;
       padding: 10px;
       min-width: fit-content;
-      position: relative;
       border-right: 1px solid var(--secondary-color);
 
       figure {
@@ -73,6 +73,12 @@
 
 .intro {
   text-align: center;
+}
+
+@media screen and (min-width: 900px) {
+  .new-messages-conversation {
+    transform: translate(50%, -50%);
+  }
 }
 
 @media screen and (max-width: 600px) {
