@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', function () {
     nextButton = document.querySelector('#next'),
     body = document.querySelector('body');
 
+  // init buttons
+  verifyButtons();
+
   // previous pokemon
   previousButton.addEventListener('click', () => {
     const pokemonId = parseInt(previousButton.getAttribute('data-id'));
@@ -19,6 +22,21 @@ document.addEventListener('DOMContentLoaded', function () {
     changePokemon(pokemonId);
   });
 
+  function verifyButtons() {
+    [nextButton, previousButton].forEach(button => {
+      let pkmnId = parseInt(button.getAttribute('data-id'));
+      if (pkmnId <= 0 || pkmnId > 1025) {
+        button.style.opacity = 0;
+        button.style.cursor = "default";
+        button.disabled = true;
+      } else {
+        button.style.opacity = 1;
+        button.style.cursor = "pointer";
+        button.disabled = false;
+      }
+    })
+  }
+
   // request
   function changePokemon(pokemonId) {
     if (pokemonId > 0) {
@@ -34,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
           recoverSlide();
           previousButton.disabled = false;
           nextButton.disabled = false;
+          verifyButtons();
         })
     }
   }
@@ -151,7 +170,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('#height-number').innerText = dataReceived.pokemon.pkmnStats.height / 10;
     document.querySelector('#weight-number').innerText = dataReceived.pokemon.pkmnStats.weight / 10;
     document.querySelector('#capture-rate-number').innerText = dataReceived.pokemon.pkmnSpec.capture_rate;
-
 
     // update "ablities"
     const abilitiesContainer = document.querySelector('#abilities')
