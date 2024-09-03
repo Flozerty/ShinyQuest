@@ -80,7 +80,7 @@ INSERT INTO `capture` (`id`, `pokedex_id`, `surnom`, `nb_rencontres`, `date_capt
 	(10, 1, 'bulbu', 645, NULL, 1, 0, 16, 1, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png', 'Bulbizarre', 'Émeraude', 'bourg palette', 'male', 0, ''),
 	(11, 1, 'bulbu', 645, NULL, 1, 0, 16, 1, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png', 'Bulbizarre', 'Émeraude', 'bourg palette', 'male', 0, ''),
 	(12, 1, 'bulbu', 645, NULL, 1, 0, 16, 1, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png', 'Bulbizarre', 'Platine', 'bourg palette', 'male', 0, ''),
-	(13, 3, NULL, 1423, NULL, 1, 0, 2, 17, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/3.png', 'Florizarre', 'Jaune', 'qf', NULL, 1, NULL),
+	(13, 3, 'test', 1425, '2024-09-02 08:38:00', 1, 0, 2, 17, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/3.png', 'Florizarre', 'Jaune', 'qf', 'femelle', 0, 'poke-ball'),
 	(14, 19, NULL, 8471, '2024-07-17 12:16:15', 1, 0, 2, 9, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/19.png', 'Rattata', 'X', 'tddd', NULL, 0, 'safari-ball'),
 	(15, 862, 'test', 453, '2024-07-16 11:01:00', 1, 0, 2, 15, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/862.png', 'Ixon', 'Émeraude', 'db', 'male', 0, 'love-ball'),
 	(18, 700, 'qesrgdh', 74947, '2024-07-18 16:43:00', 1, 0, 2, 16, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/700.png', 'Nymphali', 'Or HeartGold', 'route 104', 'femelle', 0, 'poke-ball'),
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Listage des données de la table shinyquest.doctrine_migration_versions : ~8 rows (environ)
+-- Listage des données de la table shinyquest.doctrine_migration_versions : ~6 rows (environ)
 DELETE FROM `doctrine_migration_versions`;
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 	('DoctrineMigrations\\Version20240716143607', NULL, NULL),
@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   CONSTRAINT `FK_B6BD307FF26B1C97` FOREIGN KEY (`pj_id`) REFERENCES `capture` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table shinyquest.message : ~16 rows (environ)
+-- Listage des données de la table shinyquest.message : ~14 rows (environ)
 DELETE FROM `message`;
 INSERT INTO `message` (`id`, `date_message`, `contenu_message`, `pj_id`, `user_envoi_id`, `user_recoit_id`, `lu`) VALUES
 	(1, '2024-08-19 10:13:49', 'test', 3, 2, 24, 1),
@@ -292,18 +292,19 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_IDENTIFIER_EMAIL` (`email`),
   UNIQUE KEY `UNIQ_IDENTIFIER_PSEUDO` (`pseudo`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table shinyquest.user : ~7 rows (environ)
 DELETE FROM `user`;
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `is_verified`, `pseudo`, `date_inscription`, `avatar`, `ban`) VALUES
-	(2, 'floris.louerat@gmail.com', '["ROLE_ADMIN"]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 1, 'Flozerty', '2024-05-29 12:26:53', '66d23756bfb27.jpg', 0),
-	(16, 'ezar@efz.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'patate', '2024-05-29 15:33:17', '66d3096f0058d.jpg', 0),
-	(17, 'ezaertr@efz.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'patataze', '2024-05-29 15:33:17', '66d309cd850cc.jpg', 0),
+	(2, 'floris.louerat@gmail.com', '["ROLE_ADMIN"]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 1, 'Flozerty', '2024-05-29 12:26:53', '66d23756bfb27.webp', 0),
+	(16, 'ezar@efz.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'patate', '2024-05-29 15:33:17', '66d3096f0058d.webp', 0),
+	(17, 'ezaertr@efz.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'patataze', '2024-05-29 15:33:17', '66d309cd850cc.webp', 0),
 	(19, 'ezaezertrtr@efz.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'patatazdfzreh', '2024-05-29 15:33:17', NULL, 0),
-	(20, 'ezaezerertyutrtr@efz.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'azetryzethry', '2024-05-29 15:33:17', '66d30b11cd071.png', 0),
-	(23, 'test@test.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 1, 'test', '2024-07-30 06:53:47', '66d309f7118c7.jpg', 0),
-	(24, '123456abcABC@zz.fr', '[]', '$2y$13$RayFje38xsQrQCYXfhltZetsNg/9Cv3MUpf/8Lz8pXgpK2lmWDC76', 0, '123456abcABC.', '2024-07-31 17:16:24', NULL, 0);
+	(20, 'ezaezerertyutrtr@efz.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'azetryzethry', '2024-05-29 15:33:17', '66d30b11cd071.webp', 0),
+	(23, 'test@test.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 1, 'test', '2024-07-30 06:53:47', '66d309f7118c7.webp', 0),
+	(24, '123456abcABC@zz.fr', '[]', '$2y$13$RayFje38xsQrQCYXfhltZetsNg/9Cv3MUpf/8Lz8pXgpK2lmWDC76', 0, '123456abcABC.', '2024-07-31 17:16:24', NULL, 0),
+	(27, 'sgfszff.zeffz@gmail.com', '[]', '$2y$13$H.9k/XUJamQ2r2Jbl8RKDuUqlyzwfhLqydhVR4XwpPziKb90ntD7q', 0, 'retyztzt', '2024-09-03 07:36:51', NULL, 0);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
