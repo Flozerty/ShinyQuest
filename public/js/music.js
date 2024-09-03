@@ -1,7 +1,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const audio = document.querySelector('#music');
-    audio.volume = 0.1;
+    audio.volume = 0.3;
 
     let isPlaying = localStorage.getItem('isMusicPlaying') === 'true';
     const currentTime = localStorage.getItem('audioCurrentTime');
