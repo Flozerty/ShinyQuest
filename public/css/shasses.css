@@ -52,8 +52,8 @@
 
     a {
       display: flex;
-      color: white;
-      background-color: var(--darkblue);
+      color: var(--background-color);
+      background-color: var(--blue-main);
       padding: 5px 10px;
       border-radius: 12px;
       width: fit-content;
@@ -81,7 +81,7 @@
 .menu-burger-shasse {
   position: relative;
   height: 100%;
-  color: var(--darkblue);
+  color: var(--primary-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,8 +102,8 @@
   justify-content: center;
   gap: 10px;
   text-align: center;
-  background-color: #f2f2f2;
-  border: 1px solid var(--darkblue);
+  background-color: var(--cardColor);
+  border: 1px solid var(--primary-color);
   border-radius: 10px;
   padding: 5px 10px;
 
@@ -117,7 +117,7 @@
 }
 
 #stop-suivi-tip {
-  color: var(--dangerred);
+  color: var(--red-main);
   font-weight: 600;
 }
 

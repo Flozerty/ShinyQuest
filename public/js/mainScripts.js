@@ -74,3 +74,32 @@ if (pikaRun) {
   // intervalle de vérification pour les autres cas possibles
   setInterval(checkVisibility, 100)
 }
+
+///////////////////////////// lucario dance /////////////////////////////
+const lucarioContainer = document.querySelector("#pokemon-dance");
+let inactivityTimeout;
+let animationInterval;
+
+function startAnimation() {
+  animationInterval = setInterval(() => {
+    lucarioContainer.classList.toggle("show");
+  }, 2000);
+}
+
+function stopAnimation() {
+  clearInterval(animationInterval);
+  lucarioContainer.classList.remove("show");
+}
+
+function resetTimeout() {
+  clearTimeout(inactivityTimeout);
+  stopAnimation();
+  inactivityTimeout = setTimeout(startAnimation, 300000);
+}
+
+document.addEventListener("click", resetTimeout);
+document.addEventListener("mousemove", resetTimeout);
+document.addEventListener("mousedown", resetTimeout);
+document.addEventListener("keypress", resetTimeout);
+document.addEventListener("touchstart", resetTimeout);
+resetTimeout();

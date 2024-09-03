@@ -33,17 +33,25 @@ h1 {
     flex-shrink: 0;
   }
 
-  i {
-    font-size: 2rem;
-    color: var(--primary-color);
+  a i {
     transition: var(--transitionTime);
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
 
     &:hover {
       transform: rotate(-360deg);
-      transition: 1.5s;
+      transition: 1.2s;
     }
   }
 }
+
 
 #navigation {
   align-items: center;
