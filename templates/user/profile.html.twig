@@ -21,7 +21,7 @@
 
 <section id="edit-account">
     <button id="change-avatar-button">changer l'avatar</button>
-    <button id="change-pseudo-button">changer de pseudo</button>
+    <button id="change-password-button">changer de mot de passe</button>
     <a href="{{path('delete_account')}}" class="del-account-btn">supprimer mon compte</a>
 </section>
 {% endif %}
@@ -60,7 +60,6 @@
         {% if myProfil is not defined and not (user == app.user) %}
 
         {# ajout des liens de messagerie / demande d'ami etc. #}
-
         {% if isFriend is defined and isFriend[0].statut is defined and isFriend[0].statut is not empty %}
         <a href="{{ path('messages', {'pseudo': user.pseudo}) }}" class="secondary-animated-button" id="message-link">
             <i class="fa-solid fa-envelope"></i>&nbsp; Message
@@ -135,10 +134,10 @@
     </div>
 </dialog>
 
-<dialog id="pseudoDialog">
+<dialog id="passwordDialog">
     <div class="dialog-content">
 
-        <form action="{{path('change_pseudo')}}">
+        <form action="{{path('change_password')}}">
             {{user.pseudo}}
 
             <div class="modalNav">

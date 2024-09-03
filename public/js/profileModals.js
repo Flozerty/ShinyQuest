@@ -7,10 +7,10 @@ document.addEventListener('DOMContentLoaded', function () {
   if (editSection) {
 
     const avatarButton = document.querySelector("#change-avatar-button")
-    const pseudoButton = document.querySelector("#change-pseudo-button")
+    const passwordButton = document.querySelector("#change-password-button")
 
     const avatarDialog = document.querySelector("#avatarDialog")
-    const pseudoDialog = document.querySelector("#pseudoDialog")
+    const passwordDialog = document.querySelector("#passwordDialog")
 
 
     avatarButton.addEventListener('click', () => {
@@ -18,9 +18,9 @@ document.addEventListener('DOMContentLoaded', function () {
       openCheck(avatarDialog)
     })
 
-    pseudoButton.addEventListener('click', () => {
-      showDialog(pseudoDialog)
-      openCheck(pseudoDialog)
+    passwordButton.addEventListener('click', () => {
+      showDialog(passwordDialog)
+      openCheck(passwordDialog)
     })
 
     // si on clique sur le backdrop de la modal, on veut fermer la modal

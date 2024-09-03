@@ -56,6 +56,14 @@ class SecurityController extends AbstractController
         }
     }
 
+    // reset password
+    #[Route('/user/editPassword', name: 'change_password')]
+    public function changePassword(): Response
+    {
+
+        return $this->redirectToRoute("my_profile");
+    }
+
     //////////////////////////////////////////////////////
     /////////////////////// ERRORS ///////////////////////
     //////////////////////////////////////////////////////
