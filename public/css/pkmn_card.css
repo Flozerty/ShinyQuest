@@ -58,6 +58,15 @@
   margin: 15px;
   border-radius: 20px;
   box-shadow: var(--primary-color) 3px 3px 10px -5px;
+
+  * {
+    font-family: "VT323", "Chocolate Classical Sans", sans-serif;
+    line-height: 1.5rem;
+  }
+
+  p {
+    font-size: 1.3rem;
+  }
 }
 
 .main-card-content {
@@ -70,9 +79,9 @@
   justify-content: space-between;
   width: 50%;
   height: 220px;
+  gap: 2px;
 
   div {
-    margin: 3px 0;
     width: fit-content;
   }
 
@@ -97,8 +106,7 @@
   justify-content: space-evenly;
 
   .pokemon-id {
-    font-size: 2rem;
-    font-weight: 600;
+    font-size: 3rem;
   }
 
   .capture-img-container {
