@@ -142,16 +142,19 @@ main span {
 #edit-account {
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
 
   &>* {
     padding: 5px 15px;
+    margin: 10px;
     border-radius: 5px;
     border: 1px solid var(--blue-main);
     font-size: 1rem;
     cursor: pointer;
   }
 
-  button {
+  #change-avatar-button,
+  #change-password-button {
     color: var(--blue-main);
     background-color: var(--background-color);
   }

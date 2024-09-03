@@ -91,7 +91,6 @@ body {
   &::-webkit-scrollbar-thumb:hover {
     border: var(--primary-color);
   }
-
 }
 
 body,
@@ -124,6 +123,7 @@ input[type="number"] {
 }
 
 /*  */
+
 .fa-circle-check {
   color: green;
   cursor: pointer;
@@ -198,7 +198,6 @@ h2 {
 }
 
 /* -------------------ANIMATED BUTTONS------------------ */
-
 .main-animated-button {
   background: linear-gradient(to left, var(--blue-main) 50%, var(--cardSecondaryColor) 50%);
   background-size: 200% 100%;
@@ -253,7 +252,6 @@ h2 {
 /* dans pokedex & pokemonDetails */
 #shiny-mode {
   margin: 5px;
-
   background: none;
   border-radius: 50%;
   border: 2px solid var(--primary-color);
@@ -305,8 +303,6 @@ header {
       }
     }
   }
-
-
 }
 
 #logo-container {
@@ -350,8 +346,6 @@ header {
   transform: translate(50%, -50%);
 }
 
-
-
 /* -------------------HEADER PROFILE------------------ */
 
 #header-profile {
@@ -365,10 +359,6 @@ header {
   margin-right: 30px;
   transition: var(--transitionTime);
   cursor: pointer;
-
-  &:hover {
-    padding: 12px 40px 12px 15px;
-  }
 
   p {
     color: var(--background-color);
@@ -386,7 +376,6 @@ header {
     transform: translateX(50%);
     background-color: var(--primary-color);
     border-radius: 50%;
-
 
     img {
       height: 80%;
@@ -436,11 +425,7 @@ header {
     width: 100%;
     color: var(--primary-color);
     display: flex;
-    border-bottom: 1px solid var(--hover-main-color);
-
-    &:last-of-type {
-      border-bottom: none;
-    }
+    border-top: 1px solid var(--hover-main-color);
 
     a {
       display: block;
@@ -452,16 +437,9 @@ header {
       }
     }
   }
-
-  .music-button {
-    order: -1;
-  }
 }
 
-
-
 /* ------------------- LIGHT / DARK ------------------ */
-
 .l_d_mode {
   display: flex;
 }
@@ -653,16 +631,27 @@ footer {
       }
     }
 
-    ul {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      width: 100%;
-
-      a {
+    #socials {
+      ul {
         display: flex;
-        font-size: 2rem;
-        margin: 5px;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+
+        a {
+          display: flex;
+          font-size: 2rem;
+          margin: 5px;
+        }
+
+        i {
+          transition: var(--transitionTime);
+          color: var(--primary-color);
+
+          &:hover {
+            color: var(--font-main-color);
+          }
+        }
       }
     }
   }
@@ -675,15 +664,6 @@ footer {
     #legal-mentions {
       color: var(--blue-main);
       text-decoration: underline;
-    }
-  }
-
-  i {
-    transition: var(--transitionTime);
-    color: var(--primary-color);
-
-    &:hover {
-      color: black;
     }
   }
 }
@@ -732,6 +712,20 @@ footer {
   top: 0;
   left: 0;
   width: 150px;
+}
+
+.music-button {
+  order: -1;
+  border: none;
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1rem;
+  background-color: var(--hover-main-color);
+  width: 100%;
+  border-radius: 10px;
+  padding: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 
 /* ///////////////////////////////////////////////////////////////// */
@@ -786,6 +780,11 @@ footer {
 /* ///////////////////////////////////////////////////////////////// */
 
 /* /////////////// MIN /////////////// */
+@media (min-width: 1650px) {
+  #main-wrapper {
+    width: 80%;
+  }
+}
 
 @media (min-width: 1200px) {
 
@@ -841,9 +840,9 @@ footer {
   }
 }
 
-@media (min-width: 1650px) {
-  #main-wrapper {
-    width: 80%;
+@media (min-width: 400px) {
+  #header-profile:hover {
+    padding: 12px 40px 12px 15px;
   }
 }
 

@@ -63,7 +63,7 @@
     }
 
     .refuse-demand {
-      background-color: var(--secondary-color);
+      background-color: var(--cardSecondaryColor);
       transition: var(--transitionTime);
       display: flex;
       justify-content: center;
@@ -92,7 +92,7 @@
         }
 
         i {
-          color: var(--background-color);
+          color: var(--cardSecondaryColor);
         }
       }
     }

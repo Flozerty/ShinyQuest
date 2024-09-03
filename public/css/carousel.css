@@ -1,0 +1,8 @@
+.carousel {
+  display: flex;
+  align-items: center;
+}
+
+.cards-container {
+  width: 100%;
+}

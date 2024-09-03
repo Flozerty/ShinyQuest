@@ -7,10 +7,10 @@ document.addEventListener('DOMContentLoaded', function () {
   if (editSection) {
 
     const avatarButton = document.querySelector("#change-avatar-button")
-    const passwordButton = document.querySelector("#change-password-button")
+    // const passwordButton = document.querySelector("#change-password-button")
 
     const avatarDialog = document.querySelector("#avatarDialog")
-    const passwordDialog = document.querySelector("#passwordDialog")
+    // const passwordDialog = document.querySelector("#passwordDialog")
 
 
     avatarButton.addEventListener('click', () => {
@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', function () {
       openCheck(avatarDialog)
     })
 
-    passwordButton.addEventListener('click', () => {
-      showDialog(passwordDialog)
-      openCheck(passwordDialog)
-    })
+    // passwordButton.addEventListener('click', () => {
+    //   showDialog(passwordDialog)
+    //   openCheck(passwordDialog)
+    // })
 
     // si on clique sur le backdrop de la modal, on veut fermer la modal
     function showDialog(dialog) {

@@ -51,14 +51,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const playBtn = document.createElement('button');
     playBtn.className = "music-button"
-    playBtn.innerText = isPlaying ? 'Pause' : 'Play';
+
+    playBtn.innerHTML = isPlaying ? '<i class="fa-solid fa-pause"></i>' : '<i class="fa-solid fa-play"></i>';
     playBtn.addEventListener('click', () => {
         if (audio.paused) {
             audio.play();
-            playBtn.innerText = 'Pause';
+            playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
         } else {
             audio.pause();
-            playBtn.innerText = 'Play';
+            playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
         }
     })
 

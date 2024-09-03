@@ -88,7 +88,6 @@ main i {
   }
 }
 
-
 .menu-burger-ami {
   position: relative;
   height: 100%;
@@ -134,7 +133,10 @@ main i {
 }
 
 #demandes {
-  i {
+  display: flex;
+  flex-direction: column;
+
+  .amis-envois i {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -178,10 +180,10 @@ main i {
   #demandes-envoyees,
   #demandes-recues {
     display: flex;
-    flex-wrap: wrap;
     gap: 10px;
     text-align: center;
-    justify-content: center;
+    width: 80%;
+    align-self: center;
 
     .amis-envois,
     .amis-demandes {

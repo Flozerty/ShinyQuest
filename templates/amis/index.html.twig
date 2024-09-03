@@ -4,6 +4,7 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{asset('css/amis.css')}}">
+<link rel="stylesheet" href="{{asset('css/carousel.css')}}">
 {% endblock %}
 
 {% block javascripts %}
@@ -13,11 +14,14 @@
 {% block body %}
 
 <section id="demandes">
-    {% if demandesEnvoyees is not empty %}
 
+    {% if demandesEnvoyees is not empty %}
     {# Demandes d'ami envoyées #}
     <h2>Demandes envoyées :</h2>
-    <div id="demandes-envoyees">
+    <div id="demandes-envoyees" class="carousel">
+
+  <i class="fa-solid fa-circle-arrow-left arrow arrow-left"></i>
+<div class="cards-container">
         {% for demande in demandesEnvoyees %}
         <div class="amis-envois">
 
@@ -37,6 +41,8 @@
         </div>
 
         {% endfor %}
+</div>
+  <i class="fa-solid fa-circle-arrow-right arrow arrow-right"></i>
     </div>
     {% endif %}
 

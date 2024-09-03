@@ -21,7 +21,7 @@
 
 <section id="edit-account">
     <button id="change-avatar-button">changer l'avatar</button>
-    <button id="change-password-button">changer de mot de passe</button>
+    <a id="change-password-button" href="/reset-password">changer de mot de passe</a>
     <a href="{{path('delete_account')}}" class="del-account-btn">supprimer mon compte</a>
 </section>
 {% endif %}
@@ -131,22 +131,6 @@
                         <i class="cancel fa-solid fa-circle-xmark"></i>
                 </div>
             {{ form_end(formAvatar) }}
-    </div>
-</dialog>
-
-<dialog id="passwordDialog">
-    <div class="dialog-content">
-
-        <form action="/reset-password">
-            {{user.pseudo}}
-
-            <div class="modalNav">
-                <button type="submit">
-                    <i class="fa-solid fa-circle-check"></i>
-                </button>
-                    <i class="cancel fa-solid fa-circle-xmark"></i>
-            </div>
-        </form>
     </div>
 </dialog>
 {% endif %}
