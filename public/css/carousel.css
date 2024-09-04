@@ -1,8 +1,34 @@
 .carousel {
+  margin: 20px 0;
+  position: relative;
   display: flex;
   align-items: center;
+
+  .arrow {
+    font-size: 2rem;
+    position: absolute;
+    cursor: pointer;
+    z-index: 3;
+    color: var(--primary-color);
+    display: none;
+  }
+
+  .arrow-left {
+    left: -50px;
+  }
+
+  .arrow-right {
+    right: -50px;
+  }
+
+  .cards-container {
+    transition: var(--transitionTime);
+    display: flex;
+    gap: 10px;
+  }
 }
 
-.cards-container {
+.carousel-wrapper {
+  overflow: hidden;
   width: 100%;
 }

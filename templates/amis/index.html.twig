@@ -5,72 +5,82 @@
 {% block stylesheets %}
 <link rel="stylesheet" href="{{asset('css/amis.css')}}">
 <link rel="stylesheet" href="{{asset('css/carousel.css')}}">
+<link rel="stylesheet" href="{{asset('css/modals.css')}}">
 {% endblock %}
 
 {% block javascripts %}
 <script src="{{asset('js/amisToggleLinks.js')}}"></script>
+<script src="{{asset('js/carousel.js')}}"></script>
+<script src="{{asset('js/modalsAmis.js')}}"></script>
 {% endblock %}
 
 {% block body %}
 
 <section id="demandes">
+{# Demanes d'ami reçues #}
+    {% if demandesRecues is not empty %}
+
+    <h2>Demandes reçues :</h2>
+    <div id="demandes-recues" class="carousel">
+        <i class="fa-solid fa-circle-arrow-left arrow arrow-left"></i>
+
+        <div class="carousel-wrapper">
+            <div class="cards-container">
+                {% for demande in demandesRecues %}
+                <div class="amis-demandes">
+
+                    <a class="user-link" href="{{ path('profile_user', {'pseudo': demande.user.pseudo}) }}">
+                        <figure>
+                            <img src="{{demande.user.avatar ? asset('img/avatars/' ~ demande.user.avatar) : asset('img/unknown_user.png') }}"
+                                alt="avatar de {{demande.user.pseudo}}">
+                        </figure>
+                        <span class="pseudo">
+                            {{demande.user.pseudo}}
+                        </span>
+                    </a>
+
+                    <div class="demande-links">
+                        <a href="{{ path('accept_ami', {'id': demande.id}) }}" class="accept-demand">confirmer</a>
+                        <a href="{{ path('delete_ami', {'id': demande.id}) }}" class="refuse-demand">supprimer</a>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+        <i class="fa-solid fa-circle-arrow-right arrow arrow-right"></i>
+    </div>
+    {% endif %}
 
     {% if demandesEnvoyees is not empty %}
     {# Demandes d'ami envoyées #}
     <h2>Demandes envoyées :</h2>
     <div id="demandes-envoyees" class="carousel">
+        <i class="fa-solid fa-circle-arrow-left arrow arrow-left"></i>
 
-  <i class="fa-solid fa-circle-arrow-left arrow arrow-left"></i>
-<div class="cards-container">
-        {% for demande in demandesEnvoyees %}
-        <div class="amis-envois">
+        <div class="carousel-wrapper">
+            <div class="cards-container">
+                {% for demande in demandesEnvoyees %}
+                <div class="amis-envois">
 
-            <a class="user-link" href="{{ path('profile_user', {'pseudo': demande.user.pseudo}) }}">
-                <figure>
-                    <img src="{{demande.user.avatar ? asset('img/avatars/' ~ demande.user.avatar) : asset('img/unknown_user.png') }}"
-                        alt="avatar de {{demande.user.pseudo}}">
-                </figure>
-                <span class="pseudo">
-                    {{demande.user.pseudo}}
-                </span>
-            </a>
+                    <a class="user-link" href="{{ path('profile_user', {'pseudo': demande.user.pseudo}) }}">
+                        <figure>
+                            <img src="{{demande.user.avatar ? asset('img/avatars/' ~ demande.user.avatar) : asset('img/unknown_user.png') }}"
+                                alt="avatar de {{demande.user.pseudo}}">
+                        </figure>
+                        <span class="pseudo">
+                            {{demande.user.pseudo}}
+                        </span>
+                    </a>
 
-            <div class="demande-links">
-                <a href="{{ path('delete_ami', {'id': demande.id}) }}"><i class="fa-solid fa-xmark"></i></a>
+                    <div class="demande-links">
+                        <a href="{{ path('delete_ami', {'id': demande.id}) }}"><i class="fa-solid fa-xmark"></i></a>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
-
-        {% endfor %}
-</div>
-  <i class="fa-solid fa-circle-arrow-right arrow arrow-right"></i>
-    </div>
-    {% endif %}
-
-    {# Demanes d'ami reçues #}
-    {% if demandesRecues is not empty %}
-
-    <h2>Demandes reçues :</h2>
-    <div id="demandes-recues">
-        {% for demande in demandesRecues %}
-        <div class="amis-demandes">
-
-            <a class="user-link" href="{{ path('profile_user', {'pseudo': demande.user.pseudo}) }}">
-                <figure>
-                    <img src="{{demande.user.avatar ? asset('img/avatars/' ~ demande.user.avatar) : asset('img/unknown_user.png') }}"
-                        alt="avatar de {{demande.user.pseudo}}">
-                </figure>
-                <span class="pseudo">
-                    {{demande.user.pseudo}}
-                </span>
-            </a>
-
-            <div class="demande-links">
-                <a href="{{ path('accept_ami', {'id': demande.id}) }}" class="accept-demand">confirmer</a>
-                <a href="{{ path('delete_ami', {'id': demande.id}) }}" class="refuse-demand">supprimer</a>
-            </div>
-        </div>
-
-        {% endfor %}
+        <i class="fa-solid fa-circle-arrow-right arrow arrow-right"></i>
     </div>
     {% endif %}
 </section>
@@ -120,15 +130,14 @@
                 </a>
             </li>
         </ul>
-        <a class="del-ami" href="{{ path('delete_ami', {'id': data.id}) }}">
-            <i class="fa-solid fa-trash-can"></i>
-        </a>
+            <i id="del-{{data.id}}" class="fa-solid fa-trash-can delete-ami-button"></i>
+
         <div class="menu-burger-ami">
             <i class="fa-solid fa-ellipsis toggle-menu"></i>
 
             <ul class="dresseur-links-mobile hide">
                 <li>
-                    <a href="">
+                <a href="{{path('messages', {'pseudo': data.user.pseudo})}}">
                         <i class="fa-regular fa-message"></i>
                     </a>
                 </li>
@@ -138,9 +147,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="del-ami" href="{{ path('delete_ami', {'id': data.id}) }}">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </a>
+                        <i id="del-{{data.id}}" class="fa-solid fa-trash-can delete-ami-button"></i>
                 </li>
             </ul>
         </div>
@@ -150,8 +157,23 @@
 {% endif %}
 
 {% if dresseursAmis is empty and demandesEnvoyees is empty and demandesRecues is empty %}
-
 <p id="friendLess">Sans ami :'(</p>
-
 {% endif %}
+
+<dialog id="delete-ami-modal">
+    <div class="dialog-content">
+        <h3>Etes vous sûr de vouloir supprimer cet utilisateur de votre liste d'amis ?</h3>
+
+        <div class="modalNav">
+            <a class="delete-link" href="">
+                Oui, supprimer l'ami
+            </a>
+
+            <button class="cancelBtn">
+                Non, j'ai changé d'avis
+            </button>
+        </div>
+    </div>
+</dialog>
+
 {% endblock %}

@@ -2,6 +2,29 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  i {
+    color: var(--primary-color);
+    font-size: var(--custom-icons-size);
+    transition: var(--transitionTime);
+
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
+
+  .delete-ami-button {
+    grid-column: 8;
+    justify-content: center;
+    width: fit-content;
+    margin: auto;
+    transition: var(--transitionTime);
+    color: var(--red-main);
+  }
+}
+
+main i {
+  cursor: pointer;
 }
 
 .dresseur,
@@ -51,10 +74,6 @@
 .dex-completion {
   justify-content: center;
   gap: 10px;
-
-  i {
-    color: var(--primary-color);
-  }
 }
 
 .dresseur-links {
@@ -62,30 +81,6 @@
   justify-content: center;
   gap: 10px;
   text-align: center;
-
-
-}
-
-main i {
-  font-size: var(--custom-icons-size);
-  color: var(--primary-color);
-  transition: var(--transitionTime);
-
-  &:hover {
-    transform: scale(1.5);
-  }
-}
-
-.del-ami {
-  grid-column: 8;
-  justify-content: center;
-  width: fit-content;
-  margin: auto;
-  transition: var(--transitionTime);
-
-  i {
-    color: var(--red-main);
-  }
 }
 
 .menu-burger-ami {
@@ -97,9 +92,6 @@ main i {
   display: flex;
   justify-content: center;
 
-  i {
-    cursor: pointer;
-  }
 }
 
 .dresseur-links-mobile {
@@ -148,10 +140,6 @@ main i {
     border-radius: 50%;
     color: var(--primary-color);
     background-color: var(--secondary-color);
-
-    &:hover {
-      transform: scale(1);
-    }
   }
 
   .demande-links {
@@ -188,7 +176,7 @@ main i {
     .amis-envois,
     .amis-demandes {
       display: flex;
-      max-width: 200px;
+      width: 180px;
       gap: 5px;
       background-color: var(--cardSecondaryColor);
 
@@ -264,7 +252,7 @@ figure {
     grid-column: 4/7;
   }
 
-  .del-ami {
+  .delete-ami-button {
     display: none;
   }
 

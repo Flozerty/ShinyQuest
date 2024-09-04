@@ -198,6 +198,10 @@ h2 {
   margin: 80px 50px 30px 50px;
 }
 
+button {
+  cursor: pointer;
+}
+
 /* -------------------ANIMATED BUTTONS------------------ */
 .main-animated-button {
   background: linear-gradient(to left, var(--blue-main) 50%, var(--cardSecondaryColor) 50%);
@@ -293,8 +297,139 @@ iframe {
   height: auto;
   transition: 0.5s;
 }
+
 .show {
   transform: translate(-100%, -100%);
+}
+
+/* -------------------MODALS------------------ */
+
+.modalNav {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+
+  button {
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+  }
+
+  i {
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transitionTime);
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  .delete-link {
+    color: var(--dangerred);
+    padding: 5px 10px;
+    border-radius: 5px;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 5px var(--dangerred);
+    }
+  }
+
+  .cancelBtn {
+    color: black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+  }
+}
+
+dialog {
+  margin: auto;
+  min-width: 25%;
+  border-color: var(--primary-color);
+  background-color: var(--cardColor);
+  color: black;
+  overflow: visible;
+
+  .dialog-content {
+    padding: 20px;
+    text-align: center;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      div {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+
+        &>button i,
+        &>i {
+          font-size: 2rem;
+          margin: 0 10px;
+        }
+
+        div {
+          display: block;
+          width: auto;
+          margin: 0;
+
+          i {
+            margin-right: 10px;
+          }
+        }
+
+        &:last-of-type {
+          justify-content: center;
+        }
+      }
+
+      input {
+        justify-self: flex-end;
+      }
+    }
+  }
+}
+
+#avatarDialog {
+  #avatar-preview {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    width: 200px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+
+    img {
+      background-color: var(--secondary-color);
+      border-radius: 50%;
+      height: 90%;
+      width: 90%;
+      overflow: hidden;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .avatar-container {
+      flex-direction: column;
+
+      &>* {
+        width: fit-content;
+      }
+
+      label {
+        align-self: center;
+      }
+    }
+  }
 }
 
 /* -------------------HEADER------------------ */
