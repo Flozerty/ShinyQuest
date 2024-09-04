@@ -16,6 +16,7 @@ Captures de {{user.pseudo}}
 
 {% block javascripts %}
 <script src="{{asset('js/sendCapturePjModal.js')}}"></script>
+<script src="{{asset('js/modalsDelete.js')}}"></script>
 {% endblock %}
 
 {% block body %}
@@ -51,8 +52,24 @@ Captures de {{user.pseudo}}
 
         <i class="cancelBtn fa-solid fa-circle-xmark"></i>
       </div>
-
     </form>
   </div>
 </dialog>
+
+<dialog id="delete-capture-modal">
+    <div class="dialog-content">
+        <h3>Etes vous sûr de vouloir supprimer cette capture ?</h3>
+
+        <div class="modalNav">
+            <a class="delete-link" href="">
+                Oui, supprimer la capture
+            </a>
+
+            <button class="cancelBtn">
+                Non, j'ai changé d'avis
+            </button>
+        </div>
+    </div>
+</dialog>
+
 {% endblock %}

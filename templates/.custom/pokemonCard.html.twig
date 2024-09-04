@@ -9,13 +9,13 @@
     {% if capture.termine==true %}
     <i class="fa-solid fa-share-from-square" id="{{capture.id}}"></i>
 
-    <a class="del-btn" aria-label="Supprimer la capture" href="{{ path('delete_capture', {'id': capture.id}) }}">
+    <button class="del-btn delete-capture-button" id="del-{{capture.id}}" aria-label="Supprimer la capture">
       <i class="fa-solid fa-trash-can"></i>
-    </a>
+    </button>
     {% else %}
-    <a class="del-btn" aria-label="Supprimer cette shasse" href="{{ path('delete_shasse', {'id': capture.id}) }}">
+    <button class="del-btn delete-shasse-button" id="del-{{capture.id}}" aria-label="Supprimer cette shasse">
       <i class="fa-solid fa-trash-can"></i>
-    </a>
+    </button>
 
     {% endif %}
   </div>

@@ -19,7 +19,7 @@ class AmisController extends AbstractController
 
     // Afficher toutes mes demandes d'amis
     #[Route('/amis', name: 'app_amis')]
-    public function index(ApiHttpClient $apiHttpClient, AmisRepository $amisRepository, CaptureRepository $captureRepository, UserRepository $userRepository,): Response
+    public function index(ApiHttpClient $apiHttpClient, AmisRepository $amisRepository, CaptureRepository $captureRepository, UserRepository $userRepository, ): Response
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute("app_home");
@@ -28,7 +28,7 @@ class AmisController extends AbstractController
         $allPokemons = $apiHttpClient->getPokedex();
 
         $AmisByDemande = $amisRepository->findBy(["userDemande" => $this->getUser()]);
-        $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()],);
+        $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()], );
 
         $dresseursData = [];
         $demandeEnvoyee = [];
@@ -85,14 +85,14 @@ class AmisController extends AbstractController
     {
         $lienAmis = $amisRepository->find($id);
 
-        if ($lienAmis) {
+        if ($lienAmis && (in_array('ROLE_ADMIN', $this->getUser()->getRoles()) || $lienAmis->getUserDemande() == $this->getUser() || $lienAmis->getUserRecoit() == $this->getUser())) {
             $entityManager->remove($lienAmis);
             $entityManager->flush();
         }
 
         $this->addFlash(
             'notice',
-            "La demande d'ami a été refusée."
+            "La demande d'ami a été annulée."
         );
 
         return $this->redirectToRoute("app_amis");
@@ -103,14 +103,14 @@ class AmisController extends AbstractController
     {
         $lienAmis = $amisRepository->find($id);
 
-        if ($lienAmis) {
+        if ($lienAmis && (in_array('ROLE_ADMIN', $this->getUser()->getRoles()) || $lienAmis->getUserDemande() == $this->getUser() || $lienAmis->getUserRecoit() == $this->getUser())) {
             $entityManager->remove($lienAmis);
             $entityManager->flush();
         }
 
         $this->addFlash(
             'notice',
-            "La demande d'ami a été refusée."
+            "La demande d'ami a été annulée."
         );
 
         return $this->redirectToRoute("app_users");

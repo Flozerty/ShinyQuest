@@ -290,11 +290,11 @@
     }
   }
 
-
   .del-btn {
     color: var(--dangerred);
+    border: none;
+    background-color: transparent;
   }
-
 }
 
 .shasse-trouve {

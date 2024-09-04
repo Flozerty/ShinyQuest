@@ -11,7 +11,7 @@
 {% block javascripts %}
 <script src="{{asset('js/amisToggleLinks.js')}}"></script>
 <script src="{{asset('js/carousel.js')}}"></script>
-<script src="{{asset('js/modalsAmis.js')}}"></script>
+<script src="{{asset('js/modalsDelete.js')}}"></script>
 {% endblock %}
 
 {% block body %}
@@ -137,9 +137,9 @@
 
             <ul class="dresseur-links-mobile hide">
                 <li>
-                <a href="{{path('messages', {'pseudo': data.user.pseudo})}}">
+                    <a href="{{path('messages', {'pseudo': data.user.pseudo})}}">
                         <i class="fa-regular fa-message"></i>
-                    </a>
+                        </a>
                 </li>
                 <li>
                     <a href="{{ path('captures', {'pseudo': data.user.pseudo}) }}">
@@ -147,7 +147,7 @@
                     </a>
                 </li>
                 <li>
-                        <i id="del-{{data.id}}" class="fa-solid fa-trash-can delete-ami-button"></i>
+                    <i id="del-{{data.id}}" class="fa-solid fa-trash-can delete-ami-button"></i>
                 </li>
             </ul>
         </div>

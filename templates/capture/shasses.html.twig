@@ -14,6 +14,7 @@
 <script src="{{asset('js/catchPokemonSong.js')}}"></script>
 <script src="{{asset('js/ajaxCompteur.js')}}"></script>
 <script src="{{asset('js/ajaxGetFormShasseData.js')}}"></script>
+<script src="{{asset('js/modalsDelete.js')}}"></script>
 {% endblock %}
 
 {% block body %}
@@ -175,18 +176,7 @@
     {# select balls #}
     <div class="loading-container">
       <label for="ball">Ball</label>
-      <select id="ball" name="ball">
-
-        {# {% for group in balls %}
-        <optgroup label="{{group.categoryName}}">
-          {% for ball in group.ballsData %}
-          {% if ball is defined and ball is not empty %}
-          <option value="{{ball.spriteName}}">{{ball.name}}</option>
-          {% endif %}
-          {% endfor %}
-        </optgroup>
-        {% endfor %} #}
-      </select>
+      <select id="ball" name="ball"></select>
 
       <i class="fa-brands fa-cloudscale loading ball-loading"></i>
     </div>
@@ -203,6 +193,22 @@
     </div>
     {{ form_end(formCapture) }}
   </div>
+</dialog>
+
+<dialog id="delete-shasse-modal">
+    <div class="dialog-content">
+        <h3>Etes vous sûr de vouloir supprimer cette shasse ?</h3>
+
+        <div class="modalNav">
+            <a class="delete-link" href="">
+                Oui, supprimer la shasse
+            </a>
+
+            <button class="cancelBtn">
+                Non, j'ai changé d'avis
+            </button>
+        </div>
+    </div>
 </dialog>
 
 {% endblock %}

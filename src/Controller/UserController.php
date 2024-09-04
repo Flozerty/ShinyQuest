@@ -31,6 +31,8 @@ class UserController extends AbstractController
       ];
     }
     // dd($usersData);
+
+    // pagination
     $query = $usersData;
 
     $pagination = $paginator->paginate(
@@ -38,6 +40,7 @@ class UserController extends AbstractController
       $request->query->getInt('page', 1), /*page number*/
       6 /*limit per page*/
     );
+    // 
 
     $AmisByDemande = $amisRepository->findBy(["userDemande" => $this->getUser()]);
     $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()], );
