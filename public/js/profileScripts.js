@@ -1,27 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-  const body = document.querySelector('body');
-
-  const editSection = document.querySelector("#edit-account")
+  // modal
+  const body = document.querySelector('body'),
+    editSection = document.querySelector("#edit-account");
 
   if (editSection) {
 
-    const avatarButton = document.querySelector("#change-avatar-button")
-    // const passwordButton = document.querySelector("#change-password-button")
-
-    const avatarDialog = document.querySelector("#avatarDialog")
-    // const passwordDialog = document.querySelector("#passwordDialog")
-
+    const avatarButton = document.querySelector("#change-avatar-button"),
+      avatarDialog = document.querySelector("#avatarDialog");
 
     avatarButton.addEventListener('click', () => {
       showDialog(avatarDialog)
       openCheck(avatarDialog)
     })
-
-    // passwordButton.addEventListener('click', () => {
-    //   showDialog(passwordDialog)
-    //   openCheck(passwordDialog)
-    // })
 
     // si on clique sur le backdrop de la modal, on veut fermer la modal
     function showDialog(dialog) {
@@ -45,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    // check si le dialog est ouvert
     function openCheck(dialog) {
       if (dialog.open) {
         body.style.filter = "blur(3px)";
@@ -54,4 +44,22 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   }
+
+  // avatar preview
+  const avatarInput = document.querySelector('#avatar_avatar');
+  const avatarImage = document.querySelector('#avatar-image');
+
+  avatarInput.addEventListener('change', function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      // lecture du fichier & affichage
+      reader.onload = function (e) {
+        avatarImage.src = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    }
+  });
 })

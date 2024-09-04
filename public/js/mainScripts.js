@@ -94,7 +94,7 @@ function stopAnimation() {
 function resetTimeout() {
   clearTimeout(inactivityTimeout);
   stopAnimation();
-  inactivityTimeout = setTimeout(startAnimation, 300000);
+  inactivityTimeout = setTimeout(startAnimation, 600000);
 }
 
 document.addEventListener("click", resetTimeout);
