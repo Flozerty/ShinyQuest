@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Capture;
 use App\Entity\Message;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -72,6 +73,15 @@ class MessageRepository extends ServiceEntityRepository
             ->setParameter('user', $user)
             ->setParameter('user2', $user2)
             ->groupBy('m.lu')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getMessagesWithPj(Capture $pj)
+    {
+        return $this->createQueryBuilder('m')
+            ->Where('m.pj = :pj')
+            ->setParameter('pj', $pj)
             ->getQuery()
             ->getResult();
     }

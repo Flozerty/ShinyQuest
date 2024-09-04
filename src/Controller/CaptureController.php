@@ -9,6 +9,7 @@ use App\Form\ShasseStartType;
 use App\HttpClient\ApiHttpClient;
 use App\Repository\AmisRepository;
 use App\Repository\CaptureRepository;
+use App\Repository\MessageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -149,9 +150,17 @@ class CaptureController extends AbstractController
 
   // supprimer une capture
   #[Route('/capture/{id}/delete', name: 'delete_capture')]
-  public function deleteCapture(Capture $shasse = null, EntityManagerInterface $entityManager): Response
+  public function deleteCapture(Capture $shasse = null, EntityManagerInterface $entityManager, MessageRepository $messageRepository, CaptureRepository $captureRepository): Response
   {
     if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
+      $fakeCapture = $captureRepository->findOneBy(["id" => 0]);
+      // vérification de l'existance de messages avec la capture en PJ & cahngement avec la capture factice.
+      $messages = $messageRepository->getMessagesWithPj($shasse);
+      foreach ($messages as $message) {
+        $message->setPj($fakeCapture);
+        $entityManager->flush();
+      }
+
       $entityManager->remove($shasse);
       $entityManager->flush();
     }

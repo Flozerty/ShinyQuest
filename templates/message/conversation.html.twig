@@ -73,6 +73,10 @@
 
             {# inclusion de la card en PJ #}
             {% if message.pj is defined and message.pj is not null %}
+
+{% if message.pj.id == 0 %} 
+<p class="pj-deleted">( capture supprimée )</p>
+{% else %}
             {% set capture = message.pj %}
 
             <div class="card-container">
@@ -83,6 +87,7 @@
                 {% include '.custom/pokemonCard.html.twig' %}
             </div>
                 {% endif %}
+{% endif %}
 
             <p class="message">{{message.contenuMessage}}</p>
         </div>
