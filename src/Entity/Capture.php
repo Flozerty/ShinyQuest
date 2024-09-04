@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CaptureRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -33,11 +35,11 @@ class Capture
     private ?int $pokedexId = null;
 
     #[ORM\ManyToOne(inversedBy: 'captures')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'captures')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?MethodeCapture $methodeCapture = null;
 
     #[ORM\Column]
@@ -64,10 +66,18 @@ class Capture
     #[ORM\Column(nullable: true)]
     private ?string $ball = null;
 
-    public function __construct() {
+    /**
+     * @var Collection<int, Message>
+     */
+    #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'pj')]
+    private Collection $messages;
+
+    public function __construct()
+    {
         // $this->suivi = 1;
         $this->termine = 0;
         $this->favori = 0;
+        $this->messages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -263,6 +273,36 @@ class Capture
     public function setBall(string $ball): static
     {
         $this->ball = $ball;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): static
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages->add($message);
+            $message->setPj($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): static
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getPj() === $this) {
+                $message->setPj(null);
+            }
+        }
 
         return $this;
     }

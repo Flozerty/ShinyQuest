@@ -31,7 +31,7 @@ class Message
     #[ORM\Column]
     private ?bool $lu = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'messages')]
     private ?Capture $pj = null;
 
     public function __construct()
