@@ -74,7 +74,7 @@
             {# inclusion de la card en PJ #}
             {% if message.pj is defined and message.pj is not null %}
 
-{% if message.pj.id == 0 %} 
+{% if message.pj.id == 1 %} 
 <p class="pj-deleted">( capture supprimée )</p>
 {% else %}
             {% set capture = message.pj %}

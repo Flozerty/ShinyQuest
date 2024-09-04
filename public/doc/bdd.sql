@@ -71,18 +71,16 @@ CREATE TABLE IF NOT EXISTS `capture` (
   CONSTRAINT `FK_8BFEA6E5B5DEC791` FOREIGN KEY (`methode_capture_id`) REFERENCES `methode_capture` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table shinyquest.capture : ~20 rows (environ)
+-- Listage des données de la table shinyquest.capture : ~18 rows (environ)
 DELETE FROM `capture`;
 INSERT INTO `capture` (`id`, `pokedex_id`, `surnom`, `nb_rencontres`, `date_capture`, `charme_chroma`, `favori`, `user_id`, `methode_capture_id`, `termine`, `img_shiny`, `nom_pokemon`, `jeu`, `lieu`, `sexe`, `suivi`, `ball`) VALUES
-	(0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '0', '0', NULL, NULL, NULL, 0, NULL),
+	(1, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '0', '0', NULL, NULL, NULL, 0, NULL),
 	(3, 2, 'flo', 453, '2024-06-10 10:49:21', 0, 0, 16, 3, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/2.png', 'Florizarre', 'Émeraude', 'bourg palette', 'male', 0, 'ultra-ball'),
 	(6, 2, 'flo', 453, '2024-06-10 10:49:21', 0, 0, 2, 3, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/2.png', 'Florizarre', 'Émeraude', 'bourg palette', 'zaea', 0, 'ultra-ball'),
 	(10, 1, 'bulbu', 645, NULL, 1, 0, 16, 1, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png', 'Bulbizarre', 'Émeraude', 'bourg palette', 'male', 0, ''),
 	(11, 1, 'bulbu', 645, NULL, 1, 0, 16, 1, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png', 'Bulbizarre', 'Émeraude', 'bourg palette', 'male', 0, ''),
 	(12, 1, 'bulbu', 645, NULL, 1, 0, 16, 1, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png', 'Bulbizarre', 'Platine', 'bourg palette', 'male', 0, ''),
-	(14, 19, NULL, 8471, '2024-07-17 12:16:15', 1, 0, 2, 9, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/19.png', 'Rattata', 'X', 'tddd', NULL, 0, 'safari-ball'),
 	(15, 862, 'test', 453, '2024-07-16 11:01:00', 1, 0, 2, 15, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/862.png', 'Ixon', 'Émeraude', 'db', 'male', 0, 'love-ball'),
-	(18, 700, 'qesrgdh', 74947, '2024-07-18 16:43:00', 1, 0, 2, 16, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/700.png', 'Nymphali', 'Or HeartGold', 'route 104', 'femelle', 0, 'poke-ball'),
 	(25, 7, 'test', 778, '2024-07-17 16:45:00', 0, 0, 2, 17, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/7.png', 'Carapuce', 'X', 'sdf', 'femelle', 0, 'nest-ball'),
 	(27, 600, NULL, 3910, NULL, 1, 0, 2, 3, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/600.png', 'Clic', 'X', 'bourg-en vol', NULL, 1, NULL),
 	(28, 5, NULL, 3, '2024-01-17 12:16:04', 0, 0, 2, 16, 1, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/5.png', 'Reptincel', 'Jaune', 'rtyhj', NULL, 0, 'great-ball'),
@@ -104,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Listage des données de la table shinyquest.doctrine_migration_versions : ~8 rows (environ)
+-- Listage des données de la table shinyquest.doctrine_migration_versions : ~9 rows (environ)
 DELETE FROM `doctrine_migration_versions`;
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 	('DoctrineMigrations\\Version20240716143607', NULL, NULL),
@@ -134,9 +132,9 @@ CREATE TABLE IF NOT EXISTS `message` (
   CONSTRAINT `FK_B6BD307FA3409E4` FOREIGN KEY (`user_recoit_id`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_B6BD307FDF1A08E5` FOREIGN KEY (`user_envoi_id`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_B6BD307FF26B1C97` FOREIGN KEY (`pj_id`) REFERENCES `capture` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table shinyquest.message : ~25 rows (environ)
+-- Listage des données de la table shinyquest.message : ~26 rows (environ)
 DELETE FROM `message`;
 INSERT INTO `message` (`id`, `date_message`, `contenu_message`, `pj_id`, `user_envoi_id`, `user_recoit_id`, `lu`) VALUES
 	(1, '2024-08-19 10:13:49', 'test', 3, 2, 24, 1),
@@ -153,17 +151,18 @@ INSERT INTO `message` (`id`, `date_message`, `contenu_message`, `pj_id`, `user_e
 	(12, '2024-08-27 14:39:26', 'rzetrthg', NULL, 2, 24, 1),
 	(13, '2024-08-27 14:39:37', 'cfcbhdfwhqdthjhj', 3, 2, 24, 1),
 	(14, '2024-08-27 14:40:12', 'sqtsrg', NULL, 2, 24, 1),
-	(15, '2024-08-28 17:13:58', 'test', 18, 2, 24, 1),
+	(15, '2024-08-28 17:13:58', 'test', 1, 2, 24, 1),
 	(16, '2024-08-29 06:53:41', 'hey regardes mon carapuce!', 25, 2, 17, 0),
 	(17, '2024-08-30 21:26:04', 'test', NULL, 2, 24, 0),
 	(18, '2024-08-31 12:37:32', 'test', NULL, 2, 20, 0),
-	(19, '2024-09-01 12:46:38', 'etst', 18, 2, 17, 0),
+	(19, '2024-09-01 12:46:38', 'etst', 1, 2, 17, 0),
 	(20, '2024-09-04 12:58:00', '<div style="color:  red;">test</div>\r\n<script>alert(\'dddd\')</script>', NULL, 2, 24, 0),
 	(21, '2024-09-04 12:58:15', 'az\r\nazez\r\nfrdd', NULL, 2, 24, 0),
 	(22, '2024-09-04 12:58:32', 'lol <br> lol', NULL, 2, 24, 0),
 	(23, '2024-09-04 12:58:43', '// okok', NULL, 2, 24, 0),
 	(24, '2024-09-04 12:59:06', '{* comentaidjce *}', NULL, 2, 24, 0),
-	(25, '2024-09-04 12:59:41', '{* comentaidjce *}', NULL, 2, 24, 0);
+	(25, '2024-09-04 12:59:41', '{* comentaidjce *}', NULL, 2, 24, 0),
+	(26, '2024-09-04 13:53:05', 'ertze', NULL, 2, 20, 0);
 
 -- Listage de la structure de table shinyquest. messenger_messages
 DROP TABLE IF EXISTS `messenger_messages`;
@@ -265,8 +264,8 @@ DROP TABLE IF EXISTS `reset_password_request`;
 CREATE TABLE IF NOT EXISTS `reset_password_request` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
-  `selector` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hashed_token` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `selector` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hashed_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `requested_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `expires_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   PRIMARY KEY (`id`),
