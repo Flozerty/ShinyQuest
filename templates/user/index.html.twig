@@ -41,8 +41,7 @@
 
       {% for user in amis %}
       {% if user.user == dresseur.user %}
-      <a href="{{ path('delete_ami_users', {'id': user.id}) }}" class="delete-animated-button">Supprimer l'ami</a>
-
+      <button id="del-{{user.id}}" href="{{ path('delete_ami_users', {'id': user.id}) }}" class="delete-animated-button">Supprimer l'ami</button>
       {% set count = 1 %}
       {% endif %}
       {% endfor %}
@@ -85,5 +84,19 @@
   {{ knp_pagination_render(pagination) }}
 </div>
 
+<dialog id="delete-ami-modal">
+    <div class="dialog-content">
+        <h3>Etes vous sûr de vouloir supprimer cet utilisateur de votre liste d'amis ?</h3>
 
+        <div class="modalNav">
+            <a class="delete-link" href="">
+                Oui, supprimer l'ami
+            </a>
+
+            <button class="cancelBtn">
+                Non, j'ai changé d'avis
+            </button>
+        </div>
+    </div>
+</dialog>
 {% endblock %}

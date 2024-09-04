@@ -5,27 +5,28 @@ document.addEventListener('DOMContentLoaded', function () {
   const delAmiBtn = document.querySelectorAll(".delete-ami-button"),
     delAmiDialog = document.querySelector("#delete-ami-modal");
 
-  delAmiBtn.forEach(button => {
-    const id = button.id.split('-')[1];
+  if (delAmiBtn) {
+    delAmiBtn.forEach(button => {
+      const id = button.id.split('-')[1];
 
-    button.addEventListener('click', () => {
-      // {{ path('delete_ami', {'id': data.id}) }}
-      showDialog(delAmiDialog, id)
-      openCheck(delAmiDialog)
+      const validateLink = delAmiDialog.querySelector(".delete-link");
+      validateLink.href = `/amis/${id}/delete`
+
+      button.addEventListener('click', () => {
+        // {{ path('delete_ami', {'id': data.id}) }}
+        showDialog(delAmiDialog, id)
+        openCheck(delAmiDialog)
+      })
     })
-  })
+  }
 
   // si on clique sur le backdrop de la modal, on veut fermer la modal
   function showDialog(dialog, id) {
     dialog.showModal();
     const dialogContent = dialog.querySelector('.dialog-content'),
-      cancelButton = dialog.querySelector(".cancelBtn"),
-      validateLink = dialog.querySelector(".delete-link");
-
-    validateLink.href = `/amis/${id}/delete`
+      cancelButton = dialog.querySelector(".cancelBtn");
 
     cancelButton.addEventListener("click", () => {
-
       if (dialog.open) {
         dialog.close();
         openCheck(dialog);
