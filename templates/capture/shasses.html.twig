@@ -112,9 +112,9 @@
       </a>
     </p>
     <p class="others-del-btn">
-      <a aria-label="supprimer la shasse" href="{{ path('delete_shasse', {'id': capture.id}) }}">
+      <button aria-label="supprimer la shasse" class="delete-shasse-button" id="del-{{capture.id}}">
         <i class="fa-solid fa-circle-xmark"></i>
-      </a>
+      </button>
     </p>
 
     <div class="menu-burger-shasse">
@@ -128,9 +128,9 @@
         </li>
 
         <li>
-          <a aria-label="supprimer la shasse" href="{{ path('delete_shasse', {'id': capture.id}) }}">
+          <button  class="delete-shasse-button" id="del-{{capture.id}}" aria-label="supprimer la shasse">
             <i class="fa-solid fa-trash-can"></i>
-          </a>
+          </button>
         </li>
       </ul>
     </div>
