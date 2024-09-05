@@ -9,7 +9,7 @@
   text-align: center;
 
   &>* {
-    padding: 95px;
+    padding: 10px 5px;
   }
 
   .others-title {
@@ -65,6 +65,11 @@
   .others-del-btn {
     justify-content: center;
     align-items: center;
+  }
+
+  .delete-shasse-button {
+    background-color: transparent;
+    border: none;
   }
 }
 

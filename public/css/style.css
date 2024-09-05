@@ -358,6 +358,7 @@ iframe {
 dialog {
   margin: auto;
   min-width: 25%;
+  max-width: 700px;
   border-color: var(--primary-color);
   background-color: var(--cardColor);
   color: black;
@@ -526,7 +527,6 @@ header {
 }
 
 /* -------------------HEADER PROFILE------------------ */
-
 #header-profile {
   display: flex;
   align-items: center;
@@ -708,7 +708,6 @@ main {
 }
 
 /* ------------------- SIDE NAV ------------------ */
-
 #main-side-nav {
   position: fixed;
   top: 80px;
@@ -720,7 +719,6 @@ main {
   border-right: 1px solid var(--primary-color);
   transition: var(--transitionTime);
   background-color: var(--background-secondary);
-
   backdrop-filter: blur(25px);
 
   div {

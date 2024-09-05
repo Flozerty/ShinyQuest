@@ -38,6 +38,24 @@ document.addEventListener('DOMContentLoaded', function () {
       verifyToUpdate()
     })
 
+    function verifyToUpdate() {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+      // timeout before update
+      timeout = setTimeout(() => {
+        updateCounter()
+      }, 500);
+
+      // si pas de spinner alors on en créait un
+      spinner = formCompteur.querySelector('.input-loading');
+      if (!spinner) {
+        const i = document.createElement('i')
+        i.className = "fa-brands fa-cloudscale loading input-loading";
+        formCompteur.appendChild(i)
+      }
+    }
+
     function updateCounter() {
       const newValue = compteurInput.value;
 
@@ -45,24 +63,8 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
           formCompteur.querySelector('.input-loading').remove()
+          console.log("compteur updated : " + data.nbRencontres)
         })
-    }
-
-    function verifyToUpdate() {
-      if (timeout) {
-        clearTimeout(timeout);
-      }
-
-      spinner = formCompteur.querySelector('.input-loading');
-      if (!spinner) {
-        const i = document.createElement('i')
-        i.className = "fa-brands fa-cloudscale loading input-loading";
-        formCompteur.appendChild(i)
-      }
-
-      timeout = setTimeout(() => {
-        updateCounter()
-      }, 500);
     }
   });
 });
