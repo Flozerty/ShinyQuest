@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Message;
+use App\Entity\User;
+use App\Repository\CaptureRepository;
+use App\Repository\ResetPasswordRequestRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,15 +38,37 @@ class SecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
+    // suppression d'utilisateur
     #[Route('/user/delete', name: 'delete_account')]
-    public function deleteAccount(
-        EntityManagerInterface $entityManager,
-        TokenStorageInterface $tokenStorage,
-        SessionInterface $session
-    ): Response {
+    public function deleteAccount(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage, SessionInterface $session, CaptureRepository $captureRepository, ResetPasswordRequestRepository $resetPasswordRequestRepository): Response
+    {
+        /**
+         * @var User $user
+         */
         $user = $this->getUser();
 
         if ($user) {
+            /////////// remplacement des PJ contenant des captures de l'user ///////////
+            $fakeCapture = $captureRepository->findOneBy(["id" => 1]);
+
+            $captures = $user->getCaptures();
+            // récupération des captures
+            foreach ($captures as $capture) {
+                $messages = $capture->getMessages();
+                // récupération des messages avec la capture en PJ (pas forcément dans une conversation de l'user!)
+                foreach ($messages as $message) {
+                    $message->setPj($fakeCapture);
+                }
+            }
+
+            /////////// suppression des requests de reset password ///////////
+            $requests = $resetPasswordRequestRepository->findBy(["user" => $this->getUser()]);
+            foreach ($requests as $request) {
+                $entityManager->remove($request);
+                $entityManager->flush();
+            }
+
+            /////////// suppression de l'user ///////////
 
             // suppression de token d'auth & des données d'user dans la session
             $tokenStorage->setToken(null);
@@ -52,7 +78,7 @@ class SecurityController extends AbstractController
             $entityManager->flush();
             return $this->redirectToRoute("app_home");
         } else {
-            dd("test");
+            return $this->redirectToRoute("error403");
         }
     }
 
