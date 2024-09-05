@@ -9,31 +9,31 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'index_redirect')]
-    #[Route('/home', name: 'app_home')]
-    public function index(CaptureRepository $captureRepository,): Response
-    {
-        $user = $this->getUser();
+  #[Route('/', name: 'index_redirect')]
+  #[Route('/home', name: 'app_home')]
+  public function index(CaptureRepository $captureRepository,): Response
+  {
+    $user = $this->getUser();
 
-        if ($user) {
-            $shasses = $captureRepository->findBy(['user' => $user, 'suivi' => 1]);
+    if ($user) {
+      $shasses = $captureRepository->findBy(['user' => $user, 'suivi' => 1]);
 
-            $captures = $captureRepository->findBy(['termine' => 1], ["dateCapture" => "DESC"], 10);
+      $captures = $captureRepository->findBy(['termine' => 1], ["dateCapture" => "DESC"], 10);
 
-            return $this->render('home/index.html.twig', [
-                "page_title" => "Bienvenue sur SHINYQUEST",
-                "shasses" => $shasses,
-                "captures" => $captures,
-                "pika" => true,
-            ]);
-        } else {
-            $captures = $captureRepository->findBy(['termine' => 1], ["dateCapture" => "DESC"], 10);
+      return $this->render('home/index.html.twig', [
+        "page_title" => "Bienvenue sur SHINYQUEST",
+        "shasses" => $shasses,
+        "captures" => $captures,
+        "pika" => true,
+      ]);
+    } else {
+      $captures = $captureRepository->findBy(['termine' => 1], ["dateCapture" => "DESC"], 10);
 
-            return $this->render('home/homeDisconnected.html.twig', [
-                "page_title" => "Bienvenue sur SHINYQUEST",
-                "captures" => $captures,
-                "pika" => true,
-            ]);
-        }
+      return $this->render('home/homeDisconnected.html.twig', [
+        "page_title" => "Bienvenue sur SHINYQUEST",
+        "captures" => $captures,
+        "pika" => true,
+      ]);
     }
+  }
 }

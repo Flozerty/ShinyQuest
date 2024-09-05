@@ -4,11 +4,66 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="css/home.css">
+<link rel="stylesheet" href="css/pkmn_card.css">
+<link rel="stylesheet" href="{{asset('css/carousel.css')}}">
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{asset('js/carousel.js')}}"></script>
 {% endblock %}
 
 {% block body %}
-section d'explications : à la "beergarden" : section captures/shinydex sauvegardés "attrapez les tous / complétez votre shinyDex" /
+section d'explications : à la "beergarden" : section captures/shinydex sauvegardés "attrapez les tous / complétez votre
+shinyDex" /
 section suivi des shasses en cours / section messagerie et partage de captures /
-
 section de respiration : nb users total / total shinies trouvés / total rencontres / total shasses en cours
+<h2>Les dernières trouvailles :</h2>
+<section id="last-captures" class="carousel">
+
+    <i class="fa-solid fa-circle-arrow-left arrow arrow-left"></i>
+
+    <div class="carousel-wrapper">
+        <div class="cards-container">
+
+            {% for capture in captures %}
+
+            <div class="last-capture">
+                <p class="capture-description">
+                    Attrapé par <a class="pseudo-captures"
+                        href="{{ path('profile_user', {'pseudo': capture.user.pseudo}) }}">{{
+                        capture.user.pseudo }}</a>,
+
+                    {# affichage de la date de capture #}
+                    {% set now = date() %}
+                    {% set diff = capture.dateCapture.diff(now) %}
+                    {% set years = diff.format('%y') %}
+                    {% set months = diff.format('%m') %}
+                    {% set days = diff.format('%d') %}
+
+                    {% if capture.dateCapture|date("Y-m-d") == now|date("Y-m-d") %}
+                    aujourd'hui
+                    {% elseif years > 0 %}
+                    il y a {{ years }} {{ years > 1 ? 'ans' : 'an' }}
+                    {% elseif months > 0 %}
+                    il y a {{ months }} mois
+                    {% elseif days > 1 %}
+                    il y a {{ days }} jours
+                    {% else %}
+                    hier
+                    {% endif %}
+                </p>
+
+                {# on utilise le template de pokemonCard pour afficher les captures #}
+                {% include '.custom/pokemonCard.html.twig' %}
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    <i class="fa-solid fa-circle-arrow-right arrow arrow-right"></i>
+</section>
+
+
+
+
 {% endblock %}
