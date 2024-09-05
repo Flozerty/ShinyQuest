@@ -64,3 +64,35 @@
 .intro {
   text-align: center;
 }
+
+#home-head {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-color);
+  align-self: center;
+  width: 100vw;
+  height: fit-content;
+  box-shadow: inset 0px 0px 50px 100px var(--background-color);
+}
+
+#home-head-back-img {
+  align-self: flex-start;
+  width: 100%;
+
+  flex-shrink: 1;
+  opacity: 0.08;
+}
+
+#home-head-overlay {
+  position: absolute;
+
+}
+
+@media screen and (min-width: 1200px) {
+  #home-head {
+    /* side-nav 300px & scrollbar 10px */
+    width: calc(100vw - 310px);
+  }
+}

@@ -30,7 +30,6 @@ class HomeController extends AbstractController
       $captures = $captureRepository->findBy(['termine' => 1], ["dateCapture" => "DESC"], 10);
 
       return $this->render('home/homeDisconnected.html.twig', [
-        "page_title" => "Bienvenue sur SHINYQUEST",
         "captures" => $captures,
         "pika" => true,
       ]);

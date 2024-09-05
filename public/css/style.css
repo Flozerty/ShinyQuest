@@ -294,7 +294,7 @@ iframe {
   position: fixed;
   top: 100%;
   left: 100%;
-  width: 30%;
+  width: 300px;
   height: auto;
   transition: 0.5s;
 }
