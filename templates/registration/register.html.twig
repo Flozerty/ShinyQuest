@@ -28,6 +28,8 @@ label: 'Password'
     <input type="checkbox" name="_remember_me" id="_remember_me">
 </div>
 
+<p class="login-register-redirects">Déjà un compte? <a href="{{path('app_login')}}">Connecte-toi ici!</a></p>
+
 <button type="submit" class="btn">S'enregistrer</button>
 {{ form_end(registrationForm) }}
 {% endblock %}

@@ -64,6 +64,13 @@ main form {
     cursor: pointer;
   }
 
+  .login-register-redirects {
+      margin-top: 10px;
+      a {
+      color: var(--primary-color);
+    }
+  }
+
   #forgot-password {
     align-self: flex-end;
     text-decoration: underline;

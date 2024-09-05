@@ -23,11 +23,10 @@
     {% endif %}
 
     <label for="inputPseudo">Pseudo</label>
-    <input type="pseudo" value="{{ last_username }}" name="pseudo" id="inputPseudo" class="form-control"
-        autocomplete="pseudo" required autofocus>
+    <input type="pseudo" value="{{ last_username }}" name="pseudo" id="inputPseudo" autocomplete="pseudo" required
+        autofocus>
     <label for="inputPassword">Mot de passe</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password"
-        required>
+    <input type="password" name="password" id="inputPassword" autocomplete="current-password" required>
 
     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
@@ -35,8 +34,9 @@
         <label for="_remember_me">Se souvenir de moi</label>
         <input type="checkbox" name="_remember_me" id="_remember_me">
     </div>
-<a href="/reset-password" id="forgot-password">mot de passe oublié ?</a>
-    <button class="btn btn-lg btn-primary" type="submit">
+    <a href="/reset-password" id="forgot-password">mot de passe oublié ?</a>
+    <p class="login-register-redirects">Nouveau? <a href="{{path('app_register')}}">Créais un compte ici!</a></p>
+    <button type="submit">
         Connexion
     </button>
 </form>
