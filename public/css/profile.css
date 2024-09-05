@@ -159,9 +159,10 @@ main span {
     background-color: var(--background-color);
   }
 
-  .del-account-btn {
+  .delete-account-button {
     color: var(--red-main);
     border-color: var(--red-main);
+    background-color: transparent;
   }
 }
 

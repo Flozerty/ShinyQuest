@@ -9,6 +9,7 @@
 
 {% block javascripts %}
 <script src="{{asset('js/profileScripts.js')}}"></script>
+<script src="{{asset('js/modalsDelete.js')}}"></script>
 {% endblock %}
 
 {% block body %}
@@ -21,7 +22,8 @@
 <section id="edit-account">
     <button id="change-avatar-button">changer l'avatar</button>
     <a id="change-password-button" href="/reset-password">changer de mot de passe</a>
-    <a href="{{path('delete_account')}}" class="del-account-btn">supprimer mon compte</a>
+
+    <button class="delete-account-button">supprimer mon compte</button>
 </section>
 {% endif %}
 
@@ -93,8 +95,7 @@
     {% set counter = 0 %}
     {% for capture in capturesTermine %}
 
-    {% if counter < 5 %} 
-        <p class="activity-capture">
+    {% if counter < 5 %} <p class="activity-capture">
         {{ capture.dateCapture|date('d/m/Y') }} : &nbsp;
         <span>{{ capture.user.pseudo }}</span> &nbsp; a trouvé &nbsp;<img src="{{capture.imgShiny}}"
             alt="{{capture.nomPokemon}} shiny"> <span>{{
@@ -117,19 +118,36 @@
 <dialog id="avatarDialog">
     <div class="dialog-content">
 
-            <figure id="avatar-preview">
-                <img src="{{user.avatar ? asset('img/avatars/' ~ user.avatar) : asset('img/unknown_user.png') }}" alt="avatar de {{app.user}}" id="avatar-image">
-            </figure>
+        <figure id="avatar-preview">
+            <img src="{{user.avatar ? asset('img/avatars/' ~ user.avatar) : asset('img/unknown_user.png') }}"
+                alt="avatar de {{app.user}}" id="avatar-image">
+        </figure>
 
-            {{ form_start(formAvatar) }}
-            {{ form_row(formAvatar.avatar) }}
-                <div class="modalNav">
-                    <button type="submit">
-                        <i class="fa-solid fa-circle-check"></i>
-                    </button>
-                        <i class="cancel fa-solid fa-circle-xmark"></i>
-                </div>
-            {{ form_end(formAvatar) }}
+        {{ form_start(formAvatar) }}
+        {{ form_row(formAvatar.avatar) }}
+        <div class="modalNav">
+            <button type="submit">
+                <i class="fa-solid fa-circle-check"></i>
+            </button>
+            <i class="cancel fa-solid fa-circle-xmark"></i>
+        </div>
+        {{ form_end(formAvatar) }}
+    </div>
+</dialog>
+
+<dialog id="delete-account-modal">
+    <div class="dialog-content">
+        <h3>Etes vous sûr de vouloir supprimer votre compte ?</h3>
+
+        <div class="modalNav">
+            <a class="delete-link" href="">
+                Oui, supprimer mon compte
+            </a>
+
+            <button class="cancelBtn">
+                Non, j'ai changé d'avis
+            </button>
+        </div>
     </div>
 </dialog>
 {% endif %}

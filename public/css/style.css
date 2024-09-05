@@ -121,6 +121,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 /*  */
@@ -346,6 +347,11 @@ iframe {
     padding: 5px 10px;
     border-radius: 5px;
     border: 1px solid black;
+  }
+
+  .close-btn {
+    color: var(--darkred);
+    border: none;
   }
 }
 

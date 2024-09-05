@@ -46,6 +46,17 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   }
 
+  // delete account
+  const delAccountBtn = document.querySelector(".delete-account-button"),
+    delAccountDialog = document.querySelector("#delete-account-modal");
+
+  if (delAccountBtn) {
+    delAccountBtn.addEventListener('click', () => {
+      showDialog(delAccountDialog, "account")
+      openCheck(delAccountDialog)
+    })
+  }
+
   // si on clique sur le backdrop de la modal, on veut fermer la modal
   function showDialog(dialog, type, id) {
     dialog.showModal();
@@ -53,7 +64,11 @@ document.addEventListener('DOMContentLoaded', function () {
       cancelButton = dialog.querySelector(".cancelBtn");
 
     const validateLink = dialog.querySelector(".delete-link");
-    validateLink.href = `/${type}/${id}/delete`
+    if (type == "account") {
+      validateLink.href = `/user/delete`
+    } else {
+      validateLink.href = `/${type}/${id}/delete`
+    }
 
     cancelButton.addEventListener("click", () => {
       if (dialog.open) {
