@@ -75,7 +75,7 @@ if (pikaRun) {
   setInterval(checkVisibility, 100)
 }
 
-///////////////////////////// lucario dance /////////////////////////////
+///////////////////////////// lucario dance ///////////////////////////
 const lucarioContainer = document.querySelector("#pokemon-dance");
 let inactivityTimeout;
 let animationInterval;
@@ -103,3 +103,128 @@ document.addEventListener("mousedown", resetTimeout);
 document.addEventListener("keypress", resetTimeout);
 document.addEventListener("touchstart", resetTimeout);
 resetTimeout();
+
+////////////////////////// header profile nav ////////////////////////
+const main = document.querySelector("#main-wrapper"),
+  profileNav = document.querySelector('#profile-nav'),
+  userContainer = document.querySelector('#header-profile'),
+  caret = document.querySelector("#profile-caret"),
+  header = document.querySelector("header");
+
+if (userContainer) {
+  show = false;
+  displayers = [caret, userContainer];
+
+  // montrer / cacher la profile-nav 
+  displayers.forEach(element => {
+    element.addEventListener('click', () => {
+      if (show) {
+        hideProfileNav()
+      } else {
+        showProfileNav()
+      }
+    })
+  });
+
+  // retire la nav quand on clique ailleurs
+  document.addEventListener("click", (event) => {
+    if (show && !profileNav.contains(event.target) && !caret.contains(event.target) && !userContainer.contains(event.target)) {
+      hideProfileNav()
+    }
+  })
+
+  function showProfileNav() {
+    caret.style.transform = "rotate(0deg)";
+    profileNav.style.transform = "translate(0, 100%)";
+    show = true;
+  }
+
+  function hideProfileNav() {
+    caret.style.transform = "rotate(-90deg)";
+    profileNav.style.transform = "translate(170%, 50%) rotate(45deg)";
+    show = false;
+  }
+}
+
+//////////////////////////// scroll listener //////////////////////////
+const scrollUp = document.querySelector('.scroller'),
+  fullHeader = document.querySelector('header'),
+  sideNav = document.querySelector('#main-side-nav'),
+  toggleNavBtn = document.querySelector('#toggle-nav-btn');
+
+let lastScrollY;
+
+window.addEventListener('scroll', () => {
+  if (this.scrollY <= 300) {
+    scrollUp.classList.add('hide-scroll')
+  } else {
+    scrollUp.classList.remove('hide-scroll')
+
+    // hide/revele header si > 300
+    if (window.scrollY > lastScrollY) {
+      fullHeader.style.transform = 'translateY(-100%)';
+      sideNav.style.top = '0';
+      sideNav.style.paddingTop = '80px';
+      toggleNavBtn.style.top = 'calc(10% + 80px)';
+    } else {
+      fullHeader.style.transform = 'translateY(0)';
+      sideNav.style.top = '80px';
+      sideNav.style.paddingTop = '0';
+      toggleNavBtn.style.top = '10%';
+    }
+    lastScrollY = window.scrollY;
+  }
+})
+
+//////////////////////////// toggle sideNav //////////////////////////
+const sideNavContainer = document.querySelector('#main-side-nav'),
+  toggleBtn = document.querySelector('#toggle-nav-btn'),
+  mainContainer = document.querySelector('main'),
+  footer = document.querySelector('footer')
+
+
+let toggleNav = false;
+
+toggleBtn.addEventListener('click', () => {
+  toggleNav = !toggleNav;
+  verifyToggle();
+})
+
+toggleBtn.addEventListener('mouseover', () => {
+  if (toggleNav) {
+    toggleBtn.style.transform = "translateX(20%) rotate(180deg)";
+  } else {
+    toggleBtn.style.transform = "translateX(80%)";
+  }
+})
+
+toggleBtn.addEventListener('mouseout', () => {
+  if (toggleNav) {
+    toggleBtn.style.transform = "translateX(40%) rotate(180deg)";
+  } else {
+    toggleBtn.style.transform = "translateX(60%)";
+  }
+})
+
+function verifyToggle() {
+  if (toggleNav) {
+    sideNavContainer.classList.add('toggle-nav');
+    sideNavContainer.classList.remove('hide-nav');
+    mainContainer.classList.add("main-blur")
+    footer.classList.add("main-blur")
+
+  } else {
+    sideNavContainer.classList.add('hide-nav');
+    sideNavContainer.classList.remove('toggle-nav');
+    mainContainer.classList.remove("main-blur")
+    footer.classList.remove("main-blur")
+  }
+}
+
+document.addEventListener('click', (event) => {
+  if (!sideNavContainer.contains(event.target) && toggleNav) {
+    toggleNav = !toggleNav;
+    toggleBtn.style.transform = "translateX(60%)";
+    verifyToggle();
+  }
+})

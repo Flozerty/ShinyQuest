@@ -1,6 +1,6 @@
-// Ajax recherche
 const searchInput = document.querySelectorAll('.search-input'),
   searchResults = document.querySelector('#search-results');
+
 let lastQuery;
 let timeout;
 
