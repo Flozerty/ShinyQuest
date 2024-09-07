@@ -9,9 +9,7 @@
 {% endblock %}
 
 {% block javascripts %}
-<script src="{{asset('js/shasseModal.js')}}"></script>
-<script src="{{asset('js/otherShasseToggleLinks.js')}}"></script>
-<script src="{{asset('js/catchPokemonSong.js')}}"></script>
+<script src="{{asset('js/shasseMain.js')}}"></script>
 <script src="{{asset('js/ajaxCompteur.js')}}"></script>
 <script src="{{asset('js/ajaxGetFormShasseData.js')}}"></script>
 <script src="{{asset('js/modalsDelete.js')}}"></script>
@@ -128,7 +126,7 @@
         </li>
 
         <li>
-          <button  class="delete-shasse-button" id="del-{{capture.id}}" aria-label="supprimer la shasse">
+          <button class="delete-shasse-button" id="del-{{capture.id}}" aria-label="supprimer la shasse">
             <i class="fa-solid fa-trash-can"></i>
           </button>
         </li>
@@ -196,19 +194,19 @@
 </dialog>
 
 <dialog id="delete-shasse-modal">
-    <div class="dialog-content">
-        <h3>Etes vous sûr de vouloir supprimer cette shasse ?</h3>
+  <div class="dialog-content">
+    <h3>Etes vous sûr de vouloir supprimer cette shasse ?</h3>
 
-        <div class="modalNav">
-            <a class="delete-link" href="">
-                Oui, supprimer la shasse
-            </a>
+    <div class="modalNav">
+      <a class="delete-link" href="">
+        Oui, supprimer la shasse
+      </a>
 
-            <button class="cancelBtn">
-                Non, j'ai changé d'avis
-            </button>
-        </div>
+      <button class="cancelBtn">
+        Non, j'ai changé d'avis
+      </button>
     </div>
+  </div>
 </dialog>
 
 {% endblock %}
