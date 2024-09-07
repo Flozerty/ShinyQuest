@@ -1,5 +1,21 @@
+const
+  pikaRun = document.getElementById('pika-run'),
+  lucarioContainer = document.querySelector("#pokemon-dance"),
+  main = document.querySelector("#main-wrapper"),
+  mainContainer = document.querySelector('main'),
+  header = document.querySelector("header"),
+  messagerieContainers = document.querySelectorAll('.messagerie-header-link'),
+  profileNav = document.querySelector('#profile-nav'),
+  userContainer = document.querySelector('#header-profile'),
+  caret = document.querySelector("#profile-caret"),
+  sideNav = document.querySelector('#main-side-nav'),
+  toggleNavBtn = document.querySelector('#toggle-nav-btn'),
+  scrollUp = document.querySelector('.scroller'),
+  footer = document.querySelector('footer');
+
+///////////////////////////////////////////////////////////////////////
 ////////////////////////// Nouveaux Messages //////////////////////////
-const messagerieContainers = document.querySelectorAll('.messagerie-header-link');
+///////////////////////////////////////////////////////////////////////
 if (messagerieContainers[0]) {
   // chercher les nouveaux messages
   fetch('/newMessages')
@@ -20,7 +36,9 @@ if (messagerieContainers[0]) {
     .catch(error => console.error('Erreur lors du chargement des nouveaux messages :', error));
 }
 
+///////////////////////////////////////////////////////////////////////
 /////////////////////// Initialistaion couleurs ///////////////////////
+///////////////////////////////////////////////////////////////////////
 function changeSelectedBall() {
   const imgBall = document.querySelectorAll('.capture-ball-img')
   let selectedBall = localStorage.getItem('colorSelection')
@@ -43,9 +61,9 @@ function changeSelectedBall() {
 
 changeSelectedBall();
 
+///////////////////////////////////////////////////////////////////////
 /////////////////////////////// PikaRun ///////////////////////////////
-const pikaRun = document.getElementById('pika-run');
-
+///////////////////////////////////////////////////////////////////////
 if (pikaRun) {
   const inputs = document.querySelectorAll('input');
 
@@ -75,8 +93,9 @@ if (pikaRun) {
   setInterval(checkVisibility, 100)
 }
 
+///////////////////////////////////////////////////////////////////////
 ///////////////////////////// lucario dance ///////////////////////////
-const lucarioContainer = document.querySelector("#pokemon-dance");
+///////////////////////////////////////////////////////////////////////
 let inactivityTimeout;
 let animationInterval;
 
@@ -104,13 +123,9 @@ document.addEventListener("keypress", resetTimeout);
 document.addEventListener("touchstart", resetTimeout);
 resetTimeout();
 
-////////////////////////// header profile nav ////////////////////////
-const main = document.querySelector("#main-wrapper"),
-  profileNav = document.querySelector('#profile-nav'),
-  userContainer = document.querySelector('#header-profile'),
-  caret = document.querySelector("#profile-caret"),
-  header = document.querySelector("header");
-
+///////////////////////////////////////////////////////////////////////
+////////////////////////// header profile nav /////////////////////////
+///////////////////////////////////////////////////////////////////////
 if (caret) {
   show = false;
   displayers = [caret, userContainer];
@@ -148,12 +163,9 @@ if (caret) {
   }
 }
 
+///////////////////////////////////////////////////////////////////////
 //////////////////////////// scroll listener //////////////////////////
-const scrollUp = document.querySelector('.scroller'),
-  fullHeader = document.querySelector('header'),
-  sideNav = document.querySelector('#main-side-nav'),
-  toggleNavBtn = document.querySelector('#toggle-nav-btn');
-
+///////////////////////////////////////////////////////////////////////
 let lastScrollY;
 
 window.addEventListener('scroll', () => {
@@ -164,12 +176,12 @@ window.addEventListener('scroll', () => {
 
     // hide/revele header si > 300
     if (window.scrollY > lastScrollY) {
-      fullHeader.style.transform = 'translateY(-100%)';
+      header.style.transform = 'translateY(-100%)';
       sideNav.style.top = '0';
       sideNav.style.paddingTop = '80px';
       toggleNavBtn.style.top = 'calc(10% + 80px)';
     } else {
-      fullHeader.style.transform = 'translateY(0)';
+      header.style.transform = 'translateY(0)';
       sideNav.style.top = '80px';
       sideNav.style.paddingTop = '0';
       toggleNavBtn.style.top = '10%';
@@ -178,55 +190,51 @@ window.addEventListener('scroll', () => {
   }
 })
 
-//////////////////////////// toggle sideNav //////////////////////////
-const sideNavContainer = document.querySelector('#main-side-nav'),
-  toggleBtn = document.querySelector('#toggle-nav-btn'),
-  mainContainer = document.querySelector('main'),
-  footer = document.querySelector('footer')
-
-
+///////////////////////////////////////////////////////////////////////
+//////////////////////////// toggle sideNav ///////////////////////////
+///////////////////////////////////////////////////////////////////////
 let toggleNav = false;
 
-toggleBtn.addEventListener('click', () => {
+toggleNavBtn.addEventListener('click', () => {
   toggleNav = !toggleNav;
   verifyToggle();
 })
 
-toggleBtn.addEventListener('mouseover', () => {
+toggleNavBtn.addEventListener('mouseover', () => {
   if (toggleNav) {
-    toggleBtn.style.transform = "translateX(20%) rotate(180deg)";
+    toggleNavBtn.style.transform = "translateX(20%) rotate(180deg)";
   } else {
-    toggleBtn.style.transform = "translateX(80%)";
+    toggleNavBtn.style.transform = "translateX(80%)";
   }
 })
 
-toggleBtn.addEventListener('mouseout', () => {
+toggleNavBtn.addEventListener('mouseout', () => {
   if (toggleNav) {
-    toggleBtn.style.transform = "translateX(40%) rotate(180deg)";
+    toggleNavBtn.style.transform = "translateX(40%) rotate(180deg)";
   } else {
-    toggleBtn.style.transform = "translateX(60%)";
+    toggleNavBtn.style.transform = "translateX(60%)";
   }
 })
 
 function verifyToggle() {
   if (toggleNav) {
-    sideNavContainer.classList.add('toggle-nav');
-    sideNavContainer.classList.remove('hide-nav');
+    sideNav.classList.add('toggle-nav');
+    sideNav.classList.remove('hide-nav');
     mainContainer.classList.add("main-blur")
     footer.classList.add("main-blur")
 
   } else {
-    sideNavContainer.classList.add('hide-nav');
-    sideNavContainer.classList.remove('toggle-nav');
+    sideNav.classList.add('hide-nav');
+    sideNav.classList.remove('toggle-nav');
     mainContainer.classList.remove("main-blur")
     footer.classList.remove("main-blur")
   }
 }
 
 document.addEventListener('click', (event) => {
-  if (!sideNavContainer.contains(event.target) && toggleNav) {
+  if (!sideNav.contains(event.target) && toggleNav) {
     toggleNav = !toggleNav;
-    toggleBtn.style.transform = "translateX(60%)";
+    toggleNavBtn.style.transform = "translateX(60%)";
     verifyToggle();
   }
 })
