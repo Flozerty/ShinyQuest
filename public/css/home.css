@@ -91,12 +91,36 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: inset 0px 0px 50px 100px var(--background-color);
 }
 
 @media screen and (min-width: 1200px) {
   #home-head {
     /* side-nav 300px & scrollbar 10px */
     width: calc(100vw - 310px);
+  }
+
+}
+
+@media screen and (min-width: 900px) {
+  #home-head-overlay {
+    box-shadow: inset 0px 0px 50px 100px var(--background-color);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #home-head-overlay {
+    box-shadow: inset 0px 0px 50px 70px var(--background-color);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #home-head-overlay {
+    box-shadow: inset 0px 0px 50px 50px var(--background-color);
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #home-head-overlay {
+    box-shadow: inset 0px 0px 50px 20px var(--background-color);
   }
 }

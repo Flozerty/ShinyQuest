@@ -113,7 +113,6 @@
         </figure>
 
       </div>
-      <i id="profile-caret" class="fa-solid fa-caret-down"></i>
 
       {% else %}
       <ul>
@@ -121,6 +120,8 @@
         <li><a class="nav-link" href="{{ path('app_login') }}">Connexion</a></li>
       </ul>
       {% endif %}
+      <i id="profile-caret" class="fa-solid fa-caret-down"></i>
+
     </nav>
 
 
@@ -137,6 +138,7 @@
       {# <li class="profile-link"><a class="nav-link" href="">Forum</a></li> #}
 
       <li><a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a></li>
+      {% endif %}
 
       <form id="search-profile" action="">
         <div class="search-img-container"></div>
@@ -167,7 +169,6 @@
         <div class="toggle-button"></div>
       </div>
 
-      {% endif %}
     </ul>
 
     <div id="search-results"></div>

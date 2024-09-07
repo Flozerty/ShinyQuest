@@ -111,24 +111,26 @@ const main = document.querySelector("#main-wrapper"),
   caret = document.querySelector("#profile-caret"),
   header = document.querySelector("header");
 
-if (userContainer) {
+if (caret) {
   show = false;
   displayers = [caret, userContainer];
 
   // montrer / cacher la profile-nav 
   displayers.forEach(element => {
-    element.addEventListener('click', () => {
-      if (show) {
-        hideProfileNav()
-      } else {
-        showProfileNav()
-      }
-    })
+    if (element) {
+      element.addEventListener('click', () => {
+        if (show) {
+          hideProfileNav()
+        } else {
+          showProfileNav()
+        }
+      })
+    }
   });
 
   // retire la nav quand on clique ailleurs
   document.addEventListener("click", (event) => {
-    if (show && !profileNav.contains(event.target) && !caret.contains(event.target) && !userContainer.contains(event.target)) {
+    if (show && !profileNav.contains(event.target) && !caret.contains(event.target) && (userContainer ? !userContainer.contains(event.target) : true)) {
       hideProfileNav()
     }
   })
