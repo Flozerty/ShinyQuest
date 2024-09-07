@@ -74,7 +74,6 @@
   align-self: center;
   width: 100vw;
   height: fit-content;
-  box-shadow: inset 0px 0px 50px 100px var(--background-color);
 }
 
 #home-head-back-img {
@@ -82,12 +81,17 @@
   width: 100%;
 
   flex-shrink: 1;
-  opacity: 0.08;
+  opacity: 0.2;
 }
 
 #home-head-overlay {
   position: absolute;
-
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0px 0px 50px 100px var(--background-color);
 }
 
 @media screen and (min-width: 1200px) {
