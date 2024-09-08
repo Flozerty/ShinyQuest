@@ -149,10 +149,47 @@ class ApiHttpClient extends AbstractController
         ];
     }
     // dd($allPokemons);
-
     return $allPokemons;
   }
 
+  // récupération de toutes les générations
+  public function getAllGenerations()
+  {
+    $generationsIds = [];
+
+    $response = $this->httpClient->request('GET', "generation");
+    $generations = $response->toArray()["results"];
+    foreach ($generations as $key => $generation) {
+      $generationsIds[] = $key + 1;
+    }
+    // dd($generationsIds);
+    return $generationsIds;
+  }
+
+  // récupération des infos d'une seule génération
+  public function getPokemonsByGeneration($id)
+  {
+    $allPokemons = [];
+
+    $response = $this->httpClient->request('GET', "https://tyradex.vercel.app/api/v1/gen/$id");
+    $pokemons = $response->toArray();
+
+    foreach ($pokemons as $pokemon) {
+      $allPokemons[] =
+        [
+          'pokedex_id' => $pokemon["pokedex_id"],
+          'generation' => $pokemon["generation"],
+          'name' => $pokemon['name']['fr'],
+          'spriteN' => 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' . $pokemon["pokedex_id"] . '.png',
+          'spriteS' => 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/' . $pokemon["pokedex_id"] . '.png',
+          'types' => $pokemon["types"],
+        ];
+    }
+    // dd($allPokemons);
+    return $allPokemons;
+  }
+
+  // récupérer le nom fr du pokemon avec son id
   public function getPokemonNameById($id)
   {
     $response = $this->httpClient->request('GET', "https://tyradex.vercel.app/api/v1/pokemon/$id");

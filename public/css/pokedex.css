@@ -1,3 +1,17 @@
+section {
+  margin: 10px 0 20px 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#generation-select {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--primary-color);
+}
+
 #pokedex-content {
   display: flex;
   justify-content: center;

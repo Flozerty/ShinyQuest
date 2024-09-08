@@ -23,13 +23,16 @@ class ApiController extends AbstractController
   public function pokedex(ApiHttpClient $apiHttpClient): Response
   {
     $pokemons = $apiHttpClient->getPokedex();
+    $generationsIds = $apiHttpClient->getAllGenerations();
     return $this->render('api/pokedex.html.twig', [
       "page_title" => 'Recherche par Pokédex',
       'allPokemons' => $pokemons,
+      "generations" => $generationsIds,
       "pika" => true,
     ]);
   }
 
+  // récupération de tous les pokemons
   #[Route('/api/pokemons', name: 'all_pokemons')]
   public function getPokemons(ApiHttpClient $apiHttpClient): Response
   {
@@ -38,6 +41,7 @@ class ApiController extends AbstractController
     return $this->json($pokemons);
   }
 
+  // récupération de tous les jeux
   #[Route('/api/games', name: 'all_games')]
   public function getGames(ApiHttpClient $apiHttpClient): Response
   {
@@ -45,10 +49,10 @@ class ApiController extends AbstractController
     return $this->json($games);
   }
 
+  // page du shinydex
   #[Route('/{pseudo}/shinydex', name: 'app_shinydex')]
   public function shinydex(ApiHttpClient $apiHttpClient, User $user, CaptureRepository $captureRepository, UserRepository $userRepository): Response
   {
-    // Get tous les pokemons
     $pokemons = $apiHttpClient->getPokedex();
 
     // tous les pokemons capturés par l'user
@@ -88,11 +92,28 @@ class ApiController extends AbstractController
     return new JsonResponse($data);
   }
 
+  // récupération de toutes les balls
   #[Route('/api/balls', name: 'api_balls', methods: ['GET'])]
   public function getBalls(ApiHttpClient $apiHttpClient): JsonResponse
   {
     $balls = $apiHttpClient->getAllBalls();
     return new JsonResponse($balls);
+  }
+
+  // récupération des pokémons d'une génération
+  #[Route('/api/generation/{id}', name: 'generation_pokemons')]
+  public function getGenerationPokemons(ApiHttpClient $apiHttpClient, int $id): Response
+  {
+    $pokemons = $apiHttpClient->getPokemonsByGeneration($id);
+
+    $html = '';
+    foreach ($pokemons as $pokemon) {
+      $html .= $this->renderView('.custom/pokedexCard.html.twig', [
+        'pokemon' => $pokemon,
+      ]);
+    }
+
+    return $this->json(['html' => $html]);
   }
 
   ///////////////////////////////////////////////////////////////////////////////

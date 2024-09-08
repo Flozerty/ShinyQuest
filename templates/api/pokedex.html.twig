@@ -15,6 +15,7 @@ Pokédex
 {% block javascripts %}
 <script src="{{asset('js/pokedexSpriteDisplay.js')}}"></script>
 <script src="{{asset('js/searchPokemon.js')}}"></script>
+<script src="{{asset('js/ajaxPokedexFilter.js')}}"></script>
 {% endblock %}
 
 {% block body %}
@@ -55,6 +56,19 @@ Pokédex
   <div class="search-img-container"></div>
   <input type="text" id="searchPokemons" placeholder="Rechercher un Pokémon...">
 </div>
+
+<section id="generation-select">
+  <div>
+    <input type="radio" id="all" name="generation" value="all" checked />
+    <label for="all">all</label>
+  </div>
+  {% for generation in generations %}
+  <div>
+    <input type="radio" id="{{generation}}" name="generation" value="{{generation}}" />
+    <label for="{{generation}}">{{generation}}</label>
+  </div>
+  {% endfor %}
+</section>
 
 <div id="pokedex-content">
   {% for pokemon in allPokemons %}
