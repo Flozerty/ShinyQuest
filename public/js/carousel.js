@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       let translateValue = 0
 
-      // Valeur de translateX en fonction de la width du 1er enfant (card)
-      const widthValue = cardsContainer.children[0].offsetWidth + 10,
+      // Valeur de translateX en fonction de la width du 1er enfant (card) + margin left/right + gap
+      const widthValue = cardsContainer.children[0].offsetWidth + 10 + 10,
         carouselWidth = widthValue * cardsContainer.children.length,
         containerWidth = cardsContainer.offsetWidth;
 
