@@ -1,17 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const radios = document.querySelectorAll('input[name="generation"]'),
-    isShinyDex = document.querySelector('#dex-completion') ? true : false;
+  const radios = document.querySelectorAll('input[name="generation"]');
+
 
   radios.forEach(radio => {
     radio.addEventListener('change', function () {
-      const generationId = this.value;
-      const pokedexContent = document.getElementById('pokedex-content');
+      const generationId = this.value,
+        title = document.querySelector('h1').innerText,
+        pokedexContent = document.getElementById('pokedex-content');
+
       pokedexContent.innerHTML = "";
 
-      // shinydex
-      if (isShinyDex) {
-        user = "Flozerty";
+      // récupération du pseudo User dans le h1
+      const user = title.split('Shinydex de ')[1]
+      console.log(user)
 
+      // shinydex
+      if (user) {
         if (generationId == "all") {
           fetch(`/${user}/shinydex/all`)
             .then(response => response.json())
