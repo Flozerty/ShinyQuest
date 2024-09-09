@@ -32,6 +32,95 @@ class ApiController extends AbstractController
     ]);
   }
 
+  // page du shinydex
+  #[Route('/{pseudo}/shinydex', name: 'app_shinydex')]
+  public function shinydex(ApiHttpClient $apiHttpClient, User $user, CaptureRepository $captureRepository, UserRepository $userRepository): Response
+  {
+    $pokemons = $apiHttpClient->getPokedex();
+    $generationsIds = $apiHttpClient->getAllGenerations();
+
+    // tous les pokemons capturés par l'user
+    $pokemonsCaptured = $captureRepository->findBy(['user' => $user->getId(), 'termine' => true]);
+    $capturedPokemonIds = [];
+
+    foreach ($pokemonsCaptured as $pokemon) {
+      $pokemonId = $pokemon->getPokedexId();
+
+      // on récupère les ids des pokemons capturés et leur nombre de captures
+      isset($capturedPokemonIds[$pokemonId]) ? $capturedPokemonIds[$pokemonId] = $capturedPokemonIds[$pokemonId] + 1 : $capturedPokemonIds[$pokemonId] = 1;
+    }
+
+    return $this->render('api/pokedex.html.twig', [
+      "page_title" => 'Shinydex de ' . $user->getPseudo(),
+      'allPokemons' => $pokemons,
+      // on récupère les clés du tableau d'IDs.
+      'capturedPokemonIds' => $capturedPokemonIds,
+      "generations" => $generationsIds,
+      "dresseur" => $user,
+    ]);
+  }
+
+  // pokedex des pokémons d'une génération
+  #[Route('/pokedex/generation/{id}', name: 'generation_pokedex')]
+  public function getGenerationPokemons(ApiHttpClient $apiHttpClient, int $id): Response
+  {
+    $pokemons = $apiHttpClient->getPokemonsByGeneration($id);
+    $html = '';
+    foreach ($pokemons as $pokemon) {
+      $html .=
+        '<a href="/pokemon/' . $pokemon['pokedex_id'] . '">' .
+        $this->renderView('.custom/pokedexCard.html.twig', ['pokemon' => $pokemon,]) .
+        '</a>';
+    }
+
+    return $this->json(['html' => $html]);
+  }
+
+  // pokedex entier en json
+  #[Route('/pokedex/all', name: 'pokedex_all')]
+  public function pokedexJson(ApiHttpClient $apiHttpClient): Response
+  {
+    $pokemons = $apiHttpClient->getPokedex();
+    $html = '';
+    foreach ($pokemons as $pokemon) {
+      $html .=
+        '<a href="/pokemon/' . $pokemon['pokedex_id'] . '">' .
+        $this->renderView('.custom/pokedexCard.html.twig', ['pokemon' => $pokemon,]) .
+        '</a>';
+    }
+
+    return $this->json(['html' => $html]);
+  }
+
+  // shinydex des pokémons d'une génération
+  #[Route('/{pseudo}/shinydex/generation/{id}', name: 'generation_shinydex')]
+  public function getGenerationShinydex(ApiHttpClient $apiHttpClient, UserRepository $userRepository, string $pseudo, int $id, CaptureRepository $captureRepository): Response
+  {
+    $pokemons = $apiHttpClient->getPokemonsByGeneration($id);
+    $user = $userRepository->findOneBy(['pseudo' => $pseudo]);
+    $pokemonsCaptured = $captureRepository->findBy(['user' => $user, 'termine' => true]);
+
+    $capturedPokemonIds = [];
+    foreach ($pokemonsCaptured as $pokemon) {
+      $pokemonId = $pokemon->getPokedexId();
+      // on récupère les ids des pokemons capturés et leur nombre de captures
+      isset($capturedPokemonIds[$pokemonId]) ? $capturedPokemonIds[$pokemonId] = $capturedPokemonIds[$pokemonId] + 1 : $capturedPokemonIds[$pokemonId] = 1;
+    }
+
+    $html = '';
+    foreach ($pokemons as $pokemon) {
+      $html .= $this->renderView('.custom/pokedexCard.html.twig', [
+        'pokemon' => $pokemon,
+        'capturedPokemonIds' => $capturedPokemonIds,
+      ]);
+    }
+    return $this->json(['html' => $html]);
+  }
+
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+
   // récupération de tous les pokemons
   #[Route('/api/pokemons', name: 'all_pokemons')]
   public function getPokemons(ApiHttpClient $apiHttpClient): Response
@@ -47,33 +136,6 @@ class ApiController extends AbstractController
   {
     $games = $apiHttpClient->getAllGamesVersions();
     return $this->json($games);
-  }
-
-  // page du shinydex
-  #[Route('/{pseudo}/shinydex', name: 'app_shinydex')]
-  public function shinydex(ApiHttpClient $apiHttpClient, User $user, CaptureRepository $captureRepository, UserRepository $userRepository): Response
-  {
-    $pokemons = $apiHttpClient->getPokedex();
-
-    // tous les pokemons capturés par l'user
-    $pokemonsCaptured = $captureRepository->findBy(['user' => $user->getId(), 'termine' => true]);
-    $capturedPokemonIds = [];
-
-    foreach ($pokemonsCaptured as $pokemon) {
-      $pokemonId = $pokemon->getPokedexId();
-
-      // on récupère les ids des pokemons capturés et leur nombre de captures
-      isset($capturedPokemonIds[$pokemonId]) ? $capturedPokemonIds[$pokemonId] = $capturedPokemonIds[$pokemonId] + 1 : $capturedPokemonIds[$pokemonId] = 1;
-    }
-    // dd($capturedPokemonIds);
-
-    return $this->render('api/pokedex.html.twig', [
-      "page_title" => 'Shinydex de ' . $user->getPseudo(),
-      'allPokemons' => $pokemons,
-      // on récupère les clés du tableau d'IDs.
-      'capturedPokemonIds' => $capturedPokemonIds,
-      "dresseur" => $user,
-    ]);
   }
 
   // Page de détails d'un pokémon
@@ -98,22 +160,6 @@ class ApiController extends AbstractController
   {
     $balls = $apiHttpClient->getAllBalls();
     return new JsonResponse($balls);
-  }
-
-  // récupération des pokémons d'une génération
-  #[Route('/api/generation/{id}', name: 'generation_pokemons')]
-  public function getGenerationPokemons(ApiHttpClient $apiHttpClient, int $id): Response
-  {
-    $pokemons = $apiHttpClient->getPokemonsByGeneration($id);
-
-    $html = '';
-    foreach ($pokemons as $pokemon) {
-      $html .= $this->renderView('.custom/pokedexCard.html.twig', [
-        'pokemon' => $pokemon,
-      ]);
-    }
-
-    return $this->json(['html' => $html]);
   }
 
   ///////////////////////////////////////////////////////////////////////////////
