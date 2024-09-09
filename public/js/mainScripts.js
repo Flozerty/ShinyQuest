@@ -33,7 +33,6 @@ if (messagerieContainers[0]) {
         console.log('pas de nouveaux messages')
       }
     })
-    .catch(error => console.error('Erreur lors du chargement des nouveaux messages :', error));
 }
 
 ///////////////////////////////////////////////////////////////////////
