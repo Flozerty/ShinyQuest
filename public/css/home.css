@@ -1,3 +1,21 @@
+h1 {
+  font-size: 3rem;
+  line-height: 5rem;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+section {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#explanations {
+  margin: 100px 0;
+}
+
 #my-actives {
   display: flex;
   flex-wrap: wrap;
@@ -81,7 +99,7 @@
   width: 100%;
 
   flex-shrink: 1;
-  opacity: 0.2;
+  opacity: 0.5;
 }
 
 #home-head-overlay {
@@ -93,12 +111,22 @@
   align-items: center;
 }
 
+#respiration {
+  margin: 50px 0;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+}
+
 @media screen and (min-width: 1200px) {
   #home-head {
     /* side-nav 300px & scrollbar 10px */
     width: calc(100vw - 310px);
   }
-
 }
 
 @media screen and (min-width: 900px) {

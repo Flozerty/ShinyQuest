@@ -21,19 +21,31 @@
     </div>
 </section>
 
-section d'explications : à la "beergarden" : section captures/shinydex sauvegardés "attrapez les tous / complétez votre
-shinyDex" /
-section suivi des shasses en cours / section messagerie et partage de captures /
-section de respiration : nb users total / total shinies trouvés / total rencontres / total shasses en cours
+<section id="explanations">
+    <div id="catchEm-explain">
+        <h2>Capturez-les tous!</h2>
+        <p>
+            Peu importe le jeu sur lequel vous jouez, quel pokémon vous cherchez, vous trouverez ici tout ce qu'il vous faut pour vous aider à mener à bien vos captures! 
+        </p>
+    </div>
+    <div id="shinydex-explain">
+        <h2>Complétez votre shinydex</h2>
+        <p>
+            Listez toutes vos captures de pokémons shiny, et gardez précieusement votre shinydex! N'attendez plus, allez tous les capturer pour le compléter!
+        </p>
+    </div>
+    <div id="captures-explain">
+        <h2>Suivez votre progression</h2>
+        vous êtes nouveau? rendez-vous dans l'onglet des shasses pour commencer!
+    </div>
+</section>
 
 <h2>Les dernières trouvailles :</h2>
 <section id="last-captures" class="carousel">
-
     <i class="fa-solid fa-circle-arrow-left arrow arrow-left"></i>
 
     <div class="carousel-wrapper">
         <div class="cards-container">
-
             {% for capture in captures %}
 
             <div class="last-capture">
@@ -66,13 +78,31 @@ section de respiration : nb users total / total shinies trouvés / total rencont
                 {% include '.custom/pokemonCard.html.twig' %}
             </div>
             {% endfor %}
-
         </div>
     </div>
     <i class="fa-solid fa-circle-arrow-right arrow arrow-right"></i>
 </section>
 
+<section id="respiration">
+    <div>
+        <h3>total de dresseurs</h3>
+        <p>{{nbUsers}}</p>
+    </div>
 
+    <div>
+        <h3>shinys trouvés</h3>
+        <p>{{nbCaptures}}</p>
+    </div>
 
+    <div>
+       <h3>total de rencontres</h3>
+        <p>{{nbRencontresTotal}}</p>
+    </div>
 
+    <div>
+        <h3>shasses en cours</h3>
+        <p>{{nbShassesActives}}</p>
+    </div>
+</section>
+section suivi des shasses en cours / section messagerie et partage de captures /
 {% endblock %}

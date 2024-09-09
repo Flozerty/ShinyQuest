@@ -61,4 +61,12 @@ class CaptureRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getTotalNbRencontres()
+    {
+        return $this->createQueryBuilder('c')
+            ->select('SUM(c.nbRencontres) as total')
+            ->getQuery()
+            ->getResult();
+    }
 }
