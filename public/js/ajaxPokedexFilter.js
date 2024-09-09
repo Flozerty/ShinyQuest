@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
       // shinydex
       if (isShinyDex) {
         user = "Flozerty";
+
         if (generationId == "all") {
           fetch(`/${user}/shinydex/all`)
             .then(response => response.json())

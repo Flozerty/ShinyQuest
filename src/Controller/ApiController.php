@@ -57,6 +57,7 @@ class ApiController extends AbstractController
       'capturedPokemonIds' => $capturedPokemonIds,
       "generations" => $generationsIds,
       "dresseur" => $user,
+      "pika" => true,
     ]);
   }
 
@@ -109,10 +110,51 @@ class ApiController extends AbstractController
 
     $html = '';
     foreach ($pokemons as $pokemon) {
-      $html .= $this->renderView('.custom/pokedexCard.html.twig', [
-        'pokemon' => $pokemon,
-        'capturedPokemonIds' => $capturedPokemonIds,
-      ]);
+      if (in_array($pokemon['pokedex_id'], array_keys($capturedPokemonIds))) {
+        $html .=
+          '<a href="/pokemon/' . $pokemon['pokedex_id'] . '">' .
+          $this->renderView('.custom/pokedexCard.html.twig', ['pokemon' => $pokemon, 'capturedPokemonIds' => $capturedPokemonIds]) .
+          '</a>';
+
+      } else {
+        $html .= $this->renderView('.custom/pokedexCard.html.twig', [
+          'pokemon' => $pokemon,
+          'capturedPokemonIds' => $capturedPokemonIds,
+        ]);
+      }
+    }
+    return $this->json(['html' => $html]);
+  }
+
+  // pokedex entier en json
+  #[Route('/{pseudo}/shinydex/all', name: 'shinydex_all')]
+  public function shinydexJson(ApiHttpClient $apiHttpClient, User $user, CaptureRepository $captureRepository): Response
+  {
+    $pokemons = $apiHttpClient->getPokedex();
+    $pokemonsCaptured = $captureRepository->findBy(['user' => $user, 'termine' => true]);
+
+    $capturedPokemonIds = [];
+    foreach ($pokemonsCaptured as $pokemon) {
+      $pokemonId = $pokemon->getPokedexId();
+      // on récupère les ids des pokemons capturés et leur nombre de captures
+      isset($capturedPokemonIds[$pokemonId]) ? $capturedPokemonIds[$pokemonId] = $capturedPokemonIds[$pokemonId] + 1 : $capturedPokemonIds[$pokemonId] = 1;
+    }
+
+    $html = '';
+    foreach ($pokemons as $pokemon) {
+
+      if (in_array($pokemon['pokedex_id'], array_keys($capturedPokemonIds))) {
+        $html .=
+          '<a href="/pokemon/' . $pokemon['pokedex_id'] . '">' .
+          $this->renderView('.custom/pokedexCard.html.twig', ['pokemon' => $pokemon, 'capturedPokemonIds' => $capturedPokemonIds]) .
+          '</a>';
+
+      } else {
+        $html .= $this->renderView('.custom/pokedexCard.html.twig', [
+          'pokemon' => $pokemon,
+          'capturedPokemonIds' => $capturedPokemonIds,
+        ]);
+      }
     }
     return $this->json(['html' => $html]);
   }
@@ -126,7 +168,6 @@ class ApiController extends AbstractController
   public function getPokemons(ApiHttpClient $apiHttpClient): Response
   {
     $pokemons = $apiHttpClient->getAllPokemons();
-
     return $this->json($pokemons);
   }
 
