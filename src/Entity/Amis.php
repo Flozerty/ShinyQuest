@@ -65,7 +65,7 @@ class Amis
         return $this;
     }
 
-    public function getStatut(): ?string
+    public function getStatut(): ?bool
     {
         return $this->statut;
     }
