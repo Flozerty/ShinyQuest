@@ -306,4 +306,9 @@ class Capture
 
         return $this;
     }
+    public function __tostring(): string
+    {
+        return $this->getNomPokemon() . ", " . $this->getNbRencontres() . " rencontres sur " . $this->getJeu() . ($this->getTermine() ? " (capturé)" : " (non capturé)");
+    }
+
 }
