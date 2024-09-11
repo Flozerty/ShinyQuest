@@ -178,55 +178,57 @@
 
     {# ////////////////Side nav//////////////// #}
     <aside id="main-side-nav" class="hide-nav">
-      <div>
-        <h3>Accueil</h3>
-        <ul>
-          <li><a class="nav-link" href="{{ path('app_home') }}">Page d'accueil</a></li>
-        </ul>
-      </div>
+      <nav id="side-wrapper">
+        <div>
+          <h3>Accueil</h3>
+          <ul>
+            <li><a class="nav-link" href="{{ path('app_home') }}">Page d'accueil</a></li>
+          </ul>
+        </div>
 
-      <div>
-        <h3>Mon suivi</h3>
-        <ul>
-          {% if app.user is not empty %}
-          <li><a class="nav-link" href="{{ path('my_shasses') }}">Mes shasses</a></li>
-          <li><a class="nav-link" href="{{ path('captures', {'pseudo' : app.user.pseudo}) }}">Mes captures</a></li>
-          <li><a class="nav-link" href="{{ path('app_shinydex', {'pseudo': app.user.pseudo}) }}">Mon shinydex</a></li>
-          {% else %}
-          <li><a class="nav-link" href="{{ path('app_login') }}">Connectez-vous</a></li>
-          {% endif %}
-        </ul>
-      </div>
+        <div>
+          <h3>Mon suivi</h3>
+          <ul>
+            {% if app.user is not empty %}
+            <li><a class="nav-link" href="{{ path('my_shasses') }}">Mes shasses</a></li>
+            <li><a class="nav-link" href="{{ path('captures', {'pseudo' : app.user.pseudo}) }}">Mes captures</a></li>
+            <li><a class="nav-link" href="{{ path('app_shinydex', {'pseudo': app.user.pseudo}) }}">Mon shinydex</a></li>
+            {% else %}
+            <li><a class="nav-link" href="{{ path('app_login') }}">Connectez-vous</a></li>
+            {% endif %}
+          </ul>
+        </div>
 
-      <div>
-        <h3>Communauté</h3>
-        <ul>
-          {% if app.user is not empty %}
-          <li><a class="nav-link" href="{{ path('app_amis') }}">Mes amis</a></li>
-          {% endif %}
+        <div>
+          <h3>Communauté</h3>
+          <ul>
+            {% if app.user is not empty %}
+            <li><a class="nav-link" href="{{ path('app_amis') }}">Mes amis</a></li>
+            {% endif %}
 
-          <li><a class="nav-link" href="{{ path('app_users') }}">Les dresseurs</a></li>
-          <li><a class="nav-link" href="" style="text-decoration:line-through">Le top des shasses</a></li>
-          <li><a class="nav-link" href="" style="text-decoration:line-through">Shasses en cours</a></li>
-          <li><a class="nav-link" href="" style="text-decoration:line-through">Forum</a></li>
-        </ul>
-      </div>
+            <li><a class="nav-link" href="{{ path('app_users') }}">Les dresseurs</a></li>
+            <li><a class="nav-link" href="" style="text-decoration:line-through">Le top des shasses</a></li>
+            <li><a class="nav-link" href="" style="text-decoration:line-through">Shasses en cours</a></li>
+            <li><a class="nav-link" href="" style="text-decoration:line-through">Forum</a></li>
+          </ul>
+        </div>
 
-      <div>
-        <h3>Général</h3>
-        <ul>
-          <li><a class="nav-link" href="{{ path('app_pokedex') }}">Recherche pokédex</a></li>
-        </ul>
-      </div>
+        <div>
+          <h3>Général</h3>
+          <ul>
+            <li><a class="nav-link" href="{{ path('app_pokedex') }}">Recherche pokédex</a></li>
+          </ul>
+        </div>
 
-      {% if app.user and is_granted('ROLE_ADMIN') %}
-      <div>
-        <h3>Admin</h3>
-        <ul>
-          <li><a class="nav-link" href="{{ path('admin') }}"><strong>Panneau Admin</strong></a></li>
-        </ul>
-      </div>
-      {% endif %}
+        {% if app.user and is_granted('ROLE_ADMIN') %}
+        <div>
+          <h3>Admin</h3>
+          <ul>
+            <li><a class="nav-link" href="{{ path('admin') }}"><strong>Panneau Admin</strong></a></li>
+          </ul>
+        </div>
+        {% endif %}
+      </nav>
 
       <i id="toggle-nav-btn" class="fa-solid fa-circle-right"></i>
     </aside>
