@@ -723,6 +723,36 @@ main {
   transition: var(--transitionTime);
   background-color: var(--background-secondary);
   backdrop-filter: blur(25px);
+  text-align: end;
+  direction: rtl;
+  /* overflow-y: auto; */
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--hover-main-color);
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar-track:hover {
+    background-color: var(--secondary-color);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    min-height: 50px;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    border: 1px solid var(--hover-main-color);
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    border: var(--primary-color);
+  }
 
   div {
     padding: 10px 30px;
@@ -757,7 +787,7 @@ main {
     font-size: 3rem;
     color: var(--primary-color);
     position: absolute;
-    top: 10%;
+    top: 10vh;
     right: 0;
     background-color: var(--cardSecondaryColor);
     cursor: pointer;

@@ -35,23 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', checkVisibility);
     checkVisibility();
 
-
-    // Formes des pokemons
-    const formsDiv = document.querySelector('#varieties'),
-        evolutionDiv = document.querySelector('#evolution');
-
-    [formsDiv, evolutionDiv].forEach(div => {
-        if (div) {
-            if (div.offsetHeight > 500) {
-                div.style.maxHeight = "500px";
-                div.style.overflowY = "scroll";
-            } else {
-                div.style.maxHeight = "none";
-                div.style.overflowY = "hidden";
-            }
-        }
-    });
-
     // cri pokemon
     const img = document.querySelector('#main-active-pkmn');
     let audio;

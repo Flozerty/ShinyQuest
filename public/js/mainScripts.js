@@ -221,12 +221,14 @@ function verifyToggle() {
     sideNav.classList.remove('hide-nav');
     mainContainer.classList.add("main-blur")
     footer.classList.add("main-blur")
+    toggleNavBtn.style.transform = "translateX(40%) rotate(180deg)";
 
   } else {
     sideNav.classList.add('hide-nav');
     sideNav.classList.remove('toggle-nav');
     mainContainer.classList.remove("main-blur")
     footer.classList.remove("main-blur")
+    toggleNavBtn.style.transform = "translateX(60%)";
   }
 }
 
