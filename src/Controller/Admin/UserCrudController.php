@@ -39,8 +39,7 @@ class UserCrudController extends AbstractCrudController
             ImageField::new(propertyName: 'avatar')->setBasePath('img/avatars/')->onlyOnIndex(),
             TextField::new(propertyName: 'avatar')->onlyOnForms(),
             BooleanField::new('ban'),
-            AssociationField::new('captures')->onlyOnIndex(),
-            ArrayField::new('captures')->onlyOnForms(),
+            AssociationField::new('captures')
         ];
     }
 }
