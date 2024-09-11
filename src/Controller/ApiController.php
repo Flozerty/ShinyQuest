@@ -105,7 +105,7 @@ class ApiController extends AbstractController
     foreach ($pokemonsCaptured as $pokemon) {
       $pokemonId = $pokemon->getPokedexId();
       // on récupère les ids des pokemons capturés et leur nombre de captures
-      isset($capturedPokemonIds[$pokemonId]) ? $capturedPokemonIds[$pokemonId] = $capturedPokemonIds[$pokemonId] + 1 : $capturedPokemonIds[$pokemonId] = 1;
+      isset($capturedPokemonIds[$pokemonId]) ? $capturedPokemonIds[$pokemonId]++ : $capturedPokemonIds[$pokemonId] = 1;
     }
 
     $html = '';
