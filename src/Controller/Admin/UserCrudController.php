@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -20,15 +21,23 @@ class UserCrudController extends AbstractCrudController
         return User::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInPlural('Dresseurs')
+            ->setEntityLabelInSingular('dresseur');
+    }
+
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('pseudo'),
+            TextField::new('pseudo')->setFormTypeOption('disabled', 'disabled'),
             ArrayField::new('roles'),
             BooleanField::new('is_verified'),
-            TextField::new('email'),
-            DateField::new('date_inscription'),
-            // ImageField::new(propertyName: 'avatar')->setBasePath('img/avatars/'),
+            TextField::new('email')->setFormTypeOption('disabled', 'disabled'),
+            DateField::new('date_inscription')->setFormTypeOption('disabled', 'disabled'),
+            ImageField::new(propertyName: 'avatar')->setBasePath('img/avatars/')->onlyOnIndex(),
+            TextField::new(propertyName: 'avatar')->onlyOnForms(),
             BooleanField::new('ban'),
             AssociationField::new('captures')->onlyOnIndex(),
             ArrayField::new('captures')->onlyOnForms(),

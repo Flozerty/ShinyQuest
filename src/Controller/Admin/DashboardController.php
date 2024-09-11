@@ -30,6 +30,7 @@ class DashboardController extends AbstractDashboardController
         ;
     }
 
+
     public function configureMenuItems(): iterable
     {
 
