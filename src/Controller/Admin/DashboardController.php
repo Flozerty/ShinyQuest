@@ -8,11 +8,13 @@ use App\Entity\MethodeCapture;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -30,12 +32,26 @@ class DashboardController extends AbstractDashboardController
         ;
     }
 
+    public function configureUserMenu(UserInterface $user): UserMenu
+    {
+        if (!$user instanceof User) {
+            throw new \Exception("Wrong User");
+        }
+
+        return parent::configureUserMenu($user)
+            ->setAvatarUrl("img/avatars/" . $user->getAvatar())
+            ->setMenuItems([
+                MenuItem::linkToUrl('Profil', '', 'my_profile')
+            ])
+        ;
+    }
+
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToCrud('Dresseurs', 'fas fa-list', User::class);
-        yield MenuItem::linkToCrud('Methodes de capture', 'fas fa-list', MethodeCapture::class);
-        yield MenuItem::linkToCrud('Captures', 'fas fa-list', Capture::class);
-        yield MenuItem::linkToCrud('Amis', 'fas fa-list', Amis::class);
-
+        yield MenuItem::linkToCrud('Dresseurs', 'fa-solid fa-user', User::class);
+        yield MenuItem::linkToCrud('Methodes de capture', 'fa-solid fa-filter', MethodeCapture::class);
+        yield MenuItem::linkToCrud('Captures', 'fa-brands fa-optin-monster', Capture::class);
+        yield MenuItem::linkToCrud('Amis', 'fa-solid fa-hand-holding-heart', Amis::class);
+        yield MenuItem::linkToUrl('Retour sur ShinyQuest', 'fa-solid fa-house-chimney', $this->generateUrl('app_home'));
     }
 }
