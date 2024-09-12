@@ -58,17 +58,21 @@ Pokédex
   <input type="text" id="searchPokemons" placeholder="Rechercher un Pokémon...">
 </div>
 
-<section id="generation-select">
-  <div>
-    <input type="radio" id="all" name="generation" value="all" checked />
-    <label for="all">all</label>
+<section id="generation">
+  <h2>Génération</h2>
+
+  <div id="generation-select">
+    <div>
+      <input type="radio" id="all" name="generation" value="all" checked />
+      <label for="all">all</label>
+    </div>
+    {% for generation in generations %}
+    <div>
+      <input type="radio" id="{{generation}}" name="generation" value="{{generation}}" />
+      <label for="{{generation}}">{{generation}}</label>
+    </div>
+    {% endfor %}
   </div>
-  {% for generation in generations %}
-  <div>
-    <input type="radio" id="{{generation}}" name="generation" value="{{generation}}" />
-    <label for="{{generation}}">{{generation}}</label>
-  </div>
-  {% endfor %}
 </section>
 
 {# display navigation #}

@@ -46,10 +46,20 @@ class ApiController extends AbstractController
 
   // page du shinydex
   #[Route('/{pseudo}/shinydex', name: 'app_shinydex')]
-  public function shinydex(ApiHttpClient $apiHttpClient, User $user, CaptureRepository $captureRepository, UserRepository $userRepository): Response
+  public function shinydex(ApiHttpClient $apiHttpClient, User $user, CaptureRepository $captureRepository, UserRepository $userRepository, Request $request, PaginatorInterface $paginator): Response
   {
     $pokemons = $apiHttpClient->getPokedex();
     $generationsIds = $apiHttpClient->getAllGenerations();
+
+    // pagination
+    $query = $pokemons;
+
+    $pagination = $paginator->paginate(
+      $query, /* query NOT result */
+      $request->query->getInt('page', 1), /*page number*/
+      100 /*limit per page*/
+    );
+
 
     // tous les pokemons capturés par l'user
     $pokemonsCaptured = $captureRepository->findBy(['user' => $user->getId(), 'termine' => true]);
@@ -67,6 +77,7 @@ class ApiController extends AbstractController
       'allPokemons' => $pokemons,
       // on récupère les clés du tableau d'IDs.
       'capturedPokemonIds' => $capturedPokemonIds,
+      'pagination' => $pagination,
       "generations" => $generationsIds,
       "dresseur" => $user,
       "pika" => true,
