@@ -196,8 +196,8 @@
           <h3>Communauté</h3>
           <ul>
             {% if app.user is not empty %}
-            <li><a class="nav-link" href="{{ path('app_amis') }}">Mes amis</a></li>
             <li><a class="nav-link" href="{{ path('messagerie') }}">Messagerie</a></li>
+            <li><a class="nav-link" href="{{ path('app_amis') }}">Mes amis</a></li>
             {% endif %}
 
             <li><a class="nav-link" href="{{ path('app_users') }}">Les dresseurs</a></li>

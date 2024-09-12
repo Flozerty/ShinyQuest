@@ -10,6 +10,7 @@ Pokédex
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{asset('css/pokedex.css')}}">
+{{ knp_pagination_rel_links(pagination) }}
 {% endblock %}
 
 {% block javascripts %}
@@ -70,8 +71,13 @@ Pokédex
   {% endfor %}
 </section>
 
+{# display navigation #}
+<div class="navigation">
+  {{ knp_pagination_render(pagination) }}
+</div>
+
 <div id="pokedex-content">
-  {% for pokemon in allPokemons %}
+  {% for pokemon in pagination %}
 
   {# shinyDex #}
   {% if capturedPokemonIds is defined %}
@@ -93,6 +99,11 @@ Pokédex
   {% endif %}
 
   {% endfor %}
+</div>
+
+{# display navigation #}
+<div class="navigation">
+  {{ knp_pagination_render(pagination) }}
 </div>
 
 {% endblock %}

@@ -30,7 +30,6 @@ class UserController extends AbstractController
         "capturedPokemonIds" => $this->getUserPokedexData($user, $captureRepository),
       ];
     }
-    // dd($usersData);
 
     // pagination
     $query = $usersData;
@@ -40,7 +39,6 @@ class UserController extends AbstractController
       $request->query->getInt('page', 1), /*page number*/
       6 /*limit per page*/
     );
-    // 
 
     $AmisByDemande = $amisRepository->findBy(["userDemande" => $this->getUser()]);
     $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()], );
@@ -82,10 +80,8 @@ class UserController extends AbstractController
     return $this->render('user/index.html.twig', [
       "page_title" => "Liste des dresseurs",
       "allPokemons" => $pokemons,
-
       'pagination' => $pagination,
       "usersData" => $usersData,
-
       "amis" => $amis,
       "demandeEnvoyee" => $demandeEnvoyee,
       "demandeRecue" => $demandeRecue,

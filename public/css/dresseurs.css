@@ -138,33 +138,3 @@ figure {
     object-position: center;
   }
 }
-
-.pagination {
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-
-  span {
-    display: flex;
-    font-weight: 600;
-    border-radius: 10px;
-    overflow: hidden;
-    cursor: pointer;
-
-    a {
-      padding: 10px;
-      background-color: var(--secondary-color);
-
-      &:hover {
-        color: var(--primary-color);
-      }
-    }
-  }
-
-  .current {
-    background-color: var(--primary-color);
-    color: var(--background-color);
-    padding: 10px;
-  }
-}
