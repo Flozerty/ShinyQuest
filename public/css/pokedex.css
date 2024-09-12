@@ -79,8 +79,9 @@
   font-weight: 600;
 }
 
-p {
+main p {
   text-align: center;
+  margin-bottom: 10px;
 }
 
 /* shinydex condition */
