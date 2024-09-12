@@ -32,7 +32,7 @@ class ApiController extends AbstractController
     $pagination = $paginator->paginate(
       $query, /* query NOT result */
       $request->query->getInt('page', 1), /*page number*/
-      20 /*limit per page*/
+      100 /*limit per page*/
     );
 
     return $this->render('api/pokedex.html.twig', [
@@ -229,16 +229,8 @@ class ApiController extends AbstractController
     if (isset($capturesByLieu[0])) {
       $bestSpots = $captureRepository->getPokemonCapturesByPlacesInGame($id, $capturesByLieu[0]["jeu"]);
     }
-    // dd([
-    //   'pokemon' => $pokemon,
-    //   'data' => $data,
-    //   'currentPokemonId' => $pokemon["pkmnStats"]["id"],
-    //   'capturesByLieu' => $capturesByLieu,
-    //   'captures' => $captures,
-    //   'bestSpots' => $bestSpots,
-    //   'pika' => true,
-    // ]);
-    return [
+
+    $result = [
       'pokemon' => $pokemon,
       'data' => $data,
       'currentPokemonId' => $pokemon["pkmnStats"]["id"],
@@ -247,5 +239,6 @@ class ApiController extends AbstractController
       'bestSpots' => $bestSpots,
       'pika' => true,
     ];
+    return $result;
   }
 }
