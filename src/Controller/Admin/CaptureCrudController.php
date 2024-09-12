@@ -32,22 +32,26 @@ class CaptureCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IntegerField::new('pokedex_id'),
-            TextField::new('nom_pokemon'),
+            IntegerField::new('pokedex_id')
+                ->onlyOnForms(),
+            TextField::new('nom_pokemon')
+                ->onlyOnForms(),
             TextField::new('surnom'),
             ImageField::new(propertyName: 'img_shiny')
                 ->onlyOnIndex(),
             TextField::new(propertyName: 'img_shiny')
                 ->onlyOnForms(),
             IntegerField::new('nb_rencontres'),
-            DateField::new('date_capture'),
             BooleanField::new('charme_chroma'),
-            AssociationField::new('methodeCapture'),
-            BooleanField::new('termine'),
             TextField::new('jeu'),
             TextField::new('lieu'),
-            TextField::new('sexe'),
-            TextField::new('ball'),
+            TextField::new('sexe')
+                ->onlyOnForms(),
+            TextField::new('ball')
+                ->onlyOnForms(),
+            BooleanField::new('termine'),
+            DateField::new('date_capture'),
+            AssociationField::new('methodeCapture'),
             AssociationField::new(propertyName: 'user'),
         ];
     }
