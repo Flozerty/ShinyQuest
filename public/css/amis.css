@@ -13,13 +13,16 @@
     }
   }
 
-  .delete-ami-button {
+  #delete-container {
     grid-column: 8;
     justify-content: center;
-    width: fit-content;
     margin: auto;
-    transition: var(--transitionTime);
-    color: var(--red-main);
+    width: fit-content;
+
+    .delete-ami-button {
+      transition: var(--transitionTime);
+      color: var(--red-main);
+    }
   }
 }
 
@@ -252,7 +255,7 @@ figure {
     grid-column: 4/7;
   }
 
-  .delete-ami-button {
+  #delete-container {
     display: none;
   }
 

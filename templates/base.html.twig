@@ -180,13 +180,6 @@
     <aside id="main-side-nav" class="hide-nav">
       <nav id="side-wrapper">
         <div>
-          <h3>Accueil</h3>
-          <ul>
-            <li><a class="nav-link" href="{{ path('app_home') }}">Page d'accueil</a></li>
-          </ul>
-        </div>
-
-        <div>
           <h3>Mon suivi</h3>
           <ul>
             {% if app.user is not empty %}
@@ -204,11 +197,10 @@
           <ul>
             {% if app.user is not empty %}
             <li><a class="nav-link" href="{{ path('app_amis') }}">Mes amis</a></li>
+            <li><a class="nav-link" href="{{ path('messagerie') }}">Messagerie</a></li>
             {% endif %}
 
             <li><a class="nav-link" href="{{ path('app_users') }}">Les dresseurs</a></li>
-            <li><a class="nav-link" href="" style="text-decoration:line-through">Le top des shasses</a></li>
-            <li><a class="nav-link" href="" style="text-decoration:line-through">Shasses en cours</a></li>
             <li><a class="nav-link" href="" style="text-decoration:line-through">Forum</a></li>
           </ul>
         </div>
@@ -217,6 +209,7 @@
           <h3>Général</h3>
           <ul>
             <li><a class="nav-link" href="{{ path('app_pokedex') }}">Recherche pokédex</a></li>
+            <li><a class="nav-link" href="" style="text-decoration:line-through">Le top des shasses</a></li>
           </ul>
         </div>
 

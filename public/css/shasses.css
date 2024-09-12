@@ -74,7 +74,6 @@
 }
 
 .others-row {
-  /* permet de disposer le contenu comme s'il était directement dans le conteneur parent */
   display: contents;
 
   &:nth-child(even)>* {
@@ -207,17 +206,17 @@
 
   @keyframes MoveRightInitial {
     to {
-      transform: translate3d(105%, 0, 0);
+      transform: translateX(105%);
     }
   }
 
   @keyframes MoveRightEnd {
     from {
-      transform: translate3d(-100%, 0, 0);
+      transform: translateX(-100%);
     }
 
     to {
-      transform: translate3d(0, 0, 0);
+      transform: translateX(0);
     }
   }
 
@@ -271,6 +270,7 @@
 /* ////////////// MEDIA QUERIES ////////////// */
 /* /////////////////////////////////////////// */
 
+/* MAX */
 @media (max-width: 700px) {
   #new-shasse {
     width: 90%;
@@ -308,6 +308,22 @@
   }
 }
 
+@media (max-width: 550px) {
+
+  p.add_suivi,
+  p.others-del-btn {
+    display: none;
+  }
+
+  .others-pokemon {
+    flex-direction: column;
+  }
+
+  #my-other-shasses {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
 @media (max-width: 500px) {
   #new-shasse {
     div {
@@ -329,6 +345,7 @@
   }
 }
 
+/* MIN */
 @media (min-width: 700px) {
   #new-shasse label {
     padding-right: 20px;
@@ -353,22 +370,6 @@
     .others-compteur {
       grid-column: 6/7;
     }
-  }
-}
-
-@media (max-width: 550px) {
-
-  p.add_suivi,
-  p.others-del-btn {
-    display: none;
-  }
-
-  .others-pokemon {
-    flex-direction: column;
-  }
-
-  #my-other-shasses {
-    grid-template-columns: repeat(6, 1fr);
   }
 }
 
