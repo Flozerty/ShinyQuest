@@ -2,7 +2,7 @@ main form {
   border: 1px solid var(--primary-color);
   border-radius: 20px;
   width: 50%;
-  min-width: 300px;
+  min-width: 331px;
   margin: auto;
   margin-top: 100px;
   padding: 20px;
@@ -116,6 +116,10 @@ main form {
 #conditions-utilisations {
   display: flex;
   align-items: center;
+
+  label {
+    flex-shrink: 0;
+  }
 
   .conditions {
     color: var(--primary-color);

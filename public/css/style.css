@@ -176,6 +176,10 @@ hr {
 .pseudo {
   font-weight: 600;
   color: var(--primary-color);
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .hidden {
@@ -361,7 +365,9 @@ dialog {
   min-width: 25%;
   max-width: 700px;
   width: fit-content;
-  border-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 20px;
+  box-shadow: var(--primary-color) 0px 2px 5px 0px;
   background-color: var(--cardColor);
   color: black;
   overflow: visible;
