@@ -229,7 +229,7 @@
     height: 100%;
 
     content: '';
-    background: var(--blue-main);
+    background: var(--primary-color);
   }
 
   .submit-btn::before {
