@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // check si le dialog est ouvert
   function openCheck(dialog) {
     if (dialog.open) {
-      body.style.filter = "blur(3px)";
+      body.style.filter = "blur(10px)";
     } else {
       body.style.filter = "";
     }
