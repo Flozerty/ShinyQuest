@@ -2,8 +2,24 @@
 
 {% block title %}Forum{% endblock %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('css/forum.css')}}">
+{% endblock %}
+
 {% block body %}
-{% for sujet in sujets %}
-<a href="{{path('sujet', {'titre': sujet.titre })}}">{{sujet.titre}}</a>
-{% endfor %}
+
+
+<section id="forumContent">
+    {% for sujet in sujets %}
+    <div class="sujet-link">
+        <a href="{{path('sujet', {'titre': sujet.titre })}}"><strong>{{sujet.titre}}</strong></a>
+        <div class="sujet-details">
+            <p>créé le {{sujet.dateCréation | date('d/m/y')}}</p>
+            <p>par <a class="pseudo" href="{{ path('profile_user', {'pseudo': sujet.user}) }}">{{sujet.user}}</a></p>
+            <p>{{sujet.posts | length}} posts</p>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
 {% endblock %}
