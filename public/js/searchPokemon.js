@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const pokemonName = card.querySelector('.pokemon-name').textContent.toLowerCase();
 
             if (pokemonName.includes(searchText)) {
-                card.style.display = 'block';
+                card.style.display = 'flex';
             } else {
                 card.style.display = 'none';
             }
