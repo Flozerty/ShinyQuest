@@ -65,9 +65,14 @@ main form {
   }
 
   .login-register-redirects {
-      margin-top: 10px;
-      a {
+    margin-top: 10px;
+
+    a {
       color: var(--primary-color);
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -101,6 +106,19 @@ main form {
   .retry-email {
     color: var(--primary-color);
     font-weight: 600;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+#conditions-utilisations {
+  display: flex;
+  align-items: center;
+
+  .conditions {
+    color: var(--primary-color);
 
     &:hover {
       text-decoration: underline;

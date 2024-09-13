@@ -360,6 +360,7 @@ dialog {
   margin: auto;
   min-width: 25%;
   max-width: 700px;
+  width: fit-content;
   border-color: var(--primary-color);
   background-color: var(--cardColor);
   color: black;
@@ -377,6 +378,7 @@ dialog {
       div {
         width: 100%;
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         margin: 10px 0;
 
@@ -403,6 +405,15 @@ dialog {
 
       input {
         justify-self: flex-end;
+      }
+
+      ul {
+        order: 1;
+
+        li {
+          color: var(--red-main);
+          font-size: 0.8rem;
+        }
       }
     }
   }

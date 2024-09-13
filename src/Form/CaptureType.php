@@ -8,8 +8,10 @@ use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 
 class CaptureType extends AbstractType
 {
@@ -17,8 +19,17 @@ class CaptureType extends AbstractType
     {
         $builder
             ->add('surnom')
-            ->add('dateCapture', null, [
+            ->add('dateCapture', DateType::class, [
                 'widget' => 'single_text',
+                'attr' => [
+                    'max' => (new \DateTime())->format('Y-m-d'), // Définir la date maximale à aujourd'hui
+                ],
+                'constraints' => [
+                    new LessThanOrEqual([
+                        'value' => 'today',
+                        'message' => 'Désolé, vos dons de voyance ne sont pas admis ici.',
+                    ])
+                ],
             ])
             ->add('sexe', ChoiceType::class, [
                 'choices' => [

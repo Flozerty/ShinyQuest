@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forum{% endblock %}
+
+{% block body %}
+{% for post in sujet.posts %}
+{{post.contenu}}
+{% endfor %}
+{% endblock %}

@@ -18,10 +18,12 @@
 {{ form_start(registrationForm) }}
 {{ form_row(registrationForm.pseudo) }}
 {{ form_row(registrationForm.email) }}
-{{ form_row(registrationForm.plainPassword, {
-label: 'Password'
-}) }}
-{{ form_row(registrationForm.agreeTerms) }}
+{{ form_row(registrationForm.plainPassword, {label: 'Password'}) }}
+
+<div id="conditions-utilisations">
+    {{ form_row(registrationForm.agreeTerms) }}
+    &nbsp;<a href='' class='conditions'>conditions d'utilisation</a>
+</div>
 
 <div class="checkbox-container">
     <label for="_remember_me">Se souvenir de moi</label>

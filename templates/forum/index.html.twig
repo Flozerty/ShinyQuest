@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forum{% endblock %}
+
+{% block body %}
+{% for sujet in sujets %}
+<a href="{{path('sujet', {'titre': sujet.titre })}}">{{sujet.titre}}</a>
+{% endfor %}
+{% endblock %}

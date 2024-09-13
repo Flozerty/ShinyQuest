@@ -84,7 +84,7 @@
       {% if app.user is defined and app.user is not empty %}
       <ul>
         <li title="Forum" class="header-link">
-          <a aria-label="accès au Forum" href="">
+          <a aria-label="accès au Forum" href="{{ path('app_forum')}}">
             <i class="fa-solid fa-comments"></i>
           </a>
         </li>
@@ -201,7 +201,7 @@
             {% endif %}
 
             <li><a class="nav-link" href="{{ path('app_users') }}">Les dresseurs</a></li>
-            <li><a class="nav-link" href="" style="text-decoration:line-through">Forum</a></li>
+            <li><a class="nav-link" href="{{ path('app_forum')}}">Forum</a></li>
           </ul>
         </div>
 
