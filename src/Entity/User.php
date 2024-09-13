@@ -72,13 +72,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Message>
      */
-    #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'userEnvoi')]
+    #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'userEnvoi', orphanRemoval: true)]
     private Collection $messagesEnvoye;
 
     /**
      * @var Collection<int, Message>
      */
-    #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'userRecoit')]
+    #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'userRecoit', orphanRemoval: true)]
     private Collection $messagesRecus;
 
     /**
