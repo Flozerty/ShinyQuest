@@ -153,7 +153,7 @@ class CaptureController extends AbstractController
   public function deleteCapture(Capture $shasse = null, EntityManagerInterface $entityManager, MessageRepository $messageRepository, CaptureRepository $captureRepository): Response
   {
     if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
-      
+
       $fakeCapture = $captureRepository->findOneBy(["id" => 1]);
       // vérification de l'existance de messages avec la capture en PJ & cahngement avec la capture factice.
       $messages = $messageRepository->getMessagesWithPj($shasse);
