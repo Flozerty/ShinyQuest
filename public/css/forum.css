@@ -7,7 +7,7 @@
   .sujet-link {
     padding: 0 20px;
     border-radius: 10px;
-    box-shadow: 5px 0 15px -10px var(--primary-color);
+    box-shadow: -5px 0 15px -10px var(--primary-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
