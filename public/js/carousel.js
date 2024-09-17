@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
       let translateValue = 0
 
       // Valeur de translateX en fonction de la width du 1er enfant (card) + margin left/right + gap
-      const widthValue = cardsContainer.children[0].offsetWidth + 10 + 10,
-        carouselWidth = widthValue * cardsContainer.children.length,
+      const widthValue = cardsContainer.children[0].offsetWidth + 10 + 10;
+      let carouselWidth = widthValue * cardsContainer.children.length,
         containerWidth = cardsContainer.offsetWidth;
 
       // affichage des fleches si besoin
@@ -23,6 +23,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // défilement à gauche
       previousButton.addEventListener("click", () => {
+        carouselWidth = widthValue * cardsContainer.children.length
+        containerWidth = cardsContainer.offsetWidth;
+
+        // affichage des fleches si besoin
+        if (carouselWidth - containerWidth > 0) {
+          nextButton.style.display = 'block'
+          previousButton.style.display = 'block'
+        }
+
         if (translateValue < 0) {
           translateValue += widthValue
           cardsContainer.style.transform = `translateX(${translateValue}px)`
@@ -31,6 +40,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // défilement à droite
       nextButton.addEventListener("click", () => {
+        carouselWidth = widthValue * cardsContainer.children.length
+        containerWidth = cardsContainer.offsetWidth;
+
+        // affichage des fleches si besoin
+        if (carouselWidth - containerWidth > 0) {
+          nextButton.style.display = 'block'
+          previousButton.style.display = 'block'
+        }
+
         // console.log(cardsContainer.offsetWidth - ((cardsContainer.children.length) * 200))
         if (translateValue > (containerWidth - carouselWidth)) {
           translateValue -= widthValue

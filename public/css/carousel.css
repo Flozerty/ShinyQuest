@@ -13,14 +13,6 @@
     display: none;
   }
 
-  .arrow-left {
-    left: -50px;
-  }
-
-  .arrow-right {
-    right: -50px;
-  }
-
   .cards-container {
     transition: var(--transitionTime);
     display: flex;
@@ -31,4 +23,34 @@
 .carousel-wrapper {
   overflow: hidden;
   width: 100%;
+}
+
+@media screen and (min-width: 900px) {
+  .carousel {
+    .arrow-left {
+      left: -50px;
+    }
+
+    .arrow-right {
+      right: -50px;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .carousel {
+    .arrow {
+      border-radius: 50%;
+      padding: 5px;
+      background-color: var(--background-color);
+    }
+
+    .arrow-left {
+      left: 10px;
+    }
+
+    .arrow-right {
+      right: 10px;
+    }
+  }
 }

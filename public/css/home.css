@@ -25,6 +25,7 @@ section {
     position: relative;
     align-items: center;
     width: 280px;
+    height: fit-content;
     background: var(--background-secondary);
     padding: 5rem .75rem 1.5rem .75rem;
     border-radius: 1.5rem;

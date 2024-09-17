@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block stylesheets %}
-  <link rel="stylesheet" href="css/home.css" />
-  <link rel="stylesheet" href="css/pkmn_card.css" />
+  <link rel="stylesheet" href="{{ asset('css/home.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/pkmn_card.css') }}" />
   <link rel="stylesheet" href="{{ asset('css/carousel.css') }}" />
 {% endblock %}
 
@@ -49,6 +49,8 @@
       <p>vous êtes nouveau? rendez-vous dans l'onglet des shasses pour commencer!</p>
     </article>
   </section>
+
+  <a href="{{ path('app_register') }}">commencez votre aventure!</a>
 
   <h2>Les dernières trouvailles :</h2>
   <section id="last-captures" class="carousel">
