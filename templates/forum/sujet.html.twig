@@ -1,19 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{sujet.titre}}{% endblock %}
+{% block title %}
+  {{ sujet.titre }}
+{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('css/forum.css') }}" />
+{% endblock %}
 
 {% block body %}
+  <p class="intro">{{ sujet.intro }}</p>
 
-{% for post in posts %}
-{{post.contenu}}
-{% endfor %}
+  <section id="sujetContent">
+    {% for post in posts %}
+      {% if post.user == app.user %}
+      <div class="post my_post">
+      {% else %}
+      <div class="post">
+      {% endif %}
 
-{{ form_start(form) }}
+        <div class="post-infos">
+          <a class="pseudo" href="{{ path('profile_user', { pseudo: post.user }) }}">{{ post.user }}</a>
+          <p class="date">
+, 
+{% set dateActuelle = "now" | date('m/d/y') %}
+{% set dateMessage = post.datePost | date('m/d/y') %}
+{% set diff = date("now").diff(post.datePost) %}
+{% set daysdiff = diff.days %}
 
-{{ form_row(form.contenu) }}
-      <button type="submit" class="confirmBtn">
-        Envoyer
-      </button>
+{% if daysdiff == 0 %}
+aujourd'hui
 
-{{ form_end(form) }}
+{% elseif daysdiff == 1 %}
+hier
+
+{% else %}
+il y a {{daysdiff}} jours
+{% endif %}
+          </p>
+        </div>
+        <p class="contenu">{{ post.contenu }}</p>
+      </div>
+    {% endfor %}
+  </section>
+
+{% if app.user is defined and app.user is not empty %}
+  
+  {{ form_start(form) }}
+    <p>envoyer un commentaire</p>
+  {{ form_row(form.contenu) }}
+  <button type="submit">Envoyer</button>
+
+  {{ form_end(form) }}
+{% endif %}
+
 {% endblock %}

@@ -38,10 +38,15 @@ class Sujet
     #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'sujet', orphanRemoval: true)]
     private Collection $posts;
 
+    ///////////////////// construct /////////////////////
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+        $this->date_création = new \DateTime();
+        $this->date_update = new \DateTime();
     }
+    /////////////////////////////////////////////////////
+
 
     public function getId(): ?int
     {

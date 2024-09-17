@@ -28,6 +28,13 @@ class Post
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?User $user = null;
 
+    ///////////////////// construct /////////////////////
+    public function __construct()
+    {
+        $this->date_post = new \DateTime();
+    }
+    /////////////////////////////////////////////////////
+
     public function getId(): ?int
     {
         return $this->id;

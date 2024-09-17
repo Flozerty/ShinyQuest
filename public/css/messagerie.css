@@ -70,10 +70,11 @@
   }
 }
 
-
 .intro {
   text-align: center;
 }
+
+/* //////////////media queries////////////// */
 
 @media screen and (min-width: 900px) {
   .new-messages-conversation {
@@ -86,7 +87,6 @@
     flex-direction: column;
   }
 }
-
 
 @media screen and (min-width: 400px) {
   .discussion-link {
@@ -109,7 +109,6 @@
 
     &:first-of-type {
       border-top: 1px solid var(--primary-color);
-
     }
   }
 

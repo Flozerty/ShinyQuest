@@ -17,26 +17,13 @@ use Symfony\Component\Routing\Attribute\Route;
 class ForumController extends AbstractController
 {
   #[Route('/forum', name: 'app_forum')]
-  public function index(Request $request, EntityManagerInterface $entityManager, SujetRepository $sujetRepository): Response
+  public function index(SujetRepository $sujetRepository): Response
   {
     $sujets = $sujetRepository->findBy([], ["date_update" => "DESC"]);
-
-    $sujet = new Sujet;
-
-    $formNewSujet = $this->createForm(NewSujetType::class, $sujet);
-    $formNewSujet->handleRequest($request);
-
-    if ($formNewSujet->isSubmitted() && $formNewSujet->isValid()) {
-      $entityManager->flush();
-
-      return $this->redirectToRoute('sujet', ['titre' => $sujet->getTitre()]);
-
-    }
 
     return $this->render('forum/index.html.twig', [
       "page_title" => "Bienvenue sur le forum",
       "sujets" => $sujets,
-      "form" => $formNewSujet,
     ]);
   }
 
@@ -52,9 +39,11 @@ class ForumController extends AbstractController
     $formNewPost->handleRequest($request);
 
     if ($formNewPost->isSubmitted() && $formNewPost->isValid()) {
+      $post->setUser($this->getUser());
+      $post->setSujet($sujet);
 
+      $entityManager->persist($post);
       $entityManager->flush();
-
       return $this->redirectToRoute('sujet', ['titre' => $sujet->getTitre()]);
     }
 
@@ -63,6 +52,29 @@ class ForumController extends AbstractController
       "sujet" => $sujet,
       "posts" => $posts,
       "form" => $formNewPost,
+    ]);
+  }
+
+  #[Route('/sujet/new', name: 'new_sujet')]
+  public function new_sujet(Request $request, EntityManagerInterface $entityManager): Response
+  {
+    // formulaire de nouveau sujet
+    $sujet = new Sujet;
+
+    $formNewSujet = $this->createForm(NewSujetType::class, $sujet);
+    $formNewSujet->handleRequest($request);
+
+    if ($formNewSujet->isSubmitted() && $formNewSujet->isValid()) {
+      $sujet->setUser($this->getUser());
+
+      $entityManager->persist($sujet);
+      $entityManager->flush();
+      return $this->redirectToRoute('sujet', ['titre' => $sujet->getTitre()]);
+    }
+
+    return $this->render('forum/newSujet.html.twig', [
+      "page_title" => "Nouveau topic",
+      "form" => $formNewSujet,
     ]);
   }
 }

@@ -6,7 +6,7 @@
 
   .sujet-link {
     padding: 0 20px;
-    border-radius: 10px;
+    border-radius: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -49,4 +49,147 @@
   p {
     font-size: 0.8rem;
   }
+}
+
+.intro {
+  align-self: center;
+  margin-bottom: 50px;
+}
+
+#sujetContent {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 50px;
+
+  .post {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    gap: 10px;
+    padding: 10px;
+    box-shadow: -10px 0 15px -15px var(--primary-color);
+  }
+
+  .my_post {
+    box-shadow: -5px 0 15px -10px var(--primary-color);
+
+  }
+
+  .post-infos {
+    display: flex;
+    align-items: end;
+  }
+
+  .contenu {
+    display: flex;
+  }
+
+  .date {
+    font-size: 0.8rem;
+  }
+}
+
+form[name="new_post"] {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: fit-content;
+  align-self: center;
+
+  &>p {
+    margin-bottom: 10px;
+  }
+
+  textarea {
+    border: 1px solid var(--primary-color);
+    background-color: var(--cardColor);
+    border-radius: 8px;
+    padding: 5px 10px;
+    margin: 5px 0 10px 0;
+    resize: none;
+
+    &:focus {
+      outline: none;
+      border: 1px solid var(--primary-color);
+      box-shadow: inset 0px 5px 15px var(--secondary-color), inset 0px -5px 15px rgba(255, 255, 255, 0.4);
+    }
+
+    &::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: var(--white);
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    &::-webkit-scrollbar-track:hover {
+      background-color: var(--secondary-color);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      min-height: 50px;
+      background-color: var(--primary-color);
+      border-radius: 5px;
+      border: 1px solid white;
+      cursor: pointer;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      border: var(--primary-color);
+    }
+  }
+}
+
+form[name="new_sujet"] {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  gap: 20px;
+
+  div {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  label {
+    color: var(--primary-color);
+    padding: 5px 0;
+  }
+
+  input {
+    width: 100%;
+    padding: 5px 8px;
+  }
+
+  textarea {
+    padding: 5px 8px;
+    resize: none;
+  }
+}
+
+button,
+#new_sujet {
+  color: var(--primary-color);
+  background-color: var(--background-secondary);
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  width: fit-content;
+  align-self: center;
+}
+
+#new_sujet {
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
+  border-radius: 8px;
 }

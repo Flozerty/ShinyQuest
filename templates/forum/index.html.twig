@@ -8,6 +8,7 @@
 
 {% block body %}
 
+<a id="new_sujet" href="{{path('new_sujet')}}"><i class="fa-solid fa-circle-plus"></i> &nbsp; créer un nouveau topic</a>
 
 <section id="forumContent">
     {% for sujet in sujets %}
@@ -21,5 +22,7 @@
     </div>
     {% endfor %}
 </section>
+
+
 
 {% endblock %}
