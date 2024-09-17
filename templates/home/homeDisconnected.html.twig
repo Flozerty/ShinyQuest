@@ -16,33 +16,38 @@
 
 {% block body %}
   <section id="home-head">
-    <img id="home-head-back-img" src="{{ asset('img/others/237663.jpg') }}" alt="" />
+    <img id="home-head-back-img" src="{{ asset('img/homeBackground.jpg') }}" alt="" />
     <div id="home-head-overlay">
-      <h1>Bienvenue sur<br /> SHINYQUEST</h1>
+      <h1>Bienvenue sur<br /> <strong>SHINYQUEST</strong></h1>
       <ul>
         <li>
-          <a href="{{ path('app_register') }}">Inscription</a>
+          <a class="inscription-link" href="{{ path('app_register') }}"><i class="fa-solid fa-arrow-right"></i>Inscription</a>
         </li>
         <li>
-          <a href="{{ path('app_login') }}">Connexion</a>
+          <a class="connexion-link" href="{{ path('app_login') }}"><i class="fa-solid fa-arrow-right"></i>Connexion</a>
         </li>
       </ul>
     </div>
   </section>
 
   <section id="explanations">
-    <div id="catchEm-explain">
+    <article id="catchEm-explain">
+      <img src="{{ asset('img/sachaBall.png') }}" alt="sacha lance une pokeball" />
       <h2>Capturez-les tous!</h2>
-      <p>Peu importe le jeu sur lequel vous jouez, quel pokémon vous cherchez, vous trouverez ici tout ce qu'il vous faut pour vous aider à mener à bien vos captures!</p>
-    </div>
-    <div id="shinydex-explain">
+      <p>Peu importe le jeu sur lequel vous jouez, ou quel pokémon vous cherchez, vous trouverez ici tout ce qu'il vous faut pour vous aider à mener à bien vos captures!</p>
+    </article>
+
+    <article id="shinydex-explain">
+      <img id="shinydex-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/133.png" alt="evoli shinydex" />
       <h2>Complétez votre shinydex</h2>
       <p>Listez toutes vos captures de pokémons shiny, et gardez précieusement votre shinydex! N'attendez plus, allez tous les capturer pour le compléter!</p>
-    </div>
-    <div id="captures-explain">
+    </article>
+
+    <article id="captures-explain">
+      <img src="{{ asset('img/pokemonFamily.png') }}" alt="pokemon family" />
       <h2>Suivez votre progression</h2>
-      vous êtes nouveau? rendez-vous dans l'onglet des shasses pour commencer!
-    </div>
+      <p>vous êtes nouveau? rendez-vous dans l'onglet des shasses pour commencer!</p>
+    </article>
   </section>
 
   <h2>Les dernières trouvailles :</h2>
@@ -86,24 +91,30 @@
   </section>
 
   <section id="respiration">
-    <div>
+    <article>
       <h3>total de dresseurs</h3>
       <p>{{ nbUsers }}</p>
-    </div>
+      <hr />
+    </article>
 
-    <div>
+    <article>
       <h3>shinys trouvés</h3>
       <p>{{ nbCaptures }}</p>
-    </div>
+      <hr />
+    </article>
 
-    <div>
+    <article>
       <h3>total de rencontres</h3>
       <p>{{ nbRencontresTotal }}</p>
-    </div>
+      <hr />
+    </article>
 
-    <div>
+    <article>
       <h3>shasses en cours</h3>
       <p>{{ nbShassesActives }}</p>
-    </div>
-  </section>section suivi des shasses en cours / section messagerie et partage de captures /
+      <hr />
+    </article>
+  </section>
+
+  <p>section suivi des shasses en cours / section messagerie et partage de captures /</p>
 {% endblock %}

@@ -1,4 +1,5 @@
-h1 {
+h1,
+h1 strong {
   font-family: "Salsa", cursive;
   font-weight: 600;
   letter-spacing: 0.4rem;
@@ -15,7 +16,66 @@ section {
 }
 
 #explanations {
-  margin: 100px 0;
+  margin: 200px 0 100px 0;
+  display: grid;
+  gap: 1.5rem;
+  row-gap: 8rem;
+
+  article {
+    position: relative;
+    align-items: center;
+    width: 280px;
+    background: var(--background-secondary);
+    padding: 5rem .75rem 1.5rem .75rem;
+    border-radius: 1.5rem;
+    box-shadow: var(--primary-color) 0px 4px 8px -2px, var(--primary-color) 0px 0px 0px 1px;
+
+    h2 {
+      margin: 0;
+      margin-bottom: 25px;
+      background-color: var(--background-secondary);
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    p {
+      text-align: center;
+      line-height: 1.5rem;
+    }
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      max-width: 100%;
+      max-height: 300px;
+
+      margin: 0 auto;
+      transition: transform .4s;
+      transform: translateY(-40%);
+      z-index: -1;
+    }
+
+    #shinydex-img {
+      filter: contrast(0);
+    }
+
+    &:nth-child(odd) {
+      rotate: -5deg;
+      justify-self: flex-start;
+    }
+
+    &:nth-child(even) {
+      rotate: 5deg;
+      justify-self: flex-end;
+    }
+
+    &:hover img {
+      transform: translateY(calc(-40% + -.5rem));
+    }
+
+  }
 }
 
 #my-actives {
@@ -92,7 +152,8 @@ section {
   align-items: center;
   background-color: var(--background-color);
   align-self: center;
-  width: 100vw;
+  /* scrollbar 10 px */
+  width: calc(100vw - 10px);
   height: fit-content;
 }
 
@@ -117,36 +178,83 @@ section {
     display: flex;
     gap: 50px;
 
-    a {
-      color: var(--primary-color);
+    .inscription-link,
+    .connexion-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       background-color: var(--background-secondary);
       border: 1px solid var(--primary-color);
       border-radius: 15px;
-      padding: 5px 10px;
+      padding: 2px 5px 2px 2px;
       cursor: pointer;
       width: fit-content;
       align-self: center;
+
+      i {
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--primary-color);
+        color: white;
+        transition: var(--transitionTime);
+      }
+    }
+
+    .inscription-link:hover i {
+      transform: translateX(5px) rotate(-40deg);
+    }
+
+    .connexion-link:hover i {
+      transform: translateX(5px) rotate(40deg);
     }
   }
 }
 
 #respiration {
   margin: 50px 0;
+  padding: 100px 0;
+  background-color: var(--secondary-color);
+  align-self: center;
+  flex-wrap: wrap;
 
-  div {
+  article {
     display: flex;
+    gap: 10px;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    padding: 10px;
+
+    h3 {
+      text-align: center;
+    }
+
+    p {
+      font-family: "Salsa", cursive;
+    }
+
+    /*  */
   }
 }
 
 /* media queries */
 
 @media screen and (min-width: 1200px) {
-  #home-head {
+
+  #home-head,
+  #respiration {
     /* side-nav 300px & scrollbar 10px */
     width: calc(100vw - 310px);
+
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  #respiration {
+    width: calc(100vw - 10px);
   }
 }
 
@@ -156,10 +264,60 @@ section {
   }
 }
 
+@media screen and (min-width: 800px) {
+  #respiration article {
+    width: 25%;
+
+    h3 {
+      font-size: 1.3rem;
+    }
+
+    p {
+      font-size: 2rem;
+      padding-bottom: 50px;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #respiration article {
+    h3 {
+      font-size: 1rem;
+    }
+
+    p {
+      font-size: 2rem;
+      padding-bottom: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #respiration article {
+    width: 50%;
+  }
+}
+
 @media screen and (min-width: 700px) {
   h1 {
     font-size: 3rem;
     line-height: 5rem;
+  }
+}
+
+@media screen and (min-width: 800px) {
+
+  #explanations {
+    grid-template-columns: repeat(2, 1fr);
+    align-self: center;
+    width: 80%;
+    column-gap: 4rem;
+
+    article:nth-child(even) {
+      rotate: 5deg;
+      transform: translateY(calc(50% + 4rem));
+      justify-self: flex-end;
+    }
   }
 }
 
@@ -184,5 +342,9 @@ section {
 @media screen and (max-width: 400px) {
   #home-head-overlay {
     box-shadow: inset 0px 0px 50px 20px var(--background-color);
+  }
+
+  h1 {
+    font-size: 1.5rem;
   }
 }

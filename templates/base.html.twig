@@ -23,9 +23,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Salsa&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/search.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/custom_pokeball.css') }}" />
     {% block stylesheets %}
+
     {% endblock %}
 
     <script src="https://kit.fontawesome.com/7252ea4d54.js" crossorigin="anonymous"></script>
@@ -105,36 +104,37 @@
         <i id="profile-caret" class="fa-solid fa-caret-down"></i>
       </nav>
 
-      <ul id="profile-nav">
-        {% if app.user is defined and app.user is not empty %}
-          <li>
-            <a class="nav-link" href="{{ path('my_profile') }}">Mon profil</a>
-          </li>
-          <li>
-            <a class="nav-link" href="{{ path('my_shasses') }}">Mes shasses</a>
-          </li>
-          <li class="profile-link">
-            <a class="nav-link" href="{{ path('captures', { pseudo: app.user.pseudo }) }}">Mes captures</a>
-          </li>
-          {# <li><a class="nav-link" href="">Ma carte</a></li> #}
-          <li class="profile-link">
-            <a class="nav-link" href="{{ path('app_amis') }}">Mes amis</a>
-          </li>
-          <li class="profile-link">
-            <a class="nav-link messagerie-header-link" href="{{ path('messagerie') }}">Messagerie</a>
-          </li>
-          {# <li class="profile-link"><a class="nav-link" href="">Forum</a></li> #}
+      <nav id="profile-nav">
+        <ul>
+          {% if app.user is defined and app.user is not empty %}
+            <li>
+              <a class="nav-link" href="{{ path('my_profile') }}">Mon profil</a>
+            </li>
+            <li>
+              <a class="nav-link" href="{{ path('my_shasses') }}">Mes shasses</a>
+            </li>
+            <li class="profile-link">
+              <a class="nav-link" href="{{ path('captures', { pseudo: app.user.pseudo }) }}">Mes captures</a>
+            </li>
+            {# <li><a class="nav-link" href="">Ma carte</a></li> #}
+            <li class="profile-link">
+              <a class="nav-link" href="{{ path('app_amis') }}">Mes amis</a>
+            </li>
+            <li class="profile-link">
+              <a class="nav-link messagerie-header-link" href="{{ path('messagerie') }}">Messagerie</a>
+            </li>
+            {# <li class="profile-link"><a class="nav-link" href="">Forum</a></li> #}
 
-          <li>
-            <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
-          </li>
-        {% endif %}
+            <li>
+              <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+            </li>
+          {% endif %}
 
-        <form id="search-profile" action="">
-          <div class="search-img-container"></div>
-          <input type="search" class="search-input" placeholder="recherchez un pokemon, un dresseur, ..." />
-        </form>
-
+          <form id="search-profile" action="">
+            <div class="search-img-container"></div>
+            <input type="search" class="search-input" placeholder="recherchez un pokemon, un dresseur, ..." />
+          </form>
+        </ul>
         <div class="l_d_mode">
           <input id="pokeball-toggle2" name="mode-toggle2" type="radio" />
           <label for="pokeball-toggle2" class="toggle-label"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" alt="pokeball" /></label>
@@ -148,7 +148,7 @@
           {# Bouton de bascule #}
           <div class="toggle-button"></div>
         </div>
-      </ul>
+      </nav>
 
       <div id="search-results"></div>
     </header>
@@ -233,6 +233,7 @@
         {% endif %}
 
         {% block body %}
+
         {% endblock %}
 
         <a href="#top" aria-label="scroll to top" class="scroller hide-scroll"><i class="fa-solid fa-arrow-up"></i></a>
@@ -293,7 +294,7 @@
       <div class="overlay"></div>
 
       <div style="width:100%;height:0;padding-bottom:111%;position:relative;">
-        <iframe src="https://giphy.com/embed/Z2NXSNmbgcE21zbVyZ" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+        <iframe title="lucario afk dance" src="https://giphy.com/embed/Z2NXSNmbgcE21zbVyZ" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
       </div>
     </div>
 
@@ -301,6 +302,7 @@
     <script src="{{ asset('js/ajaxHeaderSearch.js') }}"></script>
     <script src="{{ asset('js/mainScripts.js') }}"></script>
     {% block javascripts %}
+
     {% endblock %}
   </body>
 </html>
