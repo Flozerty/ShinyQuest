@@ -19,14 +19,7 @@
     <img id="home-head-back-img" src="{{ asset('img/homeBackground.jpg') }}" alt="" />
     <div id="home-head-overlay">
       <h1>Bienvenue sur<br /> <strong>SHINYQUEST</strong></h1>
-      <ul>
-        <li>
-          <a class="inscription-link" href="{{ path('app_register') }}"><i class="fa-solid fa-arrow-right"></i>Inscription</a>
-        </li>
-        <li>
-          <a class="connexion-link" href="{{ path('app_login') }}"><i class="fa-solid fa-arrow-right"></i>Connexion</a>
-        </li>
-      </ul>
+      <a class="start-link" href="{{ path('app_register') }}"><i class="fa-solid fa-arrow-right"></i>Commencer l'aventure</a>
     </div>
   </section>
 
@@ -50,7 +43,7 @@
     </article>
   </section>
 
-  <a href="{{ path('app_register') }}">commencez votre aventure!</a>
+  <a class="start-link" href="{{ path('app_register') }}"><i class="fa-solid fa-arrow-right"></i>Commencer l'aventure</a>
 
   <h2>Les dernières trouvailles :</h2>
   <section id="last-captures" class="carousel">
@@ -119,4 +112,6 @@
   </section>
 
   <p>section suivi des shasses en cours / section messagerie et partage de captures /</p>
+
+  <a class="start-link" href="{{ path('app_register') }}"><i class="fa-solid fa-arrow-right"></i>Commencer l'aventure</a>
 {% endblock %}
