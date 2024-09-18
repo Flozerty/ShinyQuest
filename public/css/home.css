@@ -217,7 +217,7 @@ section {
   }
 
   &:hover i {
-    transform: translateX(10px) rotate(-50deg);
+    transform: translateX(8px) rotate(-40deg);
   }
 }
 

@@ -1,31 +1,34 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-  Forum
+Forum
 {% endblock %}
 
 {% block stylesheets %}
-  <link rel="stylesheet" href="{{ asset('css/forum.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/forum.css') }}" />
 {% endblock %}
 
 {% block body %}
-  <a id="new_sujet" href="{{ path('new_sujet') }}"><i class="fa-solid fa-circle-plus"></i> &nbsp; créer un nouveau topic</a>
+{% if app.user %}
+<a id="new_sujet" href="{{ path('new_sujet') }}"><i class="fa-solid fa-circle-plus"></i> &nbsp; créer un nouveau
+  topic</a>
+{% endif %}
 
-  <section id="forumContent">
-    {% for sujet in sujets %}
-      <div class="sujet-link">
-        <a href="{{ path('sujet', { titre: sujet.titre }) }}">
-          <strong>{{ sujet.titre }}</strong>
-          <p>{{ sujet.intro }}</p>
-        </a>
-        <div class="sujet-details">
-          <p>créé le {{ sujet.dateCréation|date('d/m/y') }}</p>
-          <p>
-            par <a class="pseudo" href="{{ path('profile_user', { pseudo: sujet.user }) }}">{{ sujet.user }}</a>
-          </p>
-          <p>{{ sujet.posts|length }} posts</p>
-        </div>
-      </div>
-    {% endfor %}
-  </section>
+<section id="forumContent">
+  {% for sujet in sujets %}
+  <div class="sujet-link">
+    <a href="{{ path('sujet', { titre: sujet.titre }) }}">
+      <strong>{{ sujet.titre }}</strong>
+      <p>{{ sujet.intro }}</p>
+    </a>
+    <div class="sujet-details">
+      <p>créé le {{ sujet.dateCréation|date('d/m/y') }}</p>
+      <p>
+        par <a class="pseudo" href="{{ path('profile_user', { pseudo: sujet.user }) }}">{{ sujet.user }}</a>
+      </p>
+      <p>{{ sujet.posts|length }} posts</p>
+    </div>
+  </div>
+  {% endfor %}
+</section>
 {% endblock %}

@@ -14,18 +14,19 @@
     height: 100%;
 
     &:nth-child(2n) {
-      box-shadow: -5px 0 15px -10px var(--primary-color);
-    }
-
-    &:nth-child(2n+1) {
       box-shadow: 5px 0 15px -10px var(--primary-color);
     }
 
+    &:nth-child(2n+1) {
+      box-shadow: -5px 0 15px -10px var(--primary-color);
+    }
+
     >a {
-      padding: auto 0;
       height: 100%;
       display: flex;
+      padding: 5px 0;
       flex-direction: column;
+      justify-content: center;
       gap: 10px;
       width: 100%;
 
