@@ -151,7 +151,7 @@ main i {
     text-align: center;
 
     .accept-demand {
-      color: white;
+      color: var(--background-color);
       background-color: var(--buttonsColor);
     }
 

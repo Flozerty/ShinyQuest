@@ -1,308 +1,352 @@
 <!DOCTYPE html>
 <html id="top" lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Suivez et répertoriez vos Pokémon shiny sur cette plateforme dédiée. Trouvez des renseignements utiles et partagez vos succès avec la communauté des shiny-hunters" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Floris Louërat" />
 
-    <title>
-      {% block title %}
-        Welcome!
-      {% endblock %}
-    </title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description"
+    content="Suivez et répertoriez vos Pokémon shiny sur cette plateforme dédiée. Trouvez des renseignements utiles et partagez vos succès avec la communauté des shiny-hunters" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Floris Louërat" />
 
-    <link rel="icon" href="{{ asset('favicon.svg') }}" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Chocolate+Classical+Sans&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Salsa&display=swap" rel="stylesheet" />
-
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
-    {% block stylesheets %}
-
+  <title>
+    {% block title %}
+    Welcome!
     {% endblock %}
+  </title>
 
-    <script src="https://kit.fontawesome.com/7252ea4d54.js" crossorigin="anonymous"></script>
-    <audio preload="auto" src="{{ asset('/sfx/062_Through_the_Sea_of_Time.mp3') }}" loop="" id="music"></audio>
+  <link rel="icon" href="{{ asset('favicon.svg') }}" />
 
-    <script src="{{ asset('js/setColorsAndMusic.js') }}"></script>
-  </head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chocolate+Classical+Sans&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Silkscreen:ital,wght@0,400;1,400&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Salsa&display=swap" rel="stylesheet" />
 
-  <body>
-    {# header #}
-    <header>
-      <a id="logo-container" href="{{ path('app_home') }}">
-        <svg width="41" height="40" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15.246 10.2708C14.97 9.69792 14.3867 9.33337 13.7462 9.33337C13.1056 9.33337 12.5276 9.69792 12.2464 10.2708L8.89778 17.1606L1.41945 18.2647C0.794518 18.3584 0.273743 18.7959 0.0810558 19.3947C-0.111631 19.9936 0.0446014 20.655 0.492468 21.0977L5.91894 26.4669L4.63784 34.0546C4.53368 34.6795 4.79407 35.3148 5.30964 35.6846C5.8252 36.0543 6.50742 36.1012 7.06986 35.8044L13.7514 32.2371L20.4329 35.8044C20.9954 36.1012 21.6776 36.0595 22.1932 35.6846C22.7087 35.3096 22.9691 34.6795 22.865 34.0546L21.5786 26.4669L27.0051 21.0977C27.453 20.655 27.6144 19.9936 27.4165 19.3947C27.2186 18.7959 26.7031 18.3584 26.0781 18.2647L18.5946 17.1606L15.246 10.2708Z" fill="#F4A32C" />
-          <path d="M30.4783 33.5677C30.4093 33.4245 30.2634 33.3334 30.1033 33.3334C29.9432 33.3334 29.7986 33.4245 29.7283 33.5677L28.8912 35.2902L27.0216 35.5662C26.8654 35.5896 26.7352 35.699 26.687 35.8487C26.6388 35.9984 26.6779 36.1638 26.7899 36.2745L28.1465 37.6167L27.8262 39.5137C27.8002 39.6699 27.8653 39.8287 27.9942 39.9212C28.123 40.0136 28.2936 40.0253 28.4342 39.9511L30.1046 39.0593L31.775 39.9511C31.9156 40.0253 32.0861 40.0149 32.215 39.9212C32.3439 39.8274 32.409 39.6699 32.383 39.5137L32.0614 37.6167L33.418 36.2745C33.53 36.1638 33.5704 35.9984 33.5209 35.8487C33.4714 35.699 33.3425 35.5896 33.1863 35.5662L31.3154 35.2902L30.4783 33.5677Z" fill="#F4A32C" />
-          <path d="M34.2898 0.468698C34.1518 0.182271 33.8601 0 33.5398 0C33.2196 0 32.9305 0.182271 32.7899 0.468698L31.1156 3.91362L27.3765 4.46565C27.064 4.51252 26.8036 4.73124 26.7073 5.03069C26.6109 5.33013 26.689 5.66082 26.913 5.88215L29.6262 8.56675L28.9857 12.3606C28.9336 12.6731 29.0638 12.9907 29.3216 13.1756C29.5794 13.3605 29.9205 13.3839 30.2017 13.2355L33.5424 11.4518L36.8832 13.2355C37.1644 13.3839 37.5055 13.3631 37.7633 13.1756C38.0211 12.9881 38.1513 12.6731 38.0992 12.3606L37.4561 8.56675L40.1693 5.88215C40.3932 5.66082 40.474 5.33013 40.375 5.03069C40.2761 4.73124 40.0183 4.51252 39.7058 4.46565L35.9641 3.91362L34.2898 0.468698Z" fill="#F4A32C" />
-          <path d="M23.8115 5.56772C23.7425 5.42451 23.5967 5.33337 23.4365 5.33337C23.2764 5.33337 23.1319 5.42451 23.0616 5.56772L22.2244 7.29019L20.3549 7.5662C20.1986 7.58963 20.0684 7.69899 20.0203 7.84872C19.9721 7.99844 20.0112 8.16379 20.1231 8.27445L21.4797 9.61675L21.1595 11.5137C21.1334 11.6699 21.1985 11.8287 21.3274 11.9212C21.4563 12.0136 21.6269 12.0253 21.7675 11.9511L23.4379 11.0593L25.1082 11.9511C25.2488 12.0253 25.4194 12.0149 25.5483 11.9212C25.6772 11.8274 25.7423 11.6699 25.7162 11.5137L25.3947 9.61675L26.7513 8.27445C26.8632 8.16379 26.9036 7.99844 26.8541 7.84872C26.8047 7.69899 26.6758 7.58963 26.5195 7.5662L24.6487 7.29019L23.8115 5.56772Z" fill="#F4A32C" />
-        </svg>
-        <span id="logo-title">SHINYQUEST</span>
-      </a>
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+  {% block stylesheets %}
 
-      <form id="search-header" action="">
-        <div class="search-img-container"></div>
-        <input type="search" class="search-input" placeholder="recherchez un pokemon, un dresseur, ..." />
-      </form>
+  {% endblock %}
 
-      <div class="l_d_mode-main">
-        <input id="pokeball-toggle" name="mode-toggle" type="radio" />
-        <label for="pokeball-toggle" class="toggle-label"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" alt="pokeball" /></label>
+  <script src="https://kit.fontawesome.com/7252ea4d54.js" crossorigin="anonymous"></script>
+  <audio preload="auto" src="{{ asset('/sfx/062_Through_the_Sea_of_Time.mp3') }}" loop="" id="music"></audio>
 
-        <input id="superball-toggle" name="mode-toggle" type="radio" />
-        <label for="superball-toggle" class="toggle-label"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/great-ball.png" alt="superball" /></label>
+  <script src="{{ asset('js/setColorsAndMusic.js') }}"></script>
+</head>
 
-        <input id="hyperball-toggle" name="mode-toggle" type="radio" />
-        <label for="hyperball-toggle" class="toggle-label"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png" alt="hyperball" /></label>
+<body>
+  {# header #}
+  <header>
+    <a id="logo-container" href="{{ path('app_home') }}">
+      <svg width="41" height="40" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M15.246 10.2708C14.97 9.69792 14.3867 9.33337 13.7462 9.33337C13.1056 9.33337 12.5276 9.69792 12.2464 10.2708L8.89778 17.1606L1.41945 18.2647C0.794518 18.3584 0.273743 18.7959 0.0810558 19.3947C-0.111631 19.9936 0.0446014 20.655 0.492468 21.0977L5.91894 26.4669L4.63784 34.0546C4.53368 34.6795 4.79407 35.3148 5.30964 35.6846C5.8252 36.0543 6.50742 36.1012 7.06986 35.8044L13.7514 32.2371L20.4329 35.8044C20.9954 36.1012 21.6776 36.0595 22.1932 35.6846C22.7087 35.3096 22.9691 34.6795 22.865 34.0546L21.5786 26.4669L27.0051 21.0977C27.453 20.655 27.6144 19.9936 27.4165 19.3947C27.2186 18.7959 26.7031 18.3584 26.0781 18.2647L18.5946 17.1606L15.246 10.2708Z"
+          fill="#F4A32C" />
+        <path
+          d="M30.4783 33.5677C30.4093 33.4245 30.2634 33.3334 30.1033 33.3334C29.9432 33.3334 29.7986 33.4245 29.7283 33.5677L28.8912 35.2902L27.0216 35.5662C26.8654 35.5896 26.7352 35.699 26.687 35.8487C26.6388 35.9984 26.6779 36.1638 26.7899 36.2745L28.1465 37.6167L27.8262 39.5137C27.8002 39.6699 27.8653 39.8287 27.9942 39.9212C28.123 40.0136 28.2936 40.0253 28.4342 39.9511L30.1046 39.0593L31.775 39.9511C31.9156 40.0253 32.0861 40.0149 32.215 39.9212C32.3439 39.8274 32.409 39.6699 32.383 39.5137L32.0614 37.6167L33.418 36.2745C33.53 36.1638 33.5704 35.9984 33.5209 35.8487C33.4714 35.699 33.3425 35.5896 33.1863 35.5662L31.3154 35.2902L30.4783 33.5677Z"
+          fill="#F4A32C" />
+        <path
+          d="M34.2898 0.468698C34.1518 0.182271 33.8601 0 33.5398 0C33.2196 0 32.9305 0.182271 32.7899 0.468698L31.1156 3.91362L27.3765 4.46565C27.064 4.51252 26.8036 4.73124 26.7073 5.03069C26.6109 5.33013 26.689 5.66082 26.913 5.88215L29.6262 8.56675L28.9857 12.3606C28.9336 12.6731 29.0638 12.9907 29.3216 13.1756C29.5794 13.3605 29.9205 13.3839 30.2017 13.2355L33.5424 11.4518L36.8832 13.2355C37.1644 13.3839 37.5055 13.3631 37.7633 13.1756C38.0211 12.9881 38.1513 12.6731 38.0992 12.3606L37.4561 8.56675L40.1693 5.88215C40.3932 5.66082 40.474 5.33013 40.375 5.03069C40.2761 4.73124 40.0183 4.51252 39.7058 4.46565L35.9641 3.91362L34.2898 0.468698Z"
+          fill="#F4A32C" />
+        <path
+          d="M23.8115 5.56772C23.7425 5.42451 23.5967 5.33337 23.4365 5.33337C23.2764 5.33337 23.1319 5.42451 23.0616 5.56772L22.2244 7.29019L20.3549 7.5662C20.1986 7.58963 20.0684 7.69899 20.0203 7.84872C19.9721 7.99844 20.0112 8.16379 20.1231 8.27445L21.4797 9.61675L21.1595 11.5137C21.1334 11.6699 21.1985 11.8287 21.3274 11.9212C21.4563 12.0136 21.6269 12.0253 21.7675 11.9511L23.4379 11.0593L25.1082 11.9511C25.2488 12.0253 25.4194 12.0149 25.5483 11.9212C25.6772 11.8274 25.7423 11.6699 25.7162 11.5137L25.3947 9.61675L26.7513 8.27445C26.8632 8.16379 26.9036 7.99844 26.8541 7.84872C26.8047 7.69899 26.6758 7.58963 26.5195 7.5662L24.6487 7.29019L23.8115 5.56772Z"
+          fill="#F4A32C" />
+      </svg>
+      <span id="logo-title">SHINYQUEST</span>
+    </a>
+
+    <form id="search-header" action="">
+      <div class="search-img-container"></div>
+      <input type="search" class="search-input" placeholder="recherchez un pokemon, un dresseur, ..." />
+    </form>
+
+    <div class="l_d_mode-main">
+      <input id="pokeball-toggle" name="mode-toggle" type="radio" />
+      <label for="pokeball-toggle" class="toggle-label"><img
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
+          alt="pokeball" /></label>
+
+      <input id="superball-toggle" name="mode-toggle" type="radio" />
+      <label for="superball-toggle" class="toggle-label"><img
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/great-ball.png"
+          alt="superball" /></label>
+
+      <input id="hyperball-toggle" name="mode-toggle" type="radio" />
+      <label for="hyperball-toggle" class="toggle-label"><img
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png"
+          alt="hyperball" /></label>
+
+      {# Bouton de bascule #}
+      <div class="toggle-button"></div>
+    </div>
+
+    <nav id="nav-header">
+      {% if app.user is defined and app.user is not empty %}
+      <ul>
+        <li title="Forum" class="header-link">
+          <a aria-label="accès au Forum" href="{{ path('app_forum') }}"><i class="fa-solid fa-comments"></i></a>
+        </li>
+
+        <li title="Mes captures" class="header-link">
+          <a aria-label="voir mes captures" href="{{ path('captures', { pseudo: app.user.pseudo }) }}">{% include
+            '.custom/customPokeball.html.twig' %}</a>
+        </li>
+
+        <li title="Mes amis" class="header-link">
+          <a aria-label="voir mes amis" href="{{ path('app_amis') }}"><i class="fa-solid fa-user-group"></i></a>
+        </li>
+
+        <li title="Messagerie" class="header-link">
+          <a aria-label="voir ma messagerie" href="{{ path('messagerie') }}" class="messagerie-header-link"><i
+              class="fa-solid fa-message"></i></a>
+        </li>
+      </ul>
+
+      <div id="header-profile">
+        <p>{{ app.user }}</p>
+        <figure>
+          <img src="{{ app.user.avatar ? asset('img/avatars/' ~ app.user.avatar) : asset('img/unknown_user.png') }}"
+            alt="avatar de {{ app.user }}" />
+        </figure>
+      </div>
+      {% else %}
+      <ul>
+        <li>
+          <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+        </li>
+        <li>
+          <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+        </li>
+      </ul>
+      {% endif %}
+      <i id="profile-caret" class="fa-solid fa-caret-down"></i>
+    </nav>
+
+    <nav id="profile-nav">
+      <ul>
+        {% if app.user is defined and app.user is not empty %}
+        <li>
+          <a class="nav-link" href="{{ path('my_profile') }}">Mon profil</a>
+        </li>
+        <li>
+          <a class="nav-link" href="{{ path('my_shasses') }}">Mes shasses</a>
+        </li>
+        <li class="profile-link">
+          <a class="nav-link" href="{{ path('captures', { pseudo: app.user.pseudo }) }}">Mes captures</a>
+        </li>
+        {# <li><a class="nav-link" href="">Ma carte</a></li> #}
+        <li class="profile-link">
+          <a class="nav-link" href="{{ path('app_amis') }}">Mes amis</a>
+        </li>
+        <li class="profile-link">
+          <a class="nav-link messagerie-header-link" href="{{ path('messagerie') }}">Messagerie</a>
+        </li>
+        {# <li class="profile-link"><a class="nav-link" href="">Forum</a></li> #}
+
+        <li>
+          <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+        </li>
+        {% endif %}
+
+        <form id="search-profile" action="">
+          <div class="search-img-container"></div>
+          <input type="search" class="search-input" placeholder="recherchez un pokemon, un dresseur, ..." />
+        </form>
+      </ul>
+      <div class="l_d_mode">
+        <input id="pokeball-toggle2" name="mode-toggle2" type="radio" />
+        <label for="pokeball-toggle2" class="toggle-label"><img
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
+            alt="pokeball" /></label>
+
+        <input id="superball-toggle2" name="mode-toggle2" type="radio" />
+        <label for="superball-toggle2" class="toggle-label"><img
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/great-ball.png"
+            alt="superball" /></label>
+
+        <input id="hyperball-toggle2" name="mode-toggle2" type="radio" />
+        <label for="hyperball-toggle2" class="toggle-label"><img
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png"
+            alt="hyperball" /></label>
 
         {# Bouton de bascule #}
         <div class="toggle-button"></div>
       </div>
+    </nav>
 
-      <nav id="nav-header">
-        {% if app.user is defined and app.user is not empty %}
+    <div id="search-results"></div>
+  </header>
+
+  <div id="main-wrapper">
+    {# ////////////////Side nav//////////////// #}
+    <aside id="main-side-nav" class="hide-nav">
+      <nav id="side-wrapper">
+        <div>
+          <h3>Mon suivi</h3>
           <ul>
-            <li title="Forum" class="header-link">
-              <a aria-label="accès au Forum" href="{{ path('app_forum') }}"><i class="fa-solid fa-comments"></i></a>
-            </li>
-
-            <li title="Mes captures" class="header-link">
-              <a aria-label="voir mes captures" href="{{ path('captures', { pseudo: app.user.pseudo }) }}">{% include '.custom/customPokeball.html.twig' %}</a>
-            </li>
-
-            <li title="Mes amis" class="header-link">
-              <a aria-label="voir mes amis" href="{{ path('app_amis') }}"><i class="fa-solid fa-user-group"></i></a>
-            </li>
-
-            <li title="Messagerie" class="header-link">
-              <a aria-label="voir ma messagerie" href="{{ path('messagerie') }}" class="messagerie-header-link"><i class="fa-solid fa-message"></i></a>
-            </li>
-          </ul>
-
-          <div id="header-profile">
-            <p>{{ app.user }}</p>
-            <figure>
-              <img src="{{ app.user.avatar ? asset('img/avatars/' ~ app.user.avatar) : asset('img/unknown_user.png') }}" alt="avatar de {{ app.user }}" />
-            </figure>
-          </div>
-        {% else %}
-          <ul>
-            <li>
-              <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
-            </li>
-            <li>
-              <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
-            </li>
-          </ul>
-        {% endif %}
-        <i id="profile-caret" class="fa-solid fa-caret-down"></i>
-      </nav>
-
-      <nav id="profile-nav">
-        <ul>
-          {% if app.user is defined and app.user is not empty %}
-            <li>
-              <a class="nav-link" href="{{ path('my_profile') }}">Mon profil</a>
-            </li>
+            {% if app.user is not empty %}
             <li>
               <a class="nav-link" href="{{ path('my_shasses') }}">Mes shasses</a>
             </li>
-            <li class="profile-link">
+            <li>
               <a class="nav-link" href="{{ path('captures', { pseudo: app.user.pseudo }) }}">Mes captures</a>
             </li>
-            {# <li><a class="nav-link" href="">Ma carte</a></li> #}
-            <li class="profile-link">
+            <li>
+              <a class="nav-link" href="{{ path('app_shinydex', { pseudo: app.user.pseudo }) }}">Mon shinydex</a>
+            </li>
+            {% else %}
+            <li>
+              <a class="nav-link" href="{{ path('app_login') }}">Connectez-vous</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+
+        <div>
+          <h3>Communauté</h3>
+          <ul>
+            {% if app.user is not empty %}
+            <li>
+              <a class="nav-link" href="{{ path('messagerie') }}">Messagerie</a>
+            </li>
+            <li>
               <a class="nav-link" href="{{ path('app_amis') }}">Mes amis</a>
             </li>
-            <li class="profile-link">
-              <a class="nav-link messagerie-header-link" href="{{ path('messagerie') }}">Messagerie</a>
-            </li>
-            {# <li class="profile-link"><a class="nav-link" href="">Forum</a></li> #}
+            {% endif %}
 
             <li>
-              <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+              <a class="nav-link" href="{{ path('app_users') }}">Les dresseurs</a>
             </li>
-          {% endif %}
-
-          <form id="search-profile" action="">
-            <div class="search-img-container"></div>
-            <input type="search" class="search-input" placeholder="recherchez un pokemon, un dresseur, ..." />
-          </form>
-        </ul>
-        <div class="l_d_mode">
-          <input id="pokeball-toggle2" name="mode-toggle2" type="radio" />
-          <label for="pokeball-toggle2" class="toggle-label"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" alt="pokeball" /></label>
-
-          <input id="superball-toggle2" name="mode-toggle2" type="radio" />
-          <label for="superball-toggle2" class="toggle-label"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/great-ball.png" alt="superball" /></label>
-
-          <input id="hyperball-toggle2" name="mode-toggle2" type="radio" />
-          <label for="hyperball-toggle2" class="toggle-label"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png" alt="hyperball" /></label>
-
-          {# Bouton de bascule #}
-          <div class="toggle-button"></div>
-        </div>
-      </nav>
-
-      <div id="search-results"></div>
-    </header>
-
-    <div id="main-wrapper">
-      {# ////////////////Side nav//////////////// #}
-      <aside id="main-side-nav" class="hide-nav">
-        <nav id="side-wrapper">
-          <div>
-            <h3>Mon suivi</h3>
-            <ul>
-              {% if app.user is not empty %}
-                <li>
-                  <a class="nav-link" href="{{ path('my_shasses') }}">Mes shasses</a>
-                </li>
-                <li>
-                  <a class="nav-link" href="{{ path('captures', { pseudo: app.user.pseudo }) }}">Mes captures</a>
-                </li>
-                <li>
-                  <a class="nav-link" href="{{ path('app_shinydex', { pseudo: app.user.pseudo }) }}">Mon shinydex</a>
-                </li>
-              {% else %}
-                <li>
-                  <a class="nav-link" href="{{ path('app_login') }}">Connectez-vous</a>
-                </li>
-              {% endif %}
-            </ul>
-          </div>
-
-          <div>
-            <h3>Communauté</h3>
-            <ul>
-              {% if app.user is not empty %}
-                <li>
-                  <a class="nav-link" href="{{ path('messagerie') }}">Messagerie</a>
-                </li>
-                <li>
-                  <a class="nav-link" href="{{ path('app_amis') }}">Mes amis</a>
-                </li>
-              {% endif %}
-
-              <li>
-                <a class="nav-link" href="{{ path('app_users') }}">Les dresseurs</a>
-              </li>
-              <li>
-                <a class="nav-link" href="{{ path('app_forum') }}">Forum</a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3>Général</h3>
-            <ul>
-              <li>
-                <a class="nav-link" href="{{ path('app_pokedex') }}">Recherche pokédex</a>
-              </li>
-              <li>
-                <a class="nav-link" href="" style="text-decoration:line-through">Le top des shasses</a>
-              </li>
-            </ul>
-          </div>
-
-          {% if app.user and is_granted('ROLE_ADMIN') %}
-            <div>
-              <h3>Admin</h3>
-              <ul>
-                <li>
-                  <a class="nav-link" href="{{ path('admin') }}"><strong>Panneau Admin</strong></a>
-                </li>
-              </ul>
-            </div>
-          {% endif %}
-        </nav>
-
-        <i id="toggle-nav-btn" class="fa-solid fa-circle-right"></i>
-      </aside>
-
-      {# main #}
-      <main>
-        {% if page_title is defined %}
-          <h1>{{ page_title }}</h1>
-        {% endif %}
-
-        {% block body %}
-
-        {% endblock %}
-
-        <a href="#top" aria-label="scroll to top" class="scroller hide-scroll"><i class="fa-solid fa-arrow-up"></i></a>
-      </main>
-    </div>
-
-    {# footer #}
-    <footer>
-      {% if pika is defined and pika == true %}
-        <img id="pika-run" src="{{ asset('img/pikaRun.webp') }}" alt="pikachu running" loading="lazy" />
-      {% endif %}
-
-      {% for label, messages in app.flashes %}
-        {% for message in messages %}
-          <div class="flash-message flash-{{ label }}">{{ message }}</div>
-        {% endfor %}
-      {% endfor %}
-
-      <section id="footer-content">
-        <div id="project-footer">
-          <h2>
-            <svg width="30" height="30" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15.246 10.2708C14.97 9.69792 14.3867 9.33337 13.7462 9.33337C13.1056 9.33337 12.5276 9.69792 12.2464 10.2708L8.89778 17.1606L1.41945 18.2647C0.794518 18.3584 0.273743 18.7959 0.0810558 19.3947C-0.111631 19.9936 0.0446014 20.655 0.492468 21.0977L5.91894 26.4669L4.63784 34.0546C4.53368 34.6795 4.79407 35.3148 5.30964 35.6846C5.8252 36.0543 6.50742 36.1012 7.06986 35.8044L13.7514 32.2371L20.4329 35.8044C20.9954 36.1012 21.6776 36.0595 22.1932 35.6846C22.7087 35.3096 22.9691 34.6795 22.865 34.0546L21.5786 26.4669L27.0051 21.0977C27.453 20.655 27.6144 19.9936 27.4165 19.3947C27.2186 18.7959 26.7031 18.3584 26.0781 18.2647L18.5946 17.1606L15.246 10.2708Z" fill="#F4A32C" />
-              <path d="M30.4783 33.5677C30.4093 33.4245 30.2634 33.3334 30.1033 33.3334C29.9432 33.3334 29.7986 33.4245 29.7283 33.5677L28.8912 35.2902L27.0216 35.5662C26.8654 35.5896 26.7352 35.699 26.687 35.8487C26.6388 35.9984 26.6779 36.1638 26.7899 36.2745L28.1465 37.6167L27.8262 39.5137C27.8002 39.6699 27.8653 39.8287 27.9942 39.9212C28.123 40.0136 28.2936 40.0253 28.4342 39.9511L30.1046 39.0593L31.775 39.9511C31.9156 40.0253 32.0861 40.0149 32.215 39.9212C32.3439 39.8274 32.409 39.6699 32.383 39.5137L32.0614 37.6167L33.418 36.2745C33.53 36.1638 33.5704 35.9984 33.5209 35.8487C33.4714 35.699 33.3425 35.5896 33.1863 35.5662L31.3154 35.2902L30.4783 33.5677Z" fill="#F4A32C" />
-              <path d="M34.2898 0.468698C34.1518 0.182271 33.8601 0 33.5398 0C33.2196 0 32.9305 0.182271 32.7899 0.468698L31.1156 3.91362L27.3765 4.46565C27.064 4.51252 26.8036 4.73124 26.7073 5.03069C26.6109 5.33013 26.689 5.66082 26.913 5.88215L29.6262 8.56675L28.9857 12.3606C28.9336 12.6731 29.0638 12.9907 29.3216 13.1756C29.5794 13.3605 29.9205 13.3839 30.2017 13.2355L33.5424 11.4518L36.8832 13.2355C37.1644 13.3839 37.5055 13.3631 37.7633 13.1756C38.0211 12.9881 38.1513 12.6731 38.0992 12.3606L37.4561 8.56675L40.1693 5.88215C40.3932 5.66082 40.474 5.33013 40.375 5.03069C40.2761 4.73124 40.0183 4.51252 39.7058 4.46565L35.9641 3.91362L34.2898 0.468698Z" fill="#F4A32C" />
-              <path d="M23.8115 5.56772C23.7425 5.42451 23.5967 5.33337 23.4365 5.33337C23.2764 5.33337 23.1319 5.42451 23.0616 5.56772L22.2244 7.29019L20.3549 7.5662C20.1986 7.58963 20.0684 7.69899 20.0203 7.84872C19.9721 7.99844 20.0112 8.16379 20.1231 8.27445L21.4797 9.61675L21.1595 11.5137C21.1334 11.6699 21.1985 11.8287 21.3274 11.9212C21.4563 12.0136 21.6269 12.0253 21.7675 11.9511L23.4379 11.0593L25.1082 11.9511C25.2488 12.0253 25.4194 12.0149 25.5483 11.9212C25.6772 11.8274 25.7423 11.6699 25.7162 11.5137L25.3947 9.61675L26.7513 8.27445C26.8632 8.16379 26.9036 7.99844 26.8541 7.84872C26.8047 7.69899 26.6758 7.58963 26.5195 7.5662L24.6487 7.29019L23.8115 5.56772Z" fill="#F4A32C" />
-            </svg>SHINYQUEST
-          </h2>
-          <p>Cherchez, Trouvez, Partagez.</p>
-        </div>
-
-        <div id="socials">
-          <h2>Contactez-nous</h2>
-          <ul>
-            <li id="mailTo">
-              <a aria-label="Envoyer un mail à Floris" href="mailto:floris.louerat@gmail.com?subject=[from: Portfolio]" target="blank_"><i class="fa-solid fa-envelope"></i></a>
-            </li>
-            <li id="linkedIn">
-              <a aria-label="voir le linkedIn de Floris" href="https://www.linkedin.com/in/floris-louerat/" target="blank_"><i class="fa-brands fa-linkedin"></i></a>
-            </li>
-            <li id="github">
-              <a aria-label="Voir le github de Floris" href="https://github.com/Flozerty" target="blank_"><i class="fa-brands fa-github"></i></a>
+            <li>
+              <a class="nav-link" href="{{ path('app_forum') }}">Forum</a>
             </li>
           </ul>
         </div>
-      </section>
-      <hr />
-      <section id="footer-base">
-        <p id="copy">
-          &copy; 2024 Flozerty - <a id="legal-mentions" href="{{ asset('mentions_legales.pdf') }}" target="_blank">Mentions légales</a>
-        </p>
-        <p>ShinyQuest est un projet non-officiel et n'est pas affilié à Nintendo ou à The Pokémon Company.</p>
-        <p>Pokémon est une marque déposée de Nintendo, GAME FREAK, Creatures Inc. et The Pokémon Company.</p>
-      </section>
-    </footer>
 
-    <div id="pokemon-dance" class="iframe-container">
-      <div class="overlay"></div>
+        <div>
+          <h3>Général</h3>
+          <ul>
+            <li>
+              <a class="nav-link" href="{{ path('app_pokedex') }}">Recherche pokédex</a>
+            </li>
+            <li>
+              <a class="nav-link" href="" style="text-decoration:line-through">Le top des shasses</a>
+            </li>
+          </ul>
+        </div>
 
-      <div style="width:100%;height:0;padding-bottom:111%;position:relative;">
-        <iframe title="lucario afk dance" src="https://giphy.com/embed/Z2NXSNmbgcE21zbVyZ" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+        {% if app.user and is_granted('ROLE_ADMIN') %}
+        <div>
+          <h3>Admin</h3>
+          <ul>
+            <li>
+              <a class="nav-link" href="{{ path('admin') }}"><strong>Panneau Admin</strong></a>
+            </li>
+          </ul>
+        </div>
+        {% endif %}
+      </nav>
+
+      <i id="toggle-nav-btn" class="fa-solid fa-circle-right"></i>
+    </aside>
+
+    {# main #}
+    <main>
+      {% if page_title is defined %}
+      <h1>{{ page_title }}</h1>
+      {% endif %}
+
+      {% block body %}
+
+      {% endblock %}
+
+      <a href="#top" aria-label="scroll to top" class="scroller hide-scroll"><i class="fa-solid fa-arrow-up"></i></a>
+    </main>
+  </div>
+
+  {% for label, messages in app.flashes %}
+  {% for message in messages %}
+  <div class="flash-message flash-{{ label }}">
+    <p>{{ message }}</p>
+    <i class='fa-solid fa-circle-xmark'></i>
+  </div>
+  {% endfor %}
+  {% endfor %}
+
+  {# footer #}
+  <footer>
+    {% if pika is defined and pika == true %}
+    <img id="pika-run" src="{{ asset('img/pikaRun.webp') }}" alt="pikachu running" loading="lazy" />
+    {% endif %}
+
+    <section id="footer-content">
+      <div id="project-footer">
+        <h2>
+          <svg width="30" height="30" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M15.246 10.2708C14.97 9.69792 14.3867 9.33337 13.7462 9.33337C13.1056 9.33337 12.5276 9.69792 12.2464 10.2708L8.89778 17.1606L1.41945 18.2647C0.794518 18.3584 0.273743 18.7959 0.0810558 19.3947C-0.111631 19.9936 0.0446014 20.655 0.492468 21.0977L5.91894 26.4669L4.63784 34.0546C4.53368 34.6795 4.79407 35.3148 5.30964 35.6846C5.8252 36.0543 6.50742 36.1012 7.06986 35.8044L13.7514 32.2371L20.4329 35.8044C20.9954 36.1012 21.6776 36.0595 22.1932 35.6846C22.7087 35.3096 22.9691 34.6795 22.865 34.0546L21.5786 26.4669L27.0051 21.0977C27.453 20.655 27.6144 19.9936 27.4165 19.3947C27.2186 18.7959 26.7031 18.3584 26.0781 18.2647L18.5946 17.1606L15.246 10.2708Z"
+              fill="#F4A32C" />
+            <path
+              d="M30.4783 33.5677C30.4093 33.4245 30.2634 33.3334 30.1033 33.3334C29.9432 33.3334 29.7986 33.4245 29.7283 33.5677L28.8912 35.2902L27.0216 35.5662C26.8654 35.5896 26.7352 35.699 26.687 35.8487C26.6388 35.9984 26.6779 36.1638 26.7899 36.2745L28.1465 37.6167L27.8262 39.5137C27.8002 39.6699 27.8653 39.8287 27.9942 39.9212C28.123 40.0136 28.2936 40.0253 28.4342 39.9511L30.1046 39.0593L31.775 39.9511C31.9156 40.0253 32.0861 40.0149 32.215 39.9212C32.3439 39.8274 32.409 39.6699 32.383 39.5137L32.0614 37.6167L33.418 36.2745C33.53 36.1638 33.5704 35.9984 33.5209 35.8487C33.4714 35.699 33.3425 35.5896 33.1863 35.5662L31.3154 35.2902L30.4783 33.5677Z"
+              fill="#F4A32C" />
+            <path
+              d="M34.2898 0.468698C34.1518 0.182271 33.8601 0 33.5398 0C33.2196 0 32.9305 0.182271 32.7899 0.468698L31.1156 3.91362L27.3765 4.46565C27.064 4.51252 26.8036 4.73124 26.7073 5.03069C26.6109 5.33013 26.689 5.66082 26.913 5.88215L29.6262 8.56675L28.9857 12.3606C28.9336 12.6731 29.0638 12.9907 29.3216 13.1756C29.5794 13.3605 29.9205 13.3839 30.2017 13.2355L33.5424 11.4518L36.8832 13.2355C37.1644 13.3839 37.5055 13.3631 37.7633 13.1756C38.0211 12.9881 38.1513 12.6731 38.0992 12.3606L37.4561 8.56675L40.1693 5.88215C40.3932 5.66082 40.474 5.33013 40.375 5.03069C40.2761 4.73124 40.0183 4.51252 39.7058 4.46565L35.9641 3.91362L34.2898 0.468698Z"
+              fill="#F4A32C" />
+            <path
+              d="M23.8115 5.56772C23.7425 5.42451 23.5967 5.33337 23.4365 5.33337C23.2764 5.33337 23.1319 5.42451 23.0616 5.56772L22.2244 7.29019L20.3549 7.5662C20.1986 7.58963 20.0684 7.69899 20.0203 7.84872C19.9721 7.99844 20.0112 8.16379 20.1231 8.27445L21.4797 9.61675L21.1595 11.5137C21.1334 11.6699 21.1985 11.8287 21.3274 11.9212C21.4563 12.0136 21.6269 12.0253 21.7675 11.9511L23.4379 11.0593L25.1082 11.9511C25.2488 12.0253 25.4194 12.0149 25.5483 11.9212C25.6772 11.8274 25.7423 11.6699 25.7162 11.5137L25.3947 9.61675L26.7513 8.27445C26.8632 8.16379 26.9036 7.99844 26.8541 7.84872C26.8047 7.69899 26.6758 7.58963 26.5195 7.5662L24.6487 7.29019L23.8115 5.56772Z"
+              fill="#F4A32C" />
+          </svg>SHINYQUEST
+        </h2>
+        <p>Cherchez, Trouvez, Partagez.</p>
       </div>
+
+      <div id="socials">
+        <h2>Contactez-nous</h2>
+        <ul>
+          <li id="mailTo">
+            <a aria-label="Envoyer un mail à Floris" href="mailto:floris.louerat@gmail.com?subject=[from: Portfolio]"
+              target="blank_"><i class="fa-solid fa-envelope"></i></a>
+          </li>
+          <li id="linkedIn">
+            <a aria-label="voir le linkedIn de Floris" href="https://www.linkedin.com/in/floris-louerat/"
+              target="blank_"><i class="fa-brands fa-linkedin"></i></a>
+          </li>
+          <li id="github">
+            <a aria-label="Voir le github de Floris" href="https://github.com/Flozerty" target="blank_"><i
+                class="fa-brands fa-github"></i></a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <hr />
+    <section id="footer-base">
+      <p id="copy">
+        &copy; 2024 Flozerty - <a id="legal-mentions" href="{{ asset('mentions_legales.pdf') }}"
+          target="_blank">Mentions légales</a>
+      </p>
+      <p>ShinyQuest est un projet non-officiel et n'est pas affilié à Nintendo ou à The Pokémon Company.</p>
+      <p>Pokémon est une marque déposée de Nintendo, GAME FREAK, Creatures Inc. et The Pokémon Company.</p>
+    </section>
+  </footer>
+
+  <div id="pokemon-dance" class="iframe-container">
+    <div class="overlay"></div>
+
+    <div style="width:100%;height:0;padding-bottom:111%;position:relative;">
+      <iframe title="lucario afk dance" src="https://giphy.com/embed/Z2NXSNmbgcE21zbVyZ" width="100%" height="100%"
+        style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
     </div>
+  </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('js/ajaxHeaderSearch.js') }}"></script>
-    <script src="{{ asset('js/mainScripts.js') }}"></script>
-    {% block javascripts %}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{{ asset('js/ajaxHeaderSearch.js') }}"></script>
+  <script src="{{ asset('js/notifications.js') }}"></script>
+  <script src="{{ asset('js/mainScripts.js') }}"></script>
+  {% block javascripts %}
 
-    {% endblock %}
-  </body>
+  {% endblock %}
+</body>
+
 </html>
