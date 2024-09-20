@@ -1,6 +1,5 @@
-let notifDiv = document.querySelectorAll('.flash-message');
-
-let timeouts = [];
+let notifDiv = document.querySelectorAll('.flash-message'),
+  timeouts = [];
 
 affichageElements()
 // affichage des elements
@@ -17,7 +16,8 @@ function affichageElements() {
       redimensionner();
     })
 
-    element.style.bottom = 50 + 70 * i + "px";
+    // 50 px min & i*70px
+    element.style.bottom = 50 + (70 * i) + "px";
 
     // timeout on fait disparaitre, puis on supprime l'element
     let timeout = setTimeout(() => {

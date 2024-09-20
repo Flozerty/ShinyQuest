@@ -41,6 +41,10 @@
   }
 }
 
+.intro-shinydex {
+  margin-bottom: 50px;
+}
+
 .pokemon {
   position: relative;
   display: flex;
@@ -78,7 +82,7 @@
   font-weight: 600;
 }
 
-main p {
+main>p {
   text-align: center;
   margin-bottom: 10px;
 }

@@ -23,6 +23,9 @@ Pokédex
 
 {# shinydex #}
 {% if capturedPokemonIds is defined %}
+<p class="intro-shinydex">Trouvez des shiny, et ils apparaitront ici!</p>
+
+
 <p>Complétion du shinydex : </p>
 <div id="dex-completion">
   <p>{{capturedPokemonIds | length}} / {{allPokemons | length}}</p>

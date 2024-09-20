@@ -258,22 +258,11 @@
       <h1>{{ page_title }}</h1>
       {% endif %}
 
-      {% block body %}
-
-      {% endblock %}
+      {% block body %}{% endblock %}
 
       <a href="#top" aria-label="scroll to top" class="scroller hide-scroll"><i class="fa-solid fa-arrow-up"></i></a>
     </main>
   </div>
-
-  {% for label, messages in app.flashes %}
-  {% for message in messages %}
-  <div class="flash-message flash-{{ label }}">
-    <p>{{ message }}</p>
-    <i class='fa-solid fa-circle-xmark'></i>
-  </div>
-  {% endfor %}
-  {% endfor %}
 
   {# footer #}
   <footer>
@@ -339,6 +328,16 @@
         style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
     </div>
   </div>
+
+  {# notifs #}
+  {% for label, messages in app.flashes %}
+  {% for message in messages %}
+  <div class="flash-message flash-{{ label }}">
+    <p>{{ message }}</p>
+    <i class='fa-solid fa-circle-xmark'></i>
+  </div>
+  {% endfor %}
+  {% endfor %}
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{{ asset('js/ajaxHeaderSearch.js') }}"></script>

@@ -13,16 +13,16 @@
     }
   }
 
+  .delete-ami-button {
+    transition: var(--transitionTime);
+    color: var(--red-main);
+  }
+
   #delete-container {
     grid-column: 8;
     justify-content: center;
     margin: auto;
     width: fit-content;
-
-    .delete-ami-button {
-      transition: var(--transitionTime);
-      color: var(--red-main);
-    }
   }
 }
 
@@ -110,8 +110,9 @@ main i {
   background-color: ghostwhite;
   border: 1px solid var(--primary-color);
   border-radius: 10px;
-  padding: 5px 10px;
+  padding: 8px 10px;
 
+  li,
   li a {
     display: flex;
     align-items: center;
