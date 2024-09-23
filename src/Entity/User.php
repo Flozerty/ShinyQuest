@@ -96,6 +96,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $ban = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $TwitchId = null;
+
     // On donne la valeur par défaut de new DateTime dans le construct
     public function __construct()
     {
@@ -457,6 +460,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBan(bool $ban): static
     {
         $this->ban = $ban;
+
+        return $this;
+    }
+
+    public function getTwitchId(): ?string
+    {
+        return $this->TwitchId;
+    }
+
+    public function setTwitchId(?string $TwitchId): static
+    {
+        $this->TwitchId = $TwitchId;
 
         return $this;
     }
