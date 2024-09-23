@@ -48,7 +48,7 @@ class SecurityController extends AbstractController
     public function connect(ClientRegistry $clientRegistry): RedirectResponse
     {
         $client = $clientRegistry->getClient('twitch_helix');
-        return $client->redirect(['read:user', 'user:email'], []);
+        return $client->redirect(['user:read:email'], []);
     }
 
     // déconnexion
