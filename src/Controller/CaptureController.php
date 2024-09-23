@@ -97,8 +97,10 @@ class CaptureController extends AbstractController
 
           return $this->redirectToRoute('my_shasses');
         } else {
-          return $this->redirectToRoute('error404');
+          return $this->redirectToRoute('bot_detected');
         }
+      } else {
+        return $this->redirectToRoute('bot_detected');
       }
     }
 
@@ -133,7 +135,11 @@ class CaptureController extends AbstractController
           $entityManager->flush();
 
           $this->addFlash('success', 'Félicitations, vous avez capturé ' . $capture->getnomPokemon());
+        } else {
+          return $this->redirectToRoute('bot_detected');
         }
+      } else {
+        return $this->redirectToRoute('bot_detected');
       }
     }
 

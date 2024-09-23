@@ -67,7 +67,11 @@ class RegistrationController extends AbstractController
           // do anything else you need here, like send an email
 
           return $security->login($user, AppAuthenticator::class, 'main');
+        } else {
+          return $this->redirectToRoute('bot_detected');
         }
+      } else {
+        return $this->redirectToRoute('bot_detected');
       }
     }
 

@@ -26,7 +26,7 @@ class SecurityController extends AbstractController
 
         // vérification honey pot
         if (isset($_POST["first_name"]) || !empty($_POST["first_name"])) {
-            return $this->redirectToRoute('error404');
+            return $this->redirectToRoute('bot_detected');
         }
 
         // vérifie que l'utilisateur remplit bien le formulaire depuis le site. 
