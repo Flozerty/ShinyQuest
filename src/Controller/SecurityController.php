@@ -7,7 +7,10 @@ use App\Entity\User;
 use App\Repository\CaptureRepository;
 use App\Repository\ResetPasswordRequestRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
+use KnpU\OAuth2ClientBundle\Client\Provider\TwitchClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Attribute\Route;
@@ -16,6 +19,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+    // connexion
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -28,7 +32,6 @@ class SecurityController extends AbstractController
         if (isset($_POST["first_name"]) || !empty($_POST["first_name"])) {
             return $this->redirectToRoute('bot_detected');
         }
-
         // vérifie que l'utilisateur remplit bien le formulaire depuis le site. 
         if (isset($_SERVER["HTTP_REFERER"]) && strpos($_SERVER["HTTP_REFERER"], '127.0.0.1:8000')) {
 
@@ -40,7 +43,15 @@ class SecurityController extends AbstractController
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
+    // connexion avec Twitch
+    #[Route(path: '/connect/twitch_helix', name: 'twitch_helix_connect')]
+    public function connect(ClientRegistry $clientRegistry): RedirectResponse
+    {
+        $client = $clientRegistry->getClient('twitch_helix');
+        return $client->redirect(['read:user', 'user:email'], []);
+    }
 
+    // déconnexion
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
