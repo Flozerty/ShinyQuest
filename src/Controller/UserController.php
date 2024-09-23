@@ -27,6 +27,7 @@ class UserController extends AbstractController
     foreach ($users as $user) {
       $usersData[] = [
         'user' => $user,
+        // private method, regarder tout en bas
         "capturedPokemonIds" => $this->getUserPokedexData($user, $captureRepository),
       ];
     }
@@ -41,7 +42,7 @@ class UserController extends AbstractController
     );
 
     $AmisByDemande = $amisRepository->findBy(["userDemande" => $this->getUser()]);
-    $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()], );
+    $AmisByRecoit = $amisRepository->findBy(["userRecoit" => $this->getUser()],);
 
     $amis = [];
     $demandeEnvoyee = [];
