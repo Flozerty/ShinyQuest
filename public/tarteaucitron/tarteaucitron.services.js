@@ -2,6 +2,31 @@
 /*jslint regexp: true, nomen: true*/
 /* min ready */
 
+
+// ajout de giphy
+tarteaucitron.services.giphy = {
+    "key": "giphy",
+    "type": "video",
+    "name": "Giphy",
+    "uri": "https://giphy.com/privacy",
+    "needConsent": true,
+    "cookies": ['__gads', '__gpi'],
+    "js": function () {
+        tarteaucitron.fallback(['giphy_player'], function (x) {
+            var frame_title = tarteaucitron.fixSelfXSS(x.getAttribute('title') || 'Giphy iframe'),
+                player_id = x.getAttribute('data-player-id'),
+                giphy_url = 'https://giphy.com/embed/' + player_id;
+
+            return '<iframe title="' + frame_title + '" src="' + giphy_url + '" width="480" height="270" frameborder="0" allowfullscreen></iframe>';
+        });
+    },
+    "fallback": function () {
+        var id = 'giphy';
+        tarteaucitron.fallback(['giphy_player'], tarteaucitron.engage(id));
+    }
+};
+
+
 // generic iframe
 tarteaucitron.services.iframe = {
     "key": "iframe",
@@ -13,26 +38,26 @@ tarteaucitron.services.iframe = {
     "js": function () {
         "use strict";
         tarteaucitron.fallback(['tac_iframe'], function (x) {
-            var frame_title = (tarteaucitron.getElemAttr(x,"title")) ? tarteaucitron.getElemAttr(x,"title") : '',
-                width = tarteaucitron.getElemAttr(x,"width"),
-                height = tarteaucitron.getElemAttr(x,"height"),
-                allowfullscreen = tarteaucitron.getElemAttr(x,"allowfullscreen"),
-                scrolling = (tarteaucitron.getElemAttr(x,"scrolling")),
-                url = tarteaucitron.getElemAttr(x,"url");
+            var frame_title = (tarteaucitron.getElemAttr(x, "title")) ? tarteaucitron.getElemAttr(x, "title") : '',
+                width = tarteaucitron.getElemAttr(x, "width"),
+                height = tarteaucitron.getElemAttr(x, "height"),
+                allowfullscreen = tarteaucitron.getElemAttr(x, "allowfullscreen"),
+                scrolling = (tarteaucitron.getElemAttr(x, "scrolling")),
+                url = tarteaucitron.getElemAttr(x, "url");
 
-            if(!scrolling){
+            if (!scrolling) {
                 scrolling = 'no';
             }
 
-            return '<iframe title="' + frame_title + '" src="' + url + '" width="' + width + '" height="' + height + '" scrolling="'+scrolling+'" allowtransparency' + (allowfullscreen == '0' ? '' : ' webkitallowfullscreen mozallowfullscreen allowfullscreen') + '></iframe>';
+            return '<iframe title="' + frame_title + '" src="' + url + '" width="' + width + '" height="' + height + '" scrolling="' + scrolling + '" allowtransparency' + (allowfullscreen == '0' ? '' : ' webkitallowfullscreen mozallowfullscreen allowfullscreen') + '></iframe>';
         });
     },
     "fallback": function () {
         "use strict";
         var id = 'iframe';
         tarteaucitron.fallback(['tac_iframe'], function (elem) {
-            elem.style.width = tarteaucitron.getElemAttr(elem,'width') + 'px';
-            elem.style.height = tarteaucitron.getElemAttr(elem,'height') + 'px';
+            elem.style.width = tarteaucitron.getElemAttr(elem, 'width') + 'px';
+            elem.style.height = tarteaucitron.getElemAttr(elem, 'height') + 'px';
             return tarteaucitron.engage(id);
         });
     }
@@ -71,7 +96,7 @@ tarteaucitron.services.seamlessaccess = {
             return;
         }
         var uniqIds = [];
-        tarteaucitron.fallback(['seamlessaccess_button'], function(x) {
+        tarteaucitron.fallback(['seamlessaccess_button'], function (x) {
             var uniqId = x.getAttribute('id');
             if (uniqId === undefined) {
                 uniqId = '_' + Math.random().toString(36).substr(2, 9);
@@ -80,7 +105,7 @@ tarteaucitron.services.seamlessaccess = {
             uniqIds.push(uniqId);
             x.innerHTML = '';
         }, true);
-        tarteaucitron.addScript('//service.seamlessaccess.org/thiss.js', 'seamlessaccessjs', function() {
+        tarteaucitron.addScript('//service.seamlessaccess.org/thiss.js', 'seamlessaccessjs', function () {
             for (var i = 0; i < uniqIds.length; i += 1) {
                 thiss.DiscoveryComponent.render({
                     loginInitiatorURL: tarteaucitron.user.seamlessaccessInitiator,
@@ -110,7 +135,7 @@ tarteaucitron.services.reddit = {
             return;
         }
 
-        !function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js",t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);rdt('init',tarteaucitron.user.redditInit, {"aaid":tarteaucitron.user.redditAAID,"externalId":tarteaucitron.user.redditExternalId,"idfa":tarteaucitron.user.redditIDFA});rdt('track', 'PageVisit');
+        !function (w, d) { if (!w.rdt) { var p = w.rdt = function () { p.sendEvent ? p.sendEvent.apply(p, arguments) : p.callQueue.push(arguments) }; p.callQueue = []; var t = d.createElement("script"); t.src = "https://www.redditstatic.com/ads/pixel.js", t.async = !0; var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(t, s) } }(window, document); rdt('init', tarteaucitron.user.redditInit, { "aaid": tarteaucitron.user.redditAAID, "externalId": tarteaucitron.user.redditExternalId, "idfa": tarteaucitron.user.redditIDFA }); rdt('track', 'PageVisit');
     }
 };
 
@@ -129,8 +154,8 @@ tarteaucitron.services.zoho = {
             return;
         }
 
-        var $zoho=$zoho || {};
-        $zoho.salesiq = $zoho.salesiq || {widgetcode:tarteaucitron.user.zohoWidgetCode, values:{},ready:function(){}};
+        var $zoho = $zoho || {};
+        $zoho.salesiq = $zoho.salesiq || { widgetcode: tarteaucitron.user.zohoWidgetCode, values: {}, ready: function () { } };
         tarteaucitron.addScript('https://salesiq.zoho.eu/widget');
     }
 };
@@ -172,8 +197,8 @@ tarteaucitron.services.thetradedesk = {
             return;
         }
 
-        tarteaucitron.addScript('https://js.adsrvr.org/up_loader.1.1.0.js', '', function() {
-            ttd_dom_ready( function() {
+        tarteaucitron.addScript('https://js.adsrvr.org/up_loader.1.1.0.js', '', function () {
+            ttd_dom_ready(function () {
                 if (typeof TTDUniversalPixelApi === 'function') {
                     var universalPixelApi = new TTDUniversalPixelApi();
                     universalPixelApi.init(tarteaucitron.user.thetradedeskAdvertiserId, [tarteaucitron.user.thetradedeskUpixelId], "https://insight.adsrvr.org/track/up");
@@ -368,7 +393,7 @@ tarteaucitron.services.piximedia = {
             return;
         }
 
-        tarteaucitron.addScript('https://ad.piximedia.com/tools/activity/?' + tarteaucitron.user.piximediaName + '||'+ tarteaucitron.user.piximediaTag + '|' + tarteaucitron.user.piximediaType + '|' + tarteaucitron.user.piximediaId + '|||||');
+        tarteaucitron.addScript('https://ad.piximedia.com/tools/activity/?' + tarteaucitron.user.piximediaName + '||' + tarteaucitron.user.piximediaTag + '|' + tarteaucitron.user.piximediaType + '|' + tarteaucitron.user.piximediaId + '|||||');
     }
 };
 
@@ -388,9 +413,9 @@ tarteaucitron.services.screeb = {
         }
 
         window['ScreebObject'] = '$screeb';
-        window['$screeb'] = window['$screeb'] || function() {
+        window['$screeb'] = window['$screeb'] || function () {
             var d = arguments;
-            return new Promise(function(a, b) {
+            return new Promise(function (a, b) {
                 (window['$screeb'].q = window['$screeb'].q || []).push({
                     v: 1,
                     args: d,
@@ -423,19 +448,19 @@ tarteaucitron.services.pipedrive = {
             return;
         }
 
-        window.pipedriveLeadboosterConfig = {base: 'leadbooster-chat.pipedrive.com', companyId: tarteaucitron.user.pipedriveCompany, playbookUuid: tarteaucitron.user.pipedrivePlaybook, version: 2};
+        window.pipedriveLeadboosterConfig = { base: 'leadbooster-chat.pipedrive.com', companyId: tarteaucitron.user.pipedriveCompany, playbookUuid: tarteaucitron.user.pipedrivePlaybook, version: 2 };
 
         if (!window.LeadBooster) {
             window.LeadBooster = {
                 q: [],
-                on: function(n, h) {
+                on: function (n, h) {
                     this.q.push({
                         t: 'o',
                         n: n,
                         h: h
                     });
                 },
-                trigger: function(n) {
+                trigger: function (n) {
                     this.q.push({
                         t: 't',
                         n: n
@@ -485,27 +510,27 @@ tarteaucitron.services.mixpanel = {
     "js": function () {
         "use strict";
 
-        (function (f, b) { if (!b.__SV) { var e, g, i, h; window.mixpanel = b; b._i = []; b.init = function (e, f, c) { function g(a, d) { var b = d.split("."); 2 == b.length && ((a = a[b[0]]), (d = b[1])); a[d] = function () { a.push([d].concat(Array.prototype.slice.call(arguments, 0))); }; } var a = b; "undefined" !== typeof c ? (a = b[c] = []) : (c = "mixpanel"); a.people = a.people || []; a.toString = function (a) { var d = "mixpanel"; "mixpanel" !== c && (d += "." + c); a || (d += " (stub)"); return d; }; a.people.toString = function () { return a.toString(1) + ".people (stub)"; }; i = "disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split( " "); for (h = 0; h < i.length; h++) g(a, i[h]); var j = "set set_once union unset remove delete".split(" "); a.get_group = function () { function b(c) { d[c] = function () { call2_args = arguments; call2 = [c].concat(Array.prototype.slice.call(call2_args, 0)); a.push([e, call2]); }; } for ( var d = {}, e = ["get_group"].concat( Array.prototype.slice.call(arguments, 0)), c = 0; c < j.length; c++) b(j[c]); return d; }; b._i.push([e, f, c]); }; b.__SV = 1.2; e = f.createElement("script"); e.type = "text/javascript"; e.async = !0; e.src = "undefined" !== typeof MIXPANEL_CUSTOM_LIB_URL ? MIXPANEL_CUSTOM_LIB_URL : "file:" === f.location.protocol && "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//) ? "https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js" : "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js"; g = f.getElementsByTagName("script")[0]; g.parentNode.insertBefore(e, g); } })(document, window.mixpanel || []);
+        (function (f, b) { if (!b.__SV) { var e, g, i, h; window.mixpanel = b; b._i = []; b.init = function (e, f, c) { function g(a, d) { var b = d.split("."); 2 == b.length && ((a = a[b[0]]), (d = b[1])); a[d] = function () { a.push([d].concat(Array.prototype.slice.call(arguments, 0))); }; } var a = b; "undefined" !== typeof c ? (a = b[c] = []) : (c = "mixpanel"); a.people = a.people || []; a.toString = function (a) { var d = "mixpanel"; "mixpanel" !== c && (d += "." + c); a || (d += " (stub)"); return d; }; a.people.toString = function () { return a.toString(1) + ".people (stub)"; }; i = "disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" "); for (h = 0; h < i.length; h++) g(a, i[h]); var j = "set set_once union unset remove delete".split(" "); a.get_group = function () { function b(c) { d[c] = function () { call2_args = arguments; call2 = [c].concat(Array.prototype.slice.call(call2_args, 0)); a.push([e, call2]); }; } for (var d = {}, e = ["get_group"].concat(Array.prototype.slice.call(arguments, 0)), c = 0; c < j.length; c++) b(j[c]); return d; }; b._i.push([e, f, c]); }; b.__SV = 1.2; e = f.createElement("script"); e.type = "text/javascript"; e.async = !0; e.src = "undefined" !== typeof MIXPANEL_CUSTOM_LIB_URL ? MIXPANEL_CUSTOM_LIB_URL : "file:" === f.location.protocol && "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//) ? "https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js" : "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js"; g = f.getElementsByTagName("script")[0]; g.parentNode.insertBefore(e, g); } })(document, window.mixpanel || []);
     }
 };
 
 // freshsalescrm
 tarteaucitron.services.freshsalescrm = {
-  "key": "freshsalescrm",
-  "type": "analytic",
-  "name": "FreshSales (CRM)",
-  "uri": "https://www.freshworks.com/gdpr/",
-  "needConsent": true,
-  "cookies": [],
-  "js": function () {
-    "use strict";
-    
-    if (tarteaucitron.user.freshsalescrmId === undefined) {
-     return;
+    "key": "freshsalescrm",
+    "type": "analytic",
+    "name": "FreshSales (CRM)",
+    "uri": "https://www.freshworks.com/gdpr/",
+    "needConsent": true,
+    "cookies": [],
+    "js": function () {
+        "use strict";
+
+        if (tarteaucitron.user.freshsalescrmId === undefined) {
+            return;
+        }
+
+        tarteaucitron.addScript('https://eu.fw-cdn.com/' + tarteaucitron.user.freshsalescrmId + '.js');
     }
-    
-    tarteaucitron.addScript('https://eu.fw-cdn.com/' + tarteaucitron.user.freshsalescrmId + '.js');
-  }
 };
 
 // equativ
@@ -588,7 +613,7 @@ tarteaucitron.services.sharethissticky = {
     "name": "ShareThis Sticky",
     "uri": "https://sharethis.com/fr/privacy/",
     "needConsent": true,
-    "cookies": ['_stid','_stidv','pubconsent'],
+    "cookies": ['_stid', '_stidv', 'pubconsent'],
     "js": function () {
         "use strict";
 
@@ -607,7 +632,7 @@ tarteaucitron.services.pianoanalytics = {
     "name": "Piano Analytics",
     "uri": "https://piano.io/privacy-policy/",
     "needConsent": true,
-    "cookies": ['_pcid','_pctx','_pctx','pa_user', 'pa_privacy'],
+    "cookies": ['_pcid', '_pctx', '_pctx', 'pa_user', 'pa_privacy'],
     "js": function () {
         "use strict";
 
@@ -667,13 +692,13 @@ tarteaucitron.services.outbrainamplify = {
 
         var OB_ADV_ID = tarteaucitron.user.outbrainamplifyId;
         if (window.obApi) {
-            var toArray = function(object) {
+            var toArray = function (object) {
                 return Object.prototype.toString.call(object) === '[object Array]' ? object : [object];
             };
             window.obApi.marketerId = toArray(_window.obApi.marketerId).concat(toArray(OB_ADV_ID));
             return;
         }
-        var api = window.obApi = function() {
+        var api = window.obApi = function () {
             api.dispatch ? api.dispatch.apply(api, arguments) : api.queue.push(arguments);
         };
         api.version = '1.1';
@@ -732,7 +757,7 @@ tarteaucitron.services.adobeworkspace = {
             return;
         }
 
-        tarteaucitron.addScript('https://assets.adobedtm.com/'+tarteaucitron.user.adobeworkspaceId1+'/'+tarteaucitron.user.adobeworkspaceId2+'/launch-'+tarteaucitron.user.adobeworkspaceId3+'.min.js');
+        tarteaucitron.addScript('https://assets.adobedtm.com/' + tarteaucitron.user.adobeworkspaceId1 + '/' + tarteaucitron.user.adobeworkspaceId2 + '/launch-' + tarteaucitron.user.adobeworkspaceId3 + '.min.js');
     }
 };
 
@@ -771,7 +796,7 @@ tarteaucitron.services.leadinfo = {
 
         window.GlobalLeadinfoNamespace = window.GlobalLeadinfoNamespace || [];
         window.GlobalLeadinfoNamespace.push("leadinfo");
-        window["leadinfo"] = function() {
+        window["leadinfo"] = function () {
             (window["leadinfo"].q = window["leadinfo"].q || []).push(arguments)
         };
         window["leadinfo"].t = window["leadinfo"].t || tarteaucitron.user.leadinfoId;
@@ -796,7 +821,7 @@ tarteaucitron.services.force24 = {
             return;
         }
 
-        window.Force24Object = "f24", window["f24"] = window["f24"] || function() {
+        window.Force24Object = "f24", window["f24"] = window["f24"] || function () {
             window["f24"].q = window["f24"].q || [],
                 window["f24"].q.push(arguments)
         }, window["f24"].l = 1 * new Date;
@@ -864,9 +889,9 @@ tarteaucitron.services.activecampaignvgo = {
             return;
         }
 
-        window.visitorGlobalObjectAlias="vgo";
-        window[window.visitorGlobalObjectAlias]=window[window.visitorGlobalObjectAlias]||function(){(window[window.visitorGlobalObjectAlias].q=window[window.visitorGlobalObjectAlias].q||[]).push(arguments)};
-        window[window.visitorGlobalObjectAlias].l=(new Date).getTime();
+        window.visitorGlobalObjectAlias = "vgo";
+        window[window.visitorGlobalObjectAlias] = window[window.visitorGlobalObjectAlias] || function () { (window[window.visitorGlobalObjectAlias].q = window[window.visitorGlobalObjectAlias].q || []).push(arguments) };
+        window[window.visitorGlobalObjectAlias].l = (new Date).getTime();
 
         tarteaucitron.addScript('https://diffuser-cdn.app-us1.com/diffuser/diffuser.js', '', function () {
             vgo('setAccount', tarteaucitron.user.activecampaignAccount);
@@ -891,13 +916,13 @@ tarteaucitron.services.sendinblue = {
             return;
         }
 
-        window.sib = {equeue: [], client_key: tarteaucitron.user.sendinblueKey};
+        window.sib = { equeue: [], client_key: tarteaucitron.user.sendinblueKey };
         window.sendinblue = {};
         for (var j = ['track', 'identify', 'trackLink', 'page'], i = 0; i < j.length; i++) {
-            (function(k) {
-                window.sendinblue[k] = function() {
+            (function (k) {
+                window.sendinblue[k] = function () {
                     var arg = Array.prototype.slice.call(arguments);
-                    (window.sib[k] || function() {
+                    (window.sib[k] || function () {
                         var t = {};
                         t[k] = arg;
                         window.sib.equeue.push(t);
@@ -948,8 +973,8 @@ tarteaucitron.services.eulerian = {
             return;
         }
 
-        (function(e,a){var i=e.length,y=5381,k='script',s=window,v=document,o=v.createElement(k);for(;i;){i-=1;y=(y*33)^e.charCodeAt(i)}y='_EA_'+(y>>>=0);(function(e,a,s,y){s[a]=s[a]||function(){(s[y]=s[y]||[]).push(arguments);s[y].eah=e;};}(e,a,s,y));i=new Date/1E7|0;o.ea=y;y=i%26;o.async=1;o.src='//'+e+'/'+String.fromCharCode(97+y,122-y,65+y)+(i%1E3)+'.js?2';s=v.getElementsByTagName(k)[0];s.parentNode.insertBefore(o,s);})
-        (tarteaucitron.user.eulerianHost,'EA_push');
+        (function (e, a) { var i = e.length, y = 5381, k = 'script', s = window, v = document, o = v.createElement(k); for (; i;) { i -= 1; y = (y * 33) ^ e.charCodeAt(i) } y = '_EA_' + (y >>>= 0); (function (e, a, s, y) { s[a] = s[a] || function () { (s[y] = s[y] || []).push(arguments); s[y].eah = e; }; }(e, a, s, y)); i = new Date / 1E7 | 0; o.ea = y; y = i % 26; o.async = 1; o.src = '//' + e + '/' + String.fromCharCode(97 + y, 122 - y, 65 + y) + (i % 1E3) + '.js?2'; s = v.getElementsByTagName(k)[0]; s.parentNode.insertBefore(o, s); })
+            (tarteaucitron.user.eulerianHost, 'EA_push');
         EA_push();
     }
 };
@@ -969,9 +994,9 @@ tarteaucitron.services.posthog = {
             return;
         }
 
-        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        !function (t, e) { var o, n, p, r; e.__SV || (window.posthog = e, e._i = [], e.init = function (i, s, a) { function g(t, e) { var o = e.split("."); 2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } } (p = t.createElement("script")).type = "text/javascript", p.async = !0, p.src = s.api_host + "/static/array.js", (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r); var u = e; for (void 0 !== a ? u = e[a] = [] : a = "posthog", u.people = u.people || [], u.toString = function (t) { var e = "posthog"; return "posthog" !== a && (e += "." + a), t || (e += " (stub)"), e }, u.people.toString = function () { return u.toString(1) + ".people (stub)" }, o = "capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "), n = 0; n < o.length; n++)g(u, o[n]); e._i.push([i, s, a]) }, e.__SV = 1) }(document, window.posthog || []);
 
-        posthog.init(tarteaucitron.user.posthogApiKey, {api_host: tarteaucitron.user.posthogHost});
+        posthog.init(tarteaucitron.user.posthogApiKey, { api_host: tarteaucitron.user.posthogHost });
 
     }
 };
@@ -1067,7 +1092,7 @@ tarteaucitron.services.leadforensics = {
             return;
         }
 
-        tarteaucitron.addScript('https://secure.team8save.com/js/sc/'+ tarteaucitron.user.leadforensicsId +'.js');
+        tarteaucitron.addScript('https://secure.team8save.com/js/sc/' + tarteaucitron.user.leadforensicsId + '.js');
     }
 };
 
@@ -1128,7 +1153,7 @@ tarteaucitron.services.robofabrica = {
             return;
         }
 
-        tarteaucitron.addScript('https://app.robofabrica.tech/widget/script', 'inceptive-cw-script', function() {
+        tarteaucitron.addScript('https://app.robofabrica.tech/widget/script', 'inceptive-cw-script', function () {
 
             document.getElementById('inceptive-cw-script').setAttribute('unique-url', tarteaucitron.user.robofabricaUuid);
             document.getElementById('inceptive-cw-script').setAttribute('label', 'start');
@@ -1178,7 +1203,7 @@ tarteaucitron.services.snapchat = {
             return;
         }
 
-        var a = window.snaptr = function() {
+        var a = window.snaptr = function () {
             a.handleRequest ? a.handleRequest.apply(a, arguments) : a.queue.push(arguments)
         };
         a.queue = [];
@@ -1216,11 +1241,11 @@ tarteaucitron.services.antvoice = {
         }
 
         window.avDataLayer = window.avDataLayer || [];
-        window.avtag = window.avtag || function(_cmd,_p) {
-            window.avDataLayer.push({cmd:_cmd,p:_p});
+        window.avtag = window.avtag || function (_cmd, _p) {
+            window.avDataLayer.push({ cmd: _cmd, p: _p });
         }
-        window.avtag('setConsent', {consent:true});
-        window.avtag('init', {id: tarteaucitron.user.antvoiceId});
+        window.avtag('setConsent', { consent: true });
+        window.avtag('init', { id: tarteaucitron.user.antvoiceId });
 
         tarteaucitron.addScript('https://static.avads.net/avtag.min.js');
     }
@@ -1304,7 +1329,7 @@ tarteaucitron.services.myfeelback = {
                 }
             }
         };
-        tarteaucitron.addScript('https://actorssl-5637.kxcdn.com/actor/'+tarteaucitron.user.myfeelbackId+'/action', 'MFBActor');
+        tarteaucitron.addScript('https://actorssl-5637.kxcdn.com/actor/' + tarteaucitron.user.myfeelbackId + '/action', 'MFBActor');
     }
 };
 
@@ -1322,7 +1347,7 @@ tarteaucitron.services.arcio = {
             return;
         }
 
-        tarteaucitron.addScript('https://arc.io/widget.min.js#'+tarteaucitron.user.arcId);
+        tarteaucitron.addScript('https://arc.io/widget.min.js#' + tarteaucitron.user.arcId);
     }
 };
 
@@ -1351,7 +1376,7 @@ tarteaucitron.services.doubleclick = {
                 ord = tarteaucitron.getElemAttr(x, "data-ord"),
                 num = tarteaucitron.getElemAttr(x, "data-num");
 
-            return '<iframe src="https://'+id1+'.fls.doubleclick.net/activityi;src='+id2+';type='+type+';cat='+cat+';item='+item+';quantity='+quantity+';price='+price+';postage='+postage+';seller='+seller+';gdpr='+gdpr+';gdpr_consent='+gdpr_consent+';num='+num+';ord='+ord+'?" width="1" height="1" frameborder="0" style="display:none"></iframe>';
+            return '<iframe src="https://' + id1 + '.fls.doubleclick.net/activityi;src=' + id2 + ';type=' + type + ';cat=' + cat + ';item=' + item + ';quantity=' + quantity + ';price=' + price + ';postage=' + postage + ';seller=' + seller + ';gdpr=' + gdpr + ';gdpr_consent=' + gdpr_consent + ';num=' + num + ';ord=' + ord + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>';
         });
     }
 };
@@ -1370,7 +1395,7 @@ tarteaucitron.services.userpilot = {
             return;
         }
 
-        window.userpilotSettings = {token: tarteaucitron.user.userpilotToken};
+        window.userpilotSettings = { token: tarteaucitron.user.userpilotToken };
         tarteaucitron.addScript('https://js.userpilot.io/sdk/latest.js');
     }
 };
@@ -1407,12 +1432,12 @@ tarteaucitron.services.piwikpro = {
         var qP = [];
 
         var qPString = qP.length > 0 ? ("?" + qP.join("&")) : "";
-        tarteaucitron.addScript('https://'+tarteaucitron.user.piwikProContainer+'.containers.piwik.pro/'+tarteaucitron.user.piwikProId+'.js'+qPString);
+        tarteaucitron.addScript('https://' + tarteaucitron.user.piwikProContainer + '.containers.piwik.pro/' + tarteaucitron.user.piwikProId + '.js' + qPString);
 
-        ! function(a, n, i) {
+        ! function (a, n, i) {
             a[n] = a[n] || {};
-            for (var c = 0; c < i.length; c++) ! function(i) {
-                a[n][i] = a[n][i] || {}, a[n][i].api = a[n][i].api || function() {
+            for (var c = 0; c < i.length; c++) ! function (i) {
+                a[n][i] = a[n][i] || {}, a[n][i].api = a[n][i].api || function () {
                     var a = [].slice.call(arguments, 0);
                     "string" == typeof a[0] && window['dataLayer'].push({
                         event: n + "." + i + ":" + a[0],
@@ -1877,7 +1902,7 @@ tarteaucitron.services.metrica = {
                 m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
                 m[i].l = 1 * new Date(); k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
             })
-            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+                (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
             ym(tarteaucitron.user.yandexmetrica, "init", {
                 clickmap: true,
@@ -2424,7 +2449,7 @@ tarteaucitron.services.criteoonetag = {
     "uri": "https://www.criteo.com/privacy/",
     "needConsent": true,
     "cookies": ['uid', 'tk', 'uid3pd'],
-    "js": function() {
+    "js": function () {
         "use strict";
         if (tarteaucitron.user.criteoonetagAccount === undefined) return;
 
@@ -2434,7 +2459,7 @@ tarteaucitron.services.criteoonetag = {
             account: tarteaucitron.user.criteoonetagAccount
         })
 
-        tarteaucitron.addScript('//static.criteo.net/js/ld/ld.js', '', function() {
+        tarteaucitron.addScript('//static.criteo.net/js/ld/ld.js', '', function () {
             if (typeof tarteaucitron.user.criteoonetagMore === 'function') {
                 tarteaucitron.user.criteoonetagMore();
             }
@@ -3322,7 +3347,7 @@ tarteaucitron.services.googleads = {
         tarteaucitron.addScript('https://www.googletagmanager.com/gtag/js?id=' + tarteaucitron.user.googleadsId, '', function () {
             window.gtag = function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
-            var additional_config_info = (timeExpire !== undefined) ? {'anonymize_ip': true, 'cookie_expires': timeExpire / 1000} : {'anonymize_ip': true};
+            var additional_config_info = (timeExpire !== undefined) ? { 'anonymize_ip': true, 'cookie_expires': timeExpire / 1000 } : { 'anonymize_ip': true };
 
             gtag('config', tarteaucitron.user.googleadsId, additional_config_info);
 
@@ -3361,7 +3386,7 @@ tarteaucitron.services.gtag = {
         tarteaucitron.addScript('https://www.googletagmanager.com/gtag/js?id=' + tarteaucitron.user.gtagUa, '', function () {
             window.gtag = function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
-            var additional_config_info = (timeExpire !== undefined) ? {'anonymize_ip': true, 'cookie_expires': timeExpire / 1000} : {'anonymize_ip': true};
+            var additional_config_info = (timeExpire !== undefined) ? { 'anonymize_ip': true, 'cookie_expires': timeExpire / 1000 } : { 'anonymize_ip': true };
 
             if (tarteaucitron.user.gtagCrossdomain) {
                 /**
@@ -5019,7 +5044,7 @@ tarteaucitron.services.youtube = {
                     return a + "=" + tarteaucitron.getElemAttr(x, a);
                 }).join("&");
 
-            if(tarteaucitron.getElemAttr(x, "loop") == 1) {
+            if (tarteaucitron.getElemAttr(x, "loop") == 1) {
                 params = params + "&playlist=" + video_id;
             }
 
@@ -5057,8 +5082,8 @@ tarteaucitron.services.youtube = {
         "use strict";
         var id = 'youtube';
         tarteaucitron.fallback(['youtube_player'], function (elem) {
-            elem.style.width = tarteaucitron.getElemAttr(elem,'width') + 'px';
-            elem.style.height = tarteaucitron.getElemAttr(elem,'height') + 'px';
+            elem.style.width = tarteaucitron.getElemAttr(elem, 'width') + 'px';
+            elem.style.height = tarteaucitron.getElemAttr(elem, 'height') + 'px';
             return tarteaucitron.engage(id);
         });
     }
@@ -5106,8 +5131,8 @@ tarteaucitron.services.youtubeplaylist = {
         "use strict";
         var id = 'youtubeplaylist';
         tarteaucitron.fallback(['youtube_playlist_player'], function (elem) {
-            elem.style.width = tarteaucitron.getElemAttr(elem,'width') + 'px';
-            elem.style.height = tarteaucitron.getElemAttr(elem,'height') + 'px';
+            elem.style.width = tarteaucitron.getElemAttr(elem, 'width') + 'px';
+            elem.style.height = tarteaucitron.getElemAttr(elem, 'height') + 'px';
             return tarteaucitron.engage(id);
         });
     }
@@ -5325,7 +5350,7 @@ tarteaucitron.services.multiplegtag = {
                 tarteaucitron.addScript('https://www.googletagmanager.com/gtag/js?id=' + ua, '', function () {
                     window.gtag = function gtag() { dataLayer.push(arguments); }
                     gtag('js', new Date());
-                    var additional_config_info = (timeExpire !== undefined) ? {'anonymize_ip': true, 'cookie_expires': timeExpire / 1000} : {'anonymize_ip': true};
+                    var additional_config_info = (timeExpire !== undefined) ? { 'anonymize_ip': true, 'cookie_expires': timeExpire / 1000 } : { 'anonymize_ip': true };
                     gtag('config', ua, additional_config_info);
                 });
             });
@@ -5571,7 +5596,7 @@ tarteaucitron.services.matomotm = {
         }
 
         var _mtm = window._mtm = window._mtm || [];
-        _mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
+        _mtm.push({ 'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start' });
 
         tarteaucitron.addScript(tarteaucitron.user.matomotmUrl);
     }
@@ -6522,9 +6547,9 @@ tarteaucitron.services.m6meteo = {
         tarteaucitron.fallback(['tac_m6meteo'], function (x) {
             var id = tarteaucitron.getElemAttr(x, "data-id");
 
-            tarteaucitron.addScript('https://www.meteocity.com/widget/js/'+id);
+            tarteaucitron.addScript('https://www.meteocity.com/widget/js/' + id);
 
-            return '<div id="cont_'+id+'"><div id="spa_'+id+'"><a id="a_'+id+'" href="#"></a> ©<a target="_top" href="https://www.meteocity.com">M6météo</a></div></div>';
+            return '<div id="cont_' + id + '"><div id="spa_' + id + '"><a id="a_' + id + '" href="#"></a> ©<a target="_top" href="https://www.meteocity.com">M6météo</a></div></div>';
         });
     },
     "fallback": function () {
@@ -6545,7 +6570,7 @@ tarteaucitron.services.mtcaptcha = {
     "uri": "https://www.mtcaptcha.com",
     "readmoreLink": "https://www.mtcaptcha.com/faq-cookie-declaration",
     "needConsent": true,
-    "cookies": ['mtv1Pulse','mtv1ConfSum','mtv1Pong'],
+    "cookies": ['mtv1Pulse', 'mtv1ConfSum', 'mtv1Pong'],
 
     "js": function () {
 
@@ -6565,7 +6590,7 @@ tarteaucitron.services.archive = {
     "name": "Internet Archive",
     "uri": "https://archive.org/about/terms.php",
     "needConsent": true,
-    "cookies": ['abtest-identifier','donation-identifier'],
+    "cookies": ['abtest-identifier', 'donation-identifier'],
     "js": function () {
         "use strict";
         tarteaucitron.fallback(['archive_player'], function (x) {
@@ -6621,7 +6646,7 @@ tarteaucitron.services.gallica = {
             if (src === undefined) {
                 return "";
             }
-            frame = '<iframe style="'+ style + '" src="' + src + '"></iframe>';
+            frame = '<iframe style="' + style + '" src="' + src + '"></iframe>';
             return frame;
         });
     },
@@ -6683,7 +6708,7 @@ tarteaucitron.services.facebookcustomerchat = {
     "name": "Facebook (Customer Chat)",
     "uri": "https://www.facebook.com/policies/cookies/",
     "needConsent": true,
-    "cookies": ['act','c_user','datr','dpr','presence','sb','wd','xs','/tr'],
+    "cookies": ['act', 'c_user', 'datr', 'dpr', 'presence', 'sb', 'wd', 'xs', '/tr'],
     "js": function () {
         "use strict";
 
@@ -6692,7 +6717,7 @@ tarteaucitron.services.facebookcustomerchat = {
         }
 
         tarteaucitron.fallback(['fb-customerchat'], '');
-        window.fbAsyncInit=function(){FB.init({appId:tarteaucitron.user.facebookChatID,autoLogAppEvents:!0,xfbml:!0,version:"v3.0"})};
+        window.fbAsyncInit = function () { FB.init({ appId: tarteaucitron.user.facebookChatID, autoLogAppEvents: !0, xfbml: !0, version: "v3.0" }) };
         tarteaucitron.addScript('https://connect.facebook.net/' + tarteaucitron.getLocale() + '/sdk/xfbml.customerchat.js', 'facebook-jssdk');
     },
     "fallback": function () {
