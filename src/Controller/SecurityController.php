@@ -24,10 +24,19 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
+        // vérification honey pot
+        if (isset($_POST["first_name"]) || !empty($_POST["first_name"])) {
+            return $this->redirectToRoute('error404');
+        }
+
+        // vérifie que l'utilisateur remplit bien le formulaire depuis le site. 
+        if (isset($_SERVER["HTTP_REFERER"]) && strpos($_SERVER["HTTP_REFERER"], '127.0.0.1:8000')) {
+
+            // get the login error if there is one
+            $error = $authenticationUtils->getLastAuthenticationError();
+            // last username entered by the user
+            $lastUsername = $authenticationUtils->getLastUsername();
+        }
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }

@@ -10,7 +10,7 @@
 
 <h1 class="h3 mb-3 font-weight-normal">Connexion à ShinyQuest</h1>
 
-<form method="post" id="loginForm">
+<form id="loginForm" method="post">
     {% if error %}
     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -36,8 +36,10 @@
     </div>
     <a href="/reset-password" id="forgot-password">mot de passe oublié ?</a>
     <p class="login-register-redirects">Nouveau? <a href="{{path('app_register')}}">Créais un compte ici!</a></p>
-    <button type="submit">
-        Connexion
-    </button>
+
+{# honey pot #}
+<input type="hidden" name="first_name"/>
+
+    <button type="submit">Connexion</button>
 </form>
 {% endblock %}

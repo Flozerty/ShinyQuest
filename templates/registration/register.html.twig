@@ -32,6 +32,9 @@
 
 <p class="login-register-redirects">Déjà un compte? <a href="{{path('app_login')}}">Connecte-toi ici!</a></p>
 
+{# honey pot #}
+<input type="hidden" name="first_name"/>
+
 <button type="submit" class="btn">S'enregistrer</button>
 {{ form_end(registrationForm) }}
 {% endblock %}

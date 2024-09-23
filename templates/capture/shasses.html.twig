@@ -63,6 +63,10 @@
     <img src="{{ asset('img/sprite-charme-chroma.png') }}" alt='charme chroma'>
     {{ form_row(formNewShasse.charmeChroma) }}
   </div>
+
+    {# honey pot #}
+    <input type="hidden" name="email"/>
+
   <button type="submit" class="submit-btn"><span><span>A la shasse!</span></span></button>
   {{ form_end(formNewShasse) }}
 </section>
@@ -181,6 +185,9 @@
 
     {# hidden captureID #}
     <input type="hidden" id="IdCapture" name="IdCapture" value="" />
+
+    {# honey pot #}
+    <input type="hidden" name="email"/>
 
     <div class="modalNav">
 

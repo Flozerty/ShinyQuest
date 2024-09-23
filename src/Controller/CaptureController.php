@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+use function PHPUnit\Framework\isEmpty;
+
 class CaptureController extends AbstractController
 {
   // Toutes mes captures
@@ -56,7 +58,6 @@ class CaptureController extends AbstractController
     }
 
     $shasse = new Capture;
-
     // $games = $apiHttpClient->getAllGamesVersions();
 
     //////////////////////////  formulaire de nouvelle shasse  //////////////////////////
@@ -69,27 +70,36 @@ class CaptureController extends AbstractController
     // validation du formulaire de nouvelle shasse
     if ($formNewShasse->isSubmitted() && $formNewShasse->isValid()) {
 
-      $pokemonId = filter_input(INPUT_POST, "pokemonId", FILTER_VALIDATE_INT);
-      $jeu = filter_input(INPUT_POST, "jeu", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+      // vérifie que l'utilisateur remplit bien le formulaire depuis le site. 
+      if (isset($_SERVER["HTTP_REFERER"]) && strpos($_SERVER["HTTP_REFERER"], '127.0.0.1:8000')) {
+        // vérification honey pot
+        if (isset($_POST["email"]) && empty($_POST["email"])) {
 
-      // on récupère le nom du pokemon, son sprite, etc.
-      $pokemon = $apiHttpClient->getPokemonInfos($pokemonId);
-      $nomPokemon = $apiHttpClient->getPokemonNameById($pokemonId);
+          $pokemonId = filter_input(INPUT_POST, "pokemonId", FILTER_VALIDATE_INT);
+          $jeu = filter_input(INPUT_POST, "jeu", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-      $shasse = $formNewShasse->getData(); //filter tous les inputs du FormType
+          // on récupère le nom du pokemon, son sprite, etc.
+          $pokemon = $apiHttpClient->getPokemonInfos($pokemonId);
+          $nomPokemon = $apiHttpClient->getPokemonNameById($pokemonId);
 
-      $shasse->setSuivi(true);
-      $shasse->setPokedexId($pokemonId);
-      $shasse->setImgShiny($pokemon["pkmnStats"]["sprites"]["other"]["official-artwork"]["front_shiny"]);
-      $shasse->setNomPokemon($nomPokemon);
-      $shasse->setJeu($jeu);
-      $shasse->setUser($user);
+          $shasse = $formNewShasse->getData(); //filter tous les inputs du FormType
 
-      // prepare() and execute()
-      $entityManager->persist($shasse);
-      $entityManager->flush();
+          $shasse->setSuivi(true);
+          $shasse->setPokedexId($pokemonId);
+          $shasse->setImgShiny($pokemon["pkmnStats"]["sprites"]["other"]["official-artwork"]["front_shiny"]);
+          $shasse->setNomPokemon($nomPokemon);
+          $shasse->setJeu($jeu);
+          $shasse->setUser($user);
 
-      return $this->redirectToRoute('my_shasses');
+          // prepare() and execute()
+          $entityManager->persist($shasse);
+          $entityManager->flush();
+
+          return $this->redirectToRoute('my_shasses');
+        } else {
+          return $this->redirectToRoute('error404');
+        }
+      }
     }
 
     //////////////////////////  formulaire de shasse terminée //////////////////////////
@@ -99,25 +109,32 @@ class CaptureController extends AbstractController
     // validation du formulaire de shiny trouvé
     if ($formCapture->isSubmitted() && $formCapture->isValid()) {
 
-      $idCapture = filter_input(INPUT_POST, "IdCapture", FILTER_VALIDATE_INT);
-      $ball = filter_input(INPUT_POST, "ball", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+      // vérifie que l'utilisateur remplit bien le formulaire depuis le site. 
+      if (isset($_SERVER["HTTP_REFERER"]) && strpos($_SERVER["HTTP_REFERER"], '127.0.0.1:8000')) {
+        // vérification honey pot
+        if (isset($_POST["email"]) && empty($_POST["email"])) {
 
-      // on va récupérer la capture avec cet ID.
-      $capture = $captureRepository->find($idCapture);
+          $idCapture = filter_input(INPUT_POST, "IdCapture", FILTER_VALIDATE_INT);
+          $ball = filter_input(INPUT_POST, "ball", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-      // et on lui donne les résultats du formulaire de modal :
-      $capture->setSurnom($shasse->getSurnom());
-      $capture->setDateCapture($shasse->getDateCapture());
-      $capture->setSexe($shasse->getSexe());
+          // on va récupérer la capture avec cet ID.
+          $capture = $captureRepository->find($idCapture);
 
-      $capture->setBall($ball);
+          // et on lui donne les résultats du formulaire de modal :
+          $capture->setSurnom($shasse->getSurnom());
+          $capture->setDateCapture($shasse->getDateCapture());
+          $capture->setSexe($shasse->getSexe());
 
-      $capture->setSuivi(false);
-      $capture->setTermine(true);
+          $capture->setBall($ball);
 
-      $entityManager->flush();
+          $capture->setSuivi(false);
+          $capture->setTermine(true);
 
-      $this->addFlash('success', 'Félicitations, vous avez capturé ' . $capture->getnomPokemon());
+          $entityManager->flush();
+
+          $this->addFlash('success', 'Félicitations, vous avez capturé ' . $capture->getnomPokemon());
+        }
+      }
     }
 
     $captures = $captureRepository->findBy(['user' => $user, 'termine' => 0]);
