@@ -39,12 +39,24 @@ class ForumController extends AbstractController
     $formNewPost->handleRequest($request);
 
     if ($formNewPost->isSubmitted() && $formNewPost->isValid()) {
-      $post->setUser($this->getUser());
-      $post->setSujet($sujet);
 
-      $entityManager->persist($post);
-      $entityManager->flush();
-      return $this->redirectToRoute('sujet', ['titre' => $sujet->getTitre()]);
+      // vérifie que l'utilisateur remplit bien le formulaire depuis le site. 
+      if (isset($_SERVER["HTTP_REFERER"]) && strpos($_SERVER["HTTP_REFERER"], '127.0.0.1:8000')) {
+        // vérification honey pot
+        if (isset($_POST["email"]) && empty($_POST["email"])) {
+
+          $post->setUser($this->getUser());
+          $post->setSujet($sujet);
+
+          $entityManager->persist($post);
+          $entityManager->flush();
+          return $this->redirectToRoute('sujet', ['titre' => $sujet->getTitre()]);
+        } else {
+          return $this->redirectToRoute('bot_detected');
+        }
+      } else {
+        return $this->redirectToRoute('bot_detected');
+      }
     }
 
     return $this->render('forum/sujet.html.twig', [
@@ -65,11 +77,23 @@ class ForumController extends AbstractController
     $formNewSujet->handleRequest($request);
 
     if ($formNewSujet->isSubmitted() && $formNewSujet->isValid()) {
-      $sujet->setUser($this->getUser());
 
-      $entityManager->persist($sujet);
-      $entityManager->flush();
-      return $this->redirectToRoute('sujet', ['titre' => $sujet->getTitre()]);
+      // vérifie que l'utilisateur remplit bien le formulaire depuis le site. 
+      if (isset($_SERVER["HTTP_REFERER"]) && strpos($_SERVER["HTTP_REFERER"], '127.0.0.1:8000')) {
+        // vérification honey pot
+        if (isset($_POST["email"]) && empty($_POST["email"])) {
+
+          $sujet->setUser($this->getUser());
+
+          $entityManager->persist($sujet);
+          $entityManager->flush();
+          return $this->redirectToRoute('sujet', ['titre' => $sujet->getTitre()]);
+        } else {
+          return $this->redirectToRoute('bot_detected');
+        }
+      } else {
+        return $this->redirectToRoute('bot_detected');
+      }
     }
 
     return $this->render('forum/newSujet.html.twig', [

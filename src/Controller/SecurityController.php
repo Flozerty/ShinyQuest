@@ -134,4 +134,11 @@ class SecurityController extends AbstractController
             "errorCode" => "500",
         ]);
     }
+
+    #[Route(path: '/bot', name: 'bot_detected')]
+    public function botDetected(): Response
+    {
+        return $this->render('security/bot.html.twig', [
+        ]);
+    }
 }
