@@ -129,3 +129,13 @@ main form {
     }
   }
 }
+
+#loginForm {
+  #twitch-connect {
+    width: fit-content;
+
+    img {
+      width: 100px;
+    }
+  }
+}
