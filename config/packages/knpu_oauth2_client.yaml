@@ -12,4 +12,4 @@ knpu_oauth2_client:
             redirect_params:
                 service: twitch_helix
             # whether to check OAuth2 "state": defaults to true
-            # use_state: true
+            use_state: true

@@ -11,6 +11,7 @@ use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Client\Provider\TwitchClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Attribute\Route;
@@ -47,8 +48,31 @@ class SecurityController extends AbstractController
     #[Route(path: '/connect/twitch_helix', name: 'twitch_helix_connect')]
     public function connect(ClientRegistry $clientRegistry): RedirectResponse
     {
+
+        // dd($clientRegistry->getClient('twitch_helix'));
+
         $client = $clientRegistry->getClient('twitch_helix');
-        return $client->redirect(['user:read:email'], []);
+        return $client->redirect(['user:read:email'], [
+            'redirect_uri' => 'https://127.0.0.1:8000/oauth/check/twitch_helix'
+        ]);
+    }
+
+    // Gestion du retour après l'authentification sur Twitch
+    #[Route(path: '/oauth/check/twitch_helix', name: 'oauth_check_twitch_helix')]
+    public function check(Request $request, ClientRegistry $clientRegistry)
+    {
+        $client = $clientRegistry->getClient('twitch_helix');
+
+        try {
+            // Récupère les informations de l'utilisateur Twitch authentifié
+            $user = $client->fetchUser();
+            dd($user);
+
+            // Ici, tu peux gérer l'utilisateur (par exemple, le sauvegarder dans la base de données, créer une session, etc.)
+            return new Response('Connexion réussie avec Twitch ! Utilisateur : ' . $user->getNickname());
+        } catch (\Exception $e) {
+            return new Response('Erreur lors de la connexion avec Twitch : ' . $e->getMessage());
+        }
     }
 
     // déconnexion
