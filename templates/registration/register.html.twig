@@ -36,5 +36,11 @@
 <input type="hidden" name="first_name"/>
 
 <button type="submit" class="btn">S'enregistrer</button>
+
+<div id="socials-connect">
+<a href="{{path('twitch_helix_connect')}}" id="twitch-connect" aria-label="connexion avec Twitch"><img src="{{asset('img/twitch.png')}}" alt="connexion avec Twitch"></a>
+<a href="" id="twitch-connect" aria-label="connexion avec Discord"><img src="{{asset('img/discord.png')}}" alt="connexion avec Discord"></a>
+</div>
+
 {{ form_end(registrationForm) }}
 {% endblock %}
