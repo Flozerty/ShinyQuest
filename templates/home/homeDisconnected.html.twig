@@ -1,117 +1,123 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-  Home
+Home
 {% endblock %}
 
 {% block stylesheets %}
-  <link rel="stylesheet" href="{{ asset('css/home.css') }}" />
-  <link rel="stylesheet" href="{{ asset('css/pkmn_card.css') }}" />
-  <link rel="stylesheet" href="{{ asset('css/carousel.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/home.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/pkmn_card.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/carousel.css') }}" />
 {% endblock %}
 
 {% block javascripts %}
-  <script src="{{ asset('js/carousel.js') }}"></script>
+<script src="{{ asset('js/carousel.js') }}"></script>
 {% endblock %}
 
 {% block body %}
-  <section id="home-head">
-    <img id="home-head-back-img" src="{{ asset('img/homeBackground.webp') }}" alt="" />
-    <div id="home-head-overlay">
-      <h1>Bienvenue sur<br /> <strong>SHINYQUEST</strong></h1>
-      <a class="start-link" href="{{ path('app_register') }}"><i class="fa-solid fa-arrow-right"></i>Partir à la shasse</a>
-    </div>
-  </section>
+<section id="home-head">
+  <img id="home-head-back-img" src="{{ asset('img/homeBackground.webp') }}" alt="duel de pokémon entre 2 personnes" />
+  <div id="home-head-overlay">
+    <h1>Bienvenue sur<br /> <strong>SHINYQUEST</strong></h1>
+    <a class="start-link" href="{{ path('app_register') }}"><i class="fa-solid fa-arrow-right"></i>Partir à la
+      shasse</a>
+  </div>
+</section>
 
-  <section id="explanations">
-    <article id="catchEm-explain">
-      <img src="{{ asset('img/sachaBall.webp') }}" alt="sacha lance une pokeball" />
-      <h2>Capturez-les tous!</h2>
-      <p>Peu importe le jeu sur lequel vous jouez, ou quel pokémon vous cherchez, vous trouverez ici tout ce qu'il vous faut pour vous aider à mener à bien vos captures!</p>
-    </article>
+<section id="explanations">
+  <article id="catchEm-explain">
+    <img src="{{ asset('img/sachaBall.webp') }}" alt="sacha lance une pokeball" />
+    <h2>Capturez-les tous!</h2>
+    <p>Peu importe le jeu sur lequel vous jouez, ou quel pokémon vous cherchez, vous trouverez ici tout ce qu'il vous
+      faut pour vous aider à mener à bien vos captures!</p>
+  </article>
 
-    <article id="shinydex-explain">
-      <img id="shinydex-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/133.png" alt="evoli shinydex" />
-      <h2>Complétez votre shinydex</h2>
-      <p>Listez toutes vos captures de pokémons shiny, et gardez précieusement votre shinydex! N'attendez plus, allez tous les capturer pour le compléter!</p>
-    </article>
+  <article id="shinydex-explain">
+    <img id="shinydex-img"
+      src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/133.png"
+      alt="evoli shinydex" />
+    <h2>Complétez votre shinydex</h2>
+    <p>Listez toutes vos captures de pokémons shiny, et gardez précieusement votre shinydex! N'attendez plus, allez tous
+      les capturer pour le compléter!</p>
+  </article>
 
-    <article id="captures-explain">
-      <img src="{{ asset('img/pokemonFamily.webp') }}" alt="pokemon family" />
-      <h2>Suivez votre progression</h2>
-      <p>vous êtes nouveau? rendez-vous dans l'onglet des shasses pour commencer!</p>
-    </article>
-  </section>
+  <article id="captures-explain">
+    <img src="{{ asset('img/pokemonFamily.webp') }}" alt="pokemon family" />
+    <h2>Suivez votre progression</h2>
+    <p>vous êtes nouveau? rendez-vous dans l'onglet des shasses pour commencer!</p>
+  </article>
+</section>
 
-  <a class="start-link" href="{{ path('app_register') }}"><i class="fa-solid fa-arrow-right"></i>Commencer l'aventure</a>
+<a class="start-link" href="{{ path('app_register') }}"><i class="fa-solid fa-arrow-right"></i>Commencer l'aventure</a>
 
-  <h2>Les dernières trouvailles :</h2>
-  <section id="last-captures" class="carousel">
-    <i class="fa-solid fa-circle-arrow-left arrow arrow-left"></i>
+<h2>Les dernières trouvailles :</h2>
+<section id="last-captures" class="carousel">
+  <i class="fa-solid fa-circle-arrow-left arrow arrow-left"></i>
 
-    <div class="carousel-wrapper">
-      <div class="cards-container">
-        {% for capture in captures %}
-          <div class="last-capture">
-            <p class="capture-description">
-              Attrapé par <a class="pseudo-captures" href="{{ path('profile_user', { pseudo: capture.user.pseudo }) }}">{{ capture.user.pseudo }}</a>,
+  <div class="carousel-wrapper">
+    <div class="cards-container">
+      {% for capture in captures %}
+      <div class="last-capture">
+        <p class="capture-description">
+          Attrapé par <a class="pseudo-captures" href="{{ path('profile_user', { pseudo: capture.user.pseudo }) }}">{{
+            capture.user.pseudo }}</a>,
 
-              {# affichage de la date de capture #}
-              {% set now = date() %}
-              {% set diff = capture.dateCapture.diff(now) %}
-              {% set years = diff.format('%y') %}
-              {% set months = diff.format('%m') %}
-              {% set days = diff.format('%d') %}
+          {# affichage de la date de capture #}
+          {% set now = date() %}
+          {% set diff = capture.dateCapture.diff(now) %}
+          {% set years = diff.format('%y') %}
+          {% set months = diff.format('%m') %}
+          {% set days = diff.format('%d') %}
 
-              {% if (capture.dateCapture|date('Y-m-d')) == (now|date('Y-m-d')) %}
-                aujourd'hui
-              {% elseif years > 0 %}
-                il y a {{ years }} {{ years > 1 ? 'ans' : 'an' }}
-              {% elseif months > 0 %}
-                il y a {{ months }} mois
-              {% elseif days > 1 %}
-                il y a {{ days }} jours
-              {% else %}
-                hier
-              {% endif %}
-            </p>
+          {% if (capture.dateCapture|date('Y-m-d')) == (now|date('Y-m-d')) %}
+          aujourd'hui
+          {% elseif years > 0 %}
+          il y a {{ years }} {{ years > 1 ? 'ans' : 'an' }}
+          {% elseif months > 0 %}
+          il y a {{ months }} mois
+          {% elseif days > 1 %}
+          il y a {{ days }} jours
+          {% else %}
+          hier
+          {% endif %}
+        </p>
 
-            {# on utilise le template de pokemonCard pour afficher les captures #}
-            {% include '.custom/pokemonCard.html.twig' %}
-          </div>
-        {% endfor %}
+        {# on utilise le template de pokemonCard pour afficher les captures #}
+        {% include '.custom/pokemonCard.html.twig' %}
       </div>
+      {% endfor %}
     </div>
-    <i class="fa-solid fa-circle-arrow-right arrow arrow-right"></i>
-  </section>
+  </div>
+  <i class="fa-solid fa-circle-arrow-right arrow arrow-right"></i>
+</section>
 
-  <section id="respiration">
-    <article>
-      <h3>total de dresseurs</h3>
-      <p>{{ nbUsers }}</p>
-      <hr />
-    </article>
+<section id="respiration">
+  <article>
+    <h3>total de dresseurs</h3>
+    <p>{{ nbUsers }}</p>
+    <hr />
+  </article>
 
-    <article>
-      <h3>shinys trouvés</h3>
-      <p>{{ nbCaptures }}</p>
-      <hr />
-    </article>
+  <article>
+    <h3>shinys trouvés</h3>
+    <p>{{ nbCaptures }}</p>
+    <hr />
+  </article>
 
-    <article>
-      <h3>total de rencontres</h3>
-      <p>{{ nbRencontresTotal }}</p>
-      <hr />
-    </article>
+  <article>
+    <h3>total de rencontres</h3>
+    <p>{{ nbRencontresTotal }}</p>
+    <hr />
+  </article>
 
-    <article>
-      <h3>shasses en cours</h3>
-      <p>{{ nbShassesActives }}</p>
-      <hr />
-    </article>
-  </section>
+  <article>
+    <h3>shasses en cours</h3>
+    <p>{{ nbShassesActives }}</p>
+    <hr />
+  </article>
+</section>
 
-  <p>section suivi des shasses en cours / section messagerie et partage de captures /</p>
+<p>section suivi des shasses en cours / section messagerie et partage de captures /</p>
 
-  <a class="start-link" href="{{ path('app_register') }}"><i class="fa-solid fa-arrow-right"></i>Commencer l'aventure</a>
+<a class="start-link" href="{{ path('app_register') }}"><i class="fa-solid fa-arrow-right"></i>Commencer l'aventure</a>
 {% endblock %}
