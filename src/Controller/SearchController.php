@@ -18,7 +18,7 @@ class SearchController extends AbstractController
         $query = $request->query->get('q');
 
         $pokemons = $apiHttpClient->searchPokemonByQuery($query);
-        $users = $userRepository->searchByPseudo($query); // tableau d'objets
+        $users = $userRepository->searchByPseudo($query); // tableau des users
 
         // on récupère l'id et le pseudo de l'user
         $usersContent = [];
