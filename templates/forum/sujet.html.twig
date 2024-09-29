@@ -20,7 +20,11 @@
       {% endif %}
 
         <div class="post-infos">
+          {% if post.user is defined and post.user is not empty %}
           <a class="pseudo" href="{{ path('profile_user', { pseudo: post.user }) }}">{{ post.user }}</a>
+          {% else %}
+          anonyme
+          {% endif %}
           <p class="date">
 , 
 {% set dateActuelle = "now" | date('m/d/y') %}
