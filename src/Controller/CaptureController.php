@@ -163,6 +163,10 @@ class CaptureController extends AbstractController
   #[Route('/shasse/{id}/delete', name: 'delete_shasse')]
   public function deleteShasse(Capture $shasse = null, EntityManagerInterface $entityManager): Response
   {
+    if (!(isset($_SERVER["HTTP_REFERER"]) && strpos($_SERVER["HTTP_REFERER"], '//127.0.0.1:8000'))) {
+      return $this->redirectToRoute('bot_detected');
+    }
+
     if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
       $entityManager->remove($shasse);
       $entityManager->flush();
