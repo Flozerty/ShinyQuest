@@ -26,15 +26,6 @@ class ShasseStartType extends AbstractType
                 "label" => "Charme chroma"
             ])
 
-            // ->add('jeu', ChoiceType::class, [
-            //     'choices' => $options['games'],
-            //     'placeholder' => 'Choisissez un jeu',
-
-            //     'choice_label' => function ($value) {
-            //         return $value;
-            //     },
-            // ])
-
             ->add('lieu', TextType::class, [
                 'required' => false,
             ])

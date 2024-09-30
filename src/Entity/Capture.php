@@ -74,7 +74,6 @@ class Capture
 
     public function __construct()
     {
-        // $this->suivi = 1;
         $this->termine = 0;
         $this->favori = 0;
         $this->messages = new ArrayCollection();

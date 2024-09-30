@@ -16,7 +16,7 @@ class ApiHttpClient extends AbstractController
     $this->httpClient = $jph;
   }
 
-  // récupération de base depuis une url
+  // récupération depuis une url
   public function getRequestByUrl($url)
   {
     $response = $this->httpClient->request('GET', $url);
@@ -195,7 +195,7 @@ class ApiHttpClient extends AbstractController
     return $pokemon["name"]["fr"];
   }
 
-  // Récupération de toutes les versions & leurs id
+  // Récupération de toutes les versions de jeux
   public function getAllGamesVersions()
   {
     $response = $this->httpClient->request('GET', "version/?offset=0&limit=100");
@@ -205,11 +205,7 @@ class ApiHttpClient extends AbstractController
     $frGames = [];
     foreach ($allGames as $game) {
       $url = $game["url"];
-
-      $newResponse = $this->httpClient->request('GET', $url);
-      $gameNames = $newResponse->toArray();
-
-      // $idVersion = $gameNames["id"];
+      $gameNames = $this->getRequestByUrl($url);
 
       foreach ($gameNames['names'] as $name) {
         if ($name["language"]["name"] === "fr") {

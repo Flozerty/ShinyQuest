@@ -54,17 +54,13 @@ class CaptureController extends AbstractController
   {
     $user = $this->getUser();
     if (!$user) {
-      return $this->redirectToRoute('app_login');
+      return $this->redirectToRoute('app_home');
     }
 
     $shasse = new Capture;
-    // $games = $apiHttpClient->getAllGamesVersions();
 
     //////////////////////////  formulaire de nouvelle shasse  //////////////////////////
-    $formNewShasse = $this->createForm(ShasseStartType::class, $shasse, [
-      // 'games' => $games,
-    ]);
-
+    $formNewShasse = $this->createForm(ShasseStartType::class, $shasse);
     $formNewShasse->handleRequest($request);
 
     // validation du formulaire de nouvelle shasse
