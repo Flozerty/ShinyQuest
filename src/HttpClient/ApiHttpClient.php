@@ -142,13 +142,11 @@ class ApiHttpClient extends AbstractController
     $allPokemons = [];
 
     foreach ($pokemons as $pokemon) {
-      $allPokemons[] =
-        [
-          'pokedex_id' => $pokemon["pokedex_id"],
-          'name' => $pokemon['name']['fr'],
-        ];
+      $allPokemons[] = [
+        'pokedex_id' => $pokemon["pokedex_id"],
+        'name' => $pokemon['name']['fr'],
+      ];
     }
-    // dd($allPokemons);
     return $allPokemons;
   }
 
