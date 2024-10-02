@@ -19,6 +19,7 @@ class ShasseStartType extends AbstractType
     {
         $builder
             ->add('nbRencontres', IntegerType::class, [
+                'required' => false,
                 "label" => "Compteur"
             ])
 

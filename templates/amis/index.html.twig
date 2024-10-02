@@ -17,7 +17,7 @@
 {% block body %}
 
 <section id="demandes">
-{# Demanes d'ami reçues #}
+    {# Demanes d'ami reçues #}
     {% if demandesRecues is not empty %}
 
     <h2>Demandes reçues :</h2>
@@ -114,8 +114,9 @@
 
         <div class="dex-completion">
             <p>{{data.capturedPokemonIds | length}} / {{allPokemons | length}}</p>
-            <a href="{{ path('app_shinydex', {'pseudo': data.user.pseudo}) }}"><i
-                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            <a href="{{ path('app_shinydex', {'pseudo': data.user.pseudo}) }}">
+                <i class="fa-solid fa-eye"></i>
+            </a>
         </div>
 
         <ul class="dresseur-links">
@@ -130,9 +131,9 @@
                 </a>
             </li>
         </ul>
-<div id="delete-container">
+        <div id="delete-container">
             <i id="del-{{data.id}}" class="fa-solid fa-trash-can delete-ami-button"></i>
-</div>
+        </div>
         <div class="menu-burger-ami">
             <i class="fa-solid fa-ellipsis toggle-menu"></i>
 
@@ -140,7 +141,7 @@
                 <li>
                     <a href="{{path('messages', {'pseudo': data.user.pseudo})}}">
                         <i class="fa-regular fa-message"></i>
-                        </a>
+                    </a>
                 </li>
                 <li>
                     <a href="{{ path('captures', {'pseudo': data.user.pseudo}) }}">

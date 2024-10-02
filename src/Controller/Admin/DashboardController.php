@@ -54,8 +54,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Methodes de capture', 'fa-solid fa-filter', MethodeCapture::class);
         yield MenuItem::linkToCrud('Captures', 'fa-brands fa-optin-monster', Capture::class);
         yield MenuItem::linkToCrud('Amis', 'fa-solid fa-hand-holding-heart', Amis::class);
-        yield MenuItem::linkToCrud('Sujet', 'fa-solid fa-hand-holding-heart', Sujet::class);
-        yield MenuItem::linkToCrud('Post', 'fa-solid fa-hand-holding-heart', Post::class);
+        yield MenuItem::linkToCrud('Sujet', 'fa-solid fa-comments', Sujet::class);
+        yield MenuItem::linkToCrud('Post', 'fa-solid fa-comment-dots', Post::class);
         yield MenuItem::linkToUrl('Retour sur ShinyQuest', 'fa-solid fa-house-chimney', $this->generateUrl('app_home'));
     }
 }
