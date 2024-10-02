@@ -80,6 +80,9 @@ class CaptureController extends AbstractController
 
           $shasse = $formNewShasse->getData(); //filter tous les inputs du FormType
 
+          $nbRencontres = $formNewShasse->get('nbRencontres')->getData();
+          $shasse->setNbRencontres(empty($nbRencontres) ? 0 : $nbRencontres);
+
           $shasse->setSuivi(true);
           $shasse->setPokedexId($pokemonId);
           $shasse->setImgShiny($pokemon["pkmnStats"]["sprites"]["other"]["official-artwork"]["front_shiny"]);
@@ -222,8 +225,13 @@ class CaptureController extends AbstractController
     $shasse = $captureRepository->find($id);
 
     if ($shasse && ($shasse->getUser() == $this->getUser() || in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
-      $shasse->setNbRencontres($newValue);
-      $entityManager->flush();
+      if ($newValue >= 0) {
+        $shasse->setNbRencontres($newValue);
+        $entityManager->flush();
+      } else {
+        $shasse->setNbRencontres(0);
+        $entityManager->flush();
+      }
     }
 
     return $this->json(['nbRencontres' => $shasse->getNbRencontres()]);

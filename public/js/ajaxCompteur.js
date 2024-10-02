@@ -29,12 +29,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // change la valeur de l'input
     function changeCounter(value) {
-      compteurInput.value = parseInt(compteurInput.value) + value;
+      if (parseInt(compteurInput.value) + value >= 0) {
+        compteurInput.value = parseInt(compteurInput.value) + value;
+      } else {
+        compteurInput.value = 0;
+      }
       verifyToUpdate();
     }
 
     // compteur input change
     compteurInput.addEventListener('change', () => {
+      if (parseInt(compteurInput.value) <= 0) {
+        compteurInput.value = 0;
+      }
       verifyToUpdate()
     })
 
