@@ -864,7 +864,6 @@ header {
   z-index: 8;
   transition: var(--transitionTime);
 
-
   li {
     width: 100%;
     color: var(--primary-color);
@@ -955,7 +954,6 @@ header {
 }
 
 /* ------------------- MAIN ------------------ */
-
 #main-wrapper {
   width: 90%;
   flex: 1 0 auto;
@@ -1137,7 +1135,8 @@ footer {
     text-align: center;
     font-size: 0.8rem;
 
-    #legal-mentions {
+    #legal-mentions,
+    .conditions {
       color: var(--blue-main);
       text-decoration: underline;
     }
@@ -1189,7 +1188,6 @@ footer {
   left: 0;
   width: 150px;
 }
-
 
 .music-button {
   order: -1;
