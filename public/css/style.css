@@ -800,6 +800,7 @@ header {
   margin-right: 30px;
   transition: var(--transitionTime);
   cursor: pointer;
+  z-index: 10;
 
   p {
     color: var(--background-color);
@@ -860,7 +861,7 @@ header {
   align-items: center;
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
-  z-index: -1;
+  z-index: 8;
   transition: var(--transitionTime);
 
 
@@ -1407,5 +1408,11 @@ footer {
 
   #footer-base {
     gap: 5px;
+  }
+}
+
+@media (max-width: 400px) {
+  #header-profile {
+    padding: 0;
   }
 }

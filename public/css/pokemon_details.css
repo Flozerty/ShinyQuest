@@ -27,6 +27,7 @@ h1 {
   top: 15%;
   width: fit-content;
   height: 50px;
+  z-index: 5;
 
   #shiny-mode {
     transform: none;
