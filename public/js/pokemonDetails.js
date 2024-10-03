@@ -37,15 +37,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // cri pokemon
     const img = document.querySelector('#main-active-pkmn');
+    const songBtn = document.querySelector('#pokemon-song-play');
     let audio;
 
-    img.addEventListener('click', () => {
-        if (!(audio && !audio.paused)) {
-            const pokemonId = parseInt(document.querySelector('#previous').getAttribute('data-id')) + 1;
-            const url = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${pokemonId}.ogg`;
+    [img, songBtn].forEach(container => {
+        container.addEventListener('click', () => {
+            if (!(audio && !audio.paused)) {
+                const pokemonId = parseInt(document.querySelector('#previous').getAttribute('data-id')) + 1;
+                const url = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${pokemonId}.ogg`;
 
-            audio = new Audio(url);
-            audio.play();
-        }
-    });
+                audio = new Audio(url);
+                audio.volume = 0.2;
+                audio.play();
+            }
+        });
+    })
 });

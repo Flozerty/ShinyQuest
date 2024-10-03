@@ -15,6 +15,7 @@
 {% block body %}
 <h1>{{data.name}} - #{{'%03d'|format(pokemon.pkmnSpec.id)}}</h1>
 
+{# boutons de navigation #}
 <div id="nav-buttons">
   <button id="shiny-mode">
     <svg width="41" height="40" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -53,6 +54,9 @@
     <i class="fa-solid fa-angle-right"></i>
   </button>
 </section>
+
+{# bouton cri  #}
+<i id="pokemon-song-play" class="fa-solid fa-volume-high"></i>
 
 <section id="pokemon-description">
   {% set text = "" %}

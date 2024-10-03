@@ -53,13 +53,14 @@ h1 {
   }
 }
 
-
 #navigation {
   align-items: center;
   justify-content: space-evenly;
   position: relative;
+  margin-bottom: 0;
 
   #main-active-pkmn {
+    position: relative;
     width: 300px;
     height: 300px;
     align-self: center;
@@ -103,6 +104,13 @@ h1 {
   }
 }
 
+.fa-volume-high {
+  font-size: 2rem;
+  color: var(--primary-color);
+  align-self: center;
+  cursor: pointer;
+  margin-bottom: 50px;
+}
 
 #types {
   display: flex;
