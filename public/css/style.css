@@ -801,6 +801,7 @@ header {
   margin-right: 30px;
   transition: var(--transitionTime);
   cursor: pointer;
+  z-index: 10;
 
   p {
     color: var(--background-color);
@@ -861,9 +862,8 @@ header {
   align-items: center;
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
-  z-index: -1;
+  z-index: 8;
   transition: var(--transitionTime);
-
 
   li {
     width: 100%;
@@ -955,7 +955,6 @@ header {
 }
 
 /* ------------------- MAIN ------------------ */
-
 #main-wrapper {
   width: 90%;
   flex: 1 0 auto;
@@ -1137,7 +1136,8 @@ footer {
     text-align: center;
     font-size: 0.8rem;
 
-    #legal-mentions {
+    #legal-mentions,
+    .conditions {
       color: var(--blue-main);
       text-decoration: underline;
     }
@@ -1189,7 +1189,6 @@ footer {
   left: 0;
   width: 150px;
 }
-
 
 .music-button {
   order: -1;
@@ -1408,5 +1407,11 @@ footer {
 
   #footer-base {
     gap: 5px;
+  }
+}
+
+@media (max-width: 400px) {
+  #header-profile {
+    padding: 0;
   }
 }
