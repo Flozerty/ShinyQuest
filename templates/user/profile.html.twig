@@ -4,7 +4,6 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{asset('css/profile.css')}}">
-<link rel="stylesheet" href="{{asset('css/modals.css')}}">
 {% endblock %}
 
 {% block javascripts %}
@@ -141,9 +140,10 @@
         <p>Toute information vous concernant sera définitivement supprimée, y compris vos captures et shasses en cours.
         </p>
         <div class="modalNav">
-            <a class="delete-link" href="">
-                Oui, supprimer mon compte
-            </a>
+            <form action="{{path('delete_account')}}" class="delete-link" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete_item') }}">
+                <button type="submit">Oui, supprimer mon compte</button>
+            </form>
 
             <button class="cancelBtn">
                 Non, j'ai changé d'avis

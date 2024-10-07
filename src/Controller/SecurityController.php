@@ -16,6 +16,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -48,7 +51,6 @@ class SecurityController extends AbstractController
     #[Route(path: '/connect/twitch_helix', name: 'twitch_helix_connect')]
     public function connect(ClientRegistry $clientRegistry): RedirectResponse
     {
-
         // dd($clientRegistry->getClient('twitch_helix'));
 
         $client = $clientRegistry->getClient('twitch_helix');
@@ -84,12 +86,19 @@ class SecurityController extends AbstractController
 
     // suppression d'utilisateur
     #[Route('/user/delete', name: 'delete_account')]
-    public function deleteAccount(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage, SessionInterface $session, CaptureRepository $captureRepository, ResetPasswordRequestRepository $resetPasswordRequestRepository): Response
+    public function deleteAccount(Request $request, CsrfTokenManagerInterface $csrfTokenManager, EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage, SessionInterface $session, CaptureRepository $captureRepository, ResetPasswordRequestRepository $resetPasswordRequestRepository): Response
     {
         /**
          * @var User $user
          */
         $user = $this->getUser();
+
+        // vérification du token CSRF
+        $token = new CsrfToken('delete_item', $request->request->get('_token'));
+    
+        if (!$csrfTokenManager->isTokenValid($token)) {
+            $this->redirectToRoute('error403');
+        }
 
         if ($user) {
             /////////// remplacement des PJ contenant des captures de l'user ///////////
