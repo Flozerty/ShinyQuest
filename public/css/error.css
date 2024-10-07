@@ -1,7 +1,3 @@
-#main-wrapper {
-  margin-bottom: 150px;
-}
-
 main {
   display: flex;
   flex-direction: row;
