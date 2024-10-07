@@ -388,7 +388,8 @@ iframe {
     }
   }
 
-  .delete-link {
+  .delete-link,
+  .delete-link button {
     color: var(--dangerred);
     padding: 5px 10px;
     border-radius: 5px;
