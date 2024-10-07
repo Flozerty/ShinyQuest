@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
           formCompteur.querySelector('.input-loading').remove()
+          // compteurInput.value = data.nbRencontres;
           console.log("compteur updated : " + data.nbRencontres)
         })
     }

@@ -106,7 +106,7 @@ class CaptureController extends AbstractController
     //////////////////////////  formulaire de shasse terminée //////////////////////////
     $formCapture = $this->createForm(CaptureType::class, $shasse);
     $formCapture->handleRequest($request);
-
+    
     // validation du formulaire de shiny trouvé
     if ($formCapture->isSubmitted() && $formCapture->isValid()) {
 

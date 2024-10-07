@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-
-  //////////////////// modal capture ////////////////////
   const body = document.querySelector('body'),
     cards = document.querySelectorAll('.pokemon-card'),
     dialog = document.querySelector('dialog'),
@@ -8,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     cancelButton = dialog.querySelector(".cancelBtn"),
     IdCaptureInputHidden = dialog.querySelector("#IdCapture")
 
+  //////////////////// modal capture ////////////////////
   cards.forEach(card => {
     const buttonFind = card.querySelector(".shasse-trouve");
 
