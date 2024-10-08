@@ -16,10 +16,12 @@
 
 
 -- Listage de la structure de la base pour shinyquest
+DROP DATABASE IF EXISTS `shinyquest`;
 CREATE DATABASE IF NOT EXISTS `shinyquest` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `shinyquest`;
 
 -- Listage de la structure de table shinyquest. amis
+DROP TABLE IF EXISTS `amis`;
 CREATE TABLE IF NOT EXISTS `amis` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_demande_id` int NOT NULL,
@@ -43,6 +45,7 @@ INSERT INTO `amis` (`id`, `user_demande_id`, `user_recoit_id`, `statut`, `date_d
 	(8, 24, 2, 1, '2024-07-16');
 
 -- Listage de la structure de table shinyquest. capture
+DROP TABLE IF EXISTS `capture`;
 CREATE TABLE IF NOT EXISTS `capture` (
   `id` int NOT NULL AUTO_INCREMENT,
   `pokedex_id` int NOT NULL,
@@ -68,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `capture` (
   CONSTRAINT `FK_8BFEA6E5B5DEC791` FOREIGN KEY (`methode_capture_id`) REFERENCES `methode_capture` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table shinyquest.capture : ~20 rows (environ)
+-- Listage des données de la table shinyquest.capture : ~6 rows (environ)
 DELETE FROM `capture`;
 INSERT INTO `capture` (`id`, `pokedex_id`, `surnom`, `nb_rencontres`, `date_capture`, `charme_chroma`, `favori`, `user_id`, `methode_capture_id`, `termine`, `img_shiny`, `nom_pokemon`, `jeu`, `lieu`, `sexe`, `suivi`, `ball`) VALUES
 	(1, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, 0, '0', '0', NULL, NULL, NULL, 0, NULL),
@@ -94,6 +97,7 @@ INSERT INTO `capture` (`id`, `pokedex_id`, `surnom`, `nb_rencontres`, `date_capt
 	(42, 209, NULL, 54, NULL, 1, 0, 2, 3, 0, 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/209.png', 'Snubbull', 'Diamant', NULL, NULL, 1, NULL);
 
 -- Listage de la structure de table shinyquest. doctrine_migration_versions
+DROP TABLE IF EXISTS `doctrine_migration_versions`;
 CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
   `version` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `executed_at` datetime DEFAULT NULL,
@@ -112,9 +116,11 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 	('DoctrineMigrations\\Version20240827133539', '2024-08-27 13:35:47', 170),
 	('DoctrineMigrations\\Version20240829090412', '2024-08-29 09:04:22', 117),
 	('DoctrineMigrations\\Version20240829224149', '2024-08-29 22:42:47', 145),
-	('DoctrineMigrations\\Version20240904130255', '2024-09-04 13:03:11', 189);
+	('DoctrineMigrations\\Version20240904130255', '2024-09-04 13:03:11', 189),
+	('DoctrineMigrations\\Version20240923195344', '2024-10-08 07:40:47', 24);
 
 -- Listage de la structure de table shinyquest. message
+DROP TABLE IF EXISTS `message`;
 CREATE TABLE IF NOT EXISTS `message` (
   `id` int NOT NULL AUTO_INCREMENT,
   `date_message` datetime NOT NULL,
@@ -132,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   CONSTRAINT `FK_B6BD307FF26B1C97` FOREIGN KEY (`pj_id`) REFERENCES `capture` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table shinyquest.message : ~30 rows (environ)
+-- Listage des données de la table shinyquest.message : ~31 rows (environ)
 DELETE FROM `message`;
 INSERT INTO `message` (`id`, `date_message`, `contenu_message`, `pj_id`, `user_envoi_id`, `user_recoit_id`, `lu`) VALUES
 	(1, '2024-08-19 10:13:49', 'test', 3, 2, 24, 1),
@@ -168,6 +174,7 @@ INSERT INTO `message` (`id`, `date_message`, `contenu_message`, `pj_id`, `user_e
 	(31, '2024-09-08 17:54:03', 'test', 30, 2, 24, 0);
 
 -- Listage de la structure de table shinyquest. messenger_messages
+DROP TABLE IF EXISTS `messenger_messages`;
 CREATE TABLE IF NOT EXISTS `messenger_messages` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `body` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -199,6 +206,7 @@ INSERT INTO `messenger_messages` (`id`, `body`, `headers`, `queue_name`, `create
 	(12, 'O:36:\\"Symfony\\\\Component\\\\Messenger\\\\Envelope\\":2:{s:44:\\"\\0Symfony\\\\Component\\\\Messenger\\\\Envelope\\0stamps\\";a:1:{s:46:\\"Symfony\\\\Component\\\\Messenger\\\\Stamp\\\\BusNameStamp\\";a:1:{i:0;O:46:\\"Symfony\\\\Component\\\\Messenger\\\\Stamp\\\\BusNameStamp\\":1:{s:55:\\"\\0Symfony\\\\Component\\\\Messenger\\\\Stamp\\\\BusNameStamp\\0busName\\";s:21:\\"messenger.bus.default\\";}}}s:45:\\"\\0Symfony\\\\Component\\\\Messenger\\\\Envelope\\0message\\";O:51:\\"Symfony\\\\Component\\\\Mailer\\\\Messenger\\\\SendEmailMessage\\":2:{s:60:\\"\\0Symfony\\\\Component\\\\Mailer\\\\Messenger\\\\SendEmailMessage\\0message\\";O:39:\\"Symfony\\\\Bridge\\\\Twig\\\\Mime\\\\TemplatedEmail\\":5:{i:0;s:41:\\"registration/confirmation_email.html.twig\\";i:1;N;i:2;a:3:{s:9:\\"signedUrl\\";s:169:\\"http://127.0.0.1:8000/verify/email?expires=1716993012&signature=zecRWFl8BOqFPqZfbYb6Pv6WwDEdv7AFTpls5K9urYE%3D&token=8e3Ub%2F4S6s%2Bk7oZR8rYLjYaq4KG1S7%2FnFoM5LcPVdls%3D\\";s:19:\\"expiresAtMessageKey\\";s:26:\\"%count% hour|%count% hours\\";s:20:\\"expiresAtMessageData\\";a:1:{s:7:\\"%count%\\";i:1;}}i:3;a:6:{i:0;N;i:1;N;i:2;N;i:3;N;i:4;a:0:{}i:5;a:2:{i:0;O:37:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\Headers\\":2:{s:46:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\Headers\\0headers\\";a:3:{s:4:\\"from\\";a:1:{i:0;O:47:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\":5:{s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0name\\";s:4:\\"From\\";s:56:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lineLength\\";i:76;s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lang\\";N;s:53:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0charset\\";s:5:\\"utf-8\\";s:58:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\0addresses\\";a:1:{i:0;O:30:\\"Symfony\\\\Component\\\\Mime\\\\Address\\":2:{s:39:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0address\\";s:20:\\"admin@shinyquest.com\\";s:36:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0name\\";s:16:\\"Admin ShinyQuest\\";}}}}s:2:\\"to\\";a:1:{i:0;O:47:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\":5:{s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0name\\";s:2:\\"To\\";s:56:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lineLength\\";i:76;s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lang\\";N;s:53:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0charset\\";s:5:\\"utf-8\\";s:58:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\MailboxListHeader\\0addresses\\";a:1:{i:0;O:30:\\"Symfony\\\\Component\\\\Mime\\\\Address\\":2:{s:39:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0address\\";s:15:\\"ezr.fr@mail.com\\";s:36:\\"\\0Symfony\\\\Component\\\\Mime\\\\Address\\0name\\";s:0:\\"\\";}}}}s:7:\\"subject\\";a:1:{i:0;O:48:\\"Symfony\\\\Component\\\\Mime\\\\Header\\\\UnstructuredHeader\\":5:{s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0name\\";s:7:\\"Subject\\";s:56:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lineLength\\";i:76;s:50:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0lang\\";N;s:53:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\AbstractHeader\\0charset\\";s:5:\\"utf-8\\";s:55:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\UnstructuredHeader\\0value\\";s:25:\\"Please Confirm your Email\\";}}}s:49:\\"\\0Symfony\\\\Component\\\\Mime\\\\Header\\\\Headers\\0lineLength\\";i:76;}i:1;N;}}i:4;N;}s:61:\\"\\0Symfony\\\\Component\\\\Mailer\\\\Messenger\\\\SendEmailMessage\\0envelope\\";N;}}', '[]', 'default', '2024-05-29 13:30:14', '2024-05-29 13:30:14', NULL);
 
 -- Listage de la structure de table shinyquest. methode_capture
+DROP TABLE IF EXISTS `methode_capture`;
 CREATE TABLE IF NOT EXISTS `methode_capture` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nom_methode` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -243,6 +251,7 @@ INSERT INTO `methode_capture` (`id`, `nom_methode`) VALUES
 	(34, 'ultra brèches');
 
 -- Listage de la structure de table shinyquest. post
+DROP TABLE IF EXISTS `post`;
 CREATE TABLE IF NOT EXISTS `post` (
   `id` int NOT NULL AUTO_INCREMENT,
   `sujet_id` int NOT NULL,
@@ -263,6 +272,7 @@ INSERT INTO `post` (`id`, `sujet_id`, `user_id`, `contenu`, `date_post`) VALUES
 	(2, 1, 2, 're', '2024-09-13 14:12:51');
 
 -- Listage de la structure de table shinyquest. reset_password_request
+DROP TABLE IF EXISTS `reset_password_request`;
 CREATE TABLE IF NOT EXISTS `reset_password_request` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
@@ -275,12 +285,13 @@ CREATE TABLE IF NOT EXISTS `reset_password_request` (
   CONSTRAINT `FK_7CE748AA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table shinyquest.reset_password_request : ~1 rows (environ)
+-- Listage des données de la table shinyquest.reset_password_request : ~0 rows (environ)
 DELETE FROM `reset_password_request`;
 INSERT INTO `reset_password_request` (`id`, `user_id`, `selector`, `hashed_token`, `requested_at`, `expires_at`) VALUES
 	(4, 2, '0oSZatZEB5GGdU00XVRd', 'ET8vuJwltwRXw1nQYy7+RpgTpZZfOrWDZFz0AxyOyBI=', '2024-09-08 17:51:38', '2024-09-08 18:51:37');
 
 -- Listage de la structure de table shinyquest. sujet
+DROP TABLE IF EXISTS `sujet`;
 CREATE TABLE IF NOT EXISTS `sujet` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
@@ -293,7 +304,7 @@ CREATE TABLE IF NOT EXISTS `sujet` (
   CONSTRAINT `FK_2E13599DA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table shinyquest.sujet : ~5 rows (environ)
+-- Listage des données de la table shinyquest.sujet : ~0 rows (environ)
 DELETE FROM `sujet`;
 INSERT INTO `sujet` (`id`, `user_id`, `titre`, `date_création`, `date_update`, `intro`) VALUES
 	(1, 20, 'Ou trouver Chenipan', '2024-08-05 16:52:04', '2024-08-05 16:52:04', 'quelqu\'un a trouvé un bon spot sur Emeraude?'),
@@ -303,6 +314,7 @@ INSERT INTO `sujet` (`id`, `user_id`, `titre`, `date_création`, `date_update`, 
 	(5, 17, 'Ya pas une faute dans le mot shasse là?', '2024-08-05 16:52:04', '2024-08-05 16:52:04', 'Y a que moi qui trouve ça bizarre d\'appeler ça une "shasse" ? Il s\'est trompé dans l\'orthographe ou quoi?');
 
 -- Listage de la structure de table shinyquest. user
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -313,6 +325,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `date_inscription` datetime NOT NULL,
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ban` tinyint(1) NOT NULL,
+  `twitch_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_IDENTIFIER_EMAIL` (`email`),
   UNIQUE KEY `UNIQ_IDENTIFIER_PSEUDO` (`pseudo`)
@@ -320,15 +333,15 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 -- Listage des données de la table shinyquest.user : ~8 rows (environ)
 DELETE FROM `user`;
-INSERT INTO `user` (`id`, `email`, `roles`, `password`, `is_verified`, `pseudo`, `date_inscription`, `avatar`, `ban`) VALUES
-	(2, 'floris.louerat@gmail.com', '["ROLE_ADMIN"]', '$2y$13$zbqO/AWTDaQ3uz2g5pjtquV5C8uG5gmG7xdyDzUr2KHNx.coR3YX2', 1, 'Flozerty', '2024-05-29 12:26:53', '66d23756bfb27.webp', 0),
-	(16, 'ezar@efz.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'patate', '2024-05-29 15:33:17', '66d3096f0058d.webp', 0),
-	(17, 'ezaertr@efz.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'patataze', '2024-05-29 15:33:17', '66d309cd850cc.webp', 0),
-	(19, 'ezaezertrtr@efz.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'patatazdfzreh', '2024-05-29 15:33:17', NULL, 0),
-	(20, 'ezaezerertyutrtr@efz.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'azetryzethry', '2024-05-29 15:33:17', '66d30b11cd071.webp', 0),
-	(23, 'test@test.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 1, 'test', '2024-07-30 06:53:47', '66d309f7118c7.webp', 0),
-	(24, '123456abcABC@zz.fr', '[]', '$2y$13$RayFje38xsQrQCYXfhltZetsNg/9Cv3MUpf/8Lz8pXgpK2lmWDC76', 0, '123456abcABC.', '2024-07-31 17:16:24', NULL, 0),
-	(27, 'sgfszff.zeffz@gmail.com', '[]', '$2y$13$H.9k/XUJamQ2r2Jbl8RKDuUqlyzwfhLqydhVR4XwpPziKb90ntD7q', 0, 'retyztzt', '2024-09-03 07:36:51', NULL, 0);
+INSERT INTO `user` (`id`, `email`, `roles`, `password`, `is_verified`, `pseudo`, `date_inscription`, `avatar`, `ban`, `twitch_id`) VALUES
+	(2, 'floris.louerat@gmail.com', '["ROLE_ADMIN"]', '$2y$13$zbqO/AWTDaQ3uz2g5pjtquV5C8uG5gmG7xdyDzUr2KHNx.coR3YX2', 1, 'Flozerty', '2024-05-29 12:26:53', '66d23756bfb27.webp', 0, NULL),
+	(16, 'ezar@efz.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'patate', '2024-05-29 15:33:17', '66d3096f0058d.webp', 0, NULL),
+	(17, 'ezaertr@efz.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'patataze', '2024-05-29 15:33:17', '66d309cd850cc.webp', 0, NULL),
+	(19, 'ezaezertrtr@efz.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'patatazdfzreh', '2024-05-29 15:33:17', NULL, 0, NULL),
+	(20, 'ezaezerertyutrtr@efz.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 0, 'azetryzethry', '2024-05-29 15:33:17', '66d30b11cd071.webp', 0, NULL),
+	(23, 'test@test.fr', '[]', '$2y$13$/M/1RAcZvgHO6DdY2CCDXub/w285vjEvuD85gz5u1oRTvrC0nx6Oy', 1, 'test', '2024-07-30 06:53:47', '66d309f7118c7.webp', 0, NULL),
+	(24, '123456abcABC@zz.fr', '[]', '$2y$13$RayFje38xsQrQCYXfhltZetsNg/9Cv3MUpf/8Lz8pXgpK2lmWDC76', 0, '123456abcABC.', '2024-07-31 17:16:24', NULL, 0, NULL),
+	(27, 'sgfszff.zeffz@gmail.com', '[]', '$2y$13$H.9k/XUJamQ2r2Jbl8RKDuUqlyzwfhLqydhVR4XwpPziKb90ntD7q', 0, 'retyztzt', '2024-09-03 07:36:51', NULL, 0, NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
