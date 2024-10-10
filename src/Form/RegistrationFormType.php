@@ -64,6 +64,10 @@ class RegistrationFormType extends AbstractType
                         'message' => '1 minuscule',
                     ]),
                     new Regex([
+                        'pattern' => '/\d/',
+                        'message' => '1 chiffre',
+                    ]),
+                    new Regex([
                         'pattern' => '/\W/',
                         'message' => '1 caractère spécial',
                     ]),
