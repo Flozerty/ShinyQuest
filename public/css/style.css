@@ -1135,6 +1135,7 @@ footer {
     flex-direction: column;
     text-align: center;
     font-size: 0.8rem;
+    margin-bottom: 0;
 
     #legal-mentions,
     .conditions {
