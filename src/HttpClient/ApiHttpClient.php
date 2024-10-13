@@ -26,8 +26,7 @@ class ApiHttpClient extends AbstractController
   // Get all pkmns with name + gen + id + img + types
   public function getPokedex(): array
   {
-    $response = $this->httpClient->request('GET', "https://tyradex.vercel.app/api/v1/pokemon");
-    $pokemons = $response->toArray();
+    $pokemons =  $this->getRequestByUrl("https://tyradex.vercel.app/api/v1/pokemon");
 
     // on enlève le "pokemon 0"
     array_shift($pokemons);
@@ -58,16 +57,14 @@ class ApiHttpClient extends AbstractController
   // Get les infos de base d'un pkmn
   public function getPokemonById($id)
   {
-    $response = $this->httpClient->request('GET', "pokemon/$id");
-    return $response->toArray();
+    return $this->getRequestByUrl("pokemon/$id");
   }
 
 
   // Get a single pkmn "allInfos"
   public function getPokemonInfos($id)
   {
-    $response = $this->httpClient->request('GET', "pokemon/$id");
-    $pokemon = $response->toArray();
+    $pokemon = $this->getRequestByUrl("pokemon/$id");
 
     $urlSpec = $pokemon["species"]["url"];
     $pokemonSpec = $this->getRequestByUrl($urlSpec);
@@ -134,8 +131,7 @@ class ApiHttpClient extends AbstractController
   // Get all pkmns with only name + id (pour form)
   public function getAllPokemons(): array
   {
-    $response = $this->httpClient->request('GET', "https://tyradex.vercel.app/api/v1/pokemon");
-    $pokemons = $response->toArray();
+    $pokemons = $this->getRequestByUrl("https://tyradex.vercel.app/api/v1/pokemon");
 
     // on enlève le "pokemon 0"
     array_shift($pokemons);
@@ -155,8 +151,8 @@ class ApiHttpClient extends AbstractController
   {
     $generationsIds = [];
 
-    $response = $this->httpClient->request('GET', "generation");
-    $generations = $response->toArray()["results"];
+    $generations = $this->getRequestByUrl("generation")["results"];
+
     foreach ($generations as $key => $generation) {
       $generationsIds[] = $key + 1;
     }
@@ -169,8 +165,7 @@ class ApiHttpClient extends AbstractController
   {
     $allPokemons = [];
 
-    $response = $this->httpClient->request('GET', "https://tyradex.vercel.app/api/v1/gen/$id");
-    $pokemons = $response->toArray();
+    $pokemons = $this->getRequestByUrl("https://tyradex.vercel.app/api/v1/gen/$id");
 
     foreach ($pokemons as $pokemon) {
       $allPokemons[] =
@@ -190,16 +185,15 @@ class ApiHttpClient extends AbstractController
   // récupérer le nom fr du pokemon avec son id
   public function getPokemonNameById($id)
   {
-    $response = $this->httpClient->request('GET', "https://tyradex.vercel.app/api/v1/pokemon/$id");
-    $pokemon = $response->toArray();
+    $pokemon = $this->getRequestByUrl("https://tyradex.vercel.app/api/v1/pokemon/$id");
+
     return $pokemon["name"]["fr"];
   }
 
   // Récupération de toutes les versions de jeux
   public function getAllGamesVersions()
   {
-    $response = $this->httpClient->request('GET', "version/?offset=0&limit=100");
-    $allGames = $response->toArray()["results"];
+    $allGames = $this->getRequestByUrl("version/?offset=0&limit=100")["results"];
 
     // On va chercher tous les noms des jeux en français
     $frGames = [];
@@ -219,8 +213,7 @@ class ApiHttpClient extends AbstractController
   // Récupérer tous les types de balls
   public function getAllBalls()
   {
-    $response = $this->httpClient->request('GET', "item-pocket/3/");
-    $allBallsCategories = $response->toArray()["categories"];
+    $allBallsCategories = $this->getRequestByUrl("item-pocket/3/")["categories"];
 
     $allBallsData = [];
 
@@ -228,8 +221,7 @@ class ApiHttpClient extends AbstractController
       $url = $category["url"];
 
       // on effectue une nouvelle requête pour la catégorie de  ballsen cours
-      $newResponse = $this->httpClient->request('GET', $url);
-      $categoryData = $newResponse->toArray();
+      $categoryData = $this->getRequestByUrl($url);
 
       $nameOfCategory = $categoryData["names"][0]["name"];
       $ballsOfCategory = [];
@@ -254,8 +246,7 @@ class ApiHttpClient extends AbstractController
   // Récupération des infos d'une seule ball
   public function getBallData($url)
   {
-    $response = $this->httpClient->request('GET', $url);
-    $ballData = $response->toArray();
+    $ballData = $this->getRequestByUrl($url);
 
     // on cherche le nom de la ball en français.
     foreach ($ballData['names'] as $name) {
