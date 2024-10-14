@@ -112,7 +112,7 @@ function stopAnimation() {
 function resetTimeout() {
   clearTimeout(inactivityTimeout);
   stopAnimation();
-  inactivityTimeout = setTimeout(startAnimation, 600000);
+  inactivityTimeout = setTimeout(startAnimation, 6000);
 }
 
 document.addEventListener("click", resetTimeout);
@@ -144,7 +144,11 @@ if (caret) {
 
   // retire la nav quand on clique ailleurs
   document.addEventListener("click", (event) => {
-    if (show && !profileNav.contains(event.target) && !caret.contains(event.target) && (userContainer ? !userContainer.contains(event.target) : true)) {
+    if (
+      show && !profileNav.contains(event.target) &&
+      !caret.contains(event.target) &&
+      (userContainer ? !userContainer.contains(event.target) : true)
+    ) {
       hideProfileNav()
     }
   })
