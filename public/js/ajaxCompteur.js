@@ -14,6 +14,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const captureId = card.getAttribute('data-id');
     let timeout;
 
+    // maj, utiliser obj = {
+    //   "clé1": "valeur1",
+    //   "clé2": "valeur2"
+    // };
+
     incrementButton.addEventListener('click', () => {
       changeCounter(1)
     });
