@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (flashMessages.length) {
 
     const audio = new Audio('/sfx/catch-pokemon.mp3');
-    audio.volume = 0.2;
+    audio.volume = 0.1;
     audio.play();
   }
 });
