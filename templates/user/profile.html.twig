@@ -19,137 +19,140 @@
 <h2>Editer le compte</h2>
 
 <section id="edit-account">
-    <button id="change-avatar-button">changer l'avatar</button>
-    <a id="change-password-button" href="/reset-password">changer de mot de passe</a>
+  <button id="change-avatar-button">changer l'avatar</button>
+  <a id="change-password-button" href="/reset-password">changer de mot de passe</a>
 
-    <button class="delete-account-button">supprimer mon compte</button>
+  <button class="delete-account-button">supprimer mon compte</button>
 </section>
 {% endif %}
 
 <h2>Infos sur le dresseur</h2>
 <section id="user-infos">
-    <figure>
-        <img src="{{user.avatar ? asset('img/avatars/' ~ user.avatar) : asset('img/unknown_user.png') }}"
-            alt="avatar de {{user.pseudo}}">
-    </figure>
+  <figure>
+    <img src="{{user.avatar ? asset('img/avatars/' ~ user.avatar) : asset('img/unknown_user.png') }}"
+      alt="avatar de {{user.pseudo}}">
+  </figure>
 
-    <div id="user-basics-info">
-        <p class="dateInscription">Inscrit depuis le : <span>{{user.dateInscription | date("d/m/Y")}}</span></p>
-        <p class="nbShiny">Shiny trouvés : <span>{{capturesTermine | length}}</span></p>
-        <p class="nbShasses">Shasses en cours : <span>{{capturesNotTermine | length}}</span></p>
-        <p class="nbRencontres">Total des rencontres : <span>{{totalRencontres}}</span></p>
+  <div id="user-basics-info">
+    <p class="dateInscription">Inscrit depuis le : <span>{{user.dateInscription | date("d/m/Y")}}</span></p>
+    <p class="nbShiny">Shiny trouvés : <span>{{capturesTermine | length}}</span></p>
+    <p class="nbShasses">Shasses en cours : <span>{{capturesNotTermine | length}}</span></p>
+    <p class="nbRencontres">Total des rencontres : <span>{{totalRencontres}}</span></p>
+  </div>
+
+  <div id="dex-completion-container">
+    <p>Complétion du shinydex : </p>
+    <div id="dex-completion">
+      <p>{{capturedPokemonIds | length}} / {{allPokemons | length}}</p>
+      {# completion bar : capturés / total #}
+      <div id="completion-bar" style="width:{{ (capturedPokemonIds | length / allPokemons | length) * 100}}%">
+      </div>
     </div>
+  </div>
+  <div id="links">
+    <a href="{{ path('app_shinydex', {'pseudo': user.pseudo}) }}" id="shinydex-link">
+      <i class="fa-solid fa-star"></i>&nbsp; ShinyDex
+    </a>
+    <a href="{{ path('captures', {'pseudo': user.pseudo}) }}" id="captures-link">
+      <i class="fa-solid fa-star"></i>&nbsp; Captures
+    </a>
 
-    <div id="dex-completion-container">
-        <p>Complétion du shinydex : </p>
-        <div id="dex-completion">
-            <p>{{capturedPokemonIds | length}} / {{allPokemons | length}}</p>
-            {# completion bar : capturés / total #}
-            <div id="completion-bar" style="width:{{ (capturedPokemonIds | length / allPokemons | length) * 100}}%">
-            </div>
-        </div>
+    {% if myProfil is not defined and not (user == app.user) %}
+
+    {# ajout des liens de messagerie / demande d'ami etc. #}
+    {% if isFriend is defined and isFriend[0].statut is defined and isFriend[0].statut is not empty %}
+    <a href="{{ path('messages', {'pseudo': user.pseudo}) }}" class="secondary-animated-button" id="message-link">
+      <i class="fa-solid fa-envelope"></i>&nbsp; Message
+    </a>
+    {% elseif isFriend[0] is not defined %}
+    <a href="{{ path('demande_ami', {'pseudo': user.pseudo}) }}" class="secondary-animated-button" id="friend-link">
+      <i class="fa-solid fa-user-plus"></i>&nbsp; Ajouter en ami
+    </a>
+    {% elseif isFriend[0].userDemande == app.user %}
+    <a href="{{ path('delete_ami', {'id': user.id}) }}" class="refuse-demand">
+      <p>Demande envoyée</p><i class="fa-solid fa-xmark"></i>
+    </a>
+    {% else %}
+    <div class="accept-demand-condition">
+      <a href="{{ path('accept_ami', {'id': user.id}) }}" class="accept-demand"><i
+          class="fa-solid fa-user-plus"></i>&nbsp; Accepter</a>
+      <a href="{{ path('delete_ami', {'id': user.id}) }}" class="refuse-demand">
+        <p>Refuser</p><i class="fa-solid fa-xmark"></i>
+      </a>
     </div>
-    <div id="links">
-        <a href="{{ path('app_shinydex', {'pseudo': user.pseudo}) }}" id="shinydex-link">
-            <i class="fa-solid fa-star"></i>&nbsp; ShinyDex
-        </a>
-        <a href="{{ path('captures', {'pseudo': user.pseudo}) }}" id="captures-link">
-            <i class="fa-solid fa-star"></i>&nbsp; Captures
-        </a>
-
-        {% if myProfil is not defined and not (user == app.user) %}
-
-        {# ajout des liens de messagerie / demande d'ami etc. #}
-        {% if isFriend is defined and isFriend[0].statut is defined and isFriend[0].statut is not empty %}
-        <a href="{{ path('messages', {'pseudo': user.pseudo}) }}" class="secondary-animated-button" id="message-link">
-            <i class="fa-solid fa-envelope"></i>&nbsp; Message
-        </a>
-        {% elseif isFriend[0] is not defined %}
-        <a href="{{ path('demande_ami', {'pseudo': user.pseudo}) }}" class="secondary-animated-button" id="friend-link">
-            <i class="fa-solid fa-user-plus"></i>&nbsp; Ajouter en ami
-        </a>
-        {% elseif isFriend[0].userDemande == app.user %}
-        <a href="{{ path('delete_ami', {'id': user.id}) }}" class="refuse-demand">
-            <p>Demande envoyée</p><i class="fa-solid fa-xmark"></i>
-        </a>
-        {% else %}
-        <div class="accept-demand-condition">
-            <a href="{{ path('accept_ami', {'id': user.id}) }}" class="accept-demand"><i
-                    class="fa-solid fa-user-plus"></i>&nbsp; Accepter</a>
-            <a href="{{ path('delete_ami', {'id': user.id}) }}" class="refuse-demand">
-                <p>Refuser</p><i class="fa-solid fa-xmark"></i>
-            </a>
-        </div>
-        {% endif %}
-        {% endif %}
-    </div>
+    {% endif %}
+    {% endif %}
+  </div>
 
 </section>
 
 {% if capturesTermine is defined and capturesTermine is not empty %}
 
 <section id="activity">
-    <h2>Activité récente</h2>
+  <h2>Activité récente</h2>
 
-    {% set counter = 0 %}
-    {% for capture in capturesTermine %}
+  {% set counter = 0 %}
+  {% for capture in capturesTermine %}
 
-    {% if counter < 5 %} <p class="activity-capture">
-        {{ capture.dateCapture|date('d/m/Y') }} : &nbsp;
-        <span>{{ capture.user.pseudo }}</span> &nbsp; a trouvé &nbsp;<img src="{{capture.imgShiny}}"
-            alt="{{capture.nomPokemon}} shiny"> <span>{{
-            capture.nomPokemon }}</span>&nbsp; shiny sur &nbsp; <span>{{ capture.jeu }}</span> &nbsp; en &nbsp;
-        <span>{{ capture.nbRencontres }}</span> &nbsp; rencontres{% if capture.surnom is not empty %}, et l'a appelé
-        &nbsp; <span>{{capture.surnom }}</span>.
-        {% else %}.
-        {% endif %}
-        </p>
+  {% if counter < 5 %} <p class="activity-capture">
+    {{ capture.dateCapture|date('d/m/Y') }} : &nbsp;
+    <span>{{ capture.user.pseudo }}</span> &nbsp; a trouvé &nbsp;<img src="{{capture.imgShiny}}"
+      alt="{{capture.nomPokemon}} shiny"> <span>{{
+      capture.nomPokemon }}</span>&nbsp; shiny sur &nbsp; <span>{{ capture.jeu }}</span> &nbsp; en &nbsp;
+    <span>{{ capture.nbRencontres }}</span> &nbsp; rencontres{% if capture.surnom is not empty %}, et l'a appelé
+    &nbsp; <span>{{capture.surnom }}</span>.
+    {% else %}.
+    {% endif %}
+    </p>
 
-        <hr>
-        {% endif %}
-        {% set counter = counter + 1 %}
-        {% endfor %}
+    <hr>
+    {% endif %}
+    {% set counter = counter + 1 %}
+    {% endfor %}
 </section>
 {% endif %}
 
 {# dialogs de modification SSSI sur mon profil #}
 {% if myProfil is defined and myProfil is not empty %}
 <dialog id="avatarDialog">
-    <div class="dialog-content">
+  <div class="dialog-content">
 
-        <figure id="avatar-preview">
-            <img src="{{user.avatar ? asset('img/avatars/' ~ user.avatar) : asset('img/unknown_user.png') }}"
-                alt="avatar de {{app.user}}" id="avatar-image">
-        </figure>
+    <figure id="avatar-preview">
+      <img src="{{user.avatar ? asset('img/avatars/' ~ user.avatar) : asset('img/unknown_user.png') }}"
+        alt="avatar de {{app.user}}" id="avatar-image">
+    </figure>
 
-        {{ form_start(formAvatar) }}
-        {{ form_row(formAvatar.avatar) }}
-        <div class="modalNav">
-            <button type="submit">
-                <i class="fa-solid fa-circle-check"></i>
-            </button>
-            <i class="cancel fa-solid fa-circle-xmark"></i>
-        </div>
-        {{ form_end(formAvatar) }}
+    {{ form_start(formAvatar) }}
+    {{ form_row(formAvatar.avatar) }}
+    <div class="modalNav">
+      <button type="submit" aria-label="Confirmer">
+        <i class="fa-solid fa-circle-check"></i>
+      </button>
+
+      <button type="button" aria-label="Annuler">
+        <i class="cancelBtn close-btn fa-solid fa-circle-xmark"></i>
+      </button>
     </div>
+    {{ form_end(formAvatar) }}
+  </div>
 </dialog>
 
 <dialog id="delete-account-modal">
-    <div class="dialog-content">
-        <h3>Etes vous sûr de vouloir supprimer votre compte ?</h3>
-        <p>Toute information vous concernant sera définitivement supprimée, y compris vos captures et shasses en cours.
-        </p>
-        <div class="modalNav">
-            <form action="{{path('delete_account')}}" class="delete-link" method="post">
-                <input type="hidden" name="_token" value="{{ csrf_token('delete_item') }}">
-                <button type="submit">Oui, supprimer mon compte</button>
-            </form>
+  <div class="dialog-content">
+    <h3>Etes vous sûr de vouloir supprimer votre compte ?</h3>
+    <p>Toute information vous concernant sera définitivement supprimée, y compris vos captures et shasses en cours.
+    </p>
+    <div class="modalNav">
+      <form action="{{path('delete_account')}}" class="delete-link" method="post">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete_item') }}">
+        <button type="submit">Oui, supprimer mon compte</button>
+      </form>
 
-            <button class="cancelBtn">
-                Non, j'ai changé d'avis
-            </button>
-        </div>
+      <button class="cancelBtn">
+        Non, j'ai changé d'avis
+      </button>
     </div>
+  </div>
 </dialog>
 {% endif %}
 
