@@ -35,7 +35,7 @@
 <section id="new-shasse">
   {{ form_start(formNewShasse) }}
   <div class="loading-container">
-    <label for="pokemonId">Nom du pokemon :</label>
+    <label for="pokemonId">Nom du pokemon<span class="asterisk">*</span> :</label>
     <select name="pokemonId" id="pokemonId" required>
       <option value="">Sélectionnez le pokémon</option>
       {# {% for pokemon in allPokemons %}
@@ -47,7 +47,7 @@
   {{ form_row(formNewShasse.nbRencontres) }}
 
   <div class="loading-container">
-    <label for="jeu">Jeu :</label>
+    <label for="jeu">Jeu<span class="asterisk">*</span> :</label>
     <select name="jeu" id="jeu" required>
       <option value="">Choisissez un jeu</option>
       {# ajax #}
@@ -174,7 +174,7 @@
 
     {# select balls #}
     <div class="loading-container">
-      <label for="ball">Ball</label>
+      <label for="ball">Ball<span class="asterisk">*</span></label>
       <select id="ball" name="ball"></select>
 
       <i class="fa-brands fa-cloudscale loading ball-loading"></i>

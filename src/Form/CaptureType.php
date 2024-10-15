@@ -21,6 +21,8 @@ class CaptureType extends AbstractType
             ->add('surnom')
             ->add('dateCapture', DateType::class, [
                 'widget' => 'single_text',
+                "label" => "Date de capture<span class='asterisk'>*</span>",
+                'label_html' => true,
                 'attr' => [
                     'max' => (new \DateTime())->format('Y-m-d'), // Définir la date maximale à aujourd'hui
                 ],
@@ -32,6 +34,8 @@ class CaptureType extends AbstractType
                 ],
             ])
             ->add('sexe', ChoiceType::class, [
+                "label" => "Sexe<span class='asterisk'>*</span>",
+                'label_html' => true,
                 'choices' => [
                     'male',
                     'femelle',

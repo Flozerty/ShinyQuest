@@ -20,7 +20,7 @@ class ShasseStartType extends AbstractType
         $builder
             ->add('nbRencontres', IntegerType::class, [
                 'required' => false,
-                "label" => "Compteur"
+                "label" => "Compteur :",
             ])
 
             ->add('charmeChroma', null, [
@@ -28,11 +28,14 @@ class ShasseStartType extends AbstractType
             ])
 
             ->add('lieu', TextType::class, [
+                "label" => "Lieu :",
                 'required' => false,
             ])
 
             ->add('methodeCapture', EntityType::class, [
                 'class' => MethodeCapture::class,
+                "label" => "Méthode de capture<span class='asterisk'>*</span> :",
+                'label_html' => true,
                 'choice_label' => 'nom_methode',
                 'placeholder' => 'Choisissez votre méthode de capture'
             ])
