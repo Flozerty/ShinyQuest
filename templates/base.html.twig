@@ -2,60 +2,60 @@
 <html id="top" lang="fr">
 
 <head>
-<script src="{{ asset('tarteaucitron/tarteaucitron.js') }}"></script>
+  <script src="{{ asset('tarteaucitron/tarteaucitron.js') }}"></script>
 
-        <script type="text/javascript">
-        tarteaucitron.init({
-    	  "privacyUrl": "", /* Privacy policy url */
-          "bodyPosition": "bottom", /* or top to bring it as first element for accessibility */
+  <script type="text/javascript">
+    tarteaucitron.init({
+      "privacyUrl": "", /* Privacy policy url */
+      "bodyPosition": "bottom", /* or top to bring it as first element for accessibility */
 
-    	  "hashtag": "#tarteaucitron", /* Open the panel with this hashtag */
-    	  "cookieName": "tarteaucitron", /* Cookie name */
-    
-    	  "orientation": "middle", /* Banner position (top - bottom) */
-       
-          "groupServices": false, /* Group services by category */
-          "showDetailsOnClick": true, /* Click to expand the description */
-          "serviceDefaultState": "wait", /* Default state (true - wait - false) */
-                           
-    	  "showAlertSmall": false, /* Show the small banner on bottom right */
-    	  "cookieslist": false, /* Show the cookie list */
-                           
-          "closePopup": false, /* Show a close X on the banner */
+      "hashtag": "#tarteaucitron", /* Open the panel with this hashtag */
+      "cookieName": "tarteaucitron", /* Cookie name */
 
-          "showIcon": true, /* Show cookie icon to manage cookies */
-          //"iconSrc": "", /* Optionnal: URL or base64 encoded image */
-          "iconPosition": "BottomRight", /* BottomRight, BottomLeft, TopRight and TopLeft */
+      "orientation": "middle", /* Banner position (top - bottom) */
 
-    	  "adblocker": false, /* Show a Warning if an adblocker is detected */
-                           
-          "DenyAllCta" : true, /* Show the deny all button */
-          "AcceptAllCta" : true, /* Show the accept all button when highPrivacy on */
-          "highPrivacy": true, /* HIGHLY RECOMMANDED Disable auto consent */
-          "alwaysNeedConsent": false, /* Ask the consent for "Privacy by design" services */
-                           
-    	  "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
+      "groupServices": false, /* Group services by category */
+      "showDetailsOnClick": true, /* Click to expand the description */
+      "serviceDefaultState": "wait", /* Default state (true - wait - false) */
 
-    	  "removeCredit": false, /* Remove credit link */
-    	  "moreInfoLink": true, /* Show more info link */
+      "showAlertSmall": false, /* Show the small banner on bottom right */
+      "cookieslist": false, /* Show the cookie list */
 
-          "useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
-          "useExternalJs": false, /* If false, the tarteaucitron.js file will be loaded */
+      "closePopup": false, /* Show a close X on the banner */
 
-    	  //"cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for multisite */
-                          
-          "readmoreLink": "", /* Change the default readmore link */
+      "showIcon": true, /* Show cookie icon to manage cookies */
+      //"iconSrc": "", /* Optionnal: URL or base64 encoded image */
+      "iconPosition": "BottomRight", /* BottomRight, BottomLeft, TopRight and TopLeft */
 
-          "mandatory": true, /* Show a message about mandatory cookies */
-          "mandatoryCta": true, /* Show the disabled accept button when mandatory on */
-    
-          //"customCloserId": "", /* Optional a11y: Custom element ID used to open the panel */
-          
-          "googleConsentMode": true, /* Enable Google Consent Mode v2 for Google ads and GA4 */
-          
-          "partnersList": false /* Show the number of partners on the popup/middle banner */
-        });
-        </script>
+      "adblocker": false, /* Show a Warning if an adblocker is detected */
+
+      "DenyAllCta": true, /* Show the deny all button */
+      "AcceptAllCta": true, /* Show the accept all button when highPrivacy on */
+      "highPrivacy": true, /* HIGHLY RECOMMANDED Disable auto consent */
+      "alwaysNeedConsent": false, /* Ask the consent for "Privacy by design" services */
+
+      "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
+
+      "removeCredit": false, /* Remove credit link */
+      "moreInfoLink": true, /* Show more info link */
+
+      "useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
+      "useExternalJs": false, /* If false, the tarteaucitron.js file will be loaded */
+
+      //"cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for multisite */
+
+      "readmoreLink": "", /* Change the default readmore link */
+
+      "mandatory": true, /* Show a message about mandatory cookies */
+      "mandatoryCta": true, /* Show the disabled accept button when mandatory on */
+
+      //"customCloserId": "", /* Optional a11y: Custom element ID used to open the panel */
+
+      "googleConsentMode": true, /* Enable Google Consent Mode v2 for Google ads and GA4 */
+
+      "partnersList": false /* Show the number of partners on the popup/middle banner */
+    });
+  </script>
 
 
   <meta charset="UTF-8" />
@@ -142,7 +142,9 @@
       {% if app.user is defined and app.user is not empty %}
       <ul>
         <li title="Forum" class="header-link">
-          <a aria-label="accès au Forum" href="{{ path('app_forum') }}"><i class="fa-solid fa-comments"></i></a>
+          <a aria-label="accès au Forum" href="{{ path('app_forum') }}">
+            <i class="fa-solid fa-comments"></i>
+          </a>
         </li>
 
         <li title="Mes captures" class="header-link">
@@ -369,7 +371,8 @@
     <section id="footer-base">
       <p id="copy">
         &copy; 2024 Flozerty - <a id="legal-mentions" href="{{ asset('mentions_legales.pdf') }}"
-          target="_blank">Mentions légales</a> - <a href="{{ asset('CGU.pdf') }}" target="_blank" class='conditions'>conditions d'utilisation</a>
+          target="_blank">Mentions légales</a> - <a href="{{ asset('CGU.pdf') }}" target="_blank"
+          class='conditions'>conditions d'utilisation</a>
       </p>
       <p>ShinyQuest est un projet non-officiel et n'est pas affilié à Nintendo ou à The Pokémon Company.</p>
       <p>Pokémon est une marque déposée de Nintendo, GAME FREAK, Creatures Inc. et The Pokémon Company.</p>

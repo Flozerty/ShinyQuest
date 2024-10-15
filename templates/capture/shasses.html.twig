@@ -38,9 +38,7 @@
     <label for="pokemonId">Nom du pokemon<span class="asterisk">*</span> :</label>
     <select name="pokemonId" id="pokemonId" required>
       <option value="">Sélectionnez le pokémon</option>
-      {# {% for pokemon in allPokemons %}
-      <option value="{{ pokemon.pokedex_id }}">{{ pokemon.pokedex_id }} - {{ pokemon.name }}</option>
-      {% endfor %} #}
+      {# ajax #}
     </select>
     <i class="fa-brands fa-cloudscale loading nom-pokemon-loading"></i>
   </div>
@@ -53,17 +51,16 @@
       {# ajax #}
     </select>
     <i class="fa-brands fa-cloudscale loading jeu-loading"></i>
-
   </div>
 
   {{ form_row(formNewShasse.lieu) }}
   {{ form_row(formNewShasse.methodeCapture) }}
+  
   <div class="chroma-container">
     <img src="{{ asset('img/sprite-charme-chroma.png') }}" alt='charme chroma'>
     {{ form_row(formNewShasse.charmeChroma) }}
   </div>
 
-  {# honey pot #}
   <input type="hidden" name="email" />
 
   <button type="submit" class="submit-btn"><span>A la shasse!</span></button>

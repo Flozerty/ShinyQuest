@@ -86,7 +86,8 @@ class ApiHttpClient extends AbstractController
 
   // extraire tous les pokémons de la chaîne d'évolution
   private function extractEvolutionDetails($chain, &$pokemons)
-  // On utilise ici &$pokemons pour que les modifications apportées à $pokemons soient apportées à la variable d'origine, dans la fonction getEvolutionChain(), on n'a donc pas besoin de return ici.
+  // On utilise ici &$pokemons, une "variable par référence" pour que les modifications apportées à $pokemons 
+  // soient apportées à la variable d'origine, dans la fonction getEvolutionChain(), on n'a donc pas besoin de return ici.
   {
     $pokemonName = $chain['species']['name'];
     $pokemonDetails = $this->getPokemonInfos($pokemonName);
