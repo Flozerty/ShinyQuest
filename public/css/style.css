@@ -762,8 +762,8 @@ header {
 
   span {
     position: absolute;
-    top: 2px;
-    right: 2px;
+    top: 3px;
+    right: 5px;
     cursor: pointer;
 
     i {
