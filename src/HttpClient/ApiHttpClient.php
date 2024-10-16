@@ -325,11 +325,13 @@ class ApiHttpClient extends AbstractController
       $url = $type["type"]["url"];
       $result = $this->getRequestByUrl($url);
 
+      // dd($result);
+
       foreach ($result["names"] as $lang) {
         if ($lang["language"]["name"] == "fr") {
           $types[] = [
             "name" => $lang["name"],
-            "img" => $result["sprites"]["generation-viii"]["brilliant-diamond-and-shining-pearl"]["name_icon"]
+            // "img" => $result["sprites"]["generation-viii"]["brilliant-diamond-and-shining-pearl"]["name_icon"]
           ];
         }
       }

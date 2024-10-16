@@ -68,11 +68,15 @@
   <p>{{text}}</p>
 </section>
 
-<section id="types">
+{% if data.types is defined and data.types is not empty %}
+  <section id="types">
   {% for type in data.types %}
+  {% if type.img is defined %}
   <img src="{{type.img}}" alt="type {{type.name}}">
+  {% endif %}
   {% endfor %}
 </section>
+{% endif %}
 
 <div id="main-content">
 

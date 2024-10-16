@@ -12,7 +12,7 @@
   <p class="pokemon-id">#{{ '%03d'|format(pokemon.pokedex_id) }}</p>
 
   <div class="types">
-    {% if capturedPokemonIds is not defined or (capturedPokemonIds is defined and pokemon.pokedex_id in capturedPokemonIds|keys) %}
+    {% if capturedPokemonIds is not defined or (capturedPokemonIds is defined and pokemon.pokedex_id in capturedPokemonIds|keys) and pokemon.types is not empty %}
     {% for type in pokemon.types %}
     <img src="{{type.image}}" alt="type {{type.name}}">
     {% endfor %}
