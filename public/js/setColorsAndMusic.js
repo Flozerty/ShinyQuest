@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const playOnClick = () => {
           audio.play()
-          // Une fois que la musique a démarré, retirez cet écouteur
+          // Une fois que la musique a démarré on enlève l'écouteur
           document.removeEventListener('click', playOnClick);
         };
 
