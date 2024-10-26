@@ -1,8 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-Home
-{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('css/home.css') }}" />
@@ -19,8 +17,14 @@ Home
   <img id="home-head-back-img" src="{{ asset('img/homeBackground.webp') }}" alt="duel de pokémon entre 2 personnes" />
   <div id="home-head-overlay">
     <h1>Bienvenue sur<br /> <strong>SHINYQUEST</strong></h1>
+
+    {% if app.user %}
+    <p>Bonjour {{app.user}}!</p>
+    {% else %}
     <a class="start-link" href="{{ path('app_register') }}"><i class="fa-solid fa-arrow-right"></i>Partir à la
       shasse</a>
+    {% endif %}
+
   </div>
 </section>
 
@@ -33,9 +37,7 @@ Home
   </article>
 
   <article id="shinydex-explain">
-    <img id="shinydex-img"
-      src="{{ asset('img/evoli-shiny.png') }}"
-      alt="evoli shinydex" />
+    <img id="shinydex-img" src="{{ asset('img/evoli-shiny.png') }}" alt="evoli shinydex" />
     <h2>Complétez votre shinydex</h2>
     <p>Listez toutes vos captures de pokémons shiny, et gardez précieusement votre shinydex! N'attendez plus, allez tous
       les capturer pour le compléter!</p>
@@ -48,7 +50,9 @@ Home
   </article>
 </section>
 
+{% if not app.user %}
 <a class="start-link" href="{{ path('app_register') }}"><i class="fa-solid fa-arrow-right"></i>Commencer l'aventure</a>
+{% endif %}
 
 <h2>Les dernières trouvailles :</h2>
 <section id="last-captures" class="carousel">
@@ -117,7 +121,9 @@ Home
   </article>
 </section>
 
-<p>section suivi des shasses en cours / section messagerie et partage de captures /</p>
-
+{# <p>section suivi des shasses en cours / section messagerie et partage de captures /</p> #}
+{% if not app.user %}
 <a class="start-link" href="{{ path('app_register') }}"><i class="fa-solid fa-arrow-right"></i>Commencer l'aventure</a>
+{% endif %}
+
 {% endblock %}
