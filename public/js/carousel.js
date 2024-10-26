@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       let translateValue = 0
 
-      // Valeur de translateX en fonction de la width du 1er enfant (card) + margin left/right + gap
-      const widthValue = cardsContainer.children[0].offsetWidth + 10 + 10;
+      // Valeur de translateX en fonction de la width du 1er enfant (card) + gap
+      const widthValue = cardsContainer.children[0].offsetWidth + 10;
       let carouselWidth = widthValue * cardsContainer.children.length,
         containerWidth = cardsContainer.offsetWidth;
 
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
           previousButton.style.display = 'block'
         }
 
-        // console.log(cardsContainer.offsetWidth - ((cardsContainer.children.length) * 200))
+        console.log(cardsContainer.offsetWidth - ((cardsContainer.children.length) * 200))
         if (translateValue > (containerWidth - carouselWidth)) {
           translateValue -= widthValue
           cardsContainer.style.transform = `translateX(${translateValue}px)`
